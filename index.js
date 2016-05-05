@@ -12,34 +12,72 @@ var Nav = ReactBootstrap.Nav,
 
 var ourCoolServiceName = "CoolService";
 
+var PlaceBar = React.createClass({
+    render() {
+        return (
+            <Nav bsStyle="pills" stacked activeKey={1}>
+                <NavItem eventKey={1} style={{ fontSize: 25 }} disabled>KAIST</NavItem>
+                <NavItem eventKey={2} href="#">Overview</NavItem>
+                <NavItem eventKey={3} href="#">Snapshots</NavItem>
+                <NavItem eventKey={4} href="#">Reviews</NavItem>
+                <NavItem eventKey={5} href="#">Additional Information</NavItem>
+            </Nav>
+        );
+    }
+});
+
 var Main = React.createClass({
     render() {
         return (
-            <div className="main">
+            <div className="main" style={{ backgroundColor: "#F1EBA0" }}>
                 <MenuBar/>
-                <table>
-                    <tr>
-                        <th><PlaceBar/></th>
-                        <th></th>
-                    </tr>
-                </table>
+                <div style={{ paddingLeft: 20 }}>
+                    <table>
+                        <tr>
+                            <th><PlaceBar/></th>
+                            <th><OverviewPage/></th>
+                        </tr>
+                    </table>
+                </div>
             </div>
         );
     }
 });
 
+// function wrapInTwoColumns(a) {
+//     return (
+//         <table>
+//             <tr>
+//                 <th><{a}/></th>
+//             </tr>
+//         </table>
+//     );
+// }
+
 var OverviewPage = React.createClass({
-   render() {
-       
-   }
-
-
+    render() {
+        return (
+            <div style={{ paddingLeft: 50 }}>
+                <img src="images/netflix.png" height="200"></img>
+                <img src="images/seolark.png" height="200"></img>
+                <img src="images/yahooweatherapi.png" height="200"></img>
+                <div style={{ paddingTop: 20 }}>Operation hours: 09:00 ~ 18:00</div>
+                <div style={{ paddingTop: 20 }}>Operation hours: 09:00 ~ 18:00</div>
+                <div style={{ paddingTop: 20 }}>Operation hours: 09:00 ~ 18:00</div>
+                <div style={{ paddingTop: 20 }}>Operation hours: 09:00 ~ 18:00</div>
+                <div style={{ paddingTop: 20 }}>Operation hours: 09:00 ~ 18:00</div>
+            </div>
+        );
+    }
 });
 
 
+var ContentBody = React.createClass({
+    render() {
+    }
 
 
-
+});
 
 
 var MenuBar = React.createClass({
@@ -83,20 +121,6 @@ var MenuBar = React.createClass({
 });
 
 
-
-var PlaceBar = React.createClass({
-    render() {
-        return (
-            <Nav bsStyle="pills" stacked activeKey={1}>
-                <NavItem eventKey={1} style={{ fontSize: 25 }}>KAIST</NavItem>
-                <NavItem eventKey={2} href="#">Overview</NavItem>
-                <NavItem eventKey={3} href="#">Snapshots</NavItem>
-                <NavItem eventKey={4} href="#">Reviews</NavItem>
-                <NavItem eventKey={5} href="#">Additional Information</NavItem>
-            </Nav>
-        );
-    }
-});
 
 ReactDOM.render(<Main />, mountNode);
 
