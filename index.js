@@ -9,6 +9,22 @@ var Nav = ReactBootstrap.Nav,
 
 var ourCoolServiceName = "CoolService";
 
+var Main = React.createClass({
+    render() {
+        return (
+            <div className="main">
+                <MenuBar/>
+                    <PlaceBar/>
+            </div>
+        );
+    }
+});
+
+
+const TabColumn = 1;
+
+
+
 
 const MenuBar = React.createClass({
     handleSelect(selectedKey) {
@@ -23,7 +39,7 @@ const MenuBar = React.createClass({
                         <a href="#" style={{ fontSize: 30 }}>{ourCoolServiceName}</a>
                     </Navbar.Brand>
                 </Navbar.Header>
-                <Nav bsStyle="tabs">
+                <Nav>
                     <NavDropdown eventKey={1} title="Popular places" id="popular_dropdown">
                         <MenuItem eventKey={1.1} onSelect={this.handleSelect}>Seoul</MenuItem>
                         <MenuItem eventKey={1.2} onSelect={this.handleSelect}>Daejeon</MenuItem>
@@ -47,7 +63,19 @@ const MenuBar = React.createClass({
     }
 });
 
-ReactDOM.render(<MenuBar />, mountNode);
+
+const PlaceBar = React.createClass({
+    render() {
+        return (
+            <Nav bsStyle="tabs" stacked activeKey={1}>
+                <NavItem eventKey={1} href="#">NavItem 1 content</NavItem>
+                <NavItem eventKey={2} href="#">NavItem 2 content</NavItem>
+            </Nav>
+        );
+    }
+});
+
+ReactDOM.render(<Main />, mountNode);
 
 
 
