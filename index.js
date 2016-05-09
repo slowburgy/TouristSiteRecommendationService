@@ -12,74 +12,6 @@ var Nav = ReactBootstrap.Nav,
 
 var ourCoolServiceName = "CoolService";
 
-var PlaceBar = React.createClass({
-    render() {
-        return (
-            <Nav bsStyle="pills" stacked activeKey={1}>
-                <NavItem eventKey={1} style={{ fontSize: 25 }} disabled>KAIST</NavItem>
-                <NavItem eventKey={2} href="#">Overview</NavItem>
-                <NavItem eventKey={3} href="#">Snapshots</NavItem>
-                <NavItem eventKey={4} href="#">Reviews</NavItem>
-                <NavItem eventKey={5} href="#">Additional Information</NavItem>
-            </Nav>
-        );
-    }
-});
-
-var Main = React.createClass({
-    render() {
-        return (
-            <div className="main" style={{ backgroundColor: "#F1EBA0" }}>
-                <MenuBar/>
-                <div style={{ paddingLeft: 20 }}>
-                    <table>
-                        <tr>
-                            <th><PlaceBar/></th>
-                            <th><OverviewPage/></th>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        );
-    }
-});
-
-// function wrapInTwoColumns(a) {
-//     return (
-//         <table>
-//             <tr>
-//                 <th><{a}/></th>
-//             </tr>
-//         </table>
-//     );
-// }
-
-var OverviewPage = React.createClass({
-    render() {
-        return (
-            <div style={{ paddingLeft: 50 }}>
-                <img src="images/netflix.png" height="200"></img>
-                <img src="images/seolark.png" height="200"></img>
-                <img src="images/yahooweatherapi.png" height="200"></img>
-                <div style={{ paddingTop: 20 }}>Operation hours: 09:00 ~ 18:00</div>
-                <div style={{ paddingTop: 20 }}>Operation hours: 09:00 ~ 18:00</div>
-                <div style={{ paddingTop: 20 }}>Operation hours: 09:00 ~ 18:00</div>
-                <div style={{ paddingTop: 20 }}>Operation hours: 09:00 ~ 18:00</div>
-                <div style={{ paddingTop: 20 }}>Operation hours: 09:00 ~ 18:00</div>
-            </div>
-        );
-    }
-});
-
-
-var ContentBody = React.createClass({
-    render() {
-    }
-
-
-});
-
-
 var MenuBar = React.createClass({
     handleSelect(selectedKey) {
         console.log("Selected " + selectedKey);
@@ -120,22 +52,106 @@ var MenuBar = React.createClass({
     }
 });
 
+var Recommendation = React.createClass({
+  render: function() {
+    return (
+      <a href={"infor.html"}>
+        <div className="recom" style={{float:"left", width:"150px", margin:"15px"}}>
+          <center>
+            <h3>
+              {this.props.name}
+            </h3>
+            <h2>
+              {this.props.pref}
+            </h2>
+            <img src={"img/" + this.props.recipeID + ".jpg"} width="150px" height="150px"/>
+          </center>
+          <h4>{this.props.explain}</h4>
+        </div>
+      </a>
+    );
+  }
+});
 
+var SearchBar = React.createClass({
+  getInitialState: function() {
+    return {query: ''};
+  },
+  handleTextChange: function(e) {
+    this.setState({query: e.target.value});
+  },
+  render: function() {
+    return (
+      <form className="SearchForm">
+        <input type="text" placeholder="Search.." onChange={this.handleTextchange} />
+        <input type="button" value="Search" />
+      </form>
+    );
+  }
+});
 
-ReactDOM.render(<Main />, mountNode);
+var SearchBox = React.createClass({
+  render: function() {
+    return (
+      <div className="SearchBox" style={{clear:"both"}}>
+        <h2>Our service makes you happy.</h2>
+        <div className="SearchBarBox">
+          <SearchBar />
+        </div>
+      </div>
+    );
+  }
+});
 
+var RecommendBox = React.createClass({
+  render: function() {
+    return (
+      <div className="RecommendBox">
+        <Recommendation name="Castle" pref="4.3" explain="ABCDEF..." placeID="1" />
+        <Recommendation name="House" pref="4.0" explain="ABCDEFG..." placeID="2" />
+        <Recommendation name="Rest Room" pref="3.7" explain="ABCDEFGH..." placeID="3" />
+        <Recommendation name="PC Room" pref="3.3" explain="ABCDEFGHI..." placeID="4" />
+        <Recommendation name="Cafe" pref="3.0" explain="ABCDEFGHJ..." placeID="5" />
+      </div>
+    );
+  }
+});
 
+var RecommendsBox = React.createClass({
+  render: function() {
+    return (
+      <div className="RecommendsBox">
+        <div className="RecommendsBox1" style={{clear:"both", padding:"25px"}}>
+          <h2>Recommend for you</h2>
+          <RecommendBox />
+        </div>
+        <div className="RecommendsBox2" style={{clear:"both", padding:"25px"}}>
+          <h2>Recommend for woman</h2>
+          <RecommendBox />
+        </div>
+        <div className="RecommendsBox3" style={{clear:"both", padding:"25px"}}>
+          <h2>Recommend for twenties</h2>
+          <RecommendBox />
+        </div>
+      </div>
+    );
+  }
+});
 
+var FullMain = React.createClass({
+  render: function() {
+    return (
+      <div className="MainPage">
+        <MenuBar />
+        <SearchBox />
+        <RecommendsBox />
+      </div>
+    );
+  }
+});
 
-
-
-
-
-
-
-
-
-
-
-
+ReactDOM.render(
+  <FullMain />,
+  document.getElementById('content')
+);
 
