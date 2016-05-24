@@ -15,12 +15,26 @@ var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
+require('node-jsx').install();
+// Request API data
+var APIdata = require('./lib/requestAPI.js');
+// var views = require('./views/searchresultpage.js');
+
+// It's added for express-react-view
+app.set('views', __dirname + '/views');
+app.set('view engine', 'jsx');
+app.engine('jsx', require('express-react-views').createEngine());
+app.use(express.static('views'));
 
 app.set('port', (process.env.PORT || 3000));
-
 app.use('/', express.static(__dirname));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
+app.post('/search', function (req,res){
+	console.log("SEARCH ROUTE PART:");
+	res.render('searchresultpage', {apiData:APIdata.getSearchData(req.body.tourSpot)});
+});
 
 // Additional middleware which will set headers that we need on each request.
 app.use(function(req, res, next) {

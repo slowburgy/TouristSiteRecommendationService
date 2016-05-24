@@ -81,13 +81,14 @@ var SearchBar = React.createClass({
     this.setState({query: e.target.value});
   },
   handleSearch: function() {
-      window.location = 'searchresultpage.html';
+      window.location = '/search';
+      this.setState({tourSpot: e.target.value});
 },
   render: function() {
     return (
-      <form className="SearchForm">
-        <input type="text" placeholder="Search.." onChange={this.handleTextchange} />
-        <input type="button" value="Search" onClick={this.handleSearch.bind(this)} />
+      <form className="SearchForm" action ="/search" method="POST">
+        <input type="text" name="tourSpot" placeholder="Search.."  />
+        <input type="submit" value="Search" />
       </form>
     );
   }
