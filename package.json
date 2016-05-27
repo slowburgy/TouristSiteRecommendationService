@@ -1,0 +1,29 @@
+{
+  "name": "cs457",
+  "version": "1.0.0",
+  "description": "Tourist Site Recommendation Service",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify -t [ babelify --presets [ es2015 react ] ] src/index.js -o build/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slowburgy/TouristSiteRecommendationService.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/slowburgy/TouristSiteRecommendationService/issues"
+  },
+  "homepage": "https://github.com/slowburgy/TouristSiteRecommendationService#readme",
+  "dependencies": {
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
+    "babelify": "^7.3.0",
+    "material-ui": "^0.15.0",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0",
+    "react-tap-event-plugin": "^1.0.0"
+  }
+}
