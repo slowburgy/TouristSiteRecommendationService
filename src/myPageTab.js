@@ -10,8 +10,10 @@ import ContentDrafts from 'material-ui/svg-icons/content/drafts';
 
 const style = {
     height: 500,
-    margin: 20,
-    display: 'inline-block'
+    margin: 10,
+    display: 'inline-block',
+    position: 'fixed',
+    alignSelf: 'right'
 };
 
 
@@ -28,17 +30,15 @@ export default class MyPageTab extends React.Component {
 
     render() {
         return (
-            <div>
-                <Paper style={style} zDepth={2}>
-                    <List>
-                        <Subheader>My Page Menus</Subheader>
-                        <ListItem primaryText={myVisitedPlaces} leftIcon={<ContentInbox />} onTouchTap={this.handleToggle} />
-                        <ListItem primaryText={myLikes} leftIcon={<ActionGrade />} onTouchTap={this.handleToggle} />
-                        <ListItem primaryText={myReviews} leftIcon={<ContentSend />} onTouchTap={this.handleToggle} />
-                        <ListItem primaryText={changeProfileInfo} leftIcon={<ContentDrafts />} onTouchTap={this.handleToggle} />
-                    </List>
-                </Paper>
-            </div>
+            <Paper zDepth={2} style={style}>
+                <List>
+                    <Subheader>My Page Menus</Subheader>
+                    <ListItem primaryText={myVisitedPlaces} leftIcon={<ContentInbox />} onTouchTap={this.handleToggle} />
+                    <ListItem primaryText={myLikes} leftIcon={<ActionGrade />} onTouchTap={this.handleToggle} />
+                    <ListItem primaryText={myReviews} leftIcon={<ContentSend />} onTouchTap={this.handleToggle} />
+                    <ListItem primaryText={changeProfileInfo} leftIcon={<ContentDrafts />} onTouchTap={this.handleToggle} />
+                </List>
+            </Paper>
         );
     }
 }

@@ -6,17 +6,25 @@ import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 
 const styles = {
     root: {
-        display: 'flex',
-        flexWrap: 'wrap',
+        // display: 'inline-block',
+        // verticalAlign: 'top'
+        // flexWrap: 'wrap',
         // justifyContent: 'space-around',
     },
     gridList: {
-        width: 1000,
+        width: 1300,
         height: 200,
 //        overflowY: 'auto',
-        marginBottom: 24,
+        marginLeft: 10,
+        marginRight: 10,
+        marginBottom: 20,
+        alignSelf: 'stretch',
+        alignItems: 'stretch',
+        flex: 1
     },
 };
+
+const category = "Recommended";
 
 const tilesData = [
     {
@@ -51,29 +59,65 @@ const tilesData = [
     },
 ];
 
+const tilesData2 = [
+    {
+        img: 'images/github.png',
+        title: 'Breakfast',
+        author: 'jill111',
+    },
+    {
+        img: 'images/blank.png',
+        title: 'Breakfast',
+        author: 'jslim',
+    },
+    {
+        img: 'images/success.png',
+        title: 'Breakfast',
+        author: 'coinse',
+    },
+    {
+        img: 'images/seolark.png',
+        title: 'Breakfast',
+        author: 'jjsohn',
+    },
+    {
+        img: 'images/fail.png',
+        title: 'breakfast',
+        author: 'scv',
+    },
+    {
+        img: 'images/netflix.png',
+        title: 'breakfast',
+        author: 'scv',
+    },
+];
+
+const data = [tilesData, tilesData2];
+
 export default class MySiteList extends React.Component {
+    constructor(props) {
+        super(props);
+    }
     
     render() {
         return (
-            <div style={styles.root}>
-                <GridList
-                    cellHeight={200}
-                    cols={6}
-                    style={styles.gridList}
-                >
-                    <Subheader style={{fontSize: 20}}>Recommended</Subheader>
-                    {tilesData.map((tile) => (
-                        <GridTile
-                            key={tile.img}
-                            title={tile.title}
-                            subtitle={<span>by <b>{tile.author}</b></span>}
-                            actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
-                        >
-                            <img src={tile.img}/>
-                        </GridTile>
-                    ))}
-                </GridList>
-            </div>
+            <GridList
+                cellHeight={200}
+                cols={7}
+                style={styles.gridList}
+            >
+                <Subheader style={{fontSize: 20}}>Recommended</Subheader>
+                {this.props.data.map((tile) => (
+                    <GridTile
+                        key={tile.img}
+                        title={tile.title}
+                        subtitle={<span>by <b>{tile.author}</b></span>}
+                        actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
+                    >
+                        <img src={tile.img}/>
+                    </GridTile>
+                ))}
+            </GridList>
         );
     }
 }

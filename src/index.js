@@ -5,6 +5,10 @@ import {cyan500} from 'material-ui/styles/colors';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MyAppBar from './myAppBar'
+import MyPageTab from './myPageTab';
+import MySiteList from './mySiteList';
+import MyCategoryList from './myCategoryList';
+import MyProfilePage from './myProfilePage'
 
 injectTapEventPlugin();
 
@@ -22,8 +26,14 @@ const muiTheme = getMuiTheme({
 class Main extends React.Component {
     render() {
         return (
-            <MuiThemeProvider muiTheme={muiTheme}>
-                <MyAppBar />
+            <MuiThemeProvider muiTheme={getMuiTheme()}>
+                <div style={{flex: 1, alignSelf: 'stretch', alignItems: 'stretch'}}>
+                    <MyAppBar />
+                    <div style={{alignSelf: 'stretch', alignItems: 'stretch', flex: 1, backgroundImage: 'images/success.png'}} >
+                        <MyProfilePage />
+                        <MyPageTab />
+                    </div>
+                </div>
             </MuiThemeProvider>
         );
     }
