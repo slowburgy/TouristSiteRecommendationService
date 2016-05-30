@@ -8,7 +8,9 @@ import MyAppBar from './myAppBar'
 import MyPageTab from './myPageTab';
 import MySiteList from './mySiteList';
 import MyCategoryList from './myCategoryList';
-import MyProfilePage from './myProfilePage'
+import MyProfilePage from './myProfilePage';
+import MyMainPageTab from './myMainPageTab';
+import MyPlacePage from './myPlacePage';
 
 injectTapEventPlugin();
 
@@ -27,11 +29,11 @@ class Main extends React.Component {
     render() {
         return (
             <MuiThemeProvider muiTheme={getMuiTheme()}>
-                <div style={{flex: 1, alignSelf: 'stretch', alignItems: 'stretch'}}>
+                <div >
                     <MyAppBar />
-                    <div style={{alignSelf: 'stretch', alignItems: 'stretch', flex: 1, backgroundImage: 'images/success.png'}} >
-                        <MyProfilePage />
-                        <MyPageTab />
+                    <div>
+                        <MyMainPageTab />
+                        <MyMainPageTab />
                     </div>
                 </div>
             </MuiThemeProvider>

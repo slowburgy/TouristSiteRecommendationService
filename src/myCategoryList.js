@@ -7,10 +7,10 @@ const style = {
     display: 'inline-block',
     verticalAlign: 'top',
     height: 1000,
-    margin: 10,
-    alignSelf: 'stretch',
-    alignItems: 'stretch',
-    flex: 1,
+    // margin: 10,
+    // alignSelf: 'stretch',
+    // alignItems: 'stretch',
+    // flex: 1,
 };
 
 const tilesData = [
@@ -42,12 +42,12 @@ const tilesData = [
     {
         img: 'images/netflix.png',
         title: 'breakfast',
-        author: 'scv',
+        author: '2',
     },
     {
         img: 'images/highscore1.png',
         title: 'breakfast',
-        author: 'scv',
+        author: '1',
     },
 ];
 
@@ -63,8 +63,8 @@ export default class MyCategoryList extends React.Component {
         return (
             <div style={style}>
                 {data.map((d) => (
-                    <Paper zDepth={2} style={{marginBottom: 20, height: 250, flex: 1, alignSelf: 'stretch', alignItems: 'stretch'}}>
-                        <MySiteList data={d}/>
+                    <Paper zDepth={1} style={{marginBottom: 20, height: 250}}>
+                        <MySiteList data={d} />
                     </Paper>
                 ))}
             </div>
