@@ -46,7 +46,13 @@ var makeUid = function() {
     return uid;
 };
 
+function isEmpty(value){
+    return (value == null || value == NaN || value.length == 0 || typeof value == undefined);
+}
+
 exports.userinfo = function(req, res) {
+    if (isEmpty(req.query.uid))
+	return res.json({'result':-2});
     var query = connection.query(
                 'select age, sex, travStyle from tourUser where uid='+mysql.escape(req.query.uid),
                 function(err, result) {
@@ -60,11 +66,15 @@ exports.userinfo = function(req, res) {
 };
 
 exports.signup = function(req, res) {
+    if ( isEmpty(req.query.OAuth) || isEmpty(req.query.age) || isEmpty(req.query.sex) || isEmpty(req.query.travStyle))
+        return res.json({'result':-2});
+
     var user = {'uid':makeUid(),
                 'OAuth':req.query.OAuth,
                 'age':Number(req.query.age),
                 'sex':checkSex(req.query.sex),
                 'travStyle':checkStyle(req.query.travStyle)};
+    console.log(user);
     var query = connection.query(
                 'insert into tourUser set ?', user,
                 function(err,result){
@@ -77,6 +87,8 @@ exports.signup = function(req, res) {
 };
 
 exports.usermodify = function(req, res) {
+    if ( isEmpty(req.query.uid) || isEmpty(req.query.age) || isEmpty(req.query.sex)|| isEmpty(req.query.travStyle))
+	res.json({'result':-2});
     var user = {'age':Number(req.query.age),
                 'sex':checkSex(req.query.sex),
                 'travStyle':checkStyle(req.query.travStyle)};
@@ -92,6 +104,8 @@ exports.usermodify = function(req, res) {
 };
 
 exports.login = function(req, res) {
+    if ( isEmpty(req.query.OAuth))
+	res.json({'result':-2});
     var query = connection.query(
                 'select uid from tourUser where OAuth='+mysql.escape(req.query.OAuth),
                 function(err,result){
@@ -105,6 +119,8 @@ exports.login = function(req, res) {
 };
 
 exports.prefinfo = function(req, res) {
+    if ( isEmpty(req.query.uid) || isEmpty(req.query.cid))
+            res.json({'result':-2});
     var query = connection.query(
                 'select pref from tourPref where uid='+mysql.escape(req.query.uid)+
                 ' and cid='+Number(req.query.cid),
@@ -124,6 +140,9 @@ exports.recommend = function(req, res) {
 };
 
 exports.addpref = function(req, res) {
+    if ( isEmpty(req.query.pref) || isEmpty(req.query.uid) || isEmpty(req.query.cid))
+	res.json({'result':-2});
+
     var pref = Number(req.query.pref)
     var data = 'uid='+mysql.escape(req.query.uid)+
                ' and cid='+Number(req.query.cid);
