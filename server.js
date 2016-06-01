@@ -12,13 +12,23 @@
 
 var fs = require('fs');
 var path = require('path');
+var crypto = require('crypto');
 var express = require('express');
 var bodyParser = require('body-parser');
+var mysql = require('mysql');
 var app = express();
 
-app.set('port', (process.env.PORT || 3000));
+var api = require('./api');
 
-app.use('/', express.static(__dirname));
+var connection = mysql.createConnection({
+    host: 'localhost',
+    port: 3306,
+    user: 'root',
+    password: 'toursql',
+    database: 'mysql'
+});
+
+app.set('port', (process.env.PORT || 3000));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -32,6 +42,18 @@ app.use(function(req, res, next) {
     res.setHeader('Cache-Control', 'no-cache');
     next();
 });
+
+app.use('/', express.static(__dirname));
+
+app.get('/api/userinfo', api.userinfo);
+app.get('/api/signup', api.signup);
+app.get('/api/usermodify', api.usermodify);
+app.get('/api/login', api.login);
+app.get('/api/prefinfo', api.prefinfo);
+app.get('/api/recommend', api.recommend);
+app.get('/api/addpref', api.addpref);
+app.get('/api/randomplace', api.randomplace);
+app.get('/api/addplace', api.addplace);
 
 app.listen(app.get('port'), function() {
   console.log('Server started: http://localhost:' + app.get('port') + '/');
