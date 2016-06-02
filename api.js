@@ -58,7 +58,7 @@ exports.userinfo = function(req, res) {
                 function(err, result) {
                     if (err) {
                         console.error(err);
-                        res.json({'result':-1});
+                        return res.json({'result':-1});
                     }
                     if (!result || !result.length) res.json({'result':-1})
                     else res.json({'result':1, 'userprofile':result[0]});
@@ -74,13 +74,12 @@ exports.signup = function(req, res) {
                 'age':Number(req.query.age),
                 'sex':checkSex(req.query.sex),
                 'travStyle':checkStyle(req.query.travStyle)};
-    console.log(user);
     var query = connection.query(
                 'insert into tourUser set ?', user,
                 function(err,result){
                     if (err) {
                         console.error(err);
-                        res.json({'result':-1});
+                        return res.json({'result':-1});
                     }
                     res.json({'result':1});
     });
@@ -88,7 +87,7 @@ exports.signup = function(req, res) {
 
 exports.usermodify = function(req, res) {
     if ( isEmpty(req.query.uid) || isEmpty(req.query.age) || isEmpty(req.query.sex)|| isEmpty(req.query.travStyle))
-	res.json({'result':-2});
+	return res.json({'result':-2});
     var user = {'age':Number(req.query.age),
                 'sex':checkSex(req.query.sex),
                 'travStyle':checkStyle(req.query.travStyle)};
@@ -97,7 +96,7 @@ exports.usermodify = function(req, res) {
                 function(err,result){
                     if (err) {
                         console.error(err);
-                        res.json({'result':-1});
+                        return res.json({'result':-1});
                     }
                     res.json({'result':1});
     });
@@ -105,13 +104,13 @@ exports.usermodify = function(req, res) {
 
 exports.login = function(req, res) {
     if ( isEmpty(req.query.OAuth))
-	res.json({'result':-2});
+	return res.json({'result':-2});
     var query = connection.query(
                 'select uid from tourUser where OAuth='+mysql.escape(req.query.OAuth),
                 function(err,result){
                     if (err) {
                         console.error(err);
-                        res.json({'result':-1});
+                        return res.json({'result':-1});
                     }
                     if (!result || !result.length) res.json({'result':-1});
                     else res.json({'result':1, 'uid':result[0]['uid']});
@@ -120,14 +119,14 @@ exports.login = function(req, res) {
 
 exports.prefinfo = function(req, res) {
     if ( isEmpty(req.query.uid) || isEmpty(req.query.cid))
-            res.json({'result':-2});
+            return res.json({'result':-2});
     var query = connection.query(
                 'select pref from tourPref where uid='+mysql.escape(req.query.uid)+
                 ' and cid='+Number(req.query.cid),
                 function(err,result){
                     if (err) {
                        console.error(err);
-                       res.json({'result':'-1'});
+                       return res.json({'result':'-1'});
                     }
                     if (!result || !result.length) res.json({'result':0});
                     else res.json({"result":"1", 'pref':result[0]['pref']});
@@ -141,7 +140,7 @@ exports.recommend = function(req, res) {
 
 exports.addpref = function(req, res) {
     if ( isEmpty(req.query.pref) || isEmpty(req.query.uid) || isEmpty(req.query.cid))
-	res.json({'result':-2});
+	return res.json({'result':-2});
 
     var pref = Number(req.query.pref)
     var data = 'uid='+mysql.escape(req.query.uid)+
@@ -151,7 +150,7 @@ exports.addpref = function(req, res) {
                 function(err,result){
                     if (err) {
                         console.error(err);
-                        res.json({'result':-1});
+                        return res.json({'result':-1});
                     }
                     if (result) {
 		        if (result.length) {
@@ -161,7 +160,7 @@ exports.addpref = function(req, res) {
                                          function(err, result){
                                              if (err) {
                                                  console.error(err);
-                                                 res.json({'result':-1});
+                                                 return res.json({'result':-1});
                                              }
                                              res.json({'result':2})}
                             );
@@ -174,7 +173,7 @@ exports.addpref = function(req, res) {
 				         function(err, result){
 				             if (err) {
 				 	         console.error(err);
-                                                 res.json({'result':-1});
+                                                 return res.json({'result':-1});
                                              }
                                              res.json({'result':1})}
                             );
