@@ -63,7 +63,7 @@ export default class MyCategoryList extends React.Component {
         return (
             <div style={style}>
                 {data.map((d) => (
-                    <Paper zDepth={1} style={{marginBottom: 20, height: 250}}>
+                    <Paper zDepth={0} style={{marginBottom: 20, height: 250}}>
                         <MySiteList data={d} />
                     </Paper>
                 ))}

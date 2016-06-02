@@ -11,6 +11,7 @@ import MyCategoryList from './myCategoryList';
 import MyProfilePage from './myProfilePage';
 import MyMainPageTab from './myMainPageTab';
 import MyPlacePage from './myPlacePage';
+import MySearchBar from './mySearchBar';
 
 injectTapEventPlugin();
 
@@ -31,10 +32,7 @@ class Main extends React.Component {
             <MuiThemeProvider muiTheme={getMuiTheme()}>
                 <div >
                     <MyAppBar />
-                    <div>
-                        <MyMainPageTab />
-                        <MyMainPageTab />
-                    </div>
+                    <MyPlacePage />
                 </div>
             </MuiThemeProvider>
         );

@@ -7,6 +7,7 @@ import ContentInbox from 'material-ui/svg-icons/content/inbox';
 import ActionGrade from 'material-ui/svg-icons/action/grade';
 import ContentSend from 'material-ui/svg-icons/content/send';
 import ContentDrafts from 'material-ui/svg-icons/content/drafts';
+import {Tabs, Tab} from 'material-ui/Tabs';
 
 const style = {
     height: 500,
@@ -16,29 +17,54 @@ const style = {
     alignSelf: 'right'
 };
 
-
 export default class MyPageTab extends React.Component {
-
     constructor(props) {
         super(props);
         this.handleToggle = this.handleToggle.bind(this);
+        this.state = {value: "a"}
     }
 
-    handleToggle() {
-        console.log("Toggled!");
+    handleToggle(value) {
+        console.log("Toggled! " + value);
     }
 
     render() {
         return (
-            <Paper zDepth={2} style={style}>
-                <List>
-                    <Subheader>My Page Menus</Subheader>
-                    <ListItem primaryText={myVisitedPlaces} leftIcon={<ContentInbox />} onTouchTap={this.handleToggle} />
-                    <ListItem primaryText={myLikes} leftIcon={<ActionGrade />} onTouchTap={this.handleToggle} />
-                    <ListItem primaryText={myReviews} leftIcon={<ContentSend />} onTouchTap={this.handleToggle} />
-                    <ListItem primaryText={changeProfileInfo} leftIcon={<ContentDrafts />} onTouchTap={this.handleToggle} />
-                </List>
-            </Paper>
+            <Tabs
+                value={this.state.value}
+                onChange={this.handleToggle}
+            >
+                <Tab label={myVisitedPlaces} value="a" ></Tab>
+                <Tab label={myLikes} value="b"></Tab>
+                <Tab label={myReviews} value="b"></Tab>
+                <Tab label={changeProfileInfo} value="b"></Tab>
+            </Tabs>
         );
     }
 }
+
+// export default class MyPageTab extends React.Component {
+//
+//     constructor(props) {
+//         super(props);
+//         this.handleToggle = this.handleToggle.bind(this);
+//     }
+//
+//     handleToggle() {
+//         console.log("Toggled!");
+//     }
+//
+//     render() {
+//         return (
+//             <Paper zDepth={2} style={style}>
+//                 <List>
+//                     <Subheader>My Page Menus</Subheader>
+//                     <ListItem primaryText={myVisitedPlaces} leftIcon={<ContentInbox />} onTouchTap={this.handleToggle} />
+//                     <ListItem primaryText={myLikes} leftIcon={<ActionGrade />} onTouchTap={this.handleToggle} />
+//                     <ListItem primaryText={myReviews} leftIcon={<ContentSend />} onTouchTap={this.handleToggle} />
+//                     <ListItem primaryText={changeProfileInfo} leftIcon={<ContentDrafts />} onTouchTap={this.handleToggle} />
+//                 </List>
+//             </Paper>
+//         );
+//     }
+// }

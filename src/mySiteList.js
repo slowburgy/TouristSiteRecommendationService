@@ -12,8 +12,8 @@ const styles = {
         // justifyContent: 'space-around',
     },
     gridList: {
-        width: 1300,
-        height: 200,
+        // width: 1300,
+        // height: 200,
         // overflowY: 'auto',
         // marginLeft: 10,
         // marginRight: 10,
@@ -23,7 +23,7 @@ const styles = {
         // flex: 1
     }
 };
-
+// cellHeight={200}
 export default class MySiteList extends React.Component {
     constructor(props) {
         super(props);
@@ -37,7 +37,6 @@ export default class MySiteList extends React.Component {
     render() {
         return (
             <GridList
-                cellHeight={200}
                 cols={7}
                 style={styles.gridList}
             >
