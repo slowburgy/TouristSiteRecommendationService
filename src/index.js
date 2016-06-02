@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import injectTapEventPlugin from "react-tap-event-plugin";
 import {cyan500} from 'material-ui/styles/colors';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MyAppBar from './myAppBar'
 import MyPageTab from './myPageTab';
@@ -16,23 +17,25 @@ import MySearchBar from './mySearchBar';
 injectTapEventPlugin();
 
 console.log("hello, react!");
+console.log(window.innerWidth);
 
-const muiTheme = getMuiTheme({
-    palette: {
-        textColor: cyan500
-    },
-    appBar: {
-        height: 50
-    }
-});
+const darkMuiTheme = getMuiTheme();
+
+const root = {
+    display: 'flex',
+    flexDirection: 'column'
+};
+
 
 class Main extends React.Component {
     render() {
         return (
-            <MuiThemeProvider muiTheme={getMuiTheme()}>
-                <div >
+            <MuiThemeProvider muiTheme={darkMuiTheme}>
+                <div style={{backgroundImage: 'url("images/beach.jpg")', opacity: 0.3}}>
                     <MyAppBar />
-                    <MyPlacePage />
+                    <div>
+                        <MyCategoryList />
+                    </div>
                 </div>
             </MuiThemeProvider>
         );

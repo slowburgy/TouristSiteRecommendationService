@@ -9,12 +9,10 @@ import MyMainPageTab from './myMainPageTab';
 export default class MyAppBar extends React.Component {
     render() {
         return (
-            <div>
-                <AppBar
-                    title={appTitle}
-                    iconElementRight={<MyAppRightIcons />}
-                />
-            </div>
+            <AppBar style={{position: 'fixed', opacity: 0.9}}
+                title={appTitle}
+                iconElementRight={<MyAppRightIcons />}
+            />
         );
     }
 }

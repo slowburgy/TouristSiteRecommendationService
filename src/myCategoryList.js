@@ -4,9 +4,9 @@ import MySiteList from './mySiteList';
 import Subheader from 'material-ui/Subheader';
 
 const style = {
-    display: 'inline-block',
-    verticalAlign: 'top',
-    height: 1000,
+    // display: 'inline-block',
+    // verticalAlign: 'top',
+    // height: 1000,
     // margin: 10,
     // alignSelf: 'stretch',
     // alignItems: 'stretch',
@@ -63,9 +63,9 @@ export default class MyCategoryList extends React.Component {
         return (
             <div style={style}>
                 {data.map((d) => (
-                    <Paper zDepth={0} style={{marginBottom: 20, height: 250}}>
+                    <div>
                         <MySiteList data={d} />
-                    </Paper>
+                    </div>
                 ))}
             </div>
         );

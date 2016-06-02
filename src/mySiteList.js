@@ -15,9 +15,7 @@ const styles = {
         // width: 1300,
         // height: 200,
         // overflowY: 'auto',
-        // marginLeft: 10,
-        // marginRight: 10,
-        marginBottom: 20,
+        margin: 0        
         // alignSelf: 'stretch',
         // alignItems: 'stretch',
         // flex: 1
@@ -48,6 +46,7 @@ export default class MySiteList extends React.Component {
                         subtitle={<span>by <b>{tile.author}</b></span>}
                         actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
                         onTouchTap={this.handleToggle}
+                        style={{margin: 0}}
                     >
                         <img src={tile.img} />
                     </GridTile>

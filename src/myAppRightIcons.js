@@ -45,13 +45,13 @@ export default class MyAppRightIcons extends React.Component {
                     labelStyle={this.iconStyle()}
                     onTouchTap={this.handleToggle}
                 />
-                <Drawer width={400} openSecondary={true} open={this.state.open}>
+                <Drawer width={400} openSecondary={true} open={this.state.open} style={{opacity: 1}}>
                     <div>
                         <AppBar
                             title={myDrawerTitle}
                             iconElementLeft={<IconButton onTouchTap={this.handleToggle}><NavigationClose /></IconButton>}
                         />
-                        <List>
+                        <List style={{color: "#000000"}}>
                             <ListItem primaryText={myVisitedPlaces} leftIcon={<ContentInbox />} onTouchTap={this.handleToggle} />
                             <ListItem primaryText={myLikes} leftIcon={<ActionGrade />} onTouchTap={this.handleToggle} />
                             <ListItem primaryText={myReviews} leftIcon={<ContentSend />} onTouchTap={this.handleToggle} />
