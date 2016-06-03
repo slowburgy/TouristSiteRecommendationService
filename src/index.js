@@ -13,11 +13,14 @@ import MyProfilePage from './myProfilePage';
 import MyMainPageTab from './myMainPageTab';
 import MyPlacePage from './myPlacePage';
 import MySearchBar from './mySearchBar';
+import Paper from 'material-ui/Paper';
+import MyRecommendationBar from './myRecommendationBar';
 
 injectTapEventPlugin();
 
 console.log("hello, react!");
-console.log(window.innerWidth);
+console.log(window.innerHeight);
+
 
 const darkMuiTheme = getMuiTheme();
 
@@ -31,10 +34,11 @@ class Main extends React.Component {
     render() {
         return (
             <MuiThemeProvider muiTheme={darkMuiTheme}>
-                <div style={{backgroundImage: 'url("images/beach.jpg")', opacity: 0.3}}>
+                <div> 
                     <MyAppBar />
                     <div>
-                        <MyCategoryList />
+                        <MyRecommendationBar />
+                        <MyCategoryList style={{backgroundColor: ""}}/>
                     </div>
                 </div>
             </MuiThemeProvider>

@@ -6,20 +6,9 @@ import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import DropDownMenu from 'material-ui/DropDownMenu';
+import ActionZoomIn from 'material-ui/svg-icons/action/zoom-in';
+import IconButton from 'material-ui/IconButton';
 
-const style = {
-    marginLeft: 200,
-    marginRight: 200,
-    marginTop: 30,
-    marginBottom: 30,
-    display: 'flex',
-    flexDirection: 'column'
-    // display: 'inline-block'
-};
-
-const s = {
-    width: 300,
-};
 
 // <Paper style={style} zDepth={1}>
 //     <div style={{display: 'flex', flexDirection: 'row'}}>
@@ -38,23 +27,6 @@ const s = {
 // <TextField style={{display: 'flex'}} hintText="Search for anything!" />
 // <RaisedButton label="Search me!" style={{flex: 1}} />
 
-export default class MySearchBar extends React.Component {
-    render() {
-        return (
-            <div></div>
-
-        );
-    }
-
-
-
-
-
-
-
-
-}
-
 // <DropDownMenu style={s}>
 //     <MenuItem value={1} primaryText="Never" />
 //     <MenuItem value={2} primaryText="Every Night" />
@@ -63,3 +35,30 @@ export default class MySearchBar extends React.Component {
 //     <MenuItem value={5} primaryText="Weekly" />
 // </DropDownMenu>
 // <RaisedButton label="Search!" />
+
+export default class MySearchBar extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.styles = {
+            root: {
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center'
+            }
+        };
+    }
+
+    render() {
+        return (
+            <div style={this.styles.root}>
+                <TextField hintText="Search for anything" />
+                <IconButton>
+                    <ActionZoomIn />
+                </IconButton>
+            </div>
+        );
+    }
+}
+
