@@ -54,6 +54,9 @@ app.get('/api/recommend', api.recommend);
 app.get('/api/addpref', api.addpref);
 app.get('/api/randomplace', api.randomplace);
 app.get('/api/addplace', api.addplace);
+app.get('/api/like', api.like);
+app.post('/api/review', api.review);
+app.get('/api/numpref', api.numpref);
 
 app.listen(app.get('port'), function() {
   console.log('Server started: http://localhost:' + app.get('port') + '/');

@@ -4,6 +4,7 @@ var crypto = require('crypto');
 var express = require('express');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
+var request = require('request');
 var app = express();
 
 var connection = mysql.createConnection({
@@ -73,7 +74,8 @@ exports.signup = function(req, res) {
                 'OAuth':req.query.OAuth,
                 'age':Number(req.query.age),
                 'sex':checkSex(req.query.sex),
-                'travStyle':checkStyle(req.query.travStyle)};
+                'travStyle':checkStyle(req.query.travStyle),
+                'numPref':0};
     var query = connection.query(
                 'insert into tourUser set ?', user,
                 function(err,result){
@@ -175,6 +177,14 @@ exports.addpref = function(req, res) {
 				 	         console.error(err);
                                                  return res.json({'result':-1});
                                              }
+                                             var prefup = connection.query(
+                                                          'update tourUser set numPref = numPref + 1 where uid='+mysql.escape(req.query.uid),
+                                                          function(err, result){
+                                                              if (err) {
+                                                                  console.error(err);
+                                                                  return res.json({'result':-1});
+                                                             }
+                                                          });
                                              res.json({'result':1})}
                             );
 		        }
@@ -190,6 +200,144 @@ exports.randomplace = function(req, res) {
 };
 
 exports.addplace = function(req, res) {
-    // DO SOMETHING;
-    res.send(200, "NOT YET IMPLEMENTED");
+    if ( isEmpty(req.query.areaCode) || isEmpty(req.query.sigunguCode) || isEmpty(req.query.page))
+	return res.json({'result':-2});
+
+    var areaCode = req.query.areaCode;
+    var sigunguCode = req.query.sigunguCode;
+    var page = req.query.page;
+
+    var url = "http://api.visitkorea.or.kr/openapi/service/rest/EngService/areaBasedList?ServiceKey=lDzm86gYb%2Bcz6q1Kl4XPb1oXrRMMxbO0gUs%2BAEs9eVZpIQr6JigwOwbOvKCBkrth0%2Bnnq4V%2BDZlrbRdkZOYqSQ%3D%3D&contentTypeId=76&areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=PRAC4APP&arrange=A&numOfRows=25&pageNo="+page+"&_type=json";
+    request(url, function(err, resp, body) {
+        var body = JSON.parse(body);
+
+        if (body.response.header.resultCode != "0000")
+            return res.json({'result':body.response.header.resultCode});
+
+        var total = body.response.body.totalCount;
+        var item = body.response.body.items.item;
+        var added = 0;
+
+        if (!item || !item.length) return res.json({'result':-1});
+        for (i=0; i<item.length; i++) {
+            var cid = item[i].contentid;
+            var placedata = {'cid':cid,
+                'areaCode':areaCode,
+                'sigunguCode':sigunguCode};
+            var place = connection.query(
+                'insert into tourPlace set ?', placedata,
+                function(err,result){
+                    if (err) {
+                        console.error(err);
+                        return res.json({'result':-1});
+                    }
+            });
+            added++;
+        }
+        return res.json({'total':total, 'added':added});
+    });
 };
+
+exports.like = function(req, res) {
+    if ( isEmpty(req.query.uid) || isEmpty(req.query.cid))
+	return res.json({'result':-2});
+
+    var data = 'uid='+mysql.escape(req.query.uid)+
+               ' and cid='+Number(req.query.cid);
+    var query = connection.query(
+                'select * from tourLike where '+data,
+                function(err,result){
+                    if (err) {
+                        console.error(err);
+                        return res.json({'result':-1});
+                    }
+                    if (result) {
+		        if (result.length) {
+		            var update = connection.query(
+                                         'delete from tourLike where '+data,
+                                         function(err, result){
+                                             if (err) {
+                                                 console.error(err);
+                                                 return res.json({'result':-1});
+                                             }
+                                             res.json({'result':2})}
+                            );
+		        } else {
+		            var insert = connection.query(
+                                         'insert into tourLike set ?',
+                                        {'uid':req.query.uid,
+			  	         'cid':Number(req.query.cid)},
+				         function(err, result){
+				             if (err) {
+				 	         console.error(err);
+                                                 return res.json({'result':-1});
+                                             }
+                                             res.json({'result':1})}
+                            );
+		        }
+		    } else {
+		        res.json({'result':'-1'});
+		    }
+    });
+};
+
+exports.review = function(req, res) {
+    if ( isEmpty(req.body.review) || isEmpty(req.body.uid) || isEmpty(req.body.cid))
+	return res.json({'result':-2});
+
+    var review = mysql.escape(req.query.review)
+    var data = 'uid='+mysql.escape(req.query.uid)+
+               ' and cid='+Number(req.query.cid);
+    var query = connection.query(
+                'select * from tourReview where '+data,
+                function(err,result){
+                    if (err) {
+                        console.error(err);
+                        return res.json({'result':-1});
+                    }
+                    if (result) {
+		        if (result.length) {
+		            var update = connection.query(
+                                         'update tourReview set review='+review+
+                                         ' where '+data,
+                                         function(err, result){
+                                             if (err) {
+                                                 console.error(err);
+                                                 return res.json({'result':-1});
+                                             }
+                                             res.json({'result':2})}
+                            );
+		        } else {
+		            var insert = connection.query(
+                                         'insert into tourReview set ?',
+                                        {'uid':req.query.uid,
+			  	         'cid':Number(req.query.cid),
+	                                 'review':review}, 
+				         function(err, result){
+				             if (err) {
+				 	         console.error(err);
+                                                 return res.json({'result':-1});
+                                             }
+                                             res.json({'result':1})}
+                            );
+		        }
+		    } else {
+		        res.json({'result':'-1'});
+		    }
+    });
+};
+
+exports.numpref = function(req, res) {
+    if ( isEmpty(req.query.uid))
+            return res.json({'result':-2});
+    var query = connection.query(
+                'select numPref from tourUser where uid='+mysql.escape(req.query.uid),
+                function(err,result){
+                    if (err) {
+                       console.error(err);
+                       return res.json({'result':'-1'});
+                    }
+                    if (!result || !result.length) res.json({'result':-1});
+                    else res.json({"result":result[0]['numPref']});
+    });
+}
