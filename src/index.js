@@ -15,14 +15,21 @@ import MyPlacePage from './myPlacePage';
 import MySearchBar from './mySearchBar';
 import Paper from 'material-ui/Paper';
 import MyRecommendationBar from './myRecommendationBar';
+import {dp, verticalDP} from '../dimensions/dimensions';
+
 
 injectTapEventPlugin();
 
 console.log("hello, react!");
 console.log(window.innerHeight);
+console.log(window.innerWidth);
 
 
-const darkMuiTheme = getMuiTheme();
+const muiTheme = getMuiTheme({
+    appBar: {
+        height: verticalDP(100)
+    }
+});
 
 const root = {
     display: 'flex',
@@ -33,12 +40,12 @@ const root = {
 class Main extends React.Component {
     render() {
         return (
-            <MuiThemeProvider muiTheme={darkMuiTheme}>
+            <MuiThemeProvider muiTheme={muiTheme}>
                 <div> 
                     <MyAppBar />
                     <div>
                         <MyRecommendationBar />
-                        <MyCategoryList style={{backgroundColor: ""}}/>
+                        <MyCategoryList />
                     </div>
                 </div>
             </MuiThemeProvider>

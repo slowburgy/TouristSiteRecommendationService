@@ -6,10 +6,18 @@ import MyMainPageTab from './myMainPageTab';
 
 // TODO: Use <MyPageTab />
 
+const styles = {
+    appBarStyle: {
+        position: 'fixed',
+        opacity: 0.4
+    }
+};
+
+
 export default class MyAppBar extends React.Component {
     render() {
         return (
-            <AppBar style={{position: 'fixed', opacity: 0.4}}
+            <AppBar style={styles.appBarStyle}
                 title={appTitle}
                 iconElementRight={<MyAppRightIcons />}
             />
