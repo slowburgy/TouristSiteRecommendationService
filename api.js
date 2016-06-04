@@ -340,4 +340,34 @@ exports.numpref = function(req, res) {
                     if (!result || !result.length) res.json({'result':-1});
                     else res.json({"result":result[0]['numPref']});
     });
-}
+};
+
+exports.getlike = function(req, res) {
+    if ( isEmpty(req.query.uid))
+            return res.json({'result':-2});
+    var query = connection.query(
+                'select cid from tourLike where uid='+mysql.escape(req.query.uid),
+                function(err,result){
+                    if (err) {
+                       console.error(err);
+                       return res.json({'result':'-1'});
+                    }
+                    if (!result || !result.length) res.json({'result':0});
+                    else res.json({"result":"1", 'likes':result});
+    });
+};
+
+exports.getreview = function(req, res) {
+    if ( isEmpty(req.query.cid))
+            return res.json({'result':-2});
+    var query = connection.query(
+                'select review from tourReview where cid='+Number(req.query.cid),
+                function(err,result){
+                    if (err) {
+                       console.error(err);
+                       return res.json({'result':'-1'});
+                    }
+                    if (!result || !result.length) res.json({'result':0});
+                    else res.json({"result":"1", 'reviews':result});
+    });
+};
