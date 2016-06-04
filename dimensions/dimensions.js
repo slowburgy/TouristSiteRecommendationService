@@ -15,7 +15,9 @@ function verticalDP(dimPoint) {
     return dimPoint * factor;
 }
 
+var appBarHeight = verticalDP(100);
 
 exports.dp = dp;
 exports.verticalDP = verticalDP;
 exports.horizontalDP = horizontalDP;
+exports.appBarHeight = appBarHeight;

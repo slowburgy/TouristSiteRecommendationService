@@ -15,8 +15,10 @@ import MyPlacePage from './myPlacePage';
 import MySearchBar from './mySearchBar';
 import Paper from 'material-ui/Paper';
 import MyRecommendationBar from './myRecommendationBar';
+import MyProfileEditPage from './myProfileEditPage';
 import {dp, verticalDP} from '../dimensions/dimensions';
-
+import {cyan50} from 'material-ui/styles/colors';
+import {appBarHeight} from '../dimensions/dimensions';
 
 injectTapEventPlugin();
 
@@ -27,7 +29,7 @@ console.log(window.innerWidth);
 
 const muiTheme = getMuiTheme({
     appBar: {
-        height: verticalDP(100)
+        height: appBarHeight
     }
 });
 
@@ -41,11 +43,11 @@ class Main extends React.Component {
     render() {
         return (
             <MuiThemeProvider muiTheme={muiTheme}>
-                <div> 
+                <div > 
                     <MyAppBar />
                     <div>
-                        <MyRecommendationBar />
-                        <MyCategoryList />
+                        <MyPageTab />
+                        <MyProfileEditPage />
                     </div>
                 </div>
             </MuiThemeProvider>

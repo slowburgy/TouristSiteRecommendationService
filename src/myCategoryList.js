@@ -2,15 +2,13 @@ import React from 'react';
 import Paper from 'material-ui/Paper';
 import MySiteList from './mySiteList';
 import Subheader from 'material-ui/Subheader';
+import {cyan50} from 'material-ui/styles/colors';
+import {verticalDP} from '../dimensions/dimensions';
 
-const style = {
-    // display: 'inline-block',
-    // verticalAlign: 'top',
-    // height: 1000,
-    // margin: 10,
-    // alignSelf: 'stretch',
-    // alignItems: 'stretch',
-    // flex: 1,
+const styles = {
+    siteListStyle: {
+        margin: verticalDP(20),
+    },
 };
 
 const tilesData = [
@@ -61,9 +59,9 @@ export default class MyCategoryList extends React.Component {
 
     render() {
         return (
-            <div style={style}>
+            <div  >
                 {data.map((d) => (
-                    <div>
+                    <div style={styles.siteListStyle}>
                         <MySiteList data={d} />
                     </div>
                 ))}

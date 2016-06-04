@@ -45,7 +45,7 @@ const styles = {
         alignItems: 'stretch',
         justifyContent: 'flex-start',
         backgroundColor: cyan50,
-        opacity: 0.9,
+        opacity: 0.8,
     },
 
     buttonsBarStyle: {

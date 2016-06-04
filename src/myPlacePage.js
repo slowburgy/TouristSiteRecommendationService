@@ -3,7 +3,6 @@ import Divider from 'material-ui/Divider';
 import Paper from 'material-ui/Paper';
 import Subheader from 'material-ui/Subheader';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
-import ProfileTableRow from './ProfileTableRow';
 import IconMenu from 'material-ui/IconMenu';
 import IconButton from 'material-ui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
