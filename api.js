@@ -195,8 +195,16 @@ exports.addpref = function(req, res) {
 };
 
 exports.randomplace = function(req, res) {
-    // DO SOMETHING;
-    res.send(200, "NOT YET IMPLEMENTED");
+    var sqlQuery = "select cid from tourPlace order by rand() limit 30;"
+    var query = connection.query(sqlQuery,
+	function(err,result){
+	if (err) {
+	    console.error(err);
+	    return res.json({'result':'-1'});
+	}
+	if (!result || !result.length) res.json({'result':0});
+	else res.json({"result":"1", 'random':result});
+	});
 };
 
 exports.addplace = function(req, res) {
