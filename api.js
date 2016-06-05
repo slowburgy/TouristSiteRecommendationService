@@ -227,7 +227,8 @@ exports.addplace = function(req, res) {
         var added = 0;
 
         if (!item || !item.length) return res.json({'result':-1});
-        for (i=0; i<item.length; i++) {
+	var isSended = false;
+	for (i=0; i<item.length; i++) {
             var cid = item[i].contentid;
             var placedata = {'cid':cid,
                 'areaCode':areaCode,
@@ -236,13 +237,19 @@ exports.addplace = function(req, res) {
                 'insert into tourPlace set ?', placedata,
                 function(err,result){
                     if (err) {
+			if (isSended) {return ;}
                         console.error(err);
+			isSended = true;
                         return res.json({'result':-1});
-                    }
+                    }else
+		    {
+			if (isSended) {return ;}
+			isSended = true;
+			return res.json({'total':total, 'added':added});
+		    }
             });
             added++;
         }
-        return res.json({'total':total, 'added':added});
     });
 };
 
