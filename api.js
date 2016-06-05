@@ -128,16 +128,150 @@ exports.prefinfo = function(req, res) {
                 function(err,result){
                     if (err) {
                        console.error(err);
-                       return res.json({'result':'-1'});
+                       return res.json({'result':-1});
                     }
                     if (!result || !result.length) res.json({'result':0});
-                    else res.json({"result":"1", 'pref':result[0]['pref']});
+                    else res.json({"result":1, 'pref':result[0]['pref']});
     });
 };
 
 exports.recommend = function(req, res) {
-    // DO SOMETHING;
-    res.send(200, "NOT YET IMPLEMENTED");
+    // Here, input should be (age, sex, travStyle, area, [uid]optional)
+    // Example: age = 25, sex = 'W', travStyle = 'alone', area = 1 (area code from API)
+    if ( isEmpty(req.query.age) || isEmpty(req.query.sex) ||
+         isEmpty(req.query.travStyle) || isEmpty(req.query.area))
+            return res.json({'result':-2});
+    var age = Number(req.query.age);
+    var inner_query = 'sex = '+checkSex(req.query.sex)+' and '+
+                'travStyle = '+checkStyle(req.query.travStyle)+' and '+
+                'age>'+(age)+' and age<'+(age+100);
+    var area = Number(req.query.area);
+    if ( isEmpty(req.query.uid)) {
+        var query = connection.query(
+                    'select cid, avg(pref) as pref from tourPref where '+
+                    'uid in (select uid from tourUser where '+inner_query+
+                    ') and cid in (select cid from tourPlace where areaCode='+area+
+                    ') group by cid order by pref desc',
+                    function(err,result){
+                        if (err) {
+                           console.error(err);
+                           return res.json({'result':-1});
+                        }
+                        if (!result || !result.length) res.json({'result':0});
+                        else res.json({'result':1, 'data':result});
+        });
+    } else {
+       var uid = req.query.uid;
+       // cid condition can be deleted.
+       var query = connection.query(
+                    'select uid, avg(pref) as pref from tourPref where '+
+                    'uid in (select uid from tourUser where '+inner_query+') and '+
+                    'cid in (select cid from tourPlace where areaCode='+area+')'+
+                    ' group by uid',
+                    function(err,result){
+                        if (err) {
+                           console.error(err);
+                           return res.json({'result':-1});
+                        }
+                        if (!result || !result.length) return res.json({'result':0});
+                        else {
+                            var query2 = connection.query(
+	                        'select uid, cid, pref from tourPref where '+
+				'uid in (select uid from tourUser where '+inner_query+') and '+
+				'cid in (select cid from tourPlace where areaCode='+area+')',
+				function(err,result2){
+				    if (err) {
+				        console.error(err);
+					return res.json({'result':-1});
+					}
+				    if (!result2 || !result2.length) return ({'result':0});
+				    else {
+				        var query2 = connection.query(
+					    'select distinct cid from tourPref where '+
+					    'uid in (select uid from tourUser where '+
+                                            inner_query+') and '+
+					    'cid in (select cid from tourPlace '+
+                                            'where areaCode='+area+')',
+					    function(err,result3){
+					        if (err) {
+						    console.error(err);
+						    return res.json({'result':-1});
+					        }
+						if (!result3 || !result3.length) return res.json({'result':0});
+						else recom_callback(res, result, result2, result3, uid);
+					    });
+				    }
+                                });
+                        }
+        });
+    }
+};
+
+var recom_callback = function(res, usr_avg_list, all_pref, place_list, uid) {
+    var usr_dict = {};
+    var place_dict = {};
+    var pref_list = new Array();
+    for (i=0; i<usr_avg_list.length; i++) {
+        usr_dict[usr_avg_list[i]["uid"]] = i;
+        pref_list.push(new Array());
+        for (j=0; j<place_list.length; j++) {
+            pref_list[i].push(0);
+        }
+    }
+    for (i=0; i<place_list.length; i++) {
+        place_dict[place_list[i]["cid"]] = i;
+
+    }
+    for (i=0; i<all_pref.length; i++) {
+        var now = all_pref[i];
+        pref_list[usr_dict[now["uid"]]][place_dict[now["cid"]]] = now["pref"];
+    }
+    un = usr_dict[uid];
+    var final_list = sort_by_wsum(pref_list, usr_avg_list, place_list, un);
+    return res.json({'result':1, 'data':final_list});
+};
+
+var sort_by_wsum = function(pref_list, usr_avg_list, place_list, un) {
+    var final_list = [];
+    var sim_list = new Array();
+    for (i=0; i<pref_list[0].length; i++) {
+        sim_list.push(new Array());
+        for (j=0; j<pref_list[0].length; j++) {
+            if (i > j) sim_list[i].push(sim_list[j][i]);
+            else sim_list[i].push(sim(pref_list, usr_avg_list, i, j));
+        }
+    }
+    for (j=0; j<pref_list[0].length; j++) {
+        var x = weighted_sum(pref_list, sim_list, j, un);
+        final_list.push({"cid":place_list[j]["cid"], "pref":x}); 
+    }
+    return final_list;
+};
+
+var weighted_sum = function(pref_list, sim_list, j, un) {
+    var up = 0.000000;
+    var down = 0.000000;
+    for(k=0; k<pref_list[0].length; k++) {
+        if (sim_list[j][k] > 0.000) {
+            // You can change the value 0.150
+            up = up + sim_list[j][k]*pref_list[un][k];
+            down = down + Math.abs(sim_list[j][k]);
+        }
+    }
+    if (down == 0.000000) return 0.000000;
+    else return up/down;
+};
+
+var sim = function(pref_list, usr_avg_list, i, j) {
+    if (i == j) return 0.000000;
+    var up = 0.000000; var down1 = 0.000000; var down2 = 0.000000;
+    for (k=0; k<pref_list.length; k++) {
+        var x = pref_list[k][i] - usr_avg_list[k]["pref"];
+        var y = pref_list[k][j] - usr_avg_list[k]["pref"];
+        up = up + x*y; down1 = down1 + x*x; down2 = down2 + y*y;
+    }
+    if ((down1 == 0) || (down2 == 0)) return 0.000000;
+    else return up / Math.sqrt(down1*down2);
 };
 
 exports.addpref = function(req, res) {
@@ -164,7 +298,7 @@ exports.addpref = function(req, res) {
                                                  console.error(err);
                                                  return res.json({'result':-1});
                                              }
-                                             res.json({'result':2})}
+                                             return res.json({'result':2})}
                             );
 		        } else {
 		            var insert = connection.query(
