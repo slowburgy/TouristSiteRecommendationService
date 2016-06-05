@@ -18,6 +18,7 @@ import MyRecommendationBar from './myRecommendationBar';
 import MyProfileEditPage from './myProfileEditPage';
 import {dp, verticalDP} from '../dimensions/dimensions';
 import {cyan50} from 'material-ui/styles/colors';
+import MyLikedPlaces from './myLikedPlaces';
 import {appBarHeight} from '../dimensions/dimensions';
 
 injectTapEventPlugin();
@@ -47,7 +48,7 @@ class Main extends React.Component {
                     <MyAppBar />
                     <div>
                         <MyPageTab />
-                        <MyProfileEditPage />
+                        <MyLikedPlaces />
                     </div>
                 </div>
             </MuiThemeProvider>

@@ -102,7 +102,7 @@ export default class MyRecommendationBar extends React.Component {
         return (
             <div style={styles.root}>
                 <div style={styles.child}>
-                    <div style={styles.msgStyle}>Experience our recommendation system.</div>
+                    <div style={styles.msgStyle}>Experience our recommendation system</div>
                     <div style={styles.barStyle}>
                         <div style={styles.buttonsBarStyle}>
                             <RaisedButton
