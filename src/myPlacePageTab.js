@@ -45,27 +45,3 @@ export default class MyPageTab extends React.Component {
 }
 
 
-// export default class MyMainPageTab extends React.Component {
-//
-//     constructor(props) {
-//         super(props);
-//         this.handleToggle = this.handleToggle.bind(this);
-//     }
-//
-//     handleToggle() {
-//         console.log("Toggled!");
-//     }
-//
-//     render() {
-//         return (
-//             <Paper zDepth={2} style={style}>
-//                 <List>
-//                     <Subheader>Place Menus</Subheader>
-//                     <ListItem primaryText={moreSnapshots} leftIcon={<ContentInbox />} onTouchTap={this.handleToggle} />
-//                     <ListItem primaryText={rate} leftIcon={<ActionGrade />} onTouchTap={this.handleToggle} />
-//                     <ListItem primaryText={review} leftIcon={<ContentSend />} onTouchTap={this.handleToggle} />
-//                 </List>
-//             </Paper>
-//         );
-//     }
-// }

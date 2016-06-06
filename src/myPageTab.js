@@ -20,7 +20,7 @@ const styles = {
     
     tabStyle: {
         backgroundColor: grey50,
-        color: grey500
+        color: grey500,
     }
 };
 

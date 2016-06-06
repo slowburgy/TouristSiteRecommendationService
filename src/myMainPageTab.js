@@ -33,6 +33,7 @@ const styles = {
     }
 };
 
+
 export default class MyMainPageTab extends React.Component {
     constructor(props) {
         super(props);
@@ -59,29 +60,3 @@ export default class MyMainPageTab extends React.Component {
     }
 }
 
-
-// export default class MyMainPageTab extends React.Component {
-//
-//     constructor(props) {
-//         super(props);
-//         this.handleToggle = this.handleToggle.bind(this);
-//     }
-//
-//     handleToggle() {
-//         console.log("Toggled!");
-//     }
-//
-//     render() {
-//         return (
-//             <Paper zDepth={2} style={style}>
-//                 <List>
-//                     <Subheader>Menus</Subheader>
-//                     <ListItem primaryText={recommended} leftIcon={<ContentInbox />} onTouchTap={this.handleToggle} />
-//                     <ListItem primaryText={recommendedForGender} leftIcon={<ActionGrade />} onTouchTap={this.handleToggle} />
-//                     <ListItem primaryText={recommendedForAge} leftIcon={<ContentSend />} onTouchTap={this.handleToggle} />
-//                     <ListItem primaryText={recommendedForNationality} leftIcon={<ContentDrafts />} onTouchTap={this.handleToggle} />
-//                 </List>
-//             </Paper>
-//         );
-//     }
-// }

@@ -48,7 +48,7 @@ class Main extends React.Component {
                     <MyAppBar />
                     <div>
                         <MyPageTab />
-                        <MyLikedPlaces />
+                        <MyProfileEditPage />
                     </div>
                 </div>
             </MuiThemeProvider>

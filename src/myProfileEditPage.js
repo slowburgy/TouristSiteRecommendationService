@@ -30,10 +30,14 @@ const styles ={
     },
     
     headerStyle: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
         fontWeight: 'bold',
         backgroundColor: grey50,
-        fontSize: dp(40),
-        height: dp(100)
+        fontSize: dp(30),
+        height: dp(80),
     },
 
     buttonBarStyle: {
@@ -44,15 +48,15 @@ const styles ={
 
     buttonStyle: {
         flex: 1,
-        height: dp(80)
+        height: dp(60)
     },
     
     buttonLabelStyle: {
-        fontSize: dp(30),
+        fontSize: dp(25),
     },
 
     fontStyle: {
-        fontSize: dp(25)
+        fontSize: dp(20),
     }
 };
 

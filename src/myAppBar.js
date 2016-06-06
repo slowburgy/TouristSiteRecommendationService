@@ -4,7 +4,6 @@ import {appTitle} from '../strings/strings';
 import MyAppRightIcons from './myAppRightIcons';
 import MyMainPageTab from './myMainPageTab';
 
-// TODO: Use <MyPageTab />
 
 const styles = {
     appBarStyle: {

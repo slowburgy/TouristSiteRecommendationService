@@ -46593,7 +46593,7 @@ var Main = function (_React$Component) {
                         'div',
                         null,
                         _react2.default.createElement(_myPageTab2.default, null),
-                        _react2.default.createElement(_myLikedPlaces2.default, null)
+                        _react2.default.createElement(_myProfileEditPage2.default, null)
                     )
                 )
             );
@@ -46639,8 +46639,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-// TODO: Use <MyPageTab />
 
 var styles = {
     appBarStyle: {
@@ -47230,33 +47228,6 @@ var MyMainPageTab = function (_React$Component) {
     return MyMainPageTab;
 }(_react2.default.Component);
 
-// export default class MyMainPageTab extends React.Component {
-//
-//     constructor(props) {
-//         super(props);
-//         this.handleToggle = this.handleToggle.bind(this);
-//     }
-//
-//     handleToggle() {
-//         console.log("Toggled!");
-//     }
-//
-//     render() {
-//         return (
-//             <Paper zDepth={2} style={style}>
-//                 <List>
-//                     <Subheader>Menus</Subheader>
-//                     <ListItem primaryText={recommended} leftIcon={<ContentInbox />} onTouchTap={this.handleToggle} />
-//                     <ListItem primaryText={recommendedForGender} leftIcon={<ActionGrade />} onTouchTap={this.handleToggle} />
-//                     <ListItem primaryText={recommendedForAge} leftIcon={<ContentSend />} onTouchTap={this.handleToggle} />
-//                     <ListItem primaryText={recommendedForNationality} leftIcon={<ContentDrafts />} onTouchTap={this.handleToggle} />
-//                 </List>
-//             </Paper>
-//         );
-//     }
-// }
-
-
 exports.default = MyMainPageTab;
 
 },{"../strings/strings":412,"material-ui/List":137,"material-ui/Paper":143,"material-ui/Subheader":156,"material-ui/Tabs":171,"material-ui/svg-icons/action/grade":206,"material-ui/svg-icons/content/drafts":209,"material-ui/svg-icons/content/inbox":210,"material-ui/svg-icons/content/send":211,"react":385}],405:[function(require,module,exports){
@@ -47739,10 +47710,14 @@ var styles = {
     },
 
     headerStyle: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
         fontWeight: 'bold',
         backgroundColor: _colors.grey50,
-        fontSize: (0, _dimensions.dp)(40),
-        height: (0, _dimensions.dp)(100)
+        fontSize: (0, _dimensions.dp)(30),
+        height: (0, _dimensions.dp)(80)
     },
 
     buttonBarStyle: {
@@ -47753,15 +47728,15 @@ var styles = {
 
     buttonStyle: {
         flex: 1,
-        height: (0, _dimensions.dp)(80)
+        height: (0, _dimensions.dp)(60)
     },
 
     buttonLabelStyle: {
-        fontSize: (0, _dimensions.dp)(30)
+        fontSize: (0, _dimensions.dp)(25)
     },
 
     fontStyle: {
-        fontSize: (0, _dimensions.dp)(25)
+        fontSize: (0, _dimensions.dp)(20)
     }
 };
 
@@ -48373,32 +48348,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-// <Paper style={style} zDepth={1}>
-//     <div style={{display: 'flex', flexDirection: 'row'}}>
-//         <TextField style={{flex: 1}} hintText="Search for anything!" />
-//         <SelectField style={{flex: 2}}>
-//             <MenuItem value={1} primaryText="Never" />
-//             <MenuItem value={2} primaryText="Every Night" />
-//             <MenuItem value={3} primaryText="Weeknights" />
-//             <MenuItem value={4} primaryText="Weekends" />
-//             <MenuItem value={5} primaryText="Weekly" />
-//         </SelectField>
-//     </div>
-//     <RaisedButton label="Search me!" />
-// </Paper>
-
-// <TextField style={{display: 'flex'}} hintText="Search for anything!" />
-// <RaisedButton label="Search me!" style={{flex: 1}} />
-
-// <DropDownMenu style={s}>
-//     <MenuItem value={1} primaryText="Never" />
-//     <MenuItem value={2} primaryText="Every Night" />
-//     <MenuItem value={3} primaryText="Weeknights" />
-//     <MenuItem value={4} primaryText="Weekends" />
-//     <MenuItem value={5} primaryText="Weekly" />
-// </DropDownMenu>
-// <RaisedButton label="Search!" />
 
 var MySearchBar = function (_React$Component) {
     _inherits(MySearchBar, _React$Component);
