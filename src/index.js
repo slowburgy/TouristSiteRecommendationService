@@ -11,7 +11,7 @@ import MySiteList from './mySiteList';
 import MyCategoryList from './myCategoryList';
 import MyProfilePage from './myProfilePage';
 import MyMainPageTab from './myMainPageTab';
-import MyPlacePage from './myPlacePage';
+import MyPlacePage from './myPlacePage2';
 import MySearchBar from './mySearchBar';
 import Paper from 'material-ui/Paper';
 import MyRecommendationBar from './myRecommendationBar';
@@ -19,7 +19,9 @@ import MyProfileEditPage from './myProfileEditPage';
 import {dp, verticalDP} from '../dimensions/dimensions';
 import {cyan50} from 'material-ui/styles/colors';
 import MyLikedPlaces from './myLikedPlaces';
+import MyPlacePageTab from './myPlacePageTab';
 import {appBarHeight} from '../dimensions/dimensions';
+
 
 injectTapEventPlugin();
 
@@ -47,8 +49,7 @@ class Main extends React.Component {
                 <div > 
                     <MyAppBar />
                     <div>
-                        <MyPageTab />
-                        <MyProfileEditPage />
+                        <MyPlacePage />
                     </div>
                 </div>
             </MuiThemeProvider>

@@ -8,7 +8,7 @@ import MyMainPageTab from './myMainPageTab';
 const styles = {
     appBarStyle: {
         position: 'fixed',
-        opacity: 0.4
+        opacity: 0.65
     }
 };
 
