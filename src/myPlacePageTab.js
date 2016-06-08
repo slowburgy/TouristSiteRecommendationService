@@ -9,51 +9,108 @@ import ContentSend from 'material-ui/svg-icons/content/send';
 import ContentDrafts from 'material-ui/svg-icons/content/drafts';
 import ToggleStar from 'material-ui/svg-icons/toggle/star';
 import {Tab, Tabs} from 'material-ui/Tabs';
-import {appBarHeight, placePageTab} from '../dimensions/dimensions';
+import {mapWeatherContainerHeight, mapWeatherContainerWidth, placePageTab, appBarHeight} from '../dimensions/dimensions';
 import {_} from 'underscore';
 import {horizontalDP, verticalDP, dp} from '../dimensions/dimensions';
 import ActionFavorite from 'material-ui/svg-icons/action/favorite';
 import ContentCreate from 'material-ui/svg-icons/content/create';
 import ImageAddAPhoto from 'material-ui/svg-icons/image/add-a-photo';
-import {grey50} from 'material-ui/styles/colors';
+import {grey50, grey800} from 'material-ui/styles/colors';
+
+
 
 const styles = {
     root: {
-        position: 'fixed',
-        top: appBarHeight,
+        // position: 'fixed',
+        marginTop: appBarHeight,
         opacity: 0.7,
         backgroundColor: grey50,
         height: verticalDP(1000) - appBarHeight,
-        // width: placePageTab,
+        width: placePageTab,
     },
     
     headerStyle: {
+        margin: dp(20),
         display: 'flex',
         flexDirection: 'column',
-        // alignItems: 'center',
-        // justifyContent: 'center',
-        margin: dp(30)
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     
     nameStyle: {
         flex: 1,
         fontSize: dp(30),
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        marginTop: dp(20)
     },
     
     starStyle: {
         flex: 1,
         // alignSelf: 'flex-end',
-        marginTop: dp(20)
+        marginTop: dp(15)
     },
     
     oneStarStyle: {
         height: dp(30)
     },
     
+    infoStyle: {
+        fontSize: dp(20),
+        marginTop: dp(20),
+        whiteBreak: 'normal'
+    },
+
+    containerStyle: {
+        marginTop: dp(10),
+        width: mapWeatherContainerWidth,
+        display: 'flex',
+        flexDirection: 'column',
+        // alignItems: 'center',
+        justifyContent: 'flex-end'
+    },
+
+    mapBorderStyle: {
+        borderStyle: 'solid',
+        borderColor: grey800,
+        borderWidth: dp(5),
+        margin: dp(10)
+    },
+
+    mapStyle: {
+        width: mapWeatherContainerWidth - dp(30),
+        height: mapWeatherContainerHeight 
+    },
+    
+    weatherStyle: {
+        margin: dp(10),
+        marginTop: dp(10),
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    
+    oneWeatherStyle: {
+        textAlign: 'center',
+        fontSize: dp(15),
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: dp(20),
+    },
+
+    weatherIconStyle: {
+        height: dp(40),
+        marginTop: dp(5),
+        marginBottom: dp(5),
+    },
+
     listStyle: {
-        marginLeft: dp(20),
-        marginRight: dp(20)
+        // marginLeft: dp(10),
+        // marginRight: dp(10)
+    },
+    
+    fillerStyle: {
+        height: verticalDP(150)
     }
 };
 
@@ -63,6 +120,39 @@ const data = {
     img: 'images/seolarkimage.jpg',
     starRating: 3
 };
+
+const weathers = [
+    {
+        date: "06.10",
+        weather: "Rain",
+        temp: "14",
+        img: 'images/partly_cloudy.png',
+    },
+    {
+        date: "06.11",
+        weather: "Rain",
+        temp: "14",
+        img: 'images/partly_cloudy.png',
+    },
+    {
+        date: "06.12",
+        weather: "Rain",
+        temp: "14",
+        img: 'images/partly_cloudy.png',
+    },
+    {
+        date: "06.13",
+        weather: "Rain",
+        temp: "14",
+        img: 'images/partly_cloudy.png',
+    },
+    {
+        date: "06.14",
+        weather: "Rain",
+        temp: "14",
+        img: 'images/partly_cloudy.png',
+    },
+];
 
 
 export default class MyPlacePageTab extends React.Component {
@@ -77,7 +167,7 @@ export default class MyPlacePageTab extends React.Component {
 
     render() {
         return (
-            <div style={styles.root}>
+            <div style={styles.root} id="place_page_tab">
                 <div style={styles.headerStyle} >
                     <div style={styles.nameStyle}>{data.name}</div>
                     <div style={styles.starStyle}>
@@ -87,15 +177,35 @@ export default class MyPlacePageTab extends React.Component {
                         ))
                     }
                     </div>
+                    <div style={styles.infoStyle}>
+                        Gangwondo, something something something j.
+                    </div>
                 </div>
-                <List >
+                <List style={styles.listStyle}>
                     <ListItem primaryText="Like this place" leftIcon={<ActionFavorite />} />
                     <ListItem primaryText="View/write reviews" leftIcon={<ContentCreate />} />
-                    <ListItem primaryText="More snapshots" leftIcon={<ImageAddAPhoto />} />
                 </List>
+                <div style={styles.fillerStyle}></div>
+                <div style={styles.containerStyle}>
+                    <div style={styles.mapBorderStyle}>
+                        <img src="images/googlemap.png" style={styles.mapStyle} />
+                    </div>
+                    <div style={styles.weatherStyle}>
+                        {weathers.map(function (item) {
+                            return (
+                                <div style={styles.oneWeatherStyle}>
+                                    <div>{item.date}</div>
+                                    <img src={item.img} style={styles.weatherIconStyle}/>
+                                    <div>{item.temp}</div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
             </div>
         );
     }
 }
 
 
+// <ListItem primaryText="More snapshots" leftIcon={<ImageAddAPhoto />} />

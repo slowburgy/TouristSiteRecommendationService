@@ -16,20 +16,24 @@ import {rate, moreSnapshots, review} from '../strings/strings';
 import FlatButton from 'material-ui/FlatButton';
 import {horizontalDP, verticalDP, dp} from '../dimensions/dimensions';
 import MyPlacePageTab from './myPlacePageTab';
+import {mapWeatherContainerHeight, mapWeatherContainerWidth, placePageTab, appBarHeight} from '../dimensions/dimensions';
+import {grey50} from 'material-ui/styles/colors';
+
 
 const styles = {
     root: {
         backgroundImage: 'url("images/seolark_highres.jpg")',
         width: horizontalDP(1000),
         height: verticalDP(1000),
-        backgroundSize: horizontalDP(1000)
-    }
+        backgroundSize: horizontalDP(1000),
+        position: 'fixed',
+        // top: appBarHeight,
+    },
 };
 
 
 export default class MyPlacePage extends React.Component {
-
-
+    
     render() {
         return (
             <div style={styles.root}>

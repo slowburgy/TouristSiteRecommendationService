@@ -17,13 +17,17 @@ function verticalDP(dimPoint) {
 }
 
 var appBarHeight = verticalDP(80);
-var placePageTab = horizontalDP(200);
+var placePageTab = horizontalDP(250);
+var mapWeatherContainerHeight = verticalDP(200);
+var mapWeatherContainerWidth = horizontalDP(250);
 
 exports.dp = dp;
 exports.verticalDP = verticalDP;
 exports.horizontalDP = horizontalDP;
 exports.appBarHeight = appBarHeight;
 exports.placePageTab = placePageTab;
+exports.mapWeatherContainerHeight = mapWeatherContainerHeight;
+exports.mapWeatherContainerWidth = mapWeatherContainerWidth;
 
 },{}],2:[function(require,module,exports){
 /*!
@@ -47482,6 +47486,8 @@ var _myPlacePageTab = require('./myPlacePageTab');
 
 var _myPlacePageTab2 = _interopRequireDefault(_myPlacePageTab);
 
+var _colors = require('material-ui/styles/colors');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -47495,9 +47501,12 @@ var styles = {
         backgroundImage: 'url("images/seolark_highres.jpg")',
         width: (0, _dimensions.horizontalDP)(1000),
         height: (0, _dimensions.verticalDP)(1000),
-        backgroundSize: (0, _dimensions.horizontalDP)(1000)
+        backgroundSize: (0, _dimensions.horizontalDP)(1000),
+        position: 'fixed'
     }
 };
+
+// top: appBarHeight,
 
 var MyPlacePage = function (_React$Component) {
     _inherits(MyPlacePage, _React$Component);
@@ -47524,7 +47533,7 @@ var MyPlacePage = function (_React$Component) {
 
 exports.default = MyPlacePage;
 
-},{"../dimensions/dimensions":1,"../strings/strings":415,"./myPlacePageTab":409,"material-ui/Divider":118,"material-ui/DropDownMenu":120,"material-ui/FlatButton":123,"material-ui/FontIcon":125,"material-ui/IconButton":130,"material-ui/IconMenu":132,"material-ui/MenuItem":141,"material-ui/Paper":143,"material-ui/RaisedButton":149,"material-ui/Subheader":156,"material-ui/Table":166,"material-ui/Tabs":171,"material-ui/Toolbar":182,"material-ui/svg-icons/navigation/expand-more":217,"react":387}],409:[function(require,module,exports){
+},{"../dimensions/dimensions":1,"../strings/strings":415,"./myPlacePageTab":409,"material-ui/Divider":118,"material-ui/DropDownMenu":120,"material-ui/FlatButton":123,"material-ui/FontIcon":125,"material-ui/IconButton":130,"material-ui/IconMenu":132,"material-ui/MenuItem":141,"material-ui/Paper":143,"material-ui/RaisedButton":149,"material-ui/Subheader":156,"material-ui/Table":166,"material-ui/Tabs":171,"material-ui/Toolbar":182,"material-ui/styles/colors":198,"material-ui/svg-icons/navigation/expand-more":217,"react":387}],409:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -47599,41 +47608,96 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var styles = {
     root: {
-        position: 'fixed',
-        top: _dimensions.appBarHeight,
+        // position: 'fixed',
+        marginTop: _dimensions.appBarHeight,
         opacity: 0.7,
         backgroundColor: _colors.grey50,
-        height: (0, _dimensions.verticalDP)(1000) - _dimensions.appBarHeight
+        height: (0, _dimensions.verticalDP)(1000) - _dimensions.appBarHeight,
+        width: _dimensions.placePageTab
     },
 
-    // width: placePageTab,
     headerStyle: {
+        margin: (0, _dimensions.dp)(20),
         display: 'flex',
         flexDirection: 'column',
-        // alignItems: 'center',
-        // justifyContent: 'center',
-        margin: (0, _dimensions.dp)(30)
+        alignItems: 'center',
+        justifyContent: 'center'
     },
 
     nameStyle: {
         flex: 1,
         fontSize: (0, _dimensions.dp)(30),
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        marginTop: (0, _dimensions.dp)(20)
     },
 
     starStyle: {
         flex: 1,
         // alignSelf: 'flex-end',
-        marginTop: (0, _dimensions.dp)(20)
+        marginTop: (0, _dimensions.dp)(15)
     },
 
     oneStarStyle: {
         height: (0, _dimensions.dp)(30)
     },
 
+    infoStyle: {
+        fontSize: (0, _dimensions.dp)(20),
+        marginTop: (0, _dimensions.dp)(20),
+        whiteBreak: 'normal'
+    },
+
+    containerStyle: {
+        marginTop: (0, _dimensions.dp)(10),
+        width: _dimensions.mapWeatherContainerWidth,
+        display: 'flex',
+        flexDirection: 'column',
+        // alignItems: 'center',
+        justifyContent: 'flex-end'
+    },
+
+    mapBorderStyle: {
+        borderStyle: 'solid',
+        borderColor: _colors.grey800,
+        borderWidth: (0, _dimensions.dp)(5),
+        margin: (0, _dimensions.dp)(10)
+    },
+
+    mapStyle: {
+        width: _dimensions.mapWeatherContainerWidth - (0, _dimensions.dp)(30),
+        height: _dimensions.mapWeatherContainerHeight
+    },
+
+    weatherStyle: {
+        margin: (0, _dimensions.dp)(10),
+        marginTop: (0, _dimensions.dp)(10),
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+
+    oneWeatherStyle: {
+        textAlign: 'center',
+        fontSize: (0, _dimensions.dp)(15),
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: (0, _dimensions.dp)(20)
+    },
+
+    weatherIconStyle: {
+        height: (0, _dimensions.dp)(40),
+        marginTop: (0, _dimensions.dp)(5),
+        marginBottom: (0, _dimensions.dp)(5)
+    },
+
     listStyle: {
-        marginLeft: (0, _dimensions.dp)(20),
-        marginRight: (0, _dimensions.dp)(20)
+        // marginLeft: dp(10),
+        // marginRight: dp(10)
+    },
+
+    fillerStyle: {
+        height: (0, _dimensions.verticalDP)(150)
     }
 };
 
@@ -47642,6 +47706,33 @@ var data = {
     img: 'images/seolarkimage.jpg',
     starRating: 3
 };
+
+var weathers = [{
+    date: "06.10",
+    weather: "Rain",
+    temp: "14",
+    img: 'images/partly_cloudy.png'
+}, {
+    date: "06.11",
+    weather: "Rain",
+    temp: "14",
+    img: 'images/partly_cloudy.png'
+}, {
+    date: "06.12",
+    weather: "Rain",
+    temp: "14",
+    img: 'images/partly_cloudy.png'
+}, {
+    date: "06.13",
+    weather: "Rain",
+    temp: "14",
+    img: 'images/partly_cloudy.png'
+}, {
+    date: "06.14",
+    weather: "Rain",
+    temp: "14",
+    img: 'images/partly_cloudy.png'
+}];
 
 var MyPlacePageTab = function (_React$Component) {
     _inherits(MyPlacePageTab, _React$Component);
@@ -47665,7 +47756,7 @@ var MyPlacePageTab = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                { style: styles.root },
+                { style: styles.root, id: 'place_page_tab' },
                 _react2.default.createElement(
                     'div',
                     { style: styles.headerStyle },
@@ -47680,14 +47771,49 @@ var MyPlacePageTab = function (_React$Component) {
                         _underscore._.range(data.starRating).map(function (e) {
                             return _react2.default.createElement(_star2.default, { style: styles.oneStarStyle });
                         })
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { style: styles.infoStyle },
+                        'Gangwondo, something something something j.'
                     )
                 ),
                 _react2.default.createElement(
                     _List.List,
-                    null,
+                    { style: styles.listStyle },
                     _react2.default.createElement(_List.ListItem, { primaryText: 'Like this place', leftIcon: _react2.default.createElement(_favorite2.default, null) }),
-                    _react2.default.createElement(_List.ListItem, { primaryText: 'View/write reviews', leftIcon: _react2.default.createElement(_create2.default, null) }),
-                    _react2.default.createElement(_List.ListItem, { primaryText: 'More snapshots', leftIcon: _react2.default.createElement(_addAPhoto2.default, null) })
+                    _react2.default.createElement(_List.ListItem, { primaryText: 'View/write reviews', leftIcon: _react2.default.createElement(_create2.default, null) })
+                ),
+                _react2.default.createElement('div', { style: styles.fillerStyle }),
+                _react2.default.createElement(
+                    'div',
+                    { style: styles.containerStyle },
+                    _react2.default.createElement(
+                        'div',
+                        { style: styles.mapBorderStyle },
+                        _react2.default.createElement('img', { src: 'images/googlemap.png', style: styles.mapStyle })
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { style: styles.weatherStyle },
+                        weathers.map(function (item) {
+                            return _react2.default.createElement(
+                                'div',
+                                { style: styles.oneWeatherStyle },
+                                _react2.default.createElement(
+                                    'div',
+                                    null,
+                                    item.date
+                                ),
+                                _react2.default.createElement('img', { src: item.img, style: styles.weatherIconStyle }),
+                                _react2.default.createElement(
+                                    'div',
+                                    null,
+                                    item.temp
+                                )
+                            );
+                        })
+                    )
                 )
             );
         }
@@ -47695,6 +47821,9 @@ var MyPlacePageTab = function (_React$Component) {
 
     return MyPlacePageTab;
 }(_react2.default.Component);
+
+// <ListItem primaryText="More snapshots" leftIcon={<ImageAddAPhoto />} />
+
 
 exports.default = MyPlacePageTab;
 
@@ -48205,7 +48334,8 @@ var styles = {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        height: (0, _dimensions.verticalDP)(480)
+        height: (0, _dimensions.verticalDP)(480),
+        marginBottom: (0, _dimensions.verticalDP)(30)
     },
 
     msgStyle: {
@@ -48230,7 +48360,6 @@ var styles = {
         flexDirection: 'row'
     },
 
-    // margin: dp(5)
     buttonStyle: {
         flex: 1,
         fontSize: (0, _dimensions.dp)(25),

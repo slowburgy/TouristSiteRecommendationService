@@ -28,7 +28,8 @@ const styles = {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        height: verticalDP(480)
+        height: verticalDP(480),
+        marginBottom: verticalDP(30)
     },
 
     msgStyle: {
@@ -51,7 +52,6 @@ const styles = {
     buttonsBarStyle: {
         display: 'flex',
         flexDirection: 'row',
-        // margin: dp(5)
     },
     
     buttonStyle: {

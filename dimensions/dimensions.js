@@ -16,11 +16,19 @@ function verticalDP(dimPoint) {
 }
 
 var appBarHeight = verticalDP(80);
-var placePageTab = horizontalDP(200);
-
+var placePageTab = horizontalDP(250);
+var mapWeatherContainerHeight = verticalDP(200);
+var mapWeatherContainerWidth = horizontalDP(250);
 
 exports.dp = dp;
 exports.verticalDP = verticalDP;
 exports.horizontalDP = horizontalDP;
 exports.appBarHeight = appBarHeight;
 exports.placePageTab = placePageTab;
+exports.mapWeatherContainerHeight = mapWeatherContainerHeight;
+exports.mapWeatherContainerWidth = mapWeatherContainerWidth;
+
+
+
+
+
