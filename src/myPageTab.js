@@ -9,7 +9,7 @@ import ContentSend from 'material-ui/svg-icons/content/send';
 import ContentDrafts from 'material-ui/svg-icons/content/drafts';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import {appBarHeight} from '../dimensions/dimensions';
-import {grey50, grey500} from 'material-ui/styles/colors';
+import {grey200, grey800} from 'material-ui/styles/colors';
 
 
 const styles = {
@@ -19,8 +19,8 @@ const styles = {
     },
     
     tabStyle: {
-        backgroundColor: grey50,
-        color: grey500,
+        backgroundColor: grey200,
+        color: grey800,
     }
 };
 
@@ -44,7 +44,6 @@ export default class MyPageTab extends React.Component {
                     value={this.state.value}
                     onChange={this.handleToggle}
                 >
-                    <Tab label={myVisitedPlaces} value="a" style={styles.tabStyle}></Tab>
                     <Tab label={myLikes} value="b" style={styles.tabStyle}></Tab>
                     <Tab label={myReviews} value="b" style={styles.tabStyle}></Tab>
                     <Tab label={changeProfileInfo} value="b" style={styles.tabStyle}></Tab>

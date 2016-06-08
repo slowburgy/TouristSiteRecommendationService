@@ -15,16 +15,16 @@ import {horizontalDP, verticalDP, dp} from '../dimensions/dimensions';
 import ActionFavorite from 'material-ui/svg-icons/action/favorite';
 import ContentCreate from 'material-ui/svg-icons/content/create';
 import ImageAddAPhoto from 'material-ui/svg-icons/image/add-a-photo';
-import {grey50, grey800} from 'material-ui/styles/colors';
+import {grey200, black} from 'material-ui/styles/colors';
 
 
 
 const styles = {
     root: {
-        // position: 'fixed',
-        marginTop: appBarHeight,
+        position: 'fixed',
+        top: appBarHeight,
         opacity: 0.7,
-        backgroundColor: grey50,
+        backgroundColor: grey200,
         height: verticalDP(1000) - appBarHeight,
         width: placePageTab,
     },
@@ -39,7 +39,7 @@ const styles = {
     
     nameStyle: {
         flex: 1,
-        fontSize: dp(30),
+        fontSize: dp(40),
         fontWeight: 'bold',
         marginTop: dp(20)
     },
@@ -47,7 +47,7 @@ const styles = {
     starStyle: {
         flex: 1,
         // alignSelf: 'flex-end',
-        marginTop: dp(15)
+        marginTop: dp(20)
     },
     
     oneStarStyle: {
@@ -71,7 +71,7 @@ const styles = {
 
     mapBorderStyle: {
         borderStyle: 'solid',
-        borderColor: grey800,
+        borderColor: black,
         borderWidth: dp(5),
         margin: dp(10)
     },
@@ -83,7 +83,7 @@ const styles = {
     
     weatherStyle: {
         margin: dp(10),
-        marginTop: dp(10),
+        marginTop: dp(25),
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
@@ -110,7 +110,7 @@ const styles = {
     },
     
     fillerStyle: {
-        height: verticalDP(150)
+        height: verticalDP(30)
     }
 };
 
@@ -167,7 +167,7 @@ export default class MyPlacePageTab extends React.Component {
 
     render() {
         return (
-            <div style={styles.root} id="place_page_tab">
+            <Paper style={styles.root} id="place_page_tab">
                 <div style={styles.headerStyle} >
                     <div style={styles.nameStyle}>{data.name}</div>
                     <div style={styles.starStyle}>
@@ -183,6 +183,7 @@ export default class MyPlacePageTab extends React.Component {
                 </div>
                 <List style={styles.listStyle}>
                     <ListItem primaryText="Like this place" leftIcon={<ActionFavorite />} />
+                    <ListItem primaryText="Rate this place" leftIcon={<ToggleStar />} />
                     <ListItem primaryText="View/write reviews" leftIcon={<ContentCreate />} />
                 </List>
                 <div style={styles.fillerStyle}></div>
@@ -202,7 +203,7 @@ export default class MyPlacePageTab extends React.Component {
                         })}
                     </div>
                 </div>
-            </div>
+            </Paper>
         );
     }
 }
