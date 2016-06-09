@@ -1,28 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import injectTapEventPlugin from "react-tap-event-plugin";
-import {cyan500} from 'material-ui/styles/colors';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MyAppBar from './myAppBar'
-import MyPageTab from './myPageTab';
-import MySiteList from './mySiteList';
-import MyCategoryList from './myCategoryList';
-import MyProfilePage from './myProfilePage';
-import MyMainPageTab from './myMainPageTab';
-import MyPlacePage from './myPlacePage';
-import MySearchBar from './mySearchBar';
-import Paper from 'material-ui/Paper';
-import MyRecommendationBar from './myRecommendationBar';
-import MyProfileEditPage from './myProfileEditPage';
-import {dp, verticalDP} from '../dimensions/dimensions';
-import {cyan50} from 'material-ui/styles/colors';
-import MyLikedPlaces from './myLikedPlaces';
-import MyPlacePageTab from './myPlacePageTab';
-import MyPlaceReviews from './myPlaceReviews';
-import MyReviews from './myReviews';
-import MyLoginPage from './myLoginPage';
+import MyAppBar from './myAppBar';
 import {appBarHeight} from '../dimensions/dimensions';
 import MyAppBody from './myAppBody';
 import {_} from 'underscore';
@@ -44,10 +25,10 @@ var _user_ = {
     gender: "Male",
     nationality: "Korea, Republic Of",
 
-    recommendations: _.range(4).map(() => (
-        _.range(7).map(() => (
+    recommendations: _.range(4).map((c) => (
+        _.range(7).map((r) => (
             {
-                cid: "1",
+                cid: (7*c + r).toString(), // Just for testing
                 name: 'Seolark',
                 address: 'Seoraksan-ro, Sokcho-si, Gangwon-do',
                 latitude: 38.119444,
@@ -59,9 +40,9 @@ var _user_ = {
         )
     )),
 
-    likedPlaces: _.range(7).map(() => (
+    likedPlaces: _.range(7).map((r) => (
     {
-        cid: "1",
+        cid: r.toString(),
         name: 'Seolark',
         address: 'Seoraksan-ro, Sokcho-si, Gangwon-do',
         latitude: 38.119444,
@@ -93,6 +74,8 @@ var _user_ = {
         },
     ]
 };
+
+console.log(_user_);
 
 var _place_ = {
     cid: "1",
@@ -166,7 +149,7 @@ class Main extends React.Component {
             info: {
                 user: null,
                 query: null,
-                bodyPage: null,
+                bodyPage: "login page",
                 place: null
             }
         };
@@ -186,19 +169,10 @@ class Main extends React.Component {
         /*
          Routine for OAuth verification (and server communication) goes here.
          ...
-         @return: a JSON object _user_, with the following format:
-
-         user: {
-         uid: string,
-         nickname: string,
-         email: string,
-         gender: "Male" or "Female",
-         nationality: string,
-         recommendations: list of json objects,
-         likedPlaces: list of json objects,
-         reviews: list of json objects,
-         }
+         @return: a JSON object _user_ for update this.state.user
          */
+        
+        // console.log();
 
         this.state.info.user = _user_;
         this.state.info.bodyPage = "main page";
@@ -214,6 +188,8 @@ class Main extends React.Component {
     handlePlaceClick(place) {
         this.state.info.user = _user_;
         this.state.info.bodyPage = "place page";
+
+        // TODO: replace _place_ with place (the argument)
         this.state.info.place = _place_;
         this.setState(this.state);
     }
@@ -222,7 +198,7 @@ class Main extends React.Component {
         this.state.info.user = _user_;
         this.state.info.bodyPage = "main page";
         this.state.info.user.likedPlaces.push(_place_);
-        // DO NOT include this.setState(). We don't want the UI to re-render itself.
+        // DO NOT include this.setState(). We don't want the UI to be re-rendered.
     }
 
     render() {

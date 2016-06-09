@@ -3,10 +3,12 @@ import {GridList, GridTile} from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
+import FlatButton from 'material-ui/FlatButton';
 import ActionFavorite from 'material-ui/svg-icons/action/favorite';
 import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
 import {dp, horizontalDP} from '../dimensions/dimensions';
 import Snackbar from 'material-ui/Snackbar';
+import SocialPoll from 'material-ui/svg-icons/social/poll';
 
 
 const styles = {
@@ -33,35 +35,23 @@ export default class MySiteList extends React.Component {
     constructor(props) {
         super(props);
 
-        this.handleToggle = this.handleToggle.bind(this);
-        this.handlePlaceLike = this.handlePlaceLike.bind(this);
-        this.displayLike = this.displayLike.bind(this);
+        this.handlePlaceClick = this.handlePlaceClick.bind(this);
+        this.handleFetchPlaceInformation = this.handleFetchPlaceInformation.bind(this);
+    }
+    
+    handleFetchPlaceInformation(placeCID) {
+        /*
+         Routine for fetching the place information goes here.
+         ...
+         @return: a JSON object _place_, to update this.state.place in src/index.js
+         */
         
-        this.state = {
-            states: this.props.data.map(function (d) {
-                return false;
-            })
-        }
+        return null;
     }
     
-    handleToggle() {
-        console.log("Toggled!");
-    }
-
-    handlePlaceLike(index) {
-        var newStates = this.state.states;
-        newStates[index] = !newStates[index];
-
-        this.setState({states: newStates});
-        // console.log(this.state.states);
-    }
-    
-    displayLike(index) {
-        if (this.state.states[index]) {
-            return <ActionFavorite color="white" />;
-        } else {
-            return <ActionFavoriteBorder color="white" />;
-        }
+    handlePlaceClick(placeCID) {
+        var _place_ = this.handleFetchPlaceInformation(placeCID); 
+        this.props.handlers.handlePlaceClick(_place_);
     }
 
     render() {
@@ -74,43 +64,44 @@ export default class MySiteList extends React.Component {
                     padding={dp(1)}
                 >
                     <Subheader style={styles.subheaderStyle}>Recommended</Subheader>
-                    {this.props.data.map(function(tile, index) {
-                        var boundLike = this.handlePlaceLike.bind(this, index);
+                    {
+                        this.props.recommendations.map(function(place, index) {
+                            var boundClick = this.handlePlaceClick.bind(this, place.cid);
 
-                        return (
-                            <GridTile
-                                key={tile.address}
-                                title={tile.name}
-                                subtitle={<span>by <b>{tile.address}</b></span>}
-                                actionIcon={
-                                    <IconButton onTouchTap={boundLike} >
-                                        {this.displayLike(index)}
-                                    </IconButton>
+                            return (
+                                <GridTile
+                                    key={place.cid}
+                                    title={place.name}
+                                    subtitle={<span> <b>{place.address}</b></span>}
+                                    actionIcon={
+                                        <IconButton onTouchTap={boundClick} >
+                                            <SocialPoll color="white"/>
+                                        </IconButton>
                                 }
-                                titleBackground={styles.titleStyle}
-                                onTouchTap={this.handleToggle}
-                                style={styles.gridTileStyle}
-                            >
-                                <img src={tile.img} />
-                            </GridTile>
-                        )}.bind(this)
-                    )}
-
+                                    onTouchTap={boundClick}
+                                    titleBackground={styles.titleStyle}
+                                    style={styles.gridTileStyle}
+                                >
+                                    <img src={place.img} />
+                                </GridTile>
+                            )}.bind(this)
+                        )
+                    }
                 </GridList>
-                <div>
-                    {this.props.data.map(function(tile, index) {
-                        return (
-                            <Snackbar
-                                open={this.state.states[index]}
-                                message={tile.name + " added to your favorites"}
-                                autoHideDuration={2000}
-                            />
-                        )}.bind(this)
-                    )}
-                </div>
             </div>
         );
     }
 }
 
-
+// TODO: add this code to profile page
+// <div>
+//     {this.props.recommendations.map(function(tile, index) {
+//         return (
+//             <Snackbar
+//                 open={this.state.states[index]}
+//                 message={tile.name + " added to your favorites"}
+//                 autoHideDuration={2000}
+//             />
+//         )}.bind(this)
+//     )}
+// </div>

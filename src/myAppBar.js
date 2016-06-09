@@ -58,8 +58,8 @@ export default class MyAppBar extends React.Component {
         var bodyPage = this.props.info.bodyPage;
 
         switch (bodyPage) {
-    
             case "login page":
+                console.log("myAppBar.login_page");
                 PageButton = () => (
                     <FlatButton
                         label="LOGIN"
@@ -69,7 +69,8 @@ export default class MyAppBar extends React.Component {
                 );
                 break;
 
-            case "my page":
+            default:
+                console.log("myAppBar.my_page");
                 PageButton = () => (
                     <FlatButton
                         label="MY PAGE"
@@ -77,10 +78,6 @@ export default class MyAppBar extends React.Component {
                         onTouchTap={this.handleMyPageButtonClick}
                     />
                 );
-                break;
-            
-            default:
-                
         }
 
         return (

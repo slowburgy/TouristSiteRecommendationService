@@ -36,6 +36,7 @@ export default class MyAppBody extends React.Component {
 
         switch (bodyPage) {
             case "login page":
+                console.log("myAppBody.login_page");
                 BodyPage = () => (
                     <div>
                         <MyLoginPage />
@@ -44,6 +45,7 @@ export default class MyAppBody extends React.Component {
                 break;
 
             case "main page":
+                console.log("myAppBody.main_page");
                 BodyPage = () => (
                     <div>
                         <MyRecommendationBar />
@@ -69,6 +71,7 @@ export default class MyAppBody extends React.Component {
                     <div>
                         <MyPlacePage 
                             handlers={this.props.handlers}
+                            info={this.props.info}
                         />
                     </div>
                 );

@@ -21,14 +21,14 @@ import {grey50} from 'material-ui/styles/colors';
 import MyPlaceReviews from './myPlaceReviews';
 
 
-const styles = {
+var styles = {
     root: {
         display: 'flex',
         flexDirection: 'row',
     },
     
     bodyStyle: {
-        backgroundImage: 'url("images/seolark_highres.jpg")',
+        // backgroundImage: 'url("images/seolark_highres.jpg")',
         width: horizontalDP(1000) - placePageTab,
         height: verticalDP(1000) - appBarHeight,
         backgroundSize: 'cover', //horizontalDP(1000) - placePageTab,
@@ -42,12 +42,20 @@ const styles = {
 
 
 export default class MyPlacePage extends React.Component {
+    constructor(props) {
+        super(props);
+        
+        this.bodyStyle = styles.bodyStyle;
+        var imgURL = 'url("' + this.props.info.place.img + '")';
+        this.bodyStyle.backgroundImage = imgURL;
+    }
+    
     
     render() {
         return (
             <div style={styles.root}>
                 <MyPlacePageTab />
-                <div style={styles.bodyStyle}>
+                <div style={this.bodyStyle}>
                 </div>
             </div>
         );
