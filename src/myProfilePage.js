@@ -29,10 +29,14 @@ const styles ={
     },
     
     headerStyle: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
         fontWeight: 'bold',
         backgroundColor: grey50,
-        fontSize: dp(40),
-        height: dp(100)
+        fontSize: dp(30),
+        height: dp(80),
     },
 
     buttonBarStyle: {

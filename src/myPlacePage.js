@@ -28,7 +28,7 @@ const styles = {
     },
     
     bodyStyle: {
-        // backgroundImage: 'url("images/seolark_highres.jpg")',
+        backgroundImage: 'url("images/seolark_highres.jpg")',
         width: horizontalDP(1000) - placePageTab,
         height: verticalDP(1000) - appBarHeight,
         backgroundSize: 'cover', //horizontalDP(1000) - placePageTab,
@@ -48,7 +48,6 @@ export default class MyPlacePage extends React.Component {
             <div style={styles.root}>
                 <MyPlacePageTab />
                 <div style={styles.bodyStyle}>
-                    <MyPlaceReviews />
                 </div>
             </div>
         );

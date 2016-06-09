@@ -11,46 +11,6 @@ const styles = {
     },
 };
 
-const tilesData = [
-    {
-        img: 'images/github.png',
-        title: 'Breakfast',
-        author: 'jill111',
-    },
-    {
-        img: 'images/blank.png',
-        title: 'Breakfast',
-        author: 'jslim',
-    },
-    {
-        img: 'images/success.png',
-        title: 'Breakfast',
-        author: 'coinse',
-    },
-    {
-        img: 'images/seolark.png',
-        title: 'Breakfast',
-        author: 'jjsohn',
-    },
-    {
-        img: 'images/fail.png',
-        title: 'breakfast',
-        author: 'scv',
-    },
-    {
-        img: 'images/netflix.png',
-        title: 'breakfast',
-        author: '2',
-    },
-    {
-        img: 'images/highscore1.png',
-        title: 'breakfast',
-        author: '1',
-    },
-];
-
-const data = [tilesData, tilesData, tilesData, tilesData];
-
 
 export default class MyCategoryList extends React.Component {
     constructor(props) {
@@ -62,7 +22,11 @@ export default class MyCategoryList extends React.Component {
             <div  >
                 {data.map((d) => (
                     <div style={styles.siteListStyle}>
-                        <MySiteList data={d} />
+                        <MySiteList 
+                            data={d} 
+                            handlers={this.props.handlers}
+                            info={this.props.info}
+                        />
                     </div>
                 ))}
             </div>

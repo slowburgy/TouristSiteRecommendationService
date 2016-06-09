@@ -34,7 +34,7 @@ export default class MySiteList extends React.Component {
         super(props);
 
         this.handleToggle = this.handleToggle.bind(this);
-        this.handleLike = this.handleLike.bind(this);
+        this.handlePlaceLike = this.handlePlaceLike.bind(this);
         this.displayLike = this.displayLike.bind(this);
         
         this.state = {
@@ -48,7 +48,7 @@ export default class MySiteList extends React.Component {
         console.log("Toggled!");
     }
 
-    handleLike(index) {
+    handlePlaceLike(index) {
         var newStates = this.state.states;
         newStates[index] = !newStates[index];
 
@@ -75,13 +75,13 @@ export default class MySiteList extends React.Component {
                 >
                     <Subheader style={styles.subheaderStyle}>Recommended</Subheader>
                     {this.props.data.map(function(tile, index) {
-                        var boundLike = this.handleLike.bind(this, index);
+                        var boundLike = this.handlePlaceLike.bind(this, index);
 
                         return (
                             <GridTile
-                                key={tile.author}
-                                title={tile.title}
-                                subtitle={<span>by <b>{tile.author}</b></span>}
+                                key={tile.address}
+                                title={tile.name}
+                                subtitle={<span>by <b>{tile.address}</b></span>}
                                 actionIcon={
                                     <IconButton onTouchTap={boundLike} >
                                         {this.displayLike(index)}
@@ -102,7 +102,7 @@ export default class MySiteList extends React.Component {
                         return (
                             <Snackbar
                                 open={this.state.states[index]}
-                                message={tile.title + " added to your favorites"}
+                                message={tile.name + " added to your favorites"}
                                 autoHideDuration={2000}
                             />
                         )}.bind(this)
