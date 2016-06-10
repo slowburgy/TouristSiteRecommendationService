@@ -1,8 +1,5 @@
 import React from 'react';
-import Paper from 'material-ui/Paper';
 import MySiteList from './mySiteList';
-import Subheader from 'material-ui/Subheader';
-import {cyan50} from 'material-ui/styles/colors';
 import {verticalDP} from '../dimensions/dimensions';
 
 const styles = {

@@ -1,15 +1,10 @@
 import React from 'react';
-import {List, ListItem} from 'material-ui/List';
-import Subheader from 'material-ui/Subheader';
 import Paper from 'material-ui/Paper';
 import {myLikes, myReviews, myVisitedPlaces, changeProfileInfo} from '../strings/strings';
-import ContentInbox from 'material-ui/svg-icons/content/inbox';
-import ActionGrade from 'material-ui/svg-icons/action/grade';
-import ContentSend from 'material-ui/svg-icons/content/send';
-import ContentDrafts from 'material-ui/svg-icons/content/drafts';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import {appBarHeight} from '../dimensions/dimensions';
 import {grey200, grey800} from 'material-ui/styles/colors';
+import MyPage from './myPage';
 
 
 const styles = {
@@ -28,26 +23,33 @@ const styles = {
 export default class MyPageTab extends React.Component {
     constructor(props) {
         super(props);
-        this.handleToggle = this.handleToggle.bind(this);
-        this.state = {value: "a"}
+        this.state = {value: "profile"};
+        this.handleMyPageTabSelection = this.handleMyPageTabSelection.bind(this);
     }
 
-    handleToggle(value) {
-        console.log("Toggled! " + value);
+    handleMyPageTabSelection(value) {
+        this.setState({value: value})
     }
 
     render() {
         return (
             <div>
-                <Paper style={styles.paperStyle}></Paper>
-                <Tabs
-                    value={this.state.value}
-                    onChange={this.handleToggle}
-                >
-                    <Tab label={myLikes} value="b" style={styles.tabStyle}></Tab>
-                    <Tab label={myReviews} value="b" style={styles.tabStyle}></Tab>
-                    <Tab label={changeProfileInfo} value="b" style={styles.tabStyle}></Tab>
-                </Tabs>
+                <div>
+                    <Paper style={styles.paperStyle}></Paper>
+                    <Tabs
+                        value={this.state.value}
+                        onChange={this.handleMyPageTabSelection}
+                    >
+                        <Tab label={myLikes} value="liked places" style={styles.tabStyle}></Tab>
+                        <Tab label={myReviews} value="reviews" style={styles.tabStyle}></Tab>
+                        <Tab label={changeProfileInfo} value="profile" style={styles.tabStyle}></Tab>
+                    </Tabs>
+                </div>
+                <MyPage 
+                    info={this.props.info}
+                    handlers={this.props.handlers}
+                    myPage={this.state.value}
+                />
             </div>
         );
     }

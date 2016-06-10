@@ -3,7 +3,7 @@ import Divider from 'material-ui/Divider';
 import Paper from 'material-ui/Paper';
 import Subheader from 'material-ui/Subheader';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
-import {dp, verticalDP, horizontalDP} from '../dimensions/dimensions';
+import {dp, verticalDP} from '../dimensions/dimensions';
 import {grey50} from 'material-ui/styles/colors';
 import RaisedButton from 'material-ui/RaisedButton';
 
@@ -47,11 +47,11 @@ const styles ={
 
     buttonStyle: {
         flex: 1,
-        height: dp(80)
+        height: dp(65)
     },
     
     buttonLabelStyle: {
-        fontSize: dp(30),
+        fontSize: dp(25),
     },
     
     fontStyle: {
@@ -63,26 +63,28 @@ const styles ={
 export default class MyProfilePage extends React.Component {
     constructor(props) {
         super(props);
-
-        // Unused, just for reference.
-        this.categories = [
+        this.handleProfileEditRequest = this.handleProfileEditRequest.bind(this);
+    }
+    
+    handleProfileEditRequest() {
+        this.props.handlers.handleProfileEditRequest();
+    }
+    
+    render() {
+        var categories = [
             "Nickname",
             "Age",
             "Gender",
-            "E-mail address",
             "Nationality"
         ];
         
-        this.info = [
-            "jjsohn",
-            "25",
-            "Female",
-            "kasio555@gmail.com",
-            "Korea, Republic Of"
+        var labels = [
+            "nickname",
+            "age",
+            "gender",
+            "nationality"
         ];
-    }
-
-    render() {
+        
         return (
             <div style={styles.root}>
                 <div style={styles.filler}></div>
@@ -92,10 +94,10 @@ export default class MyProfilePage extends React.Component {
                     <Table>
                         <TableBody displayRowCheckbox={false}>
                             {
-                                this.categories.map((e, i) => (
+                                categories.map((e, i) => (
                                     <TableRow>
                                         <TableRowColumn style={styles.fontStyle}>{e}</TableRowColumn>
-                                        <TableRowColumn style={styles.fontStyle}>{this.info[i]}</TableRowColumn>
+                                        <TableRowColumn style={styles.fontStyle}>{this.props.userInfo[labels[i]]}</TableRowColumn>
                                     </TableRow>
                                 ))
                             }
@@ -107,6 +109,7 @@ export default class MyProfilePage extends React.Component {
                             style={styles.buttonStyle}
                             labelStyle={styles.buttonLabelStyle}
                             secondary={true}
+                            onTouchTap={this.handleProfileEditRequest}
                         />
                     </div>
                 </Paper>

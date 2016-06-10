@@ -1,18 +1,21 @@
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
 import {appTitle} from '../strings/strings';
-import MyAppRightIcons from './myAppRightIcons';
-import MyMainPageTab from './myMainPageTab';
 import FlatButton from 'material-ui/FlatButton';
 import ActionZoomIn from 'material-ui/svg-icons/action/zoom-in';
 import IconButton from 'material-ui/IconButton';
 import TextField from 'material-ui/TextField';
+import PlacesBeachAccess from 'material-ui/svg-icons/places/beach-access';
 
 
 const styles = {
     root: {
         position: 'fixed',
         opacity: 0.65
+    },
+
+    titleStyle: {
+        cursor: 'pointer'
     },
 
     rightStyle: {
@@ -42,6 +45,7 @@ export default class MyAppBar extends React.Component {
         
         this.handleLoginButtonClick = this.handleLoginButtonClick.bind(this);
         this.handleMyPageButtonClick = this.handleMyPageButtonClick.bind(this);
+        this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
     }
 
     handleLoginButtonClick() {
@@ -52,9 +56,12 @@ export default class MyAppBar extends React.Component {
         this.props.handlers.handleMyPageButtonClick();
     }
 
+    handleBackButtonClick() {
+        this.props.handlers.handleBackButtonClick();
+    }
+
     render() {
         var PageButton;
-
         var bodyPage = this.props.info.bodyPage;
 
         switch (bodyPage) {
@@ -81,8 +88,15 @@ export default class MyAppBar extends React.Component {
         }
 
         return (
-            <AppBar style={styles.root}
-                title={appTitle}
+            <AppBar
+                style={styles.root}
+                title={<span style={styles.titleStyle}>{appTitle}</span>}
+                onTitleTouchTap={this.handleBackButtonClick}
+                iconElementLeft={
+                    <IconButton onTouchTap={this.handleBackButtonClick}>
+                        <PlacesBeachAccess />
+                    </IconButton>
+                }
                 iconElementRight={
                     <div style={styles.rightStyle}>
                         <div style={styles.searchBarStyle}>

@@ -1,16 +1,7 @@
 import React from 'react';
-import Paper from 'material-ui/Paper';
-import Checkbox from 'material-ui/Checkbox';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import {cyan50, grey200} from 'material-ui/styles/colors';
 import {dp, horizontalDP, verticalDP} from '../dimensions/dimensions';
-import DropDownMenu from 'material-ui/DropDownMenu'
-import {Popover, PopoverAnimationVertical} from 'material-ui/Popover';
-import Menu from 'material-ui/Menu';
-import {List, ListItem} from 'material-ui/List';
-import ContentClear from 'material-ui/svg-icons/content/clear';
 import {appBarHeight} from '../dimensions/dimensions';
 
 

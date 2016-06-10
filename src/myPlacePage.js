@@ -1,42 +1,12 @@
 import React from 'react';
-import Divider from 'material-ui/Divider';
-import Paper from 'material-ui/Paper';
-import Subheader from 'material-ui/Subheader';
-import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
-import IconMenu from 'material-ui/IconMenu';
-import IconButton from 'material-ui/IconButton';
-import FontIcon from 'material-ui/FontIcon';
-import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
-import MenuItem from 'material-ui/MenuItem';
-import DropDownMenu from 'material-ui/DropDownMenu';
-import RaisedButton from 'material-ui/RaisedButton';
-import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
-import {Tabs, Tab} from 'material-ui/Tabs';
-import {rate, moreSnapshots, review} from '../strings/strings';
-import FlatButton from 'material-ui/FlatButton';
-import {horizontalDP, verticalDP, dp} from '../dimensions/dimensions';
+import MyPlaceBody from './myPlaceBody';
 import MyPlacePageTab from './myPlacePageTab';
-import {mapWeatherContainerHeight, mapWeatherContainerWidth, placePageTab, appBarHeight} from '../dimensions/dimensions';
-import {grey50} from 'material-ui/styles/colors';
-import MyPlaceReviews from './myPlaceReviews';
 
 
 var styles = {
     root: {
         display: 'flex',
         flexDirection: 'row',
-    },
-    
-    bodyStyle: {
-        // backgroundImage: 'url("images/seolark_highres.jpg")',
-        width: horizontalDP(1000) - placePageTab,
-        height: verticalDP(1000) - appBarHeight,
-        backgroundSize: 'cover', //horizontalDP(1000) - placePageTab,
-        marginTop: appBarHeight,
-        marginLeft: placePageTab,
-        backgroundRepeat: 'no-repeat'
-        // position: 'fixed',
-        // top: appBarHeight,
     },
 };
 
@@ -45,18 +15,42 @@ export default class MyPlacePage extends React.Component {
     constructor(props) {
         super(props);
         
-        this.bodyStyle = styles.bodyStyle;
-        var imgURL = 'url("' + this.props.info.place.img + '")';
-        this.bodyStyle.backgroundImage = imgURL;
+        this.state = {
+            reviewFlag: false
+        };
+        this.handleShowReviewPage = this.handleShowReviewPage.bind(this);
+        this.handleShowImagePage = this.handleShowImagePage.bind(this);
     }
     
+    handleShowReviewPage() {
+        this.setState({reviewFlag: true});
+    }
+
+    handleShowImagePage() {
+        this.setState({reviewFlag: false});
+    }
     
     render() {
+        var tabHandlers = this.props.handlers;
+        tabHandlers.handleShowReviewPage = this.handleShowReviewPage;
+
+        var bodyHandlers = this.props.handlers;
+        bodyHandlers.handleShowImagePage = this.handleShowImagePage;
+        
+        var imgURL = 'url("' + this.props.info.place.img + '")';
+
         return (
             <div style={styles.root}>
-                <MyPlacePageTab />
-                <div style={this.bodyStyle}>
-                </div>
+                <MyPlacePageTab 
+                    handlers={tabHandlers}
+                    info={this.props.info}
+                />
+                <MyPlaceBody
+                    info={this.props.info}
+                    imgURL={imgURL}
+                    handlers={bodyHandlers}
+                    reviewFlag={this.state.reviewFlag}
+                />
             </div>
         );
     }

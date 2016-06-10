@@ -3,7 +3,7 @@ import Divider from 'material-ui/Divider';
 import Paper from 'material-ui/Paper';
 import Subheader from 'material-ui/Subheader';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
-import {dp, verticalDP, horizontalDP} from '../dimensions/dimensions';
+import {dp, verticalDP} from '../dimensions/dimensions';
 import {grey50} from 'material-ui/styles/colors';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
@@ -65,91 +65,41 @@ export default class MyProfileEditPage extends React.Component {
     constructor(props) {
         super(props);
 
-        this.categories = [
-            "Nickname",
-            "Age",
-            "Gender",
-            "E-mail address",
-            "Nationality"
-        ];
-        
-        this.info = [
-            "jjsohn",
-            "25",
-            "Female",
-            "kasio555@gmail.com",
-            "Korea, Republic Of"
-        ];
-
+       
         this.state = {
-            "nameVal": "",
-            "ageVal": "",
-            "genderVal": "",
-            "emailVal": "",
-            "natVal": ""
+            nickname: "",
+            age: "",
+            gender: "",
+            nationality: ""
         };
 
-        this.handleAgeChange = this.handleAgeChange.bind(this);
         this.handleNameChange = this.handleNameChange.bind(this);
+        this.handleAgeChange = this.handleAgeChange.bind(this);
         this.handleGenderChange = this.handleGenderChange.bind(this);
-        this.handleEmailChange = this.handleEmailChange.bind(this);
         this.handleNatChange = this.handleNatChange.bind(this);
         
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleProfileEditSubmit = this.handleProfileEditSubmit.bind(this);
     }
 
     handleNameChange(event) {
-        this.setState({
-            "nameVal": event.target.value,
-            "ageVal": this.state.ageVal,
-            "genderVal": this.state.genderVal,
-            "emailVal": this.state.emailVal,
-            "natVal": this.state.natVal
-        })
+        this.state.nickname = event.target.value;
     }
 
     handleAgeChange(event) {
-        this.setState({
-            "nameVal": this.state.nameVal,
-            "ageVal": event.target.value,
-            "genderVal": this.state.genderVal,
-            "emailVal": this.state.emailVal,
-            "natVal": this.state.natVal
-        })
+        this.state.age = event.target.value;
     }
 
     handleGenderChange(event) {
-        this.setState({
-            "nameVal": this.state.nameVal,
-            "ageVal": this.state.ageVal,
-            "genderVal": event.target.value,
-            "emailVal": this.state.emailVal,
-            "natVal": this.state.natVal
-        })
-    }
-
-    handleEmailChange(event) {
-        this.setState({
-            "nameVal": this.state.nameVal,
-            "ageVal": this.state.ageVal,
-            "genderVal": this.state.genderVal,
-            "emailVal": event.target.value,
-            "natVal": this.state.natVal
-        })
+        this.state.gender = event.target.value;
     }
 
     handleNatChange(event) {
-        this.setState({
-            "nameVal": this.state.nameVal,
-            "ageVal": this.state.ageVal,
-            "genderVal": this.state.genderVal,
-            "emailVal": this.state.emailVal,
-            "natVal": event.target.value
-        })
+        this.state.nationality = event.target.value;
     }
     
-    handleSubmit() {
-        console.log(this.state);
+    handleProfileEditSubmit() {
+        this.props.handlers.handleProfileEditSubmit(this.state);
+        this.props.handlers.handleProfileEditSubmitRequest(this.state);
     }
 
     render() {
@@ -157,10 +107,23 @@ export default class MyProfileEditPage extends React.Component {
             this.handleNameChange,
             this.handleAgeChange,
             this.handleGenderChange,
-            this.handleEmailChange,
             this.handleNatChange
         ];
 
+        const categories = [
+            "Nickname",
+            "Age",
+            "Gender",
+            "Nationality"
+        ];
+
+        const labels = [
+            "nickname",
+            "age",
+            "gender",
+            "nationality"
+        ];
+        
         return (
             <div style={styles.root}>
                 <div style={styles.filler}></div>
@@ -170,10 +133,10 @@ export default class MyProfileEditPage extends React.Component {
                     <Table selectable={false}>
                         <TableBody displayRowCheckbox={false}>
                             {
-                                this.categories.map((e, i) => (
+                                categories.map((e, i) => (
                                     <TableRow>
                                         <TableRowColumn style={styles.fontStyle}>{e}</TableRowColumn>
-                                        <TableRowColumn style={styles.fontStyle}>{this.info[i]}</TableRowColumn>
+                                        <TableRowColumn style={styles.fontStyle}>{this.props.userInfo[labels[i]]}</TableRowColumn>
                                         <TableRowColumn style={styles.fontStyle}>
                                             <TextField style={styles.fontStyle} onChange={actions[i]} />
                                         </TableRowColumn>
@@ -188,7 +151,7 @@ export default class MyProfileEditPage extends React.Component {
                             style={styles.buttonStyle}
                             labelStyle={styles.buttonLabelStyle}
                             primary={true}
-                            onTouchTap={this.handleSubmit}
+                            onTouchTap={this.handleProfileEditSubmit}
                         />
                     </div>
                 </Paper>

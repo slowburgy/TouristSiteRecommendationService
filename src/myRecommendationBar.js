@@ -1,12 +1,8 @@
 import React from 'react';
-import Paper from 'material-ui/Paper';
-import Checkbox from 'material-ui/Checkbox';
-import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import {cyan50} from 'material-ui/styles/colors';
 import {dp, horizontalDP, verticalDP} from '../dimensions/dimensions';
-import DropDownMenu from 'material-ui/DropDownMenu'
 import {Popover, PopoverAnimationVertical} from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import {List, ListItem} from 'material-ui/List';
@@ -120,10 +116,10 @@ export default class MyRecommendationBar extends React.Component {
                             >
                                 <Menu>
                                     <MenuItem value={1} primaryText="Recommended for you" />
-                                    <MenuItem value={2} primaryText="Every Night" />
-                                    <MenuItem value={3} primaryText="Weeknights" />
-                                    <MenuItem value={4} primaryText="Weekends" />
-                                    <MenuItem value={5} primaryText="Weekly" />
+                                    <MenuItem value={2} primaryText="Recommended for women" />
+                                    <MenuItem value={3} primaryText="Recommended for 20s" />
+                                    <MenuItem value={4} primaryText="Recommended for alone" />
+                                    <MenuItem value={5} primaryText="Recommended for family" />
                                 </Menu>
                             </Popover>
                             <RaisedButton 
@@ -133,10 +129,10 @@ export default class MyRecommendationBar extends React.Component {
                             />
                         </div>
                         <List style={styles.listStyle}>
-                            <ListItem primaryText="Inbox" rightIcon={<ContentClear />} />
-                            <ListItem primaryText="Starred" rightIcon={<ContentClear />} />
-                            <ListItem primaryText="Sent mail" rightIcon={<ContentClear />} />
-                            <ListItem primaryText="Sent mail" rightIcon={<ContentClear />} />
+                            <ListItem primaryText="Recommended for you" rightIcon={<ContentClear />} />
+                            <ListItem primaryText="Recommended for women" rightIcon={<ContentClear />} />
+                            <ListItem primaryText="Recommended for 20s" rightIcon={<ContentClear />} />
+                            <ListItem primaryText="Recommended for family" rightIcon={<ContentClear />} />
                         </List>
                     </div>
                 </div>

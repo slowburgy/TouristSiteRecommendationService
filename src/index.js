@@ -17,11 +17,12 @@ const muiTheme = getMuiTheme({
     }
 });
 
-// Sample data for testing
+// _user_, _place_: Sample data for testing
 var _user_ = {
     uid: "1",
+    firstLogin: true,
     nickname: "rhapsodyjs",
-    email: "rhapsody_js@kaist.ac.kr",
+    age: 24,
     gender: "Male",
     nationality: "Korea, Republic Of",
 
@@ -35,7 +36,26 @@ var _user_ = {
                 longitude: 128.465556,
                 img: "images/seolark_highres.jpg",
                 starRating: 3,
-                reviews: [] // Unused, just for consistency of the place information format.
+                reviews: [
+                    {
+                        name: 'nick',
+                        starRating: 5,
+                        date: '2016.06.07',
+                        content: 'This place is fantastic! The food is amazing, the people are kind, and the view is magnificent. I would certainly come here again!'
+                    },
+                    {
+                        name: 'brendan',
+                        starRating: 1,
+                        date: '2016.05.01',
+                        content: 'Imma never come \'ere again, I can tell ya that!'
+                    },
+                    {
+                        name: 'you',
+                        starRating: 3,
+                        date: '2016.04.02',
+                        content: 'Good!'
+                    },
+                ]
             })
         )
     )),
@@ -49,7 +69,26 @@ var _user_ = {
         longitude: 128.465556,
         img: "images/seolark_highres.jpg",
         starRating: 3,
-        reviews: [] // Unused, just for consistency of the place information format.
+        reviews: [
+            {
+                name: 'sherlock',
+                starRating: 5,
+                date: '2016.06.07',
+                content: 'This place is fantastic! The food is amazing, the people are kind, and the view is magnificent. I would certainly come here again!'
+            },
+            {
+                name: 'holmes',
+                starRating: 1,
+                date: '2016.05.01',
+                content: 'Imma never come \'ere again, I can tell ya that!'
+            },
+            {
+                name: 'watson',
+                starRating: 3,
+                date: '2016.04.02',
+                content: 'Good!'
+            },
+        ]
     }
     )),
 
@@ -74,8 +113,6 @@ var _user_ = {
         },
     ]
 };
-
-console.log(_user_);
 
 var _place_ = {
     cid: "1",
@@ -115,7 +152,7 @@ class Main extends React.Component {
         * user: 
             - uid
             - nickname
-            - email
+            - age
             - gender
             - nationality
             - recommendations: list of list of places (json objects).
@@ -125,11 +162,12 @@ class Main extends React.Component {
             
         * query: Query typed into the search bar
         
-        * bodyPage: Type of the body page.
+        * bodyPage: Type of the body page. Stack of strings for emulating "back" button in a browser.
             (1) "login page": Default login page
-            (2) "main page": Page of recommendations
-            (3) "my page": My profile page
-            (4) "place page": Page with the detailed information about a place
+            (2) "page on first login": page in which a new user is asked to select favorite places
+            (3) "main page": Main page with recommendations
+            (4) "my page": My profile page
+            (5) "place page": Page with the detailed information about a place
             
         * place: Place information (updated when a certain place is clicked)
             - cid
@@ -156,9 +194,14 @@ class Main extends React.Component {
 
         this.componentDidMount = this.componentDidMount.bind(this);
         this.handleLoginButtonClick = this.handleLoginButtonClick.bind(this);
+        this.fetchInformationFromServer = this.fetchInformationFromServer.bind(this);
         this.handleMyPageButtonClick = this.handleMyPageButtonClick.bind(this);
         this.handlePlaceClick = this.handlePlaceClick.bind(this);
         this.handlePlaceLike = this.handlePlaceLike.bind(this);
+        this.handleReviewSubmit = this.handleReviewSubmit.bind(this);
+        this.handleProfileEditSubmit = this.handleProfileEditSubmit.bind(this);
+        this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
+        this.redirectToMainPage = this.redirectToMainPage.bind(this);
     }
 
     componentDidMount() {
@@ -167,49 +210,154 @@ class Main extends React.Component {
 
     handleLoginButtonClick() {
         /*
-         Routine for OAuth verification (and server communication) goes here.
-         ...
-         @return: a JSON object _user_ for update this.state.user
+        TODO: Routine for OAuth verification and server communication goes here. 
+            ...
+            @return: _uid_, a string, and _first_, a boolean flag to check whether the user is new to our service.
          */
         
-        // console.log();
-
+        var uid = "1", firstLogin = true;
+        this.fetchInformationFromServer(uid, firstLogin);
+        
+        this.setState(this.state);
+    }
+    
+    fetchInformationFromServer(uid, firstLogin) {
+        /*
+         TODO: Fetch ALL information about the user (nickname, gender, places he liked, ..., initial set of recommendations, etc).
+        
+         If first !== true (i.e., the user has been to our service before), then return the usual information about the user.
+         Otherwise, make random recommendations.
+         */
+        
+        if (firstLogin) {
+            /* Some routine */ 
+            
+            this.state.info.bodyPage = "page on first login";
+        } else {
+            /* Some routine */
+        
+            this.state.info.bodyPage = "main page";
+        }
+        
+        // _user_ is used just for testing. Replace it with the real values.
         this.state.info.user = _user_;
+    }
+    
+    redirectToMainPage(placePreferenceList) {
+        /*
+         Handler to redirect the new user from choosing preferred places to the main page. 
+         (1) POST preferences to the server
+         (2) GET recommendations from the server
+         (3) Redirect to the main page
+         */
+        
+        /* TODO: Routine for (1) & (2) */
+        
+        /* Routine for (3) */
         this.state.info.bodyPage = "main page";
         this.setState(this.state);
     }
 
     handleMyPageButtonClick() {
-        this.state.info.user = _user_;
         this.state.info.bodyPage = "my page";
         this.setState(this.state);
     }
-    
+
     handlePlaceClick(place) {
-        this.state.info.user = _user_;
         this.state.info.bodyPage = "place page";
 
-        // TODO: replace _place_ with place (the argument)
-        this.state.info.place = _place_;
+        this.state.info.place = place;
+        this.setState(this.state);
+    }
+    
+    handleBackButtonClick() {
+        this.state.info.bodyPage = "main page";
         this.setState(this.state);
     }
 
     handlePlaceLike(place) {
-        this.state.info.user = _user_;
-        this.state.info.bodyPage = "main page";
-        this.state.info.user.likedPlaces.push(_place_);
-        // DO NOT include this.setState(). We don't want the UI to be re-rendered.
+        /*
+         DO NOT invoke this.setState(). We don't want the UI to be re-rendered.
+
+         TODO: Replace _place_ with state.info.place and update user information in the server.
+         */
+
+        var duplicate =
+            this.state.info.user.likedPlaces
+            .map(
+                function(e) {
+                    return e.cid == place.cid;
+                })
+                .reduce(
+                    function(p, c) {
+                        return p || c;
+                    }
+                );
+        
+        if (!duplicate) {
+            /* Routine */
+            
+            this.state.info.user.likedPlaces.unshift(place);
+            console.log("Place liked!");
+        } else {
+            console.log("Duplicate entry.");
+        }
+    }
+
+    handleReviewSubmit(placeReview, userReview) {
+        /*
+        Take a review (json object) as the argument and add it to:
+                (1) Place review list
+                (2) User review list
+
+        DO NOT invoke this.setState(). We don't want the UI to be re-rendered.
+
+        TODO: Update user & place information in the server
+         */
+
+        this.state.info.user.reviews.unshift(userReview);
+        this.state.info.place.reviews.unshift(placeReview);
+        console.log("Review submitted!");
+        console.log(this.state.info);
+    }
+    
+    handleProfileEditSubmit(profileInfo) {
+        /*
+        Take a profileInfo (json object) as the argument and update the user info:
+            profileInfo spec:
+            {
+                nickname: string,
+                gender: string,
+                nationality: string
+            }
+
+        DO NOT invoke this.setState(). We don't want the UI to be re-rendered.
+
+        TODO: Update user information in the server
+        */ 
+        
+        this.state.info.user.nickname = profileInfo.nickname;
+        this.state.info.user.age = profileInfo.age;
+        this.state.info.user.gender = profileInfo.gender;
+        this.state.info.user.nationality = profileInfo.nationality;
+        
+        console.log("profile edited!");
     }
 
     render() {
         const appBarHandlers = {
             handleLoginButtonClick: this.handleLoginButtonClick,
             handleMyPageButtonClick: this.handleMyPageButtonClick,
+            handleBackButtonClick: this.handleBackButtonClick
         };
 
         const bodyHandlers = {
             handlePlaceClick: this.handlePlaceClick,
             handlePlaceLike: this.handlePlaceLike,
+            handleProfileEditSubmit: this.handleProfileEditSubmit,
+            handleReviewSubmit: this.handleReviewSubmit,
+            handleBackButtonClick: this.handleBackButtonClick,
+            redirectToMainPage: this.redirectToMainPage
         };
 
         return (

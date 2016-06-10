@@ -1,22 +1,15 @@
 import React from 'react';
 import {List, ListItem} from 'material-ui/List';
-import Subheader from 'material-ui/Subheader';
 import Paper from 'material-ui/Paper';
-import {rate, moreSnapshots, review} from '../strings/strings';
-import ContentInbox from 'material-ui/svg-icons/content/inbox';
-import ActionGrade from 'material-ui/svg-icons/action/grade';
-import ContentSend from 'material-ui/svg-icons/content/send';
-import ContentDrafts from 'material-ui/svg-icons/content/drafts';
 import ToggleStar from 'material-ui/svg-icons/toggle/star';
-import {Tab, Tabs} from 'material-ui/Tabs';
 import {mapWeatherContainerHeight, mapWeatherContainerWidth, placePageTab, appBarHeight} from '../dimensions/dimensions';
 import {_} from 'underscore';
-import {horizontalDP, verticalDP, dp} from '../dimensions/dimensions';
+import {verticalDP, dp} from '../dimensions/dimensions';
 import ActionFavorite from 'material-ui/svg-icons/action/favorite';
-import ContentCreate from 'material-ui/svg-icons/content/create';
-import ImageAddAPhoto from 'material-ui/svg-icons/image/add-a-photo';
 import {grey200, black} from 'material-ui/styles/colors';
-
+import Snackbar from 'material-ui/Snackbar';
+import IconButton from 'material-ui/IconButton';
+import NavigationArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 
 
 const styles = {
@@ -30,7 +23,7 @@ const styles = {
     },
     
     headerStyle: {
-        margin: dp(20),
+        marginBottom: dp(20),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -41,12 +34,10 @@ const styles = {
         flex: 1,
         fontSize: dp(40),
         fontWeight: 'bold',
-        marginTop: dp(20)
     },
     
     starStyle: {
         flex: 1,
-        // alignSelf: 'flex-end',
         marginTop: dp(20)
     },
     
@@ -65,7 +56,6 @@ const styles = {
         width: mapWeatherContainerWidth,
         display: 'flex',
         flexDirection: 'column',
-        // alignItems: 'center',
         justifyContent: 'flex-end'
     },
 
@@ -104,22 +94,11 @@ const styles = {
         marginBottom: dp(5),
     },
 
-    listStyle: {
-        // marginLeft: dp(10),
-        // marginRight: dp(10)
-    },
-    
     fillerStyle: {
         height: verticalDP(30)
-    }
+    },
 };
 
-
-const data = {
-    name: 'Seolark',
-    img: 'images/seolarkimage.jpg',
-    starRating: 3
-};
 
 const weathers = [
     {
@@ -156,40 +135,86 @@ const weathers = [
 
 
 export default class MyPlacePageTab extends React.Component {
+    
+    // TODO: fetch weathers
+    
     constructor(props) {
         super(props);
-        this.handleToggle = this.handleToggle.bind(this);
+        
+        this.state = {
+            open: false
+        };
+
+        this.handlePlaceLike = this.handlePlaceLike.bind(this, this.props.info.place);
+        this.handleShowReviewPage = this.handleShowReviewPage.bind(this);
+        this.componentDidMount = this.componentDidMount.bind(this);
+        this.handleSnackbarClose = this.handleSnackbarClose.bind(this);
+        this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
+    }
+    
+    componentDidMount() {
+        var latLon = {
+            lat: this.props.info.place.latitude,
+            lng: this.props.info.place.longitude
+        };
+        
+        // Google Map API
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: latLon,
+            zoom: 8
+        });
+
+        var marker = new google.maps.Marker({
+            position: latLon,
+            map: map,
+            title: this.props.info.place.name
+        });
     }
 
-    handleToggle(value) {
-        console.log("Toggled! " + value);
+    handlePlaceLike(place) {
+        this.props.handlers.handlePlaceLike(place);
+        this.setState({open: true});
+    }
+    
+    handleShowReviewPage() {
+        this.props.handlers.handleShowReviewPage();
+    }
+
+    handleSnackbarClose() {
+        this.setState({open: false});
+    }
+    
+    handleBackButtonClick() {
+        this.props.handlers.handleBackButtonClick();
     }
 
     render() {
         return (
             <Paper style={styles.root} id="place_page_tab">
+                <IconButton onTouchTap={this.handleBackButtonClick}>
+                    <NavigationArrowBack />
+                </IconButton>
                 <div style={styles.headerStyle} >
-                    <div style={styles.nameStyle}>{data.name}</div>
+                    <div style={styles.nameStyle}>{this.props.info.place.name}</div>
                     <div style={styles.starStyle}>
                     {
-                        _.range(data.starRating).map((e) => (
+                        _.range(this.props.info.place.starRating).map((e) => (
                             <ToggleStar style={styles.oneStarStyle} />
                         ))
                     }
                     </div>
                     <div style={styles.infoStyle}>
-                        Gangwondo, something something something j.
+                        {this.props.info.place.address}
                     </div>
                 </div>
-                <List style={styles.listStyle}>
-                    <ListItem primaryText="Like this place" leftIcon={<ActionFavorite />} />
-                    <ListItem primaryText="Rate this place" leftIcon={<ToggleStar />} />
-                    <ListItem primaryText="View/write reviews" leftIcon={<ContentCreate />} />
+                <List>
+                    <ListItem primaryText="Like this place" onTouchTap={this.handlePlaceLike} leftIcon={<ActionFavorite />} /> 
+                    <ListItem primaryText="Rate & Review" onTouchTap={this.handleShowReviewPage} leftIcon={<ToggleStar />} />
                 </List>
                 <div style={styles.fillerStyle}></div>
                 <div style={styles.containerStyle}>
                     <div style={styles.mapBorderStyle}>
-                        <img src="images/googlemap.png" style={styles.mapStyle} />
+                        <div id="map" style={styles.mapStyle}></div>
                     </div>
                     <div style={styles.weatherStyle}>
                         {weathers.map(function (item) {
@@ -203,10 +228,20 @@ export default class MyPlacePageTab extends React.Component {
                         })}
                     </div>
                 </div>
+                <div>
+                    <Snackbar
+                        open={this.state.open}
+                        message={this.props.info.place.name + " added to your favorites"}
+                        autoHideDuration={2000}
+                        onRequestClose={this.handleSnackbarClose}
+                    />
+                </div>
             </Paper>
         );
     }
 }
 
-
+// TODO: add more snapshots
 // <ListItem primaryText="More snapshots" leftIcon={<ImageAddAPhoto />} />
+
+// <img src="images/googlemap.png" style={styles.mapStyle} />
