@@ -431,10 +431,16 @@ exports.like = function(req, res) {
 };
 
 exports.review = function(req, res) {
-    if ( isEmpty(req.body.review) || isEmpty(req.body.uid) || isEmpty(req.body.cid))
+    if ( isEmpty(req.body.review) || isEmptry(req.body.star) ||
+         isEmpty(req.body.uid) || isEmpty(req.body.cid))
 	return res.json({'result':-2});
-
-    var review = mysql.escape(req.query.review)
+    var review = mysql.escape(req.query.review);
+    var star = Number(req.query.star);
+    var date = new Date();
+    date.setHours(date.getHours() + 9);
+    date_str = date.getUTCFullYear() + "." + (1+date.getUTCMonth()) + "." + date.getUTCDate());
+    date.setHours(date.getHours() + 9);
+    console.log(date);
     var data = 'uid='+mysql.escape(req.query.uid)+
                ' and cid='+Number(req.query.cid);
     var query = connection.query(
@@ -448,6 +454,8 @@ exports.review = function(req, res) {
 		        if (result.length) {
 		            var update = connection.query(
                                          'update tourReview set review='+review+
+                                         ', star='+star+
+                                         ', date='+date_str+
                                          ' where '+data,
                                          function(err, result){
                                              if (err) {
@@ -461,7 +469,9 @@ exports.review = function(req, res) {
                                          'insert into tourReview set ?',
                                         {'uid':req.query.uid,
 			  	         'cid':Number(req.query.cid),
-	                                 'review':review}, 
+	                                 'review':review,
+                                         'star': star,
+                                         'date': date_str}, 
 				         function(err, result){
 				             if (err) {
 				 	         console.error(err);
@@ -494,8 +504,9 @@ exports.numpref = function(req, res) {
 exports.getlike = function(req, res) {
     if ( isEmpty(req.query.uid))
             return res.json({'result':-2});
-    var query = connection.query(
-                'select cid from tourLike where uid='+mysql.escape(req.query.uid),
+    else if ( isEmptry(req.query.cid)) {
+        var query = connection.query(
+                'select cid from tourlike where uid='+mysql.escape(req.query.uid),
                 function(err,result){
                     if (err) {
                        console.error(err);
@@ -503,14 +514,28 @@ exports.getlike = function(req, res) {
                     }
                     if (!result || !result.length) res.json({'result':0});
                     else res.json({"result":"1", 'likes':result});
-    });
+        });
+     } else {
+        var query2 = connection.query(
+                'select cid from tourlike where uid='+mysql.escape(req.query.uid)+
+                ' and cid='+Number(req.query.cid),
+                function(err,result){
+                    if (err) {
+                       console.error(err);
+                       return res.json({'result':'-1'});
+                    }
+                    if (!result || !result.length) res.json({'result':0});
+                    else res.json({"result":"1"});
+        });
+     }
 };
 
-exports.getreview = function(req, res) {
+exports.getreviewByCID = function(req, res) {
     if ( isEmpty(req.query.cid))
             return res.json({'result':-2});
     var query = connection.query(
-                'select review from tourReview where cid='+Number(req.query.cid),
+                'select review, date, star from tourReview'+
+                ' where cid='+Number(req.query.cid),
                 function(err,result){
                     if (err) {
                        console.error(err);
@@ -520,3 +545,20 @@ exports.getreview = function(req, res) {
                     else res.json({"result":"1", 'reviews':result});
     });
 };
+
+exports.getreviewByUID = function(req, res) {
+    if ( isEmpty(req.query.cid))
+            return res.json({'result':-2});
+    var query = connection.query(
+                'select review, date, star from tourReview'+
+                ' where uid='+mysql.escape(req.query.uid),
+                function(err,result){
+                    if (err) {
+                       console.error(err);
+                       return res.json({'result':'-1'});
+                    }
+                    if (!result || !result.length) res.json({'result':0});
+                    else res.json({"result":"1", 'reviews':result});
+    });
+};
+

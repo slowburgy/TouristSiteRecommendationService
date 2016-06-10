@@ -51,9 +51,12 @@ passport.deserializeUser(function(user, done) {
 	});
 
 passport.use(new FacebookStrategy({
-    clientID: '1404570266509220',
-    clientSecret: '691a373e94e46fc1444baf8d03635846',
-    callbackURL: "http://143.248.48.156:3000/auth/facebook/callback"
+    //clientID: '1404570266509220',
+    //clientSecret: '691a373e94e46fc1444baf8d03635846',
+    //callbackURL: "http://143.248.48.156:3000/auth/facebook/callback"
+    clientID: '1188709271174757',
+    clientSecret: '0a559abb3019d4e6eff9f8b8faca6eef',
+    callbackURL: "http://ec2-52-79-176-169.ap-northeast-2.compute.amazonaws.com:3000/auth/facebook/callback"
 },
 function(accessToken, refreshToken, profile, done) {
     console.log(profile);
@@ -96,7 +99,8 @@ app.get('/api/like', api.like);
 app.post('/api/review', api.review);
 app.get('/api/numpref', api.numpref);
 app.get('/api/getlike', api.getlike);
-app.get('/api/getreview', api.getreview);
+app.get('/api/getreview_uid', api.getreviewByUID);
+app.get('/api/getreview_cid', api.getreviewByCID);
 
 // FACEBOOK OAUTH 
 app.get('/auth/facebook', passport.authenticate('facebook'));

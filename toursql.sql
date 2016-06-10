@@ -647,6 +647,7 @@ CREATE TABLE `tourLike` (
 
 LOCK TABLES `tourLike` WRITE;
 /*!40000 ALTER TABLE `tourLike` DISABLE KEYS */;
+INSERT INTO `tourLike` VALUES ('test',264475),('test',999854);
 /*!40000 ALTER TABLE `tourLike` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -701,6 +702,7 @@ CREATE TABLE `tourPref` (
 
 LOCK TABLES `tourPref` WRITE;
 /*!40000 ALTER TABLE `tourPref` DISABLE KEYS */;
+INSERT INTO `tourPref` VALUES ('test',668511,3),('test',1909494,4),('test2',1909494,5);
 /*!40000 ALTER TABLE `tourPref` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -715,6 +717,8 @@ CREATE TABLE `tourReview` (
   `uid` varchar(40) NOT NULL DEFAULT '',
   `cid` int(11) NOT NULL DEFAULT '0',
   `review` text,
+  `date` varchar(50) DEFAULT NULL,
+  `star` int(11) DEFAULT NULL,
   PRIMARY KEY (`uid`,`cid`),
   KEY `cid` (`cid`),
   CONSTRAINT `tourReview_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `tourUser` (`uid`),
@@ -870,4 +874,4 @@ CREATE TABLE IF NOT EXISTS `slow_log` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-06-03 16:39:04
+-- Dump completed on 2016-06-10 20:26:07
