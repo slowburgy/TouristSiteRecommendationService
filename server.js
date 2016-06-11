@@ -19,7 +19,7 @@ var mysql = require('mysql');
 var app = express();
 var session = require('express-session');
 var passport = require('passport')
-, FacebookStrategy = require('passport-facebook').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 var util = require('util');
 var api = require('./api');
 

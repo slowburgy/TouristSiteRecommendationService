@@ -34,6 +34,10 @@ var checkStyle = function(str) {
     }
 };
 
+var getExp = function(age, sex, travStyle, area) {
+    return "Recommedation ~~";
+};
+
 var makeUid = function() {
     var uid = crypto.randomBytes(20).toString('hex');
     var query = connection.query(
@@ -147,10 +151,13 @@ exports.recommend = function(req, res) {
             return res.json({'result':-2});
     var age = Number(req.query.age);
     var inner_query = "1";
+    var sex = checkSex(req.query.sex);
+    var travStyle = checkStyle(req.query.travStyle);
     //var inner_query = 'sex = '+checkSex(req.query.sex)+' and '+
     //            'travStyle = '+checkStyle(req.query.travStyle)+' and '+
     //            'age>'+(age)+' and age<'+(age+100);
     var area = Number(req.query.area);
+    var exp = getExp(age, sex, travStyle, area);
     if ( isEmpty(req.query.uid)) {
         var query = connection.query(
                     'select cid, avg(pref) as pref from tourPref where '+
@@ -163,8 +170,16 @@ exports.recommend = function(req, res) {
                            return res.json({'result':-1});
                         }
                         if (!result || !result.length) res.json({'result':0});
-                        else res.json({'result':1, 'data':result});
-        });
+                        else {
+                          var i=0; var items = [];
+			  (function loop() {
+			     if (i<result.length) {
+			       if (i != result.length - 1) getPlaceData(result[i].cid, items, result[i].pref, exp, null);
+			       else getPlaceData(result[i].cid, items, result[i].pref, exp, res);
+			       i++;
+			       loop();
+			     }}());
+        }});
     } else {
        var uid = req.query.uid;
        // cid condition can be deleted.
@@ -203,7 +218,7 @@ exports.recommend = function(req, res) {
 						    return res.json({'result':-1});
 					        }
 						if (!result3 || !result3.length) return res.json({'result':0});
-						else recom_callback(res, result, result2, result3, uid);
+						else recom_callback(res, result, result2, result3, uid, exp);
 					    });
 				    }
                                 });
@@ -212,7 +227,7 @@ exports.recommend = function(req, res) {
     }
 };
 
-var recom_callback = function(res, usr_avg_list, all_pref, place_list, uid) {
+var recom_callback = function(res, usr_avg_list, all_pref, place_list, uid, exp) {
     var usr_dict = {};
     var place_dict = {};
     var pref_list = new Array();
@@ -236,8 +251,8 @@ var recom_callback = function(res, usr_avg_list, all_pref, place_list, uid) {
     var items = []; var i = 0;
     (function loop() {
       if (i<final_list.length) {
-        if (i != final_list.length - 1) getPlaceData(final_list[i].cid, items, final_list[i].pref, null);
-        else getPlaceData(final_list[i].cid, items, final_list[i].pref, res, loop, i);
+        if (i != final_list.length - 1) getPlaceData(final_list[i].cid, items, final_list[i].pref, exp, null);
+        else getPlaceData(final_list[i].cid, items, final_list[i].pref, exp, res);
         i++;
         loop();
       }}());
@@ -360,8 +375,8 @@ exports.randomplace = function(req, res) {
             var items = []; var i = 0;
             (function loop() {
 	    if (i<result.length) {
-                if (i != result.length - 1) items = getPlaceData(result[i].cid, items, null, null);
-                else items = getPlaceData(result[i].cid, items, null, res);
+                if (i != result.length - 1) items = getPlaceData(result[i].cid, items, null, null, null);
+                else items = getPlaceData(result[i].cid, items, null, null, res);
                 i++;
                 loop();
             }}());
@@ -589,7 +604,7 @@ exports.getreviewByUID = function(req, res) {
     });
 };
 
-var getPlaceData = function(cid, items, pref, res) {
+var getPlaceData = function(cid, items, pref, exp, res) {
     var response = srequest("GET", "http://api.visitkorea.or.kr/openapi/service/rest/EngService/detailCommon?ServiceKey=lDzm86gYb%2Bcz6q1Kl4XPb1oXrRMMxbO0gUs%2BAEs9eVZpIQr6JigwOwbOvKCBkrth0%2Bnnq4V%2BDZlrbRdkZOYqSQ%3D%3D&MobileOS=ETC&MobileApp=PRAC4APP&defaultYN=Y&areacodeYN=Y&firstImageYN=Y&mapinfoYN=Y&addrinfoYN=Y&overviewYN=Y&contentId="+cid+"&_type=json");
     var item = JSON.parse(response.getBody()).response.body.items.item;
     var response2 = srequest("GET", "https://query.yahooapis.com/v1/public/yql?q=select%20item.condition%20from%20weather.forecast%20where%20woeid%20in%20(SELECT%20woeid%20FROM%20geo.places%20WHERE%20text=%22("+item.mapy+","+item.mapx+")%22)&format=json");
@@ -610,7 +625,7 @@ var getPlaceData = function(cid, items, pref, res) {
                 else return items;
             } else {
                 items.push({"item":data, "pref":pref});
-                if (res != null) return res.json({'result':1, 'data':items});
+                if (res != null) return res.json({'result':1, 'data':{'exp':exp, 'items':items}});
                 else return items;
             }
 };
