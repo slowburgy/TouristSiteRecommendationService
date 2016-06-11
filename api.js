@@ -60,7 +60,7 @@ exports.userinfo = function(req, res) {
     if (isEmpty(req.query.uid))
 	return res.json({'result':-2});
     var query = connection.query(
-                'select age, sex, travStyle from tourUser where uid='+mysql.escape(req.query.uid),
+                'select age, sex, travStyle, nickname, age, nationality, numPref from tourUser where uid='+mysql.escape(req.query.uid),
                 function(err, result) {
                     if (err) {
                         console.error(err);
@@ -146,6 +146,7 @@ exports.prefinfo = function(req, res) {
 exports.recommend = function(req, res) {
     // Here, input should be (age, sex, travStyle, area, [uid]optional)
     // Example: age = 25, sex = 'W', travStyle = 'alone', area = 1 (area code from API)
+    console.log(req.query);
     if ( isEmpty(req.query.age) || isEmpty(req.query.sex) ||
          isEmpty(req.query.travStyle) || isEmpty(req.query.area))
             return res.json({'result':-2});
@@ -473,7 +474,7 @@ exports.like = function(req, res) {
 };
 
 exports.review = function(req, res) {
-    if ( isEmpty(req.body.review) || isEmptry(req.body.star) ||
+    if ( isEmpty(req.body.review) || isEmpty(req.body.star) ||
          isEmpty(req.body.uid) || isEmpty(req.body.cid))
 	return res.json({'result':-2});
     var review = mysql.escape(req.query.review);
@@ -546,20 +547,29 @@ exports.numpref = function(req, res) {
 exports.getlike = function(req, res) {
     if ( isEmpty(req.query.uid))
             return res.json({'result':-2});
-    else if ( isEmptry(req.query.cid)) {
+    else if ( isEmpty(req.query.cid)) {
         var query = connection.query(
-                'select cid from tourlike where uid='+mysql.escape(req.query.uid),
+                'select cid from tourLike where uid='+mysql.escape(req.query.uid),
                 function(err,result){
                     if (err) {
                        console.error(err);
                        return res.json({'result':'-1'});
                     }
                     if (!result || !result.length) res.json({'result':0});
-                    else res.json({"result":1, 'likes':result});
+                    else {
+                      var items = []; var i = 0;
+                      (function loop() {
+             	        if (i<result.length) {
+			  if (i != result.length - 1) items = getPlaceData(result[i].cid, items, null, null, null);
+			  else items = getPlaceData(result[i].cid, items, null, null, res);
+			  i++;
+			  loop();
+			}}());
+                    }
         });
      } else {
         var query2 = connection.query(
-                'select cid from tourlike where uid='+mysql.escape(req.query.uid)+
+                'select cid from tourLike where uid='+mysql.escape(req.query.uid)+
                 ' and cid='+Number(req.query.cid),
                 function(err,result){
                     if (err) {
@@ -584,15 +594,15 @@ exports.getreviewByCID = function(req, res) {
                        return res.json({'result':-1});
                     }
                     if (!result || !result.length) res.json({'result':0});
-                    else res.json({"result":1, 'reviews':result});
+                    else res.json({"result":1, 'items':result});
     });
 };
 
 exports.getreviewByUID = function(req, res) {
-    if ( isEmpty(req.query.cid))
+    if ( isEmpty(req.query.uid))
             return res.json({'result':-2});
     var query = connection.query(
-                'select review, date, star from tourReview'+
+                'select cid, review as content, date from tourReview'+
                 ' where uid='+mysql.escape(req.query.uid),
                 function(err,result){
                     if (err) {
@@ -600,7 +610,20 @@ exports.getreviewByUID = function(req, res) {
                        return res.json({'result':-1});
                     }
                     if (!result || !result.length) res.json({'result':0});
-                    else res.json({"result":1, 'reviews':result});
+                    else {
+            var items = []; var i = 0;
+            (function loop() {
+	    if (i<result.length) {
+                if (i != result.length - 1) items = getPlaceData(result[i].cid, items, null, null, null);
+                else items = getPlaceData(result[i].cid, items, null, null, null);
+                items[i].starRating = 3; //TEMP
+                items[i].content = result[i].content;
+                items[i].date = result[i].date;
+                i++;
+                loop();
+            }}());
+           res.json({"result":1, 'items':items});
+        }
     });
 };
 

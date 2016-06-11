@@ -99,8 +99,8 @@ app.get('/api/like', api.like);
 app.post('/api/review', api.review);
 app.get('/api/numpref', api.numpref);
 app.get('/api/getlike', api.getlike);
-app.get('/api/getreview_uid', api.getreviewByUID);
-app.get('/api/getreview_cid', api.getreviewByCID);
+app.get('/api/getreviewByUID', api.getreviewByUID);
+app.get('/api/getreviewByCID', api.getreviewByCID);
 
 // FACEBOOK OAUTH 
 app.get('/auth/facebook', passport.authenticate('facebook'));

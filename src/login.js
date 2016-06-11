@@ -38,7 +38,7 @@ class Main extends React.Component {
          @return: _uid_, a string, and _firstLogin_, a boolean flag to check whether the user is new to our service.
          */
 
-        var uid = "1", firstLogin = true;
+        var uid = "test", firstLogin = true;
         
         window.sessionStorage.uid = uid;
         

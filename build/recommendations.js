@@ -47841,91 +47841,6 @@ var muiTheme = (0, _getMuiTheme2.default)({
     }
 });
 
-// _user_, _place_: Sample data for testing
-var _user_ = {
-    uid: "1",
-    firstLogin: true,
-    nickname: "rhapsodyjs",
-    age: 24,
-    gender: "Male",
-    nationality: "Korea, Republic Of",
-
-    recommendations: _underscore._.range(4).map(function (c) {
-        return _underscore._.range(7).map(function (r) {
-            return {
-                cid: (7 * c + r).toString(), // Just for testing
-                name: 'Seolark',
-                address: 'Seoraksan-ro, Sokcho-si, Gangwon-do',
-                latitude: 38.119444,
-                longitude: 128.465556,
-                img: "images/seolark_highres.jpg",
-                starRating: 3,
-                reviews: [{
-                    name: 'nick',
-                    starRating: 5,
-                    date: '2016.06.07',
-                    content: 'This place is fantastic! The food is amazing, the people are kind, and the view is magnificent. I would certainly come here again!'
-                }, {
-                    name: 'brendan',
-                    starRating: 1,
-                    date: '2016.05.01',
-                    content: 'Imma never come \'ere again, I can tell ya that!'
-                }, {
-                    name: 'you',
-                    starRating: 3,
-                    date: '2016.04.02',
-                    content: 'Good!'
-                }]
-            };
-        });
-    }),
-
-    likedPlaces: _underscore._.range(7).map(function (r) {
-        return {
-            cid: r.toString(),
-            name: 'Seolark',
-            address: 'Seoraksan-ro, Sokcho-si, Gangwon-do',
-            latitude: 38.119444,
-            longitude: 128.465556,
-            img: "images/seolark_highres.jpg",
-            starRating: 3,
-            reviews: [{
-                name: 'sherlock',
-                starRating: 5,
-                date: '2016.06.07',
-                content: 'This place is fantastic! The food is amazing, the people are kind, and the view is magnificent. I would certainly come here again!'
-            }, {
-                name: 'holmes',
-                starRating: 1,
-                date: '2016.05.01',
-                content: 'Imma never come \'ere again, I can tell ya that!'
-            }, {
-                name: 'watson',
-                starRating: 3,
-                date: '2016.04.02',
-                content: 'Good!'
-            }]
-        };
-    }),
-
-    reviews: [{
-        name: 'Seolark',
-        starRating: 5,
-        date: '2016.06.07',
-        content: 'This place is fantastic! The food is amazing, the people are kind, and the view is magnificent. I would certainly come here again!'
-    }, {
-        name: 'Mt. Everest',
-        starRating: 1,
-        date: '2016.05.01',
-        content: 'Imma never come \'ere again, I can tell ya that!'
-    }, {
-        name: 'Jeju Island',
-        starRating: 3,
-        date: '2016.04.02',
-        content: 'Good!'
-    }]
-};
-
 var _place_ = {
     cid: "1",
     name: 'Seolark',
@@ -48029,7 +47944,7 @@ var Main = function (_React$Component) {
                 @return: _uid_, a string, and _first_, a boolean flag to check whether the user is new to our service.
              */
 
-            var uid = "1",
+            var uid = "test",
                 firstLogin = true;
             this.fetchInformationFromServer(uid, firstLogin);
 
@@ -48220,6 +48135,11 @@ var moreSnapshots = exports.moreSnapshots = "View more snapshots";
 // shim for using process in browser
 
 var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it don't break things.
+var cachedSetTimeout = setTimeout;
+var cachedClearTimeout = clearTimeout;
+
 var queue = [];
 var draining = false;
 var currentQueue;
@@ -48244,7 +48164,7 @@ function drainQueue() {
     if (draining) {
         return;
     }
-    var timeout = setTimeout(cleanUpNextTick);
+    var timeout = cachedSetTimeout(cleanUpNextTick);
     draining = true;
 
     var len = queue.length;
@@ -48261,7 +48181,7 @@ function drainQueue() {
     }
     currentQueue = null;
     draining = false;
-    clearTimeout(timeout);
+    cachedClearTimeout(timeout);
 }
 
 process.nextTick = function (fun) {
@@ -48273,7 +48193,7 @@ process.nextTick = function (fun) {
     }
     queue.push(new Item(fun, args));
     if (queue.length === 1 && !draining) {
-        setTimeout(drainQueue, 0);
+        cachedSetTimeout(drainQueue, 0);
     }
 };
 

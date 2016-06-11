@@ -47841,91 +47841,6 @@ var muiTheme = (0, _getMuiTheme2.default)({
     }
 });
 
-// _user_, _place_: Sample data for testing
-var _user_ = {
-    uid: "1",
-    firstLogin: true,
-    nickname: "rhapsodyjs",
-    age: 24,
-    gender: "Male",
-    nationality: "Korea, Republic Of",
-
-    recommendations: _underscore._.range(4).map(function (c) {
-        return _underscore._.range(7).map(function (r) {
-            return {
-                cid: (7 * c + r).toString(), // Just for testing
-                name: 'Seolark',
-                address: 'Seoraksan-ro, Sokcho-si, Gangwon-do',
-                latitude: 38.119444,
-                longitude: 128.465556,
-                img: "images/seolark_highres.jpg",
-                starRating: 3,
-                reviews: [{
-                    name: 'nick',
-                    starRating: 5,
-                    date: '2016.06.07',
-                    content: 'This place is fantastic! The food is amazing, the people are kind, and the view is magnificent. I would certainly come here again!'
-                }, {
-                    name: 'brendan',
-                    starRating: 1,
-                    date: '2016.05.01',
-                    content: 'Imma never come \'ere again, I can tell ya that!'
-                }, {
-                    name: 'you',
-                    starRating: 3,
-                    date: '2016.04.02',
-                    content: 'Good!'
-                }]
-            };
-        });
-    }),
-
-    likedPlaces: _underscore._.range(7).map(function (r) {
-        return {
-            cid: r.toString(),
-            name: 'Seolark',
-            address: 'Seoraksan-ro, Sokcho-si, Gangwon-do',
-            latitude: 38.119444,
-            longitude: 128.465556,
-            img: "images/seolark_highres.jpg",
-            starRating: 3,
-            reviews: [{
-                name: 'sherlock',
-                starRating: 5,
-                date: '2016.06.07',
-                content: 'This place is fantastic! The food is amazing, the people are kind, and the view is magnificent. I would certainly come here again!'
-            }, {
-                name: 'holmes',
-                starRating: 1,
-                date: '2016.05.01',
-                content: 'Imma never come \'ere again, I can tell ya that!'
-            }, {
-                name: 'watson',
-                starRating: 3,
-                date: '2016.04.02',
-                content: 'Good!'
-            }]
-        };
-    }),
-
-    reviews: [{
-        name: 'Seolark',
-        starRating: 5,
-        date: '2016.06.07',
-        content: 'This place is fantastic! The food is amazing, the people are kind, and the view is magnificent. I would certainly come here again!'
-    }, {
-        name: 'Mt. Everest',
-        starRating: 1,
-        date: '2016.05.01',
-        content: 'Imma never come \'ere again, I can tell ya that!'
-    }, {
-        name: 'Jeju Island',
-        starRating: 3,
-        date: '2016.04.02',
-        content: 'Good!'
-    }]
-};
-
 var _place_ = {
     cid: "1",
     name: 'Seolark',
@@ -48029,9 +47944,85 @@ var Main = function (_React$Component) {
                 var user,
                     place = null;
 
-                /* Routine for fetching information from the server (i.e., updating user) using the uid comes here */
+                var _user_ = {};
 
-                // _user_ is used just for testing. Replace it with the real value.
+                $.ajax({
+                    url: "/api/userinfo?uid=" + uid,
+                    type: 'get',
+                    async: false,
+                    cache: false,
+                    success: function success(data) {
+                        if (data.result == 1) {
+                            _user_.uid = uid;
+                            _user_.firstlogin = data.userprofile.numpref >= 10;
+                            _user_.nickname = data.userprofile.nickname;
+                            _user_.age = data.userprofile.age;
+                            _user_.gender = data.userprofile.sex;
+                            _user_.nationality = data.userprofile.nationality;
+                        }
+                    },
+                    error: function error(request, status, _error) {
+                        alert(_error);
+                    }
+                });
+
+                $.ajax({
+                    url: "/api/recommend?uid=" + uid + "&age=" + _user_.age + "&sex=" + _user_.gender + "&travStyle=1" + // TEMP
+                    "&area=1", // TEMP
+                    type: 'get',
+                    async: false,
+                    cache: false,
+                    success: function success(data) {
+                        if (data.result == 1) {
+                            _user_.recommendations = [[], [], [], []];
+                            for (var i = 0; i < 4; i++) {
+                                for (var j = 0; j < data.data.items.length; j++) {
+                                    _user_.recommendations[i].push(data.data.items[j].item);
+                                }
+                            }
+                        }
+                    },
+                    error: function error(request, status, _error2) {
+                        alert(_error2);
+                    }
+                });
+
+                $.ajax({
+                    url: "/api/getlike?uid=" + uid,
+                    type: 'get',
+                    cache: false,
+                    async: false,
+                    success: function success(data) {
+                        _user_.likedPlaces = [];
+                        if (data.result == 1) {
+                            for (var i = 0; i < data.data.length; i++) {
+                                _user_.likedPlaces.push(data.data[i].item);
+                            }
+                        }
+                    },
+                    error: function error(request, status, _error3) {
+                        alert(_error3);
+                    }
+                });
+
+                $.ajax({
+                    url: "/api/getreviewByUID?uid=" + uid,
+                    type: 'get',
+                    cache: false,
+                    async: false,
+                    success: function success(data) {
+                        _user_.reviews = [];
+                        if (data.result == 1) {
+                            for (var i = 0; i < data.items.length; i++) {
+                                _user_.reviews.push(data.items[i]);
+                            }
+                        }
+                    },
+                    error: function error(request, status, _error4) {
+                        alert(_error4);
+                    }
+                });
+
                 user = _user_;
 
                 this.state.info.user = user;
@@ -48160,6 +48151,11 @@ var moreSnapshots = exports.moreSnapshots = "View more snapshots";
 // shim for using process in browser
 
 var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it don't break things.
+var cachedSetTimeout = setTimeout;
+var cachedClearTimeout = clearTimeout;
+
 var queue = [];
 var draining = false;
 var currentQueue;
@@ -48184,7 +48180,7 @@ function drainQueue() {
     if (draining) {
         return;
     }
-    var timeout = setTimeout(cleanUpNextTick);
+    var timeout = cachedSetTimeout(cleanUpNextTick);
     draining = true;
 
     var len = queue.length;
@@ -48201,7 +48197,7 @@ function drainQueue() {
     }
     currentQueue = null;
     draining = false;
-    clearTimeout(timeout);
+    cachedClearTimeout(timeout);
 }
 
 process.nextTick = function (fun) {
@@ -48213,7 +48209,7 @@ process.nextTick = function (fun) {
     }
     queue.push(new Item(fun, args));
     if (queue.length === 1 && !draining) {
-        setTimeout(drainQueue, 0);
+        cachedSetTimeout(drainQueue, 0);
     }
 };
 
