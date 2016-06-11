@@ -1,0 +1,959 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/bin/npm', 'install', 'passport-facebook' ]
+2 info using npm@1.3.6
+3 info using node@v0.10.42
+4 verbose cache add [ 'passport-facebook', null ]
+5 verbose cache add name=undefined spec="passport-facebook" args=["passport-facebook",null]
+6 verbose parsed url { protocol: null,
+6 verbose parsed url   slashes: null,
+6 verbose parsed url   auth: null,
+6 verbose parsed url   host: null,
+6 verbose parsed url   port: null,
+6 verbose parsed url   hostname: null,
+6 verbose parsed url   hash: null,
+6 verbose parsed url   search: null,
+6 verbose parsed url   query: null,
+6 verbose parsed url   pathname: 'passport-facebook',
+6 verbose parsed url   path: 'passport-facebook',
+6 verbose parsed url   href: 'passport-facebook' }
+7 silly lockFile 1f112557-passport-facebook passport-facebook
+8 verbose lock passport-facebook /home/ec2-user/.npm/1f112557-passport-facebook.lock
+9 silly lockFile 1f112557-passport-facebook passport-facebook
+10 silly lockFile 1f112557-passport-facebook passport-facebook
+11 verbose addNamed [ 'passport-facebook', '' ]
+12 verbose addNamed [ null, '*' ]
+13 silly lockFile d48e7760-passport-facebook passport-facebook@
+14 verbose lock passport-facebook@ /home/ec2-user/.npm/d48e7760-passport-facebook.lock
+15 silly addNameRange { name: 'passport-facebook', range: '*', hasData: false }
+16 verbose url raw passport-facebook
+17 verbose url resolving [ 'https://registry.npmjs.org/', './passport-facebook' ]
+18 verbose url resolved https://registry.npmjs.org/passport-facebook
+19 info trying registry request attempt 1 at 19:27:54
+20 http GET https://registry.npmjs.org/passport-facebook
+21 http 200 https://registry.npmjs.org/passport-facebook
+22 silly registry.get cb [ 200,
+22 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+22 silly registry.get     etag: '"BCUPTVQA08A4CZYNVFQ5BQS89"',
+22 silly registry.get     'content-type': 'application/json',
+22 silly registry.get     'content-encoding': 'gzip',
+22 silly registry.get     'cache-control': 'max-age=300',
+22 silly registry.get     'content-length': '5707',
+22 silly registry.get     'accept-ranges': 'bytes',
+22 silly registry.get     date: 'Fri, 10 Jun 2016 19:27:54 GMT',
+22 silly registry.get     via: '1.1 varnish',
+22 silly registry.get     age: '0',
+22 silly registry.get     connection: 'keep-alive',
+22 silly registry.get     'x-served-by': 'cache-itm7424-ITM',
+22 silly registry.get     'x-cache': 'HIT',
+22 silly registry.get     'x-cache-hits': '1',
+22 silly registry.get     'x-timer': 'S1465586874.388972,VS0,VE603',
+22 silly registry.get     vary: 'Accept-Encoding' } ]
+23 silly addNameRange number 2 { name: 'passport-facebook', range: '*', hasData: true }
+24 silly addNameRange versions [ 'passport-facebook',
+24 silly addNameRange   [ '0.1.0',
+24 silly addNameRange     '0.1.1',
+24 silly addNameRange     '0.1.2',
+24 silly addNameRange     '0.1.3',
+24 silly addNameRange     '0.1.4',
+24 silly addNameRange     '0.1.5',
+24 silly addNameRange     '0.1.6',
+24 silly addNameRange     '1.0.0',
+24 silly addNameRange     '1.0.1',
+24 silly addNameRange     '1.0.2',
+24 silly addNameRange     '1.0.3',
+24 silly addNameRange     '2.0.0',
+24 silly addNameRange     '2.1.0',
+24 silly addNameRange     '2.1.1' ] ]
+25 verbose addNamed [ 'passport-facebook', '2.1.1' ]
+26 verbose addNamed [ '2.1.1', '2.1.1' ]
+27 silly lockFile 3a9cb49c-passport-facebook-2-1-1 passport-facebook@2.1.1
+28 verbose lock passport-facebook@2.1.1 /home/ec2-user/.npm/3a9cb49c-passport-facebook-2-1-1.lock
+29 silly lockFile 5ffac1af-book-passport-facebook-2-1-1-tgz https://registry.npmjs.org/passport-facebook/-/passport-facebook-2.1.1.tgz
+30 verbose lock https://registry.npmjs.org/passport-facebook/-/passport-facebook-2.1.1.tgz /home/ec2-user/.npm/5ffac1af-book-passport-facebook-2-1-1-tgz.lock
+31 verbose addRemoteTarball [ 'https://registry.npmjs.org/passport-facebook/-/passport-facebook-2.1.1.tgz',
+31 verbose addRemoteTarball   'c39d0b52ae4d59163245a4e21a7b9b6321303311' ]
+32 info retry fetch attempt 1 at 19:27:55
+33 verbose fetch to= /home/ec2-user/tmp/npm-16335-KiU7tUja/1465586875033-0.4315041566733271/tmp.tgz
+34 http GET https://registry.npmjs.org/passport-facebook/-/passport-facebook-2.1.1.tgz
+35 http 200 https://registry.npmjs.org/passport-facebook/-/passport-facebook-2.1.1.tgz
+36 verbose tar unpack /home/ec2-user/tmp/npm-16335-KiU7tUja/1465586875033-0.4315041566733271/tmp.tgz
+37 silly lockFile fbdd51f8-75033-0-4315041566733271-package tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586875033-0.4315041566733271/package
+38 verbose lock tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586875033-0.4315041566733271/package /home/ec2-user/.npm/fbdd51f8-75033-0-4315041566733271-package.lock
+39 silly lockFile 2e2ff7b4-75033-0-4315041566733271-tmp-tgz tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586875033-0.4315041566733271/tmp.tgz
+40 verbose lock tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586875033-0.4315041566733271/tmp.tgz /home/ec2-user/.npm/2e2ff7b4-75033-0-4315041566733271-tmp-tgz.lock
+41 silly gunzTarPerm modes [ '755', '644' ]
+42 silly gunzTarPerm extractEntry package.json
+43 silly gunzTarPerm extractEntry .npmignore
+44 silly gunzTarPerm extractEntry README.md
+45 silly gunzTarPerm extractEntry LICENSE
+46 silly gunzTarPerm extractEntry lib/index.js
+47 silly gunzTarPerm extractEntry lib/profile.js
+48 silly gunzTarPerm extractEntry lib/strategy.js
+49 silly gunzTarPerm extractEntry lib/errors/facebookauthorizationerror.js
+50 silly gunzTarPerm extractEntry lib/errors/facebookgraphapierror.js
+51 silly gunzTarPerm extractEntry lib/errors/facebooktokenerror.js
+52 silly lockFile fbdd51f8-75033-0-4315041566733271-package tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586875033-0.4315041566733271/package
+53 silly lockFile fbdd51f8-75033-0-4315041566733271-package tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586875033-0.4315041566733271/package
+54 silly lockFile 2e2ff7b4-75033-0-4315041566733271-tmp-tgz tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586875033-0.4315041566733271/tmp.tgz
+55 silly lockFile 2e2ff7b4-75033-0-4315041566733271-tmp-tgz tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586875033-0.4315041566733271/tmp.tgz
+56 verbose tar pack [ '/home/ec2-user/.npm/passport-facebook/2.1.1/package.tgz',
+56 verbose tar pack   '/home/ec2-user/tmp/npm-16335-KiU7tUja/1465586875033-0.4315041566733271/package' ]
+57 verbose tarball /home/ec2-user/.npm/passport-facebook/2.1.1/package.tgz
+58 verbose folder /home/ec2-user/tmp/npm-16335-KiU7tUja/1465586875033-0.4315041566733271/package
+59 silly lockFile fbdd51f8-75033-0-4315041566733271-package tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586875033-0.4315041566733271/package
+60 verbose lock tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586875033-0.4315041566733271/package /home/ec2-user/.npm/fbdd51f8-75033-0-4315041566733271-package.lock
+61 silly lockFile ab8cedf7-sport-facebook-2-1-1-package-tgz tar:///home/ec2-user/.npm/passport-facebook/2.1.1/package.tgz
+62 verbose lock tar:///home/ec2-user/.npm/passport-facebook/2.1.1/package.tgz /home/ec2-user/.npm/ab8cedf7-sport-facebook-2-1-1-package-tgz.lock
+63 silly lockFile fbdd51f8-75033-0-4315041566733271-package tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586875033-0.4315041566733271/package
+64 silly lockFile fbdd51f8-75033-0-4315041566733271-package tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586875033-0.4315041566733271/package
+65 silly lockFile ab8cedf7-sport-facebook-2-1-1-package-tgz tar:///home/ec2-user/.npm/passport-facebook/2.1.1/package.tgz
+66 silly lockFile ab8cedf7-sport-facebook-2-1-1-package-tgz tar:///home/ec2-user/.npm/passport-facebook/2.1.1/package.tgz
+67 silly lockFile 3ee3fa9a--passport-facebook-2-1-1-package /home/ec2-user/.npm/passport-facebook/2.1.1/package
+68 verbose lock /home/ec2-user/.npm/passport-facebook/2.1.1/package /home/ec2-user/.npm/3ee3fa9a--passport-facebook-2-1-1-package.lock
+69 silly lockFile 3ee3fa9a--passport-facebook-2-1-1-package /home/ec2-user/.npm/passport-facebook/2.1.1/package
+70 silly lockFile 3ee3fa9a--passport-facebook-2-1-1-package /home/ec2-user/.npm/passport-facebook/2.1.1/package
+71 verbose tar unpack /home/ec2-user/.npm/passport-facebook/2.1.1/package.tgz
+72 silly lockFile 30fcca7e--passport-facebook-2-1-1-package tar:///home/ec2-user/.npm/passport-facebook/2.1.1/package
+73 verbose lock tar:///home/ec2-user/.npm/passport-facebook/2.1.1/package /home/ec2-user/.npm/30fcca7e--passport-facebook-2-1-1-package.lock
+74 silly lockFile ab8cedf7-sport-facebook-2-1-1-package-tgz tar:///home/ec2-user/.npm/passport-facebook/2.1.1/package.tgz
+75 verbose lock tar:///home/ec2-user/.npm/passport-facebook/2.1.1/package.tgz /home/ec2-user/.npm/ab8cedf7-sport-facebook-2-1-1-package-tgz.lock
+76 silly gunzTarPerm modes [ '755', '644' ]
+77 silly gunzTarPerm extractEntry package.json
+78 silly gunzTarPerm extractEntry .npmignore
+79 silly gunzTarPerm extractEntry README.md
+80 silly gunzTarPerm extractEntry LICENSE
+81 silly gunzTarPerm extractEntry lib/index.js
+82 silly gunzTarPerm extractEntry lib/profile.js
+83 silly gunzTarPerm extractEntry lib/strategy.js
+84 silly gunzTarPerm extractEntry lib/errors/facebookauthorizationerror.js
+85 silly gunzTarPerm extractEntry lib/errors/facebookgraphapierror.js
+86 silly gunzTarPerm extractEntry lib/errors/facebooktokenerror.js
+87 silly lockFile 30fcca7e--passport-facebook-2-1-1-package tar:///home/ec2-user/.npm/passport-facebook/2.1.1/package
+88 silly lockFile 30fcca7e--passport-facebook-2-1-1-package tar:///home/ec2-user/.npm/passport-facebook/2.1.1/package
+89 silly lockFile ab8cedf7-sport-facebook-2-1-1-package-tgz tar:///home/ec2-user/.npm/passport-facebook/2.1.1/package.tgz
+90 silly lockFile ab8cedf7-sport-facebook-2-1-1-package-tgz tar:///home/ec2-user/.npm/passport-facebook/2.1.1/package.tgz
+91 verbose chmod /home/ec2-user/.npm/passport-facebook/2.1.1/package.tgz 644
+92 verbose chown /home/ec2-user/.npm/passport-facebook/2.1.1/package.tgz [ 500, 500 ]
+93 silly lockFile 5ffac1af-book-passport-facebook-2-1-1-tgz https://registry.npmjs.org/passport-facebook/-/passport-facebook-2.1.1.tgz
+94 silly lockFile 5ffac1af-book-passport-facebook-2-1-1-tgz https://registry.npmjs.org/passport-facebook/-/passport-facebook-2.1.1.tgz
+95 silly lockFile 3a9cb49c-passport-facebook-2-1-1 passport-facebook@2.1.1
+96 silly lockFile 3a9cb49c-passport-facebook-2-1-1 passport-facebook@2.1.1
+97 silly lockFile d48e7760-passport-facebook passport-facebook@
+98 silly lockFile d48e7760-passport-facebook passport-facebook@
+99 silly resolved [ { name: 'passport-facebook',
+99 silly resolved     version: '2.1.1',
+99 silly resolved     description: 'Facebook authentication strategy for Passport.',
+99 silly resolved     keywords:
+99 silly resolved      [ 'passport',
+99 silly resolved        'facebook',
+99 silly resolved        'auth',
+99 silly resolved        'authn',
+99 silly resolved        'authentication',
+99 silly resolved        'identity' ],
+99 silly resolved     author:
+99 silly resolved      { name: 'Jared Hanson',
+99 silly resolved        email: 'jaredhanson@gmail.com',
+99 silly resolved        url: 'http://www.jaredhanson.net/' },
+99 silly resolved     repository:
+99 silly resolved      { type: 'git',
+99 silly resolved        url: 'git://github.com/jaredhanson/passport-facebook.git' },
+99 silly resolved     bugs: { url: 'http://github.com/jaredhanson/passport-facebook/issues' },
+99 silly resolved     license: 'MIT',
+99 silly resolved     licenses: [ [Object] ],
+99 silly resolved     main: './lib',
+99 silly resolved     dependencies: { 'passport-oauth2': '1.x.x' },
+99 silly resolved     devDependencies:
+99 silly resolved      { 'make-node': '0.3.x',
+99 silly resolved        mocha: '1.x.x',
+99 silly resolved        chai: '2.x.x',
+99 silly resolved        'chai-passport-strategy': '1.x.x' },
+99 silly resolved     engines: { node: '>= 0.4.0' },
+99 silly resolved     scripts: { test: 'node_modules/.bin/mocha --require test/bootstrap/node test/*.test.js' },
+99 silly resolved     readme: '# passport-facebook\n\n[![Build](https://img.shields.io/travis/jaredhanson/passport-facebook.svg)](https://travis-ci.org/jaredhanson/passport-facebook)\n[![Coverage](https://img.shields.io/coveralls/jaredhanson/passport-facebook.svg)](https://coveralls.io/r/jaredhanson/passport-facebook)\n[![Quality](https://img.shields.io/codeclimate/github/jaredhanson/passport-facebook.svg?label=quality)](https://codeclimate.com/github/jaredhanson/passport-facebook)\n[![Dependencies](https://img.shields.io/david/jaredhanson/passport-facebook.svg)](https://david-dm.org/jaredhanson/passport-facebook)\n\n\n[Passport](http://passportjs.org/) strategy for authenticating with [Facebook](http://www.facebook.com/)\nusing the OAuth 2.0 API.\n\nThis module lets you authenticate using Facebook in your Node.js applications.\nBy plugging into Passport, Facebook authentication can be easily and\nunobtrusively integrated into any application or framework that supports\n[Connect](http://www.senchalabs.org/connect/)-style middleware, including\n[Express](http://expressjs.com/).\n\n## Install\n\n    $ npm install passport-facebook\n\n## Usage\n\n#### Create an Application\n\nBefore using `passport-facebook`, you must register an application with\nFacebook.  If you have not already done so, a new application can be created at\n[Facebook Developers](https://developers.facebook.com/).  Your application will\nbe issued an app ID and app secret, which need to be provided to the strategy.\nYou will also need to configure a redirect URI which matches the route in your\napplication.\n\n#### Configure Strategy\n\nThe Facebook authentication strategy authenticates users using a Facebook\naccount and OAuth 2.0 tokens.  The app ID and secret obtained when creating an\napplication are supplied as options when creating the strategy.  The strategy\nalso requires a `verify` callback, which receives the access token and optional\nrefresh token, as well as `profile` which contains the authenticated user\'s\nFacebook profile.  The `verify` callback must call `cb` providing a user to\ncomplete authentication.\n\n```js\npassport.use(new FacebookStrategy({\n    clientID: FACEBOOK_APP_ID,\n    clientSecret: FACEBOOK_APP_SECRET,\n    callbackURL: "http://localhost:3000/auth/facebook/callback"\n  },\n  function(accessToken, refreshToken, profile, cb) {\n    User.findOrCreate({ facebookId: profile.id }, function (err, user) {\n      return cb(err, user);\n    });\n  }\n));\n```\n\n#### Authenticate Requests\n\nUse `passport.authenticate()`, specifying the `\'facebook\'` strategy, to\nauthenticate requests.\n\nFor example, as route middleware in an [Express](http://expressjs.com/)\napplication:\n\n```js\napp.get(\'/auth/facebook\',\n  passport.authenticate(\'facebook\'));\n\napp.get(\'/auth/facebook/callback\',\n  passport.authenticate(\'facebook\', { failureRedirect: \'/login\' }),\n  function(req, res) {\n    // Successful authentication, redirect home.\n    res.redirect(\'/\');\n  });\n```\n\n## Examples\n\nDevelopers using the popular [Express](http://expressjs.com/) web framework can\nrefer to an [example](https://github.com/passport/express-4.x-facebook-example)\nas a starting point for their own web applications.\n\n## FAQ\n\n##### How do I ask a user for additional permissions?\n\nIf you need additional permissions from the user, the permissions can be\nrequested via the `scope` option to `passport.authenticate()`.\n\n```js\napp.get(\'/auth/facebook\',\n  passport.authenticate(\'facebook\', { scope: [\'user_friends\', \'manage_pages\'] }));\n```\n\nRefer to [permissions with Facebook Login](https://developers.facebook.com/docs/facebook-login/permissions/overview)\nfor further details.\n\n##### How do I re-ask for for declined permissions?\n\nSet the `authType` option to `rerequest` when authenticating.\n\n```js\napp.get(\'/auth/facebook\',\n  passport.authenticate(\'facebook\', { authType: \'rerequest\', scope: [\'user_friends\', \'manage_pages\'] }));\n```\n\nRefer to [re-asking for declined permissions](https://developers.facebook.com/docs/facebook-login/web#re-asking-declined-permissions)\nfor further details.\n\n##### How do I obtain a user profile with specific fields?\n\nThe Facebook profile contains a lot of information about a user.  By default,\nnot all the fields in a profile are returned.  The fields need by an application\ncan be indicated by setting the `profileFields` option.\n\n```js\nnew FacebookStrategy({\n  clientID: FACEBOOK_APP_ID,\n  clientSecret: FACEBOOK_APP_SECRET,\n  callbackURL: "http://localhost:3000/auth/facebook/callback",\n  profileFields: [\'id\', \'displayName\', \'photos\', \'email\']\n}), ...)\n```\n\nRefer to the [User](https://developers.facebook.com/docs/graph-api/reference/v2.5/user)\nsection of the Graph API Reference for the complete set of available fields.\n\n##### How do I include app secret proof in API requests?\n\nSet the `enableProof` option when creating the strategy.\n\n```js\nnew FacebookStrategy({\n  clientID: FACEBOOK_APP_ID,\n  clientSecret: FACEBOOK_APP_SECRET,\n  callbackURL: "http://localhost:3000/auth/facebook/callback",\n  enableProof: true\n}, ...)\n```\n\nAs detailed in [securing graph API requests](https://developers.facebook.com/docs/graph-api/securing-requests#appsecret_proof),\nrequiring the app secret for server API requests helps prevent use of tokens\nstolen by malicous software or man in the middle attacks.\n\n##### Why is #\\_=\\_ appended to the redirect URI?\n\nThis behavior is "by design" according to Facebook\'s response to a [bug](https://developers.facebook.com/bugs/318390728250352)\nfiled regarding this issue.\n\nFragment identifiers are not supplied in requests made to a server, and as such\nthis strategy is not aware that this behavior is exhibited and is not affected\nby it.  If desired, this fragment can be removed on the client side.  Refer to\nthis [discussion](http://stackoverflow.com/questions/7131909/facebook-callback-appends-to-return-url) on\nStack Overflow for recommendations on how to accomplish such removal.\n\n\n## Contributing\n\n#### Tests\n\nThe test suite is located in the `test/` directory.  All new features are\nexpected to have corresponding test cases.  Ensure that the complete test suite\npasses by executing:\n\n```bash\n$ make test\n```\n\n#### Coverage\n\nThe test suite covers 100% of the code base.  All new feature development is\nexpected to maintain that level.  Coverage reports can be viewed by executing:\n\n```bash\n$ make test-cov\n$ make view-cov\n```\n\n## Support\n\n#### Funding\n\nThis software is provided to you as open source, free of charge.  The time and\neffort to develop and maintain this project is dedicated by [@jaredhanson](https://github.com/jaredhanson).\nIf you (or your employer) benefit from this project, please consider a financial\ncontribution.  Your contribution helps continue the efforts that produce this\nand other open source software.\n\nFunds are accepted via [PayPal](https://paypal.me/jaredhanson), [Venmo](https://venmo.com/jaredhanson),\nand [other](http://jaredhanson.net/pay) methods.  Any amount is appreciated.\n\n## License\n\n[The MIT License](http://opensource.org/licenses/MIT)\n\nCopyright (c) 2011-2016 Jared Hanson <[http://jaredhanson.net/](http://jaredhanson.net/)>\n',
+99 silly resolved     readmeFilename: 'README.md',
+99 silly resolved     _id: 'passport-facebook@2.1.1',
+99 silly resolved     dist: { shasum: '6f5554c56ff89f836c7c9f45f53c3b0e3c3a2d36' },
+99 silly resolved     _from: 'passport-facebook@',
+99 silly resolved     _resolved: 'https://registry.npmjs.org/passport-facebook/-/passport-facebook-2.1.1.tgz' } ]
+100 info install passport-facebook@2.1.1 into /home/ec2-user/heo/tour/TouristSiteRecommendationService
+101 info installOne passport-facebook@2.1.1
+102 info /home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook unbuild
+103 verbose tar unpack /home/ec2-user/.npm/passport-facebook/2.1.1/package.tgz
+104 silly lockFile 262e6cf4-e-node-modules-passport-facebook tar:///home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook
+105 verbose lock tar:///home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook /home/ec2-user/.npm/262e6cf4-e-node-modules-passport-facebook.lock
+106 silly lockFile ab8cedf7-sport-facebook-2-1-1-package-tgz tar:///home/ec2-user/.npm/passport-facebook/2.1.1/package.tgz
+107 verbose lock tar:///home/ec2-user/.npm/passport-facebook/2.1.1/package.tgz /home/ec2-user/.npm/ab8cedf7-sport-facebook-2-1-1-package-tgz.lock
+108 silly gunzTarPerm modes [ '755', '644' ]
+109 silly gunzTarPerm extractEntry package.json
+110 silly gunzTarPerm extractEntry .npmignore
+111 silly gunzTarPerm extractEntry README.md
+112 silly gunzTarPerm extractEntry LICENSE
+113 silly gunzTarPerm extractEntry lib/index.js
+114 silly gunzTarPerm extractEntry lib/profile.js
+115 silly gunzTarPerm extractEntry lib/strategy.js
+116 silly gunzTarPerm extractEntry lib/errors/facebookauthorizationerror.js
+117 silly gunzTarPerm extractEntry lib/errors/facebookgraphapierror.js
+118 silly gunzTarPerm extractEntry lib/errors/facebooktokenerror.js
+119 silly lockFile 262e6cf4-e-node-modules-passport-facebook tar:///home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook
+120 silly lockFile 262e6cf4-e-node-modules-passport-facebook tar:///home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook
+121 silly lockFile ab8cedf7-sport-facebook-2-1-1-package-tgz tar:///home/ec2-user/.npm/passport-facebook/2.1.1/package.tgz
+122 silly lockFile ab8cedf7-sport-facebook-2-1-1-package-tgz tar:///home/ec2-user/.npm/passport-facebook/2.1.1/package.tgz
+123 info preinstall passport-facebook@2.1.1
+124 verbose readDependencies using package.json deps
+125 verbose readDependencies using package.json deps
+126 verbose cache add [ 'passport-oauth2@1.x.x', null ]
+127 verbose cache add name=undefined spec="passport-oauth2@1.x.x" args=["passport-oauth2@1.x.x",null]
+128 verbose parsed url { protocol: null,
+128 verbose parsed url   slashes: null,
+128 verbose parsed url   auth: null,
+128 verbose parsed url   host: null,
+128 verbose parsed url   port: null,
+128 verbose parsed url   hostname: null,
+128 verbose parsed url   hash: null,
+128 verbose parsed url   search: null,
+128 verbose parsed url   query: null,
+128 verbose parsed url   pathname: 'passport-oauth2@1.x.x',
+128 verbose parsed url   path: 'passport-oauth2@1.x.x',
+128 verbose parsed url   href: 'passport-oauth2@1.x.x' }
+129 verbose cache add name="passport-oauth2" spec="1.x.x" args=["passport-oauth2","1.x.x"]
+130 verbose parsed url { protocol: null,
+130 verbose parsed url   slashes: null,
+130 verbose parsed url   auth: null,
+130 verbose parsed url   host: null,
+130 verbose parsed url   port: null,
+130 verbose parsed url   hostname: null,
+130 verbose parsed url   hash: null,
+130 verbose parsed url   search: null,
+130 verbose parsed url   query: null,
+130 verbose parsed url   pathname: '1.x.x',
+130 verbose parsed url   path: '1.x.x',
+130 verbose parsed url   href: '1.x.x' }
+131 verbose addNamed [ 'passport-oauth2', '1.x.x' ]
+132 verbose addNamed [ null, '>=1.0.0-0 <2.0.0-0' ]
+133 silly lockFile 05557f7a-passport-oauth2-1-x-x passport-oauth2@1.x.x
+134 verbose lock passport-oauth2@1.x.x /home/ec2-user/.npm/05557f7a-passport-oauth2-1-x-x.lock
+135 silly addNameRange { name: 'passport-oauth2',
+135 silly addNameRange   range: '>=1.0.0-0 <2.0.0-0',
+135 silly addNameRange   hasData: false }
+136 verbose url raw passport-oauth2
+137 verbose url resolving [ 'https://registry.npmjs.org/', './passport-oauth2' ]
+138 verbose url resolved https://registry.npmjs.org/passport-oauth2
+139 info trying registry request attempt 1 at 19:27:55
+140 http GET https://registry.npmjs.org/passport-oauth2
+141 http 200 https://registry.npmjs.org/passport-oauth2
+142 silly registry.get cb [ 200,
+142 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+142 silly registry.get     etag: '"3REFBVI3OW5D1CODESVH7RYHL"',
+142 silly registry.get     'content-type': 'application/json',
+142 silly registry.get     'content-encoding': 'gzip',
+142 silly registry.get     'cache-control': 'max-age=300',
+142 silly registry.get     'content-length': '3673',
+142 silly registry.get     'accept-ranges': 'bytes',
+142 silly registry.get     date: 'Fri, 10 Jun 2016 19:27:56 GMT',
+142 silly registry.get     via: '1.1 varnish',
+142 silly registry.get     age: '0',
+142 silly registry.get     connection: 'keep-alive',
+142 silly registry.get     'x-served-by': 'cache-itm7421-ITM',
+142 silly registry.get     'x-cache': 'HIT',
+142 silly registry.get     'x-cache-hits': '1',
+142 silly registry.get     'x-timer': 'S1465586875.790087,VS0,VE568',
+142 silly registry.get     vary: 'Accept-Encoding' } ]
+143 silly addNameRange number 2 { name: 'passport-oauth2',
+143 silly addNameRange   range: '>=1.0.0-0 <2.0.0-0',
+143 silly addNameRange   hasData: true }
+144 silly addNameRange versions [ 'passport-oauth2',
+144 silly addNameRange   [ '1.0.0', '1.1.0', '1.1.1', '1.1.2', '1.2.0', '1.3.0' ] ]
+145 verbose addNamed [ 'passport-oauth2', '1.3.0' ]
+146 verbose addNamed [ '1.3.0', '1.3.0' ]
+147 silly lockFile c9c83e6c-passport-oauth2-1-3-0 passport-oauth2@1.3.0
+148 verbose lock passport-oauth2@1.3.0 /home/ec2-user/.npm/c9c83e6c-passport-oauth2-1-3-0.lock
+149 silly lockFile 84e44dae-oauth2-passport-oauth2-1-3-0-tgz https://registry.npmjs.org/passport-oauth2/-/passport-oauth2-1.3.0.tgz
+150 verbose lock https://registry.npmjs.org/passport-oauth2/-/passport-oauth2-1.3.0.tgz /home/ec2-user/.npm/84e44dae-oauth2-passport-oauth2-1-3-0-tgz.lock
+151 verbose addRemoteTarball [ 'https://registry.npmjs.org/passport-oauth2/-/passport-oauth2-1.3.0.tgz',
+151 verbose addRemoteTarball   'd72b4bd62eeb807a4089ff3071a22c26c382dc0c' ]
+152 info retry fetch attempt 1 at 19:27:56
+153 verbose fetch to= /home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876396-0.8306904330383986/tmp.tgz
+154 http GET https://registry.npmjs.org/passport-oauth2/-/passport-oauth2-1.3.0.tgz
+155 http 200 https://registry.npmjs.org/passport-oauth2/-/passport-oauth2-1.3.0.tgz
+156 verbose tar unpack /home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876396-0.8306904330383986/tmp.tgz
+157 silly lockFile cf0a2848-76396-0-8306904330383986-package tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876396-0.8306904330383986/package
+158 verbose lock tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876396-0.8306904330383986/package /home/ec2-user/.npm/cf0a2848-76396-0-8306904330383986-package.lock
+159 silly lockFile 4d1e6183-76396-0-8306904330383986-tmp-tgz tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876396-0.8306904330383986/tmp.tgz
+160 verbose lock tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876396-0.8306904330383986/tmp.tgz /home/ec2-user/.npm/4d1e6183-76396-0-8306904330383986-tmp-tgz.lock
+161 silly gunzTarPerm modes [ '755', '644' ]
+162 silly gunzTarPerm extractEntry package.json
+163 silly gunzTarPerm extractEntry .npmignore
+164 silly gunzTarPerm extractEntry README.md
+165 silly gunzTarPerm extractEntry LICENSE
+166 silly gunzTarPerm extractEntry lib/index.js
+167 silly gunzTarPerm extractEntry lib/strategy.js
+168 silly gunzTarPerm extractEntry lib/utils.js
+169 silly gunzTarPerm extractEntry lib/errors/authorizationerror.js
+170 silly gunzTarPerm extractEntry lib/errors/internaloautherror.js
+171 silly gunzTarPerm extractEntry lib/errors/tokenerror.js
+172 silly gunzTarPerm extractEntry lib/state/null.js
+173 silly gunzTarPerm extractEntry lib/state/session.js
+174 silly lockFile cf0a2848-76396-0-8306904330383986-package tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876396-0.8306904330383986/package
+175 silly lockFile cf0a2848-76396-0-8306904330383986-package tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876396-0.8306904330383986/package
+176 silly lockFile 4d1e6183-76396-0-8306904330383986-tmp-tgz tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876396-0.8306904330383986/tmp.tgz
+177 silly lockFile 4d1e6183-76396-0-8306904330383986-tmp-tgz tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876396-0.8306904330383986/tmp.tgz
+178 verbose tar pack [ '/home/ec2-user/.npm/passport-oauth2/1.3.0/package.tgz',
+178 verbose tar pack   '/home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876396-0.8306904330383986/package' ]
+179 verbose tarball /home/ec2-user/.npm/passport-oauth2/1.3.0/package.tgz
+180 verbose folder /home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876396-0.8306904330383986/package
+181 silly lockFile cf0a2848-76396-0-8306904330383986-package tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876396-0.8306904330383986/package
+182 verbose lock tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876396-0.8306904330383986/package /home/ec2-user/.npm/cf0a2848-76396-0-8306904330383986-package.lock
+183 silly lockFile d617bb1c-assport-oauth2-1-3-0-package-tgz tar:///home/ec2-user/.npm/passport-oauth2/1.3.0/package.tgz
+184 verbose lock tar:///home/ec2-user/.npm/passport-oauth2/1.3.0/package.tgz /home/ec2-user/.npm/d617bb1c-assport-oauth2-1-3-0-package-tgz.lock
+185 silly lockFile cf0a2848-76396-0-8306904330383986-package tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876396-0.8306904330383986/package
+186 silly lockFile cf0a2848-76396-0-8306904330383986-package tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876396-0.8306904330383986/package
+187 silly lockFile d617bb1c-assport-oauth2-1-3-0-package-tgz tar:///home/ec2-user/.npm/passport-oauth2/1.3.0/package.tgz
+188 silly lockFile d617bb1c-assport-oauth2-1-3-0-package-tgz tar:///home/ec2-user/.npm/passport-oauth2/1.3.0/package.tgz
+189 silly lockFile b21d4f2f-pm-passport-oauth2-1-3-0-package /home/ec2-user/.npm/passport-oauth2/1.3.0/package
+190 verbose lock /home/ec2-user/.npm/passport-oauth2/1.3.0/package /home/ec2-user/.npm/b21d4f2f-pm-passport-oauth2-1-3-0-package.lock
+191 silly lockFile b21d4f2f-pm-passport-oauth2-1-3-0-package /home/ec2-user/.npm/passport-oauth2/1.3.0/package
+192 silly lockFile b21d4f2f-pm-passport-oauth2-1-3-0-package /home/ec2-user/.npm/passport-oauth2/1.3.0/package
+193 verbose tar unpack /home/ec2-user/.npm/passport-oauth2/1.3.0/package.tgz
+194 silly lockFile 47157fa4-pm-passport-oauth2-1-3-0-package tar:///home/ec2-user/.npm/passport-oauth2/1.3.0/package
+195 verbose lock tar:///home/ec2-user/.npm/passport-oauth2/1.3.0/package /home/ec2-user/.npm/47157fa4-pm-passport-oauth2-1-3-0-package.lock
+196 silly lockFile d617bb1c-assport-oauth2-1-3-0-package-tgz tar:///home/ec2-user/.npm/passport-oauth2/1.3.0/package.tgz
+197 verbose lock tar:///home/ec2-user/.npm/passport-oauth2/1.3.0/package.tgz /home/ec2-user/.npm/d617bb1c-assport-oauth2-1-3-0-package-tgz.lock
+198 silly gunzTarPerm modes [ '755', '644' ]
+199 silly gunzTarPerm extractEntry package.json
+200 silly gunzTarPerm extractEntry .npmignore
+201 silly gunzTarPerm extractEntry README.md
+202 silly gunzTarPerm extractEntry LICENSE
+203 silly gunzTarPerm extractEntry lib/index.js
+204 silly gunzTarPerm extractEntry lib/strategy.js
+205 silly gunzTarPerm extractEntry lib/utils.js
+206 silly gunzTarPerm extractEntry lib/errors/authorizationerror.js
+207 silly gunzTarPerm extractEntry lib/errors/internaloautherror.js
+208 silly gunzTarPerm extractEntry lib/errors/tokenerror.js
+209 silly gunzTarPerm extractEntry lib/state/null.js
+210 silly gunzTarPerm extractEntry lib/state/session.js
+211 silly lockFile 47157fa4-pm-passport-oauth2-1-3-0-package tar:///home/ec2-user/.npm/passport-oauth2/1.3.0/package
+212 silly lockFile 47157fa4-pm-passport-oauth2-1-3-0-package tar:///home/ec2-user/.npm/passport-oauth2/1.3.0/package
+213 silly lockFile d617bb1c-assport-oauth2-1-3-0-package-tgz tar:///home/ec2-user/.npm/passport-oauth2/1.3.0/package.tgz
+214 silly lockFile d617bb1c-assport-oauth2-1-3-0-package-tgz tar:///home/ec2-user/.npm/passport-oauth2/1.3.0/package.tgz
+215 verbose chmod /home/ec2-user/.npm/passport-oauth2/1.3.0/package.tgz 644
+216 verbose chown /home/ec2-user/.npm/passport-oauth2/1.3.0/package.tgz [ 500, 500 ]
+217 silly lockFile 84e44dae-oauth2-passport-oauth2-1-3-0-tgz https://registry.npmjs.org/passport-oauth2/-/passport-oauth2-1.3.0.tgz
+218 silly lockFile 84e44dae-oauth2-passport-oauth2-1-3-0-tgz https://registry.npmjs.org/passport-oauth2/-/passport-oauth2-1.3.0.tgz
+219 silly lockFile c9c83e6c-passport-oauth2-1-3-0 passport-oauth2@1.3.0
+220 silly lockFile c9c83e6c-passport-oauth2-1-3-0 passport-oauth2@1.3.0
+221 silly lockFile 05557f7a-passport-oauth2-1-x-x passport-oauth2@1.x.x
+222 silly lockFile 05557f7a-passport-oauth2-1-x-x passport-oauth2@1.x.x
+223 silly resolved [ { name: 'passport-oauth2',
+223 silly resolved     version: '1.3.0',
+223 silly resolved     description: 'OAuth 2.0 authentication strategy for Passport.',
+223 silly resolved     keywords:
+223 silly resolved      [ 'passport',
+223 silly resolved        'auth',
+223 silly resolved        'authn',
+223 silly resolved        'authentication',
+223 silly resolved        'authz',
+223 silly resolved        'authorization',
+223 silly resolved        'oauth',
+223 silly resolved        'oauth2' ],
+223 silly resolved     author:
+223 silly resolved      { name: 'Jared Hanson',
+223 silly resolved        email: 'jaredhanson@gmail.com',
+223 silly resolved        url: 'http://www.jaredhanson.net/' },
+223 silly resolved     repository:
+223 silly resolved      { type: 'git',
+223 silly resolved        url: 'git://github.com/jaredhanson/passport-oauth2.git' },
+223 silly resolved     bugs: { url: 'http://github.com/jaredhanson/passport-oauth2/issues' },
+223 silly resolved     license: 'MIT',
+223 silly resolved     licenses: [ [Object] ],
+223 silly resolved     main: './lib',
+223 silly resolved     dependencies: { 'passport-strategy': '1.x.x', oauth: '0.9.x', uid2: '0.0.x' },
+223 silly resolved     devDependencies:
+223 silly resolved      { 'make-node': '0.3.x',
+223 silly resolved        mocha: '2.x.x',
+223 silly resolved        chai: '2.x.x',
+223 silly resolved        'chai-passport-strategy': '1.x.x' },
+223 silly resolved     engines: { node: '>= 0.4.0' },
+223 silly resolved     scripts: { test: 'node_modules/.bin/mocha --reporter spec --require test/bootstrap/node test/*.test.js test/**/*.test.js' },
+223 silly resolved     readme: '# passport-oauth2\n\n[![Build](https://img.shields.io/travis/jaredhanson/passport-oauth2.svg)](https://travis-ci.org/jaredhanson/passport-oauth2)\n[![Coverage](https://img.shields.io/coveralls/jaredhanson/passport-oauth2.svg)](https://coveralls.io/r/jaredhanson/passport-oauth2)\n[![Quality](https://img.shields.io/codeclimate/github/jaredhanson/passport-oauth2.svg?label=quality)](https://codeclimate.com/github/jaredhanson/passport-oauth2)\n[![Dependencies](https://img.shields.io/david/jaredhanson/passport-oauth2.svg)](https://david-dm.org/jaredhanson/passport-oauth2)\n\n\nGeneral-purpose OAuth 2.0 authentication strategy for [Passport](http://passportjs.org/).\n\nThis module lets you authenticate using OAuth 2.0 in your Node.js applications.\nBy plugging into Passport, OAuth 2.0 authentication can be easily and\nunobtrusively integrated into any application or framework that supports\n[Connect](http://www.senchalabs.org/connect/)-style middleware, including\n[Express](http://expressjs.com/).\n\nNote that this strategy provides generic OAuth 2.0 support.  In many cases, a\nprovider-specific strategy can be used instead, which cuts down on unnecessary\nconfiguration, and accommodates any provider-specific quirks.  See the\n[list](https://github.com/jaredhanson/passport/wiki/Strategies) for supported\nproviders.\n\nDevelopers who need to implement authentication against an OAuth 2.0 provider\nthat is not already supported are encouraged to sub-class this strategy.  If you\nchoose to open source the new provider-specific strategy, please add it to the\nlist so other people can find it.\n\n## Install\n\n    $ npm install passport-oauth2\n\n## Usage\n\n#### Configure Strategy\n\nThe OAuth 2.0 authentication strategy authenticates users using a third-party\naccount and OAuth 2.0 tokens.  The provider\'s OAuth 2.0 endpoints, as well as\nthe client identifer and secret, are specified as options.  The strategy\nrequires a `verify` callback, which receives an access token and profile,\nand calls `cb` providing a user.\n\n```js\npassport.use(new OAuth2Strategy({\n    authorizationURL: \'https://www.example.com/oauth2/authorize\',\n    tokenURL: \'https://www.example.com/oauth2/token\',\n    clientID: EXAMPLE_CLIENT_ID,\n    clientSecret: EXAMPLE_CLIENT_SECRET,\n    callbackURL: "http://localhost:3000/auth/example/callback"\n  },\n  function(accessToken, refreshToken, profile, cb) {\n    User.findOrCreate({ exampleId: profile.id }, function (err, user) {\n      return cb(err, user);\n    });\n  }\n));\n```\n\n#### Authenticate Requests\n\nUse `passport.authenticate()`, specifying the `\'oauth2\'` strategy, to\nauthenticate requests.\n\nFor example, as route middleware in an [Express](http://expressjs.com/)\napplication:\n\n```js\napp.get(\'/auth/example\',\n  passport.authenticate(\'oauth2\'));\n\napp.get(\'/auth/example/callback\',\n  passport.authenticate(\'oauth2\', { failureRedirect: \'/login\' }),\n  function(req, res) {\n    // Successful authentication, redirect home.\n    res.redirect(\'/\');\n  });\n```\n\n## Related Modules\n\n- [passport-oauth1](https://github.com/jaredhanson/passport-oauth1) — OAuth 1.0 authentication strategy\n- [passport-http-bearer](https://github.com/jaredhanson/passport-http-bearer) — Bearer token authentication strategy for APIs\n- [OAuth2orize](https://github.com/jaredhanson/oauth2orize) — OAuth 2.0 authorization server toolkit\n\n## Contributing\n\n#### Tests\n\nThe test suite is located in the `test/` directory.  All new features are\nexpected to have corresponding test cases.  Ensure that the complete test suite\npasses by executing:\n\n```bash\n$ make test\n```\n\n#### Coverage\n\nAll new feature development is expected to have test coverage.  Patches that\nincrese test coverage are happily accepted.  Coverage reports can be viewed by\nexecuting:\n\n```bash\n$ make test-cov\n$ make view-cov\n```\n\n## Support\n\n#### Funding\n\nThis software is provided to you as open source, free of charge.  The time and\neffort to develop and maintain this project is dedicated by [@jaredhanson](https://github.com/jaredhanson).\nIf you (or your employer) benefit from this project, please consider a financial\ncontribution.  Your contribution helps continue the efforts that produce this\nand other open source software.\n\nFunds are accepted via [PayPal](https://paypal.me/jaredhanson), [Venmo](https://venmo.com/jaredhanson),\nand [other](http://jaredhanson.net/pay) methods.  Any amount is appreciated.\n\n## License\n\n[The MIT License](http://opensource.org/licenses/MIT)\n\nCopyright (c) 2011-2016 Jared Hanson <[http://jaredhanson.net/](http://jaredhanson.net/)>\n',
+223 silly resolved     readmeFilename: 'README.md',
+223 silly resolved     _id: 'passport-oauth2@1.3.0',
+223 silly resolved     dist: { shasum: '12423411d1cf6530f96233fa5ed6320b975a2cad' },
+223 silly resolved     _from: 'passport-oauth2@1.x.x',
+223 silly resolved     _resolved: 'https://registry.npmjs.org/passport-oauth2/-/passport-oauth2-1.3.0.tgz' } ]
+224 info install passport-oauth2@1.3.0 into /home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook
+225 info installOne passport-oauth2@1.3.0
+226 info /home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2 unbuild
+227 verbose tar unpack /home/ec2-user/.npm/passport-oauth2/1.3.0/package.tgz
+228 silly lockFile baef69b3-ook-node-modules-passport-oauth2 tar:///home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2
+229 verbose lock tar:///home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2 /home/ec2-user/.npm/baef69b3-ook-node-modules-passport-oauth2.lock
+230 silly lockFile d617bb1c-assport-oauth2-1-3-0-package-tgz tar:///home/ec2-user/.npm/passport-oauth2/1.3.0/package.tgz
+231 verbose lock tar:///home/ec2-user/.npm/passport-oauth2/1.3.0/package.tgz /home/ec2-user/.npm/d617bb1c-assport-oauth2-1-3-0-package-tgz.lock
+232 silly gunzTarPerm modes [ '755', '644' ]
+233 silly gunzTarPerm extractEntry package.json
+234 silly gunzTarPerm extractEntry .npmignore
+235 silly gunzTarPerm extractEntry README.md
+236 silly gunzTarPerm extractEntry LICENSE
+237 silly gunzTarPerm extractEntry lib/index.js
+238 silly gunzTarPerm extractEntry lib/strategy.js
+239 silly gunzTarPerm extractEntry lib/utils.js
+240 silly gunzTarPerm extractEntry lib/errors/authorizationerror.js
+241 silly gunzTarPerm extractEntry lib/errors/internaloautherror.js
+242 silly gunzTarPerm extractEntry lib/errors/tokenerror.js
+243 silly gunzTarPerm extractEntry lib/state/null.js
+244 silly gunzTarPerm extractEntry lib/state/session.js
+245 silly lockFile baef69b3-ook-node-modules-passport-oauth2 tar:///home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2
+246 silly lockFile baef69b3-ook-node-modules-passport-oauth2 tar:///home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2
+247 silly lockFile d617bb1c-assport-oauth2-1-3-0-package-tgz tar:///home/ec2-user/.npm/passport-oauth2/1.3.0/package.tgz
+248 silly lockFile d617bb1c-assport-oauth2-1-3-0-package-tgz tar:///home/ec2-user/.npm/passport-oauth2/1.3.0/package.tgz
+249 info preinstall passport-oauth2@1.3.0
+250 verbose readDependencies using package.json deps
+251 verbose readDependencies using package.json deps
+252 verbose cache add [ 'passport-strategy@1.x.x', null ]
+253 verbose cache add name=undefined spec="passport-strategy@1.x.x" args=["passport-strategy@1.x.x",null]
+254 verbose parsed url { protocol: null,
+254 verbose parsed url   slashes: null,
+254 verbose parsed url   auth: null,
+254 verbose parsed url   host: null,
+254 verbose parsed url   port: null,
+254 verbose parsed url   hostname: null,
+254 verbose parsed url   hash: null,
+254 verbose parsed url   search: null,
+254 verbose parsed url   query: null,
+254 verbose parsed url   pathname: 'passport-strategy@1.x.x',
+254 verbose parsed url   path: 'passport-strategy@1.x.x',
+254 verbose parsed url   href: 'passport-strategy@1.x.x' }
+255 verbose cache add name="passport-strategy" spec="1.x.x" args=["passport-strategy","1.x.x"]
+256 verbose parsed url { protocol: null,
+256 verbose parsed url   slashes: null,
+256 verbose parsed url   auth: null,
+256 verbose parsed url   host: null,
+256 verbose parsed url   port: null,
+256 verbose parsed url   hostname: null,
+256 verbose parsed url   hash: null,
+256 verbose parsed url   search: null,
+256 verbose parsed url   query: null,
+256 verbose parsed url   pathname: '1.x.x',
+256 verbose parsed url   path: '1.x.x',
+256 verbose parsed url   href: '1.x.x' }
+257 verbose addNamed [ 'passport-strategy', '1.x.x' ]
+258 verbose addNamed [ null, '>=1.0.0-0 <2.0.0-0' ]
+259 silly lockFile 4637535c-passport-strategy-1-x-x passport-strategy@1.x.x
+260 verbose lock passport-strategy@1.x.x /home/ec2-user/.npm/4637535c-passport-strategy-1-x-x.lock
+261 verbose cache add [ 'oauth@0.9.x', null ]
+262 verbose cache add name=undefined spec="oauth@0.9.x" args=["oauth@0.9.x",null]
+263 verbose parsed url { protocol: null,
+263 verbose parsed url   slashes: null,
+263 verbose parsed url   auth: null,
+263 verbose parsed url   host: null,
+263 verbose parsed url   port: null,
+263 verbose parsed url   hostname: null,
+263 verbose parsed url   hash: null,
+263 verbose parsed url   search: null,
+263 verbose parsed url   query: null,
+263 verbose parsed url   pathname: 'oauth@0.9.x',
+263 verbose parsed url   path: 'oauth@0.9.x',
+263 verbose parsed url   href: 'oauth@0.9.x' }
+264 verbose cache add name="oauth" spec="0.9.x" args=["oauth","0.9.x"]
+265 verbose parsed url { protocol: null,
+265 verbose parsed url   slashes: null,
+265 verbose parsed url   auth: null,
+265 verbose parsed url   host: null,
+265 verbose parsed url   port: null,
+265 verbose parsed url   hostname: null,
+265 verbose parsed url   hash: null,
+265 verbose parsed url   search: null,
+265 verbose parsed url   query: null,
+265 verbose parsed url   pathname: '0.9.x',
+265 verbose parsed url   path: '0.9.x',
+265 verbose parsed url   href: '0.9.x' }
+266 verbose addNamed [ 'oauth', '0.9.x' ]
+267 verbose addNamed [ null, '>=0.9.0-0 <0.10.0-0' ]
+268 silly lockFile 657e5595-oauth-0-9-x oauth@0.9.x
+269 verbose lock oauth@0.9.x /home/ec2-user/.npm/657e5595-oauth-0-9-x.lock
+270 verbose cache add [ 'uid2@0.0.x', null ]
+271 verbose cache add name=undefined spec="uid2@0.0.x" args=["uid2@0.0.x",null]
+272 verbose parsed url { protocol: null,
+272 verbose parsed url   slashes: null,
+272 verbose parsed url   auth: null,
+272 verbose parsed url   host: null,
+272 verbose parsed url   port: null,
+272 verbose parsed url   hostname: null,
+272 verbose parsed url   hash: null,
+272 verbose parsed url   search: null,
+272 verbose parsed url   query: null,
+272 verbose parsed url   pathname: 'uid2@0.0.x',
+272 verbose parsed url   path: 'uid2@0.0.x',
+272 verbose parsed url   href: 'uid2@0.0.x' }
+273 verbose cache add name="uid2" spec="0.0.x" args=["uid2","0.0.x"]
+274 verbose parsed url { protocol: null,
+274 verbose parsed url   slashes: null,
+274 verbose parsed url   auth: null,
+274 verbose parsed url   host: null,
+274 verbose parsed url   port: null,
+274 verbose parsed url   hostname: null,
+274 verbose parsed url   hash: null,
+274 verbose parsed url   search: null,
+274 verbose parsed url   query: null,
+274 verbose parsed url   pathname: '0.0.x',
+274 verbose parsed url   path: '0.0.x',
+274 verbose parsed url   href: '0.0.x' }
+275 verbose addNamed [ 'uid2', '0.0.x' ]
+276 verbose addNamed [ null, '>=0.0.0-0 <0.1.0-0' ]
+277 silly lockFile 60b56886-uid2-0-0-x uid2@0.0.x
+278 verbose lock uid2@0.0.x /home/ec2-user/.npm/60b56886-uid2-0-0-x.lock
+279 silly addNameRange { name: 'passport-strategy',
+279 silly addNameRange   range: '>=1.0.0-0 <2.0.0-0',
+279 silly addNameRange   hasData: false }
+280 silly addNameRange { name: 'oauth', range: '>=0.9.0-0 <0.10.0-0', hasData: false }
+281 verbose url raw oauth
+282 verbose url resolving [ 'https://registry.npmjs.org/', './oauth' ]
+283 verbose url resolved https://registry.npmjs.org/oauth
+284 info trying registry request attempt 1 at 19:27:56
+285 http GET https://registry.npmjs.org/oauth
+286 silly addNameRange { name: 'uid2', range: '>=0.0.0-0 <0.1.0-0', hasData: false }
+287 verbose url raw uid2
+288 verbose url resolving [ 'https://registry.npmjs.org/', './uid2' ]
+289 verbose url resolved https://registry.npmjs.org/uid2
+290 info trying registry request attempt 1 at 19:27:56
+291 http GET https://registry.npmjs.org/uid2
+292 verbose registry.get passport-strategy not expired, no request
+293 silly addNameRange number 2 { name: 'passport-strategy',
+293 silly addNameRange   range: '>=1.0.0-0 <2.0.0-0',
+293 silly addNameRange   hasData: true }
+294 silly addNameRange versions [ 'passport-strategy', [ '1.0.0' ] ]
+295 verbose addNamed [ 'passport-strategy', '1.0.0' ]
+296 verbose addNamed [ '1.0.0', '1.0.0' ]
+297 silly lockFile 10967421-passport-strategy-1-0-0 passport-strategy@1.0.0
+298 verbose lock passport-strategy@1.0.0 /home/ec2-user/.npm/10967421-passport-strategy-1-0-0.lock
+299 silly lockFile 10967421-passport-strategy-1-0-0 passport-strategy@1.0.0
+300 silly lockFile 10967421-passport-strategy-1-0-0 passport-strategy@1.0.0
+301 silly lockFile 4637535c-passport-strategy-1-x-x passport-strategy@1.x.x
+302 silly lockFile 4637535c-passport-strategy-1-x-x passport-strategy@1.x.x
+303 http 200 https://registry.npmjs.org/uid2
+304 silly registry.get cb [ 200,
+304 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+304 silly registry.get     etag: '"7RSAASXDHPTV5CB8ZK6R4XAYW"',
+304 silly registry.get     'content-type': 'application/json',
+304 silly registry.get     'content-encoding': 'gzip',
+304 silly registry.get     'cache-control': 'max-age=300',
+304 silly registry.get     'content-length': '655',
+304 silly registry.get     'accept-ranges': 'bytes',
+304 silly registry.get     date: 'Fri, 10 Jun 2016 19:27:56 GMT',
+304 silly registry.get     via: '1.1 varnish',
+304 silly registry.get     age: '9',
+304 silly registry.get     connection: 'keep-alive',
+304 silly registry.get     'x-served-by': 'cache-nrt6131-NRT',
+304 silly registry.get     'x-cache': 'HIT',
+304 silly registry.get     'x-cache-hits': '1',
+304 silly registry.get     'x-timer': 'S1465586876.703416,VS0,VE0',
+304 silly registry.get     vary: 'Accept-Encoding' } ]
+305 silly addNameRange number 2 { name: 'uid2', range: '>=0.0.0-0 <0.1.0-0', hasData: true }
+306 silly addNameRange versions [ 'uid2', [ '0.0.1', '0.0.2', '0.0.3' ] ]
+307 verbose addNamed [ 'uid2', '0.0.3' ]
+308 verbose addNamed [ '0.0.3', '0.0.3' ]
+309 silly lockFile f1df1282-uid2-0-0-3 uid2@0.0.3
+310 verbose lock uid2@0.0.3 /home/ec2-user/.npm/f1df1282-uid2-0-0-3.lock
+311 silly lockFile a4528503-ry-npmjs-org-uid2-uid2-0-0-3-tgz https://registry.npmjs.org/uid2/-/uid2-0.0.3.tgz
+312 verbose lock https://registry.npmjs.org/uid2/-/uid2-0.0.3.tgz /home/ec2-user/.npm/a4528503-ry-npmjs-org-uid2-uid2-0-0-3-tgz.lock
+313 verbose addRemoteTarball [ 'https://registry.npmjs.org/uid2/-/uid2-0.0.3.tgz',
+313 verbose addRemoteTarball   '483126e11774df2f71b8b639dcd799c376162b82' ]
+314 info retry fetch attempt 1 at 19:27:56
+315 verbose fetch to= /home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876726-0.609511896269396/tmp.tgz
+316 http GET https://registry.npmjs.org/uid2/-/uid2-0.0.3.tgz
+317 http 200 https://registry.npmjs.org/uid2/-/uid2-0.0.3.tgz
+318 verbose tar unpack /home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876726-0.609511896269396/tmp.tgz
+319 silly lockFile 82b9b21e-876726-0-609511896269396-package tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876726-0.609511896269396/package
+320 verbose lock tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876726-0.609511896269396/package /home/ec2-user/.npm/82b9b21e-876726-0-609511896269396-package.lock
+321 silly lockFile 2ef6d970-876726-0-609511896269396-tmp-tgz tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876726-0.609511896269396/tmp.tgz
+322 verbose lock tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876726-0.609511896269396/tmp.tgz /home/ec2-user/.npm/2ef6d970-876726-0-609511896269396-tmp-tgz.lock
+323 silly gunzTarPerm modes [ '755', '644' ]
+324 http 200 https://registry.npmjs.org/oauth
+325 silly registry.get cb [ 200,
+325 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+325 silly registry.get     etag: '"88CJASVEBP8R2ZGZ1PIWHND25"',
+325 silly registry.get     'content-type': 'application/json',
+325 silly registry.get     'content-encoding': 'gzip',
+325 silly registry.get     'cache-control': 'max-age=300',
+325 silly registry.get     'content-length': '7332',
+325 silly registry.get     'accept-ranges': 'bytes',
+325 silly registry.get     date: 'Fri, 10 Jun 2016 19:27:56 GMT',
+325 silly registry.get     via: '1.1 varnish',
+325 silly registry.get     age: '0',
+325 silly registry.get     connection: 'keep-alive',
+325 silly registry.get     'x-served-by': 'cache-nrt6122-NRT',
+325 silly registry.get     'x-cache': 'HIT',
+325 silly registry.get     'x-cache-hits': '1',
+325 silly registry.get     'x-timer': 'S1465586876.707072,VS0,VE124',
+325 silly registry.get     vary: 'Accept-Encoding' } ]
+326 silly gunzTarPerm extractEntry package.json
+327 silly addNameRange number 2 { name: 'oauth', range: '>=0.9.0-0 <0.10.0-0', hasData: true }
+328 silly addNameRange versions [ 'oauth',
+328 silly addNameRange   [ '0.7.4',
+328 silly addNameRange     '0.7.5',
+328 silly addNameRange     '0.7.6',
+328 silly addNameRange     '0.7.7',
+328 silly addNameRange     '0.8.0',
+328 silly addNameRange     '0.8.1',
+328 silly addNameRange     '0.8.2',
+328 silly addNameRange     '0.8.3',
+328 silly addNameRange     '0.8.4',
+328 silly addNameRange     '0.9.0',
+328 silly addNameRange     '0.9.1',
+328 silly addNameRange     '0.9.2',
+328 silly addNameRange     '0.9.3',
+328 silly addNameRange     '0.9.4',
+328 silly addNameRange     '0.9.5',
+328 silly addNameRange     '0.9.6',
+328 silly addNameRange     '0.9.7',
+328 silly addNameRange     '0.9.8',
+328 silly addNameRange     '0.9.9',
+328 silly addNameRange     '0.9.10',
+328 silly addNameRange     '0.9.11',
+328 silly addNameRange     '0.9.12',
+328 silly addNameRange     '0.9.13',
+328 silly addNameRange     '0.9.14' ] ]
+329 verbose addNamed [ 'oauth', '0.9.14' ]
+330 verbose addNamed [ '0.9.14', '0.9.14' ]
+331 silly lockFile 1f5a908b-oauth-0-9-14 oauth@0.9.14
+332 verbose lock oauth@0.9.14 /home/ec2-user/.npm/1f5a908b-oauth-0-9-14.lock
+333 silly gunzTarPerm extractEntry LICENSE
+334 silly gunzTarPerm extractEntry index.js
+335 silly lockFile 72d69665-npmjs-org-oauth-oauth-0-9-14-tgz https://registry.npmjs.org/oauth/-/oauth-0.9.14.tgz
+336 verbose lock https://registry.npmjs.org/oauth/-/oauth-0.9.14.tgz /home/ec2-user/.npm/72d69665-npmjs-org-oauth-oauth-0-9-14-tgz.lock
+337 verbose addRemoteTarball [ 'https://registry.npmjs.org/oauth/-/oauth-0.9.14.tgz',
+337 verbose addRemoteTarball   'c5748883a40b53de30ade9cabf2100414b8a0971' ]
+338 info retry fetch attempt 1 at 19:27:56
+339 verbose fetch to= /home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876859-0.676649993751198/tmp.tgz
+340 http GET https://registry.npmjs.org/oauth/-/oauth-0.9.14.tgz
+341 silly lockFile 82b9b21e-876726-0-609511896269396-package tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876726-0.609511896269396/package
+342 silly lockFile 82b9b21e-876726-0-609511896269396-package tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876726-0.609511896269396/package
+343 silly lockFile 2ef6d970-876726-0-609511896269396-tmp-tgz tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876726-0.609511896269396/tmp.tgz
+344 silly lockFile 2ef6d970-876726-0-609511896269396-tmp-tgz tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876726-0.609511896269396/tmp.tgz
+345 verbose tar pack [ '/home/ec2-user/.npm/uid2/0.0.3/package.tgz',
+345 verbose tar pack   '/home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876726-0.609511896269396/package' ]
+346 verbose tarball /home/ec2-user/.npm/uid2/0.0.3/package.tgz
+347 verbose folder /home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876726-0.609511896269396/package
+348 silly lockFile 82b9b21e-876726-0-609511896269396-package tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876726-0.609511896269396/package
+349 verbose lock tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876726-0.609511896269396/package /home/ec2-user/.npm/82b9b21e-876726-0-609511896269396-package.lock
+350 silly lockFile 0de46e12--user-npm-uid2-0-0-3-package-tgz tar:///home/ec2-user/.npm/uid2/0.0.3/package.tgz
+351 verbose lock tar:///home/ec2-user/.npm/uid2/0.0.3/package.tgz /home/ec2-user/.npm/0de46e12--user-npm-uid2-0-0-3-package-tgz.lock
+352 silly lockFile 82b9b21e-876726-0-609511896269396-package tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876726-0.609511896269396/package
+353 silly lockFile 82b9b21e-876726-0-609511896269396-package tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876726-0.609511896269396/package
+354 silly lockFile 0de46e12--user-npm-uid2-0-0-3-package-tgz tar:///home/ec2-user/.npm/uid2/0.0.3/package.tgz
+355 silly lockFile 0de46e12--user-npm-uid2-0-0-3-package-tgz tar:///home/ec2-user/.npm/uid2/0.0.3/package.tgz
+356 silly lockFile 742fd907--ec2-user-npm-uid2-0-0-3-package /home/ec2-user/.npm/uid2/0.0.3/package
+357 verbose lock /home/ec2-user/.npm/uid2/0.0.3/package /home/ec2-user/.npm/742fd907--ec2-user-npm-uid2-0-0-3-package.lock
+358 silly lockFile 742fd907--ec2-user-npm-uid2-0-0-3-package /home/ec2-user/.npm/uid2/0.0.3/package
+359 silly lockFile 742fd907--ec2-user-npm-uid2-0-0-3-package /home/ec2-user/.npm/uid2/0.0.3/package
+360 verbose tar unpack /home/ec2-user/.npm/uid2/0.0.3/package.tgz
+361 silly lockFile 9a70cea0--ec2-user-npm-uid2-0-0-3-package tar:///home/ec2-user/.npm/uid2/0.0.3/package
+362 verbose lock tar:///home/ec2-user/.npm/uid2/0.0.3/package /home/ec2-user/.npm/9a70cea0--ec2-user-npm-uid2-0-0-3-package.lock
+363 silly lockFile 0de46e12--user-npm-uid2-0-0-3-package-tgz tar:///home/ec2-user/.npm/uid2/0.0.3/package.tgz
+364 verbose lock tar:///home/ec2-user/.npm/uid2/0.0.3/package.tgz /home/ec2-user/.npm/0de46e12--user-npm-uid2-0-0-3-package-tgz.lock
+365 silly gunzTarPerm modes [ '755', '644' ]
+366 silly gunzTarPerm extractEntry package.json
+367 silly gunzTarPerm extractEntry LICENSE
+368 silly gunzTarPerm extractEntry index.js
+369 silly lockFile 9a70cea0--ec2-user-npm-uid2-0-0-3-package tar:///home/ec2-user/.npm/uid2/0.0.3/package
+370 silly lockFile 9a70cea0--ec2-user-npm-uid2-0-0-3-package tar:///home/ec2-user/.npm/uid2/0.0.3/package
+371 silly lockFile 0de46e12--user-npm-uid2-0-0-3-package-tgz tar:///home/ec2-user/.npm/uid2/0.0.3/package.tgz
+372 silly lockFile 0de46e12--user-npm-uid2-0-0-3-package-tgz tar:///home/ec2-user/.npm/uid2/0.0.3/package.tgz
+373 verbose chmod /home/ec2-user/.npm/uid2/0.0.3/package.tgz 644
+374 verbose chown /home/ec2-user/.npm/uid2/0.0.3/package.tgz [ 500, 500 ]
+375 silly lockFile a4528503-ry-npmjs-org-uid2-uid2-0-0-3-tgz https://registry.npmjs.org/uid2/-/uid2-0.0.3.tgz
+376 silly lockFile a4528503-ry-npmjs-org-uid2-uid2-0-0-3-tgz https://registry.npmjs.org/uid2/-/uid2-0.0.3.tgz
+377 silly lockFile f1df1282-uid2-0-0-3 uid2@0.0.3
+378 silly lockFile f1df1282-uid2-0-0-3 uid2@0.0.3
+379 silly lockFile 60b56886-uid2-0-0-x uid2@0.0.x
+380 silly lockFile 60b56886-uid2-0-0-x uid2@0.0.x
+381 http 200 https://registry.npmjs.org/oauth/-/oauth-0.9.14.tgz
+382 verbose tar unpack /home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876859-0.676649993751198/tmp.tgz
+383 silly lockFile 7ba395b1-876859-0-676649993751198-package tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876859-0.676649993751198/package
+384 verbose lock tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876859-0.676649993751198/package /home/ec2-user/.npm/7ba395b1-876859-0-676649993751198-package.lock
+385 silly lockFile 383472be-876859-0-676649993751198-tmp-tgz tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876859-0.676649993751198/tmp.tgz
+386 verbose lock tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876859-0.676649993751198/tmp.tgz /home/ec2-user/.npm/383472be-876859-0-676649993751198-tmp-tgz.lock
+387 silly gunzTarPerm modes [ '755', '644' ]
+388 silly gunzTarPerm extractEntry package.json
+389 silly gunzTarPerm extractEntry .npmignore
+390 silly gunzTarPerm extractEntry LICENSE
+391 silly gunzTarPerm extractEntry index.js
+392 silly gunzTarPerm extractEntry examples/github-example.js
+393 silly gunzTarPerm extractEntry examples/term.ie.oauth-HMAC-SHA1.js
+394 silly gunzTarPerm extractEntry examples/express-gdata/server.js
+395 silly gunzTarPerm extractEntry examples/express-gdata/views/google_calendars.ejs
+396 silly gunzTarPerm extractEntry examples/express-gdata/views/google_contacts.ejs
+397 silly gunzTarPerm extractEntry examples/express-gdata/views/layout.ejs
+398 silly gunzTarPerm extractEntry Readme.md
+399 silly gunzTarPerm extractEntry lib/_utils.js
+400 silly gunzTarPerm extractEntry lib/oauth.js
+401 silly gunzTarPerm extractEntry lib/oauth2.js
+402 silly gunzTarPerm extractEntry lib/sha1.js
+403 silly gunzTarPerm extractEntry Makefile
+404 silly gunzTarPerm extractEntry tests/oauth2tests.js
+405 silly gunzTarPerm extractEntry tests/oauthtests.js
+406 silly gunzTarPerm extractEntry tests/sha1tests.js
+407 silly gunzTarPerm extractEntry tests/shared.js
+408 silly lockFile 7ba395b1-876859-0-676649993751198-package tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876859-0.676649993751198/package
+409 silly lockFile 7ba395b1-876859-0-676649993751198-package tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876859-0.676649993751198/package
+410 silly lockFile 383472be-876859-0-676649993751198-tmp-tgz tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876859-0.676649993751198/tmp.tgz
+411 silly lockFile 383472be-876859-0-676649993751198-tmp-tgz tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876859-0.676649993751198/tmp.tgz
+412 verbose tar pack [ '/home/ec2-user/.npm/oauth/0.9.14/package.tgz',
+412 verbose tar pack   '/home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876859-0.676649993751198/package' ]
+413 verbose tarball /home/ec2-user/.npm/oauth/0.9.14/package.tgz
+414 verbose folder /home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876859-0.676649993751198/package
+415 silly lockFile 7ba395b1-876859-0-676649993751198-package tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876859-0.676649993751198/package
+416 verbose lock tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876859-0.676649993751198/package /home/ec2-user/.npm/7ba395b1-876859-0-676649993751198-package.lock
+417 silly lockFile 316d68c9-ser-npm-oauth-0-9-14-package-tgz tar:///home/ec2-user/.npm/oauth/0.9.14/package.tgz
+418 verbose lock tar:///home/ec2-user/.npm/oauth/0.9.14/package.tgz /home/ec2-user/.npm/316d68c9-ser-npm-oauth-0-9-14-package-tgz.lock
+419 silly lockFile 7ba395b1-876859-0-676649993751198-package tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876859-0.676649993751198/package
+420 silly lockFile 7ba395b1-876859-0-676649993751198-package tar:///home/ec2-user/tmp/npm-16335-KiU7tUja/1465586876859-0.676649993751198/package
+421 silly lockFile 316d68c9-ser-npm-oauth-0-9-14-package-tgz tar:///home/ec2-user/.npm/oauth/0.9.14/package.tgz
+422 silly lockFile 316d68c9-ser-npm-oauth-0-9-14-package-tgz tar:///home/ec2-user/.npm/oauth/0.9.14/package.tgz
+423 silly lockFile 89431c2a-c2-user-npm-oauth-0-9-14-package /home/ec2-user/.npm/oauth/0.9.14/package
+424 verbose lock /home/ec2-user/.npm/oauth/0.9.14/package /home/ec2-user/.npm/89431c2a-c2-user-npm-oauth-0-9-14-package.lock
+425 silly lockFile 89431c2a-c2-user-npm-oauth-0-9-14-package /home/ec2-user/.npm/oauth/0.9.14/package
+426 silly lockFile 89431c2a-c2-user-npm-oauth-0-9-14-package /home/ec2-user/.npm/oauth/0.9.14/package
+427 verbose tar unpack /home/ec2-user/.npm/oauth/0.9.14/package.tgz
+428 silly lockFile e31bfe38-c2-user-npm-oauth-0-9-14-package tar:///home/ec2-user/.npm/oauth/0.9.14/package
+429 verbose lock tar:///home/ec2-user/.npm/oauth/0.9.14/package /home/ec2-user/.npm/e31bfe38-c2-user-npm-oauth-0-9-14-package.lock
+430 silly lockFile 316d68c9-ser-npm-oauth-0-9-14-package-tgz tar:///home/ec2-user/.npm/oauth/0.9.14/package.tgz
+431 verbose lock tar:///home/ec2-user/.npm/oauth/0.9.14/package.tgz /home/ec2-user/.npm/316d68c9-ser-npm-oauth-0-9-14-package-tgz.lock
+432 silly gunzTarPerm modes [ '755', '644' ]
+433 silly gunzTarPerm extractEntry package.json
+434 silly gunzTarPerm extractEntry .npmignore
+435 silly gunzTarPerm extractEntry LICENSE
+436 silly gunzTarPerm extractEntry index.js
+437 silly gunzTarPerm extractEntry Makefile
+438 silly gunzTarPerm extractEntry Readme.md
+439 silly gunzTarPerm extractEntry examples/github-example.js
+440 silly gunzTarPerm extractEntry examples/term.ie.oauth-HMAC-SHA1.js
+441 silly gunzTarPerm extractEntry examples/express-gdata/server.js
+442 silly gunzTarPerm extractEntry examples/express-gdata/views/google_calendars.ejs
+443 silly gunzTarPerm extractEntry examples/express-gdata/views/google_contacts.ejs
+444 silly gunzTarPerm extractEntry examples/express-gdata/views/layout.ejs
+445 silly gunzTarPerm extractEntry lib/_utils.js
+446 silly gunzTarPerm extractEntry lib/oauth.js
+447 silly gunzTarPerm extractEntry lib/oauth2.js
+448 silly gunzTarPerm extractEntry lib/sha1.js
+449 silly gunzTarPerm extractEntry tests/oauth2tests.js
+450 silly gunzTarPerm extractEntry tests/oauthtests.js
+451 silly gunzTarPerm extractEntry tests/sha1tests.js
+452 silly gunzTarPerm extractEntry tests/shared.js
+453 silly lockFile e31bfe38-c2-user-npm-oauth-0-9-14-package tar:///home/ec2-user/.npm/oauth/0.9.14/package
+454 silly lockFile e31bfe38-c2-user-npm-oauth-0-9-14-package tar:///home/ec2-user/.npm/oauth/0.9.14/package
+455 silly lockFile 316d68c9-ser-npm-oauth-0-9-14-package-tgz tar:///home/ec2-user/.npm/oauth/0.9.14/package.tgz
+456 silly lockFile 316d68c9-ser-npm-oauth-0-9-14-package-tgz tar:///home/ec2-user/.npm/oauth/0.9.14/package.tgz
+457 verbose chmod /home/ec2-user/.npm/oauth/0.9.14/package.tgz 644
+458 verbose chown /home/ec2-user/.npm/oauth/0.9.14/package.tgz [ 500, 500 ]
+459 silly lockFile 72d69665-npmjs-org-oauth-oauth-0-9-14-tgz https://registry.npmjs.org/oauth/-/oauth-0.9.14.tgz
+460 silly lockFile 72d69665-npmjs-org-oauth-oauth-0-9-14-tgz https://registry.npmjs.org/oauth/-/oauth-0.9.14.tgz
+461 silly lockFile 1f5a908b-oauth-0-9-14 oauth@0.9.14
+462 silly lockFile 1f5a908b-oauth-0-9-14 oauth@0.9.14
+463 silly lockFile 657e5595-oauth-0-9-x oauth@0.9.x
+464 silly lockFile 657e5595-oauth-0-9-x oauth@0.9.x
+465 silly resolved [ { name: 'passport-strategy',
+465 silly resolved     version: '1.0.0',
+465 silly resolved     description: 'An abstract class implementing Passport\'s strategy API.',
+465 silly resolved     keywords: [ 'passport', 'strategy' ],
+465 silly resolved     repository:
+465 silly resolved      { type: 'git',
+465 silly resolved        url: 'git://github.com/jaredhanson/passport-strategy.git' },
+465 silly resolved     bugs: { url: 'http://github.com/jaredhanson/passport-strategy/issues' },
+465 silly resolved     author:
+465 silly resolved      { name: 'Jared Hanson',
+465 silly resolved        email: 'jaredhanson@gmail.com',
+465 silly resolved        url: 'http://www.jaredhanson.net/' },
+465 silly resolved     licenses: [ [Object] ],
+465 silly resolved     main: './lib',
+465 silly resolved     dependencies: {},
+465 silly resolved     devDependencies: { mocha: '1.x.x', chai: '1.x.x' },
+465 silly resolved     engines: { node: '>= 0.4.0' },
+465 silly resolved     scripts: { test: 'node_modules/.bin/mocha --reporter spec --require test/bootstrap/node test/*.test.js' },
+465 silly resolved     testling: { browsers: [Object], harness: 'mocha', files: [Object] },
+465 silly resolved     readme: '# passport-strategy\n\n[![Build](https://travis-ci.org/jaredhanson/passport-strategy.png)](http://travis-ci.org/jaredhanson/passport-strategy)\n[![Coverage](https://coveralls.io/repos/jaredhanson/passport-strategy/badge.png)](https://coveralls.io/r/jaredhanson/passport-strategy)\n[![Dependencies](https://david-dm.org/jaredhanson/passport-strategy.png)](http://david-dm.org/jaredhanson/passport-strategy)\n\n\nAn abstract class implementing [Passport](http://passportjs.org/)\'s strategy\nAPI.\n\n## Install\n\n    $ npm install passport-strategy\n\n## Usage\n\nThis module exports an abstract `Strategy` class that is intended to be\nsubclassed when implementing concrete authentication strategies.  Once\nimplemented, such strategies can be used by applications that utilize Passport\nmiddleware for authentication.\n\n#### Subclass Strategy\n\nCreate a new `CustomStrategy` constructor which inherits from `Strategy`:\n\n```javascript\nvar util = require(\'util\')\n  , Strategy = require(\'passport-strategy\');\n\nfunction CustomStrategy(...) {\n  Strategy.call(this);\n}\n\nutil.inherits(CustomStrategy, Strategy);\n```\n\n#### Implement Authentication\n\nImplement `autheticate()`, performing the necessary operations required by the\nauthentication scheme or protocol being implemented.\n\n```javascript\nCustomStrategy.prototype.authenticate = function(req, options) {\n  // TODO: authenticate request\n}\n```\n\n## Tests\n\n    $ npm install\n    $ npm test\n\n## Credits\n\n  - [Jared Hanson](http://github.com/jaredhanson)\n\n## License\n\n[The MIT License](http://opensource.org/licenses/MIT)\n\nCopyright (c) 2011-2013 Jared Hanson <[http://jaredhanson.net/](http://jaredhanson.net/)>\n',
+465 silly resolved     readmeFilename: 'README.md',
+465 silly resolved     _id: 'passport-strategy@1.0.0',
+465 silly resolved     _from: 'passport-strategy@1.x.x' },
+465 silly resolved   { name: 'uid2',
+465 silly resolved     description: 'strong uid',
+465 silly resolved     tags: [ 'uid' ],
+465 silly resolved     version: '0.0.3',
+465 silly resolved     dependencies: {},
+465 silly resolved     readme: 'ERROR: No README data found!',
+465 silly resolved     _id: 'uid2@0.0.3',
+465 silly resolved     dist: { shasum: '0b11e9600cfa6c5bfca8a4ab08e3da15968c2b1d' },
+465 silly resolved     _from: 'uid2@0.0.x',
+465 silly resolved     _resolved: 'https://registry.npmjs.org/uid2/-/uid2-0.0.3.tgz' },
+465 silly resolved   { name: 'oauth',
+465 silly resolved     description: 'Library for interacting with OAuth 1.0, 1.0A, 2 and Echo.  Provides simplified client access and allows for construction of more complex apis and OAuth providers.',
+465 silly resolved     version: '0.9.14',
+465 silly resolved     directories: { lib: './lib' },
+465 silly resolved     main: 'index.js',
+465 silly resolved     author: { name: 'Ciaran Jessup', email: 'ciaranj@gmail.com' },
+465 silly resolved     repository: { type: 'git', url: 'http://github.com/ciaranj/node-oauth.git' },
+465 silly resolved     devDependencies: { vows: '0.5.x' },
+465 silly resolved     scripts: { test: 'make test' },
+465 silly resolved     licenses: [ [Object] ],
+465 silly resolved     readme: 'node-oauth\n===========\nA simple oauth API for node.js .  This API allows users to authenticate against OAUTH providers, and thus act as OAuth consumers. It also has support for OAuth Echo, which is used for communicating with 3rd party media providers such as TwitPic and yFrog.\n\nTested against Twitter (http://twitter.com), term.ie (http://term.ie/oauth/example/), TwitPic, and Yahoo!\n\nAlso provides rudimentary OAuth2 support, tested against facebook, github, foursquare, google and Janrain.   For more complete usage examples please take a look at connect-auth (http://github.com/ciaranj/connect-auth)\n\n[![Clone in Koding](http://learn.koding.com/btn/clone_d.png)][koding]\n[koding]: https://koding.com/Teamwork?import=https://github.com/ciaranj/node-oauth/archive/master.zip&c=git1\n[![Pair on Thinkful](https://tf-assets-staging.s3.amazonaws.com/badges/thinkful_repo_badge.svg)][Thinkful]\n[Thinkful]: http://start.thinkful.com/node/?utm_source=github&utm_medium=badge&utm_campaign=node-oauth\n\nInstallation\n============== \n\n    $ npm install oauth\n\n\nExamples\n==========\n\nTo run examples/tests install Mocha `$ npm install -g mocha` and run `$ mocha you-file-name.js`:\n\n## OAuth1.0\n\n```javascript\ndescribe(\'OAuth1.0\',function(){\n  var OAuth = require(\'oauth\');\n\n  it(\'tests trends Twitter API v1.1\',function(done){\n    var oauth = new OAuth.OAuth(\n      \'https://api.twitter.com/oauth/request_token\',\n      \'https://api.twitter.com/oauth/access_token\',\n      \'your application consumer key\',\n      \'your application secret\',\n      \'1.0A\',\n      null,\n      \'HMAC-SHA1\'\n    );\n    oauth.get(\n      \'https://api.twitter.com/1.1/trends/place.json?id=23424977\',\n      \'your user token for this app\', //test user token\n      \'your user secret for this app\', //test user secret            \n      function (e, data, res){\n        if (e) console.error(e);        \n        console.log(require(\'util\').inspect(data));\n        done();      \n      });    \n  });\n});\n```\n\n## OAuth2.0 \n```javascript\ndescribe(\'OAuth2\',function(){\n  var OAuth = require(\'oauth\');\n\n   it(\'gets bearer token\', function(done){\n     var OAuth2 = OAuth.OAuth2;    \n     var twitterConsumerKey = \'your key\';\n     var twitterConsumerSecret = \'your secret\';\n     var oauth2 = new OAuth2(server.config.keys.twitter.consumerKey,\n       twitterConsumerSecret, \n       \'https://api.twitter.com/\', \n       null,\n       \'oauth2/token\', \n       null);\n     oauth2.getOAuthAccessToken(\n       \'\',\n       {\'grant_type\':\'client_credentials\'},\n       function (e, access_token, refresh_token, results){\n       console.log(\'bearer: \',access_token);\n       done();\n     });\n   });\n```\n\nChange History\n============== \n* 0.9.14\n    - OAuth2:   Extend \'successful\' token responses to include anything in the 2xx range.\n* 0.9.13\n    - OAuth2:   Fixes the "createCredentials() is deprecated, use tls.createSecureContext instead" message. (thank you AJ ONeal)\n* 0.9.12\n    - OAuth1/2: Can now pass Buffer instance directly for PUTs+POSTs (thank you Evan Prodromou)\n    - OAuth1:   Improve interoperability with libraries that mess with the prototype. (thank you Jose Ignacio Andres)\n    - OAuth2:   Adds PUT support for OAuth2 (thank you Derek Brooks)\n    - OAuth1:   Improves use_strict compatibility (thank you Ted Goddard)\n* 0.9.11\n    - OAuth2:   No longer sends the type=webserver argument with the OAuth2 requests (thank you bendiy)\n    - OAuth2:   Provides a default (and overrideable) User-Agent header (thanks to Andrew Martens & Daniel Mahlow)\n    - OAuth1:   New followRedirects client option (true by default) (thanks to Pieter Joost van de Sande)\n    - OAuth1:   Adds RSA-SHA1 support (thanks to Jeffrey D. Van Alstine  & Michael Garvin &  Andreas Knecht)\n* 0.9.10\n    - OAuth2:   Addresses 2 issues that came in with 0.9.9, #129 & #125 (thank you José F. Romaniello)\n* 0.9.9\n    - OAuth1:   Fix the mismatch between the output of querystring.stringify() and this._encodeData(). (thank you rolandboon)\n    - OAuth2:   Adds Authorization Header and supports extra headers by default ( thanks to Brian Park)\n* 0.9.8\n    - OAuth1:   Support overly-strict OAuth server\'s that require whitespace separating the Authorization Header parameters  (e.g. 500px.com) (Thanks to Christian Schwarz)\n    - OAuth1:   Fix incorrect double-encoding of PLAINTEXT OAuth connections (Thanks to Joe Rozner)\n    - OAuth1:   Minor safety check added when checking hostnames. (Thanks to Garrick Cheung)\n* 0.9.7\n    - OAuth2:   Pass back any extra response data for calls to getOAuthAccessToken (Thanks to Tang Bo Hao)\n    - OAuth2:   Don\'t force a https request if given a http url (Thanks to Damien Mathieu)\n    - OAuth2:   Supports specifying a grant-type of \'refresh-token\' (Thanks to Luke Baker)\n* 0.9.6\n    - OAuth2:   Support for 302 redirects (Thanks Patrick Negri). \n    - OAuth1/2: Some code tidying. ( Thanks to Raoul Millais )  \n* 0.9.5\n    - OAuth1:   Allow usage of HTTP verbs other than GET for retrieving the access and request tokens (Thanks to Raoul Millais)  \n* 0.9.4\n    - OAuth1/2: Support for OAuth providers that drop connections (don\'t send response lengths? [Google]) \n    - OAuth2:   Change getOAuthAccessToken to POST rather than GET ( Possible Breaking change!!! ... re-tested against Google, Github, Facebook, FourSquare and Janrain and seems ok .. is closer to the spec (v20) )  \n* 0.9.3\n    - OAuth1:   Adds support for following 301 redirects (Thanks bdickason) \n* 0.9.2 \n    - OAuth1:   Correct content length calculated for non-ascii post bodies (Thanks selead)  \n    - OAuth1:   Allowed for configuration of the \'access token\' name used when requesting protected resources (OAuth2)  \n* 0.9.1\n    - OAuth1:   Added support for automatically following 302 redirects (Thanks neyric) \n    - OAuth1:   Added support for OAuth Echo (Thanks Ryan LeFevre). \n    - OAuth1:   Improved handling of 2xx responses (Thanks Neil Mansilla).  \n* 0.9.0\n    - OAuth1/2: Compatibility fixes to bring node-oauth up to speed with node.js 0.4x [thanks to Rasmus Andersson for starting the work ]  \n* 0.8.4\n    - OAuth1:   Fixed issue #14 (Parameter ordering ignored encodings).\n    - OAuth1:   Added support for repeated parameter names.\n    - OAuth1/2: Implements issue #15 (Use native SHA1 if available, 10x speed improvement!).\n    - OAuth2:   Fixed issue #16 (Should use POST when requesting access tokens.).\n    - OAuth2:   Fixed Issue #17 (OAuth2 spec compliance).  \n    - OAuth1:   Implemented enhancement #13 (Adds support for PUT & DELETE http verbs). \n    - OAuth1:   Fixes issue #18 (Complex/Composite url arguments [thanks novemberborn])  \n* 0.8.3\n    - OAuth1:   Fixed an issue where the auth header code depended on the Array\'s toString method (Yohei Sasaki) Updated the getOAuthRequestToken method so we can access google\'s OAuth secured methods. Also re-implemented and fleshed out the test suite.  \n* 0.8.2\n    - OAuth1:   The request returning methods will now write the POST body if provided (Chris Anderson), the code responsible for manipulating the headers is a bit safe now when working with other code (Paul McKellar)\n    - Package:  Tweaked the package.json to use index.js instead of main.js  \n* 0.8.1\n    - OAuth1:   Added mechanism to get hold of a signed Node Request object, ready for attaching response listeners etc. (Perfect for streaming APIs)  \n* 0.8.0\n    - OAuth1:   Standardised method capitalisation, the old getOauthAccessToken is now getOAuthAccessToken (Breaking change to existing code)  \n* 0.7.7\n    - OAuth1:   Looks like non oauth_ parameters where appearing within the Authorization headers, which I believe to be incorrect.  \n* 0.7.6\n    - OAuth1:   Added in oauth_verifier property to getAccessToken required for 1.0A  \n* 0.7.5\n    - Package:  Added in a main.js to simplify the require\'ing of OAuth  \n* 0.7.4\n    - OAuth1:   Minor change to add an error listener to the OAuth client (thanks troyk)  \n* 0.7.3\n    - OAuth2:   Now sends a Content-Length Http header to keep nginx happy :)  \n* 0.7.2\n    - OAuth1:   Fixes some broken unit tests!  \n* 0.7.0\n    - OAuth1/2: Introduces support for HTTPS end points and callback URLS for OAuth 1.0A and Oauth 2 (Please be aware that this was a breaking change to the constructor arguments order)  \n\nContributors (In no particular order)\n=====================================\n\n* Evan Prodromou\n* Jose Ignacio Andres\n* Ted Goddard\n* Derek Brooks\n* Ciaran Jessup - ciaranj@gmail.com\n* Mark Wubben - http://equalmedia.com/\n* Ryan LeFevre - http://meltingice.net\n* Raoul Millais\n* Patrick Negri - http://github.com/pnegri\n* Tang Bo Hao - http://github.com/btspoony\n* Damien Mathieu - http://42.dmathieu.com\n* Luke Baker - http://github.com/lukebaker\n* Christian Schwarz  - http://github.com/chrischw/\n* Joe Rozer - http://www.deadbytes.net\n* Garrick Cheung - http://www.garrickcheung.com/\n* rolandboon - http://rolandboon.com\n* Brian Park - http://github.com/yaru22\n* José F. Romaniello - http://github.com/jfromaniello\n* bendiy - https://github.com/bendiy\n* Andrew Martins - http://www.andrewmartens.com\n* Daniel Mahlow - https://github.com/dmahlow\n* Pieter Joost van de Sande - https://github.com/pjvds\n* Jeffrey D. Van Alstine\n* Michael Garvin\n* Andreas Knecht\n* AJ ONeal\n',
+465 silly resolved     readmeFilename: 'Readme.md',
+465 silly resolved     bugs: { url: 'https://github.com/ciaranj/node-oauth/issues' },
+465 silly resolved     _id: 'oauth@0.9.14',
+465 silly resolved     dist: { shasum: '6bd1fc41956180bcaac98013a436c97c8dbcff27' },
+465 silly resolved     _from: 'oauth@0.9.x',
+465 silly resolved     _resolved: 'https://registry.npmjs.org/oauth/-/oauth-0.9.14.tgz' } ]
+466 info install passport-strategy@1.0.0 into /home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2
+467 info install uid2@0.0.3 into /home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2
+468 info install oauth@0.9.14 into /home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2
+469 info installOne passport-strategy@1.0.0
+470 info installOne uid2@0.0.3
+471 info installOne oauth@0.9.14
+472 info /home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2/node_modules/passport-strategy unbuild
+473 info /home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2/node_modules/uid2 unbuild
+474 info /home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2/node_modules/oauth unbuild
+475 verbose tar unpack /home/ec2-user/.npm/passport-strategy/1.0.0/package.tgz
+476 silly lockFile 30132c30-2-node-modules-passport-strategy tar:///home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2/node_modules/passport-strategy
+477 verbose lock tar:///home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2/node_modules/passport-strategy /home/ec2-user/.npm/30132c30-2-node-modules-passport-strategy.lock
+478 silly lockFile bf85a606-sport-strategy-1-0-0-package-tgz tar:///home/ec2-user/.npm/passport-strategy/1.0.0/package.tgz
+479 verbose lock tar:///home/ec2-user/.npm/passport-strategy/1.0.0/package.tgz /home/ec2-user/.npm/bf85a606-sport-strategy-1-0-0-package-tgz.lock
+480 verbose tar unpack /home/ec2-user/.npm/uid2/0.0.3/package.tgz
+481 silly lockFile 6f9e83ea-assport-oauth2-node-modules-uid2 tar:///home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2/node_modules/uid2
+482 verbose lock tar:///home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2/node_modules/uid2 /home/ec2-user/.npm/6f9e83ea-assport-oauth2-node-modules-uid2.lock
+483 silly lockFile 0de46e12--user-npm-uid2-0-0-3-package-tgz tar:///home/ec2-user/.npm/uid2/0.0.3/package.tgz
+484 verbose lock tar:///home/ec2-user/.npm/uid2/0.0.3/package.tgz /home/ec2-user/.npm/0de46e12--user-npm-uid2-0-0-3-package-tgz.lock
+485 verbose tar unpack /home/ec2-user/.npm/oauth/0.9.14/package.tgz
+486 silly lockFile 7bde0169-ssport-oauth2-node-modules-oauth tar:///home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2/node_modules/oauth
+487 verbose lock tar:///home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2/node_modules/oauth /home/ec2-user/.npm/7bde0169-ssport-oauth2-node-modules-oauth.lock
+488 silly lockFile 316d68c9-ser-npm-oauth-0-9-14-package-tgz tar:///home/ec2-user/.npm/oauth/0.9.14/package.tgz
+489 verbose lock tar:///home/ec2-user/.npm/oauth/0.9.14/package.tgz /home/ec2-user/.npm/316d68c9-ser-npm-oauth-0-9-14-package-tgz.lock
+490 silly gunzTarPerm modes [ '755', '644' ]
+491 silly gunzTarPerm modes [ '755', '644' ]
+492 silly gunzTarPerm modes [ '755', '644' ]
+493 silly gunzTarPerm extractEntry package.json
+494 silly gunzTarPerm extractEntry package.json
+495 silly gunzTarPerm extractEntry package.json
+496 silly gunzTarPerm extractEntry README.md
+497 silly gunzTarPerm extractEntry LICENSE
+498 silly gunzTarPerm extractEntry LICENSE
+499 silly gunzTarPerm extractEntry index.js
+500 silly gunzTarPerm extractEntry .npmignore
+501 silly gunzTarPerm extractEntry LICENSE
+502 silly gunzTarPerm extractEntry .jshintrc
+503 silly gunzTarPerm extractEntry .travis.yml
+504 silly gunzTarPerm extractEntry index.js
+505 silly gunzTarPerm extractEntry Makefile
+506 silly gunzTarPerm extractEntry Readme.md
+507 silly gunzTarPerm extractEntry examples/github-example.js
+508 silly gunzTarPerm extractEntry examples/term.ie.oauth-HMAC-SHA1.js
+509 silly gunzTarPerm extractEntry examples/express-gdata/server.js
+510 silly gunzTarPerm extractEntry examples/express-gdata/views/google_calendars.ejs
+511 silly gunzTarPerm extractEntry examples/express-gdata/views/google_contacts.ejs
+512 silly gunzTarPerm extractEntry examples/express-gdata/views/layout.ejs
+513 silly gunzTarPerm extractEntry lib/_utils.js
+514 silly gunzTarPerm extractEntry lib/oauth.js
+515 silly gunzTarPerm extractEntry lib/oauth2.js
+516 silly gunzTarPerm extractEntry lib/sha1.js
+517 silly gunzTarPerm extractEntry tests/oauth2tests.js
+518 silly gunzTarPerm extractEntry tests/oauthtests.js
+519 silly gunzTarPerm extractEntry tests/sha1tests.js
+520 silly gunzTarPerm extractEntry tests/shared.js
+521 silly gunzTarPerm extractEntry lib/index.js
+522 silly gunzTarPerm extractEntry lib/strategy.js
+523 silly lockFile 6f9e83ea-assport-oauth2-node-modules-uid2 tar:///home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2/node_modules/uid2
+524 silly lockFile 6f9e83ea-assport-oauth2-node-modules-uid2 tar:///home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2/node_modules/uid2
+525 silly lockFile 0de46e12--user-npm-uid2-0-0-3-package-tgz tar:///home/ec2-user/.npm/uid2/0.0.3/package.tgz
+526 silly lockFile 0de46e12--user-npm-uid2-0-0-3-package-tgz tar:///home/ec2-user/.npm/uid2/0.0.3/package.tgz
+527 info preinstall uid2@0.0.3
+528 verbose readDependencies using package.json deps
+529 verbose readDependencies using package.json deps
+530 silly resolved []
+531 verbose about to build /home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2/node_modules/uid2
+532 info build /home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2/node_modules/uid2
+533 verbose linkStuff [ false,
+533 verbose linkStuff   false,
+533 verbose linkStuff   false,
+533 verbose linkStuff   '/home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2/node_modules' ]
+534 info linkStuff uid2@0.0.3
+535 verbose linkBins uid2@0.0.3
+536 verbose linkMans uid2@0.0.3
+537 verbose rebuildBundles uid2@0.0.3
+538 info install uid2@0.0.3
+539 info postinstall uid2@0.0.3
+540 silly lockFile 30132c30-2-node-modules-passport-strategy tar:///home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2/node_modules/passport-strategy
+541 silly lockFile 30132c30-2-node-modules-passport-strategy tar:///home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2/node_modules/passport-strategy
+542 silly lockFile bf85a606-sport-strategy-1-0-0-package-tgz tar:///home/ec2-user/.npm/passport-strategy/1.0.0/package.tgz
+543 silly lockFile bf85a606-sport-strategy-1-0-0-package-tgz tar:///home/ec2-user/.npm/passport-strategy/1.0.0/package.tgz
+544 info preinstall passport-strategy@1.0.0
+545 verbose readDependencies using package.json deps
+546 verbose readDependencies using package.json deps
+547 silly resolved []
+548 verbose about to build /home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2/node_modules/passport-strategy
+549 info build /home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2/node_modules/passport-strategy
+550 verbose linkStuff [ false,
+550 verbose linkStuff   false,
+550 verbose linkStuff   false,
+550 verbose linkStuff   '/home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2/node_modules' ]
+551 info linkStuff passport-strategy@1.0.0
+552 verbose linkBins passport-strategy@1.0.0
+553 verbose linkMans passport-strategy@1.0.0
+554 verbose rebuildBundles passport-strategy@1.0.0
+555 info install passport-strategy@1.0.0
+556 info postinstall passport-strategy@1.0.0
+557 silly lockFile 7bde0169-ssport-oauth2-node-modules-oauth tar:///home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2/node_modules/oauth
+558 silly lockFile 7bde0169-ssport-oauth2-node-modules-oauth tar:///home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2/node_modules/oauth
+559 silly lockFile 316d68c9-ser-npm-oauth-0-9-14-package-tgz tar:///home/ec2-user/.npm/oauth/0.9.14/package.tgz
+560 silly lockFile 316d68c9-ser-npm-oauth-0-9-14-package-tgz tar:///home/ec2-user/.npm/oauth/0.9.14/package.tgz
+561 info preinstall oauth@0.9.14
+562 verbose readDependencies using package.json deps
+563 verbose readDependencies using package.json deps
+564 silly resolved []
+565 verbose about to build /home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2/node_modules/oauth
+566 info build /home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2/node_modules/oauth
+567 verbose linkStuff [ false,
+567 verbose linkStuff   false,
+567 verbose linkStuff   false,
+567 verbose linkStuff   '/home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2/node_modules' ]
+568 info linkStuff oauth@0.9.14
+569 verbose linkBins oauth@0.9.14
+570 verbose linkMans oauth@0.9.14
+571 verbose rebuildBundles oauth@0.9.14
+572 info install oauth@0.9.14
+573 info postinstall oauth@0.9.14
+574 verbose about to build /home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2
+575 info build /home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules/passport-oauth2
+576 verbose linkStuff [ false,
+576 verbose linkStuff   false,
+576 verbose linkStuff   false,
+576 verbose linkStuff   '/home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook/node_modules' ]
+577 info linkStuff passport-oauth2@1.3.0
+578 verbose linkBins passport-oauth2@1.3.0
+579 verbose linkMans passport-oauth2@1.3.0
+580 verbose rebuildBundles passport-oauth2@1.3.0
+581 verbose rebuildBundles [ 'oauth', 'passport-strategy', 'uid2' ]
+582 info install passport-oauth2@1.3.0
+583 info postinstall passport-oauth2@1.3.0
+584 verbose about to build /home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook
+585 info build /home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules/passport-facebook
+586 verbose linkStuff [ false,
+586 verbose linkStuff   false,
+586 verbose linkStuff   false,
+586 verbose linkStuff   '/home/ec2-user/heo/tour/TouristSiteRecommendationService/node_modules' ]
+587 info linkStuff passport-facebook@2.1.1
+588 verbose linkBins passport-facebook@2.1.1
+589 verbose linkMans passport-facebook@2.1.1
+590 verbose rebuildBundles passport-facebook@2.1.1
+591 verbose rebuildBundles [ 'passport-oauth2' ]
+592 info install passport-facebook@2.1.1
+593 info postinstall passport-facebook@2.1.1
+594 error peerinvalid The package react does not satisfy its siblings' peerDependencies requirements!
+594 error peerinvalid Peer react-bootstrap@0.29.3 wants react@>=0.14.0
+594 error peerinvalid Peer react-dom@15.0.2 wants react@^15.0.2
+594 error peerinvalid Peer react-overlays@0.6.3 wants react@>=0.14.0
+594 error peerinvalid Peer react-stylesheet@0.8.2 wants react@^0.14.0
+594 error peerinvalid Peer uncontrollable@3.2.4 wants react@>=0.11.0
+595 error System Linux 4.4.8-20.46.amzn1.x86_64
+596 error command "node" "/usr/bin/npm" "install" "passport-facebook"
+597 error cwd /home/ec2-user/heo/tour/TouristSiteRecommendationService
+598 error node -v v0.10.42
+599 error npm -v 1.3.6
+600 error code EPEERINVALID
+601 verbose exit [ 1, true ]
