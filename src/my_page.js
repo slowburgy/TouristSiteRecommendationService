@@ -192,6 +192,8 @@ class Main extends React.Component {
             }
         };
 
+        
+        
         this.componentDidMount = this.componentDidMount.bind(this);
         this.handleLoginButtonClick = this.handleLoginButtonClick.bind(this);
         this.fetchInformationFromServer = this.fetchInformationFromServer.bind(this);
@@ -208,40 +210,6 @@ class Main extends React.Component {
         // this.setState(this.state);
     }
 
-    handleLoginButtonClick() {
-        /*
-        TODO: Routine for OAuth verification and server communication goes here. 
-            ...
-            @return: _uid_, a string, and _first_, a boolean flag to check whether the user is new to our service.
-         */
-        
-        var uid = "1", firstLogin = true;
-        this.fetchInformationFromServer(uid, firstLogin);
-        
-        this.setState(this.state);
-    }
-    
-    fetchInformationFromServer(uid, firstLogin) {
-        /*
-         TODO: Fetch ALL information about the user (nickname, gender, places he liked, ..., initial set of recommendations, etc).
-        
-         If first !== true (i.e., the user has been to our service before), then return the usual information about the user.
-         Otherwise, make random recommendations.
-         */
-        
-        if (firstLogin) {
-            /* Some routine */ 
-            
-            this.state.info.bodyPage = "page on first login";
-        } else {
-            /* Some routine */
-        
-            this.state.info.bodyPage = "main page";
-        }
-        
-        // _user_ is used just for testing. Replace it with the real values.
-        this.state.info.user = _user_;
-    }
     
     redirectToMainPage(placePreferenceList) {
         /*

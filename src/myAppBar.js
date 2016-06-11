@@ -43,57 +43,39 @@ export default class MyAppBar extends React.Component {
     constructor(props) {
         super(props);
         
-        this.handleLoginButtonClick = this.handleLoginButtonClick.bind(this);
+        this.handleMainPageButtonClick = this.handleMainPageButtonClick.bind(this);
         this.handleMyPageButtonClick = this.handleMyPageButtonClick.bind(this);
         this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
     }
 
-    handleLoginButtonClick() {
-        this.props.handlers.handleLoginButtonClick();
-    }
-
     handleMyPageButtonClick() {
-        this.props.handlers.handleMyPageButtonClick();
+        window.location.href = "my_page.html";
     }
 
     handleBackButtonClick() {
         this.props.handlers.handleBackButtonClick();
     }
+    
+    handleMainPageButtonClick() {
+        window.location.href = "main.html";
+    }
 
     render() {
-        var PageButton;
-        var bodyPage = this.props.info.bodyPage;
-
-        switch (bodyPage) {
-            case "login page":
-                console.log("myAppBar.login_page");
-                PageButton = () => (
-                    <FlatButton
-                        label="LOGIN"
-                        labelStyle={styles.iconStyle}
-                        onTouchTap={this.handleLoginButtonClick}
-                    />
-                );
-                break;
-
-            default:
-                console.log("myAppBar.my_page");
-                PageButton = () => (
-                    <FlatButton
-                        label="MY PAGE"
-                        labelStyle={styles.iconStyle}
-                        onTouchTap={this.handleMyPageButtonClick}
-                    />
-                );
-        }
+        var PageButton = () => (
+            <FlatButton
+                label="MY PAGE"
+                labelStyle={styles.iconStyle}
+                onTouchTap={this.handleMyPageButtonClick}
+            />
+        );
 
         return (
             <AppBar
                 style={styles.root}
                 title={<span style={styles.titleStyle}>{appTitle}</span>}
-                onTitleTouchTap={this.handleBackButtonClick}
+                onTitleTouchTap={this.handleMainPageButtonClick}
                 iconElementLeft={
-                    <IconButton onTouchTap={this.handleBackButtonClick}>
+                    <IconButton onTouchTap={this.handleMainPageButtonClick}>
                         <PlacesBeachAccess />
                     </IconButton>
                 }

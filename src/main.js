@@ -163,11 +163,8 @@ class Main extends React.Component {
         * query: Query typed into the search bar
         
         * bodyPage: Type of the body page. Stack of strings for emulating "back" button in a browser.
-            (1) "login page": Default login page
-            (2) "page on first login": page in which a new user is asked to select favorite places
-            (3) "main page": Main page with recommendations
-            (4) "my page": My profile page
-            (5) "place page": Page with the detailed information about a place
+            (1) "main page": Main page with recommendations
+            (2) "place page": Page with the detailed information about a place
             
         * place: Place information (updated when a certain place is clicked)
             - cid
@@ -192,15 +189,18 @@ class Main extends React.Component {
             }
         };
 
-        this.handleLoginButtonClick = this.handleLoginButtonClick.bind(this);
+        this.updateSessionStorage = this.updateSessionStorage.bind(this);
         this.fetchInformationFromServer = this.fetchInformationFromServer.bind(this);
-        this.handleMyPageButtonClick = this.handleMyPageButtonClick.bind(this);
         this.handlePlaceClick = this.handlePlaceClick.bind(this);
         this.handlePlaceLike = this.handlePlaceLike.bind(this);
         this.handleReviewSubmit = this.handleReviewSubmit.bind(this);
-        this.handleProfileEditSubmit = this.handleProfileEditSubmit.bind(this);
         this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
-        this.redirectToMainPage = this.redirectToMainPage.bind(this);
+        
+        this.fetchInformationFromServer();
+    }
+
+    updateSessionStorage() {
+        window.sessionStorage.info = JSON.stringify(this.state.info);
     }
 
     fetchInformationFromServer() {
@@ -209,32 +209,24 @@ class Main extends React.Component {
                using the UID stored in sessionStorage, and store the retrieved information in sessionStorage.
          */
 
-        var uid = window.sessionStorage.uid;
-        /* Routine for fetching informatio
+        if (!window.sessionStorage.info) {
 
+            var uid = window.sessionStorage.uid;
+            var user, place = null;
 
-        // _user_ is used just for testing. Replace it with the real values.
-        this.state.info.user = _user_;
-    }
-    
-    redirectToMainPage(placePreferenceList) {
-        /*
-         Handler to redirect the new user from choosing preferred places to the main page. 
-         (1) POST preferences to the server
-         (2) GET recommendations from the server
-         (3) Redirect to the main page
-         */
-        
-        /* TODO: Routine for (1) & (2) */
-        
-        /* Routine for (3) */
-        this.state.info.bodyPage = "main page";
-        this.setState(this.state);
-    }
+            /* Routine for fetching information from the server (i.e., updating user) using the uid comes here */
 
-    handleMyPageButtonClick() {
-        this.state.info.bodyPage = "my page";
-        this.setState(this.state);
+            // _user_ is used just for testing. Replace it with the real value.
+            user = _user_;
+
+            this.state.info.user = user;
+            this.updateSessionStorage();
+
+        } else {
+            // If data is in the sessionStorage, retrieve from there.
+
+            this.state.info = JSON.parse(window.sessionStorage.info);
+        }
     }
 
     handlePlaceClick(place) {
@@ -272,6 +264,8 @@ class Main extends React.Component {
             /* Routine */
             
             this.state.info.user.likedPlaces.unshift(place);
+            this.updateSessionStorage();
+            
             console.log("Place liked!");
         } else {
             console.log("Duplicate entry.");
@@ -286,52 +280,26 @@ class Main extends React.Component {
 
         DO NOT invoke this.setState(). We don't want the UI to be re-rendered.
 
-        TODO: Update user & place information in the server
+        TODO: Update user & place review information in the server
          */
 
         this.state.info.user.reviews.unshift(userReview);
         this.state.info.place.reviews.unshift(placeReview);
+        this.updateSessionStorage();
+        
         console.log("Review submitted!");
-        console.log(this.state.info);
-    }
-    
-    handleProfileEditSubmit(profileInfo) {
-        /*
-        Take a profileInfo (json object) as the argument and update the user info:
-            profileInfo spec:
-            {
-                nickname: string,
-                gender: string,
-                nationality: string
-            }
-
-        DO NOT invoke this.setState(). We don't want the UI to be re-rendered.
-
-        TODO: Update user information in the server
-        */ 
-        
-        this.state.info.user.nickname = profileInfo.nickname;
-        this.state.info.user.age = profileInfo.age;
-        this.state.info.user.gender = profileInfo.gender;
-        this.state.info.user.nationality = profileInfo.nationality;
-        
-        console.log("profile edited!");
     }
 
     render() {
         const appBarHandlers = {
-            handleLoginButtonClick: this.handleLoginButtonClick,
-            handleMyPageButtonClick: this.handleMyPageButtonClick,
             handleBackButtonClick: this.handleBackButtonClick
         };
 
         const bodyHandlers = {
             handlePlaceClick: this.handlePlaceClick,
             handlePlaceLike: this.handlePlaceLike,
-            handleProfileEditSubmit: this.handleProfileEditSubmit,
             handleReviewSubmit: this.handleReviewSubmit,
             handleBackButtonClick: this.handleBackButtonClick,
-            redirectToMainPage: this.redirectToMainPage
         };
 
         return (
