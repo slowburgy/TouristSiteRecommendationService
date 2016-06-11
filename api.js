@@ -115,7 +115,7 @@ exports.login = function(req, res) {
                         console.error(err);
                         return res.json({'result':-1});
                     }
-                    if (!result || !result.length) res.json({'result':-1});
+                    if (!result || !result.length) res.json({'result':0});
                     else res.json({'result':1, 'uid':result[0]['uid']});
     });
 };
@@ -588,15 +588,19 @@ exports.getreviewByUID = function(req, res) {
 
 var getPlaceData = function(cid, items, pref, res) {
     var response = srequest("GET", "http://api.visitkorea.or.kr/openapi/service/rest/EngService/detailCommon?ServiceKey=lDzm86gYb%2Bcz6q1Kl4XPb1oXrRMMxbO0gUs%2BAEs9eVZpIQr6JigwOwbOvKCBkrth0%2Bnnq4V%2BDZlrbRdkZOYqSQ%3D%3D&MobileOS=ETC&MobileApp=PRAC4APP&defaultYN=Y&areacodeYN=Y&firstImageYN=Y&mapinfoYN=Y&addrinfoYN=Y&overviewYN=Y&contentId="+cid+"&_type=json");
-            var item = JSON.parse(response.getBody()).response.body.items.item;
-            var data = {"cid": item.contentid,
+    var item = JSON.parse(response.getBody()).response.body.items.item;
+    var response2 = srequest("GET", "https://query.yahooapis.com/v1/public/yql?q=select%20item.condition%20from%20weather.forecast%20where%20woeid%20in%20(SELECT%20woeid%20FROM%20geo.places%20WHERE%20text=%22("+item.mapy+","+item.mapx+")%22)&format=json");
+    var weather = JSON.parse(response2.getBody()).query.results.channel.item.condition
+	    var data = {"cid": item.contentid,
                         "name": item.title,
                         "address": "("+item.zipcode+") "+item.addr1,
                         "latitude": item.mapy,
                         "longitude": item.mapx,
-                        "img": item.firstimage, 
-                        "starRating": 3,
-                        "reviews": []};
+                        "img": item.firstimage,
+                        "weather": weather.text,
+                        "temp": (5*(weather.temp-32)/9).toFixed(1),
+                        "starRating": 3, // TEMP
+                        "reviews": []} // TEMP;
             if (pref == null) {
                 items.push({"item":data});
                 if (res != null) return res.json({'result':1, 'data':items});
