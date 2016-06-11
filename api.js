@@ -68,14 +68,15 @@ exports.userinfo = function(req, res) {
 };
 
 exports.signup = function(req, res) {
-    if ( isEmpty(req.query.OAuth) || isEmpty(req.query.age) || isEmpty(req.query.sex) || isEmpty(req.query.travStyle))
+    if (isEmpty(req.query.uid) || isEmpty(req.query.age) || isEmpty(req.query.sex) || isEmpty(req.query.travStyle)|| isEmpty(req.query.nickname) || isEmpty(req.query.nationality))
         return res.json({'result':-2});
 
-    var user = {'uid':makeUid(),
-                'OAuth':req.query.OAuth,
+    var user = {'uid':uid,
                 'age':Number(req.query.age),
                 'sex':checkSex(req.query.sex),
                 'travStyle':checkStyle(req.query.travStyle),
+                'nationality':nationality,
+                'nickname':nickname,
                 'numPref':0};
     var query = connection.query(
                 'insert into tourUser set ?', user,
@@ -89,10 +90,12 @@ exports.signup = function(req, res) {
 };
 
 exports.usermodify = function(req, res) {
-    if ( isEmpty(req.query.uid) || isEmpty(req.query.age) || isEmpty(req.query.sex)|| isEmpty(req.query.travStyle))
+    if ( isEmpty(req.query.uid) || isEmpty(req.query.age) || isEmpty(req.query.sex) || isEmpty(req.query.travStyle) || isEmpty(req.query.nickname) || isEmpty(req.query.nationalty) )
 	return res.json({'result':-2});
     var user = {'age':Number(req.query.age),
                 'sex':checkSex(req.query.sex),
+		'nationality':nationality,
+                'nickname':nickname,
                 'travStyle':checkStyle(req.query.travStyle)};
     var query = connection.query(
                 'update tourUser set ? where uid='+mysql.escape(req.query.uid), user,
@@ -106,10 +109,10 @@ exports.usermodify = function(req, res) {
 };
 
 exports.login = function(req, res) {
-    if ( isEmpty(req.query.OAuth))
+    if ( isEmpty(req.query.uid))
 	return res.json({'result':-2});
     var query = connection.query(
-                'select uid from tourUser where OAuth='+mysql.escape(req.query.OAuth),
+                'select uid from tourUser where uid='+mysql.escape(req.query.uid),
                 function(err,result){
                     if (err) {
                         console.error(err);
