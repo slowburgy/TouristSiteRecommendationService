@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import injectTapEventPlugin from "react-tap-event-plugin";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MyAppBar from './myAppBar';
+import MyAppBar from './components/myAppBar';
 import {appBarHeight} from '../dimensions/dimensions';
-import MyAppBody from './myAppBody';
+import MyAppBody from './components/myAppBody';
 import {_} from 'underscore';
 
 injectTapEventPlugin();
@@ -16,134 +16,6 @@ const muiTheme = getMuiTheme({
         height: appBarHeight
     }
 });
-
-// _user_, _place_: Sample data for testing
-var _user_ = {
-    uid: "1",
-    firstLogin: true,
-    nickname: "rhapsodyjs",
-    age: 24,
-    gender: "Male",
-    nationality: "Korea, Republic Of",
-
-    recommendations: _.range(4).map((c) => (
-        _.range(7).map((r) => (
-            {
-                cid: (7*c + r).toString(), // Just for testing
-                name: 'Seolark',
-                address: 'Seoraksan-ro, Sokcho-si, Gangwon-do',
-                latitude: 38.119444,
-                longitude: 128.465556,
-                img: "images/seolark_highres.jpg",
-                starRating: 3,
-                reviews: [
-                    {
-                        name: 'nick',
-                        starRating: 5,
-                        date: '2016.06.07',
-                        content: 'This place is fantastic! The food is amazing, the people are kind, and the view is magnificent. I would certainly come here again!'
-                    },
-                    {
-                        name: 'brendan',
-                        starRating: 1,
-                        date: '2016.05.01',
-                        content: 'Imma never come \'ere again, I can tell ya that!'
-                    },
-                    {
-                        name: 'you',
-                        starRating: 3,
-                        date: '2016.04.02',
-                        content: 'Good!'
-                    },
-                ]
-            })
-        )
-    )),
-
-    likedPlaces: _.range(7).map((r) => (
-    {
-        cid: r.toString(),
-        name: 'Seolark',
-        address: 'Seoraksan-ro, Sokcho-si, Gangwon-do',
-        latitude: 38.119444,
-        longitude: 128.465556,
-        img: "images/seolark_highres.jpg",
-        starRating: 3,
-        reviews: [
-            {
-                name: 'sherlock',
-                starRating: 5,
-                date: '2016.06.07',
-                content: 'This place is fantastic! The food is amazing, the people are kind, and the view is magnificent. I would certainly come here again!'
-            },
-            {
-                name: 'holmes',
-                starRating: 1,
-                date: '2016.05.01',
-                content: 'Imma never come \'ere again, I can tell ya that!'
-            },
-            {
-                name: 'watson',
-                starRating: 3,
-                date: '2016.04.02',
-                content: 'Good!'
-            },
-        ]
-    }
-    )),
-
-    reviews: [
-        {
-            name: 'Seolark',
-            starRating: 5,
-            date: '2016.06.07',
-            content: 'This place is fantastic! The food is amazing, the people are kind, and the view is magnificent. I would certainly come here again!'
-        },
-        {
-            name: 'Mt. Everest',
-            starRating: 1,
-            date: '2016.05.01',
-            content: 'Imma never come \'ere again, I can tell ya that!'
-        },
-        {
-            name: 'Jeju Island',
-            starRating: 3,
-            date: '2016.04.02',
-            content: 'Good!'
-        },
-    ]
-};
-
-var _place_ = {
-    cid: "1",
-    name: 'Seolark',
-    address: 'Seoraksan-ro, Sokcho-si, Gangwon-do',
-    latitude: 38.119444,
-    longitude: 128.465556,
-    img: 'images/seolark_highres.jpg',
-    starRating: 3,
-    reviews: [
-        {
-            name: 'Seolark',
-            starRating: 5,
-            date: '2016.06.07',
-            content: 'This place is fantastic! The food is amazing, the people are kind, and the view is magnificent. I would certainly come here again!'
-        },
-        {
-            name: 'Seolark',
-            starRating: 1,
-            date: '2016.05.01',
-            content: 'Imma never come \'ere again, I can tell ya that!'
-        },
-        {
-            name: 'Seolark',
-            starRating: 3,
-            date: '2016.04.02',
-            content: 'Good!'
-        },
-    ]
-};
-
 
 class Main extends React.Component {
     /*
@@ -185,52 +57,25 @@ class Main extends React.Component {
 
         this.state = {
             info: {
-                user: null,
+                user: JSON.parse(window.sessionStorage.user),
                 query: null,
-                bodyPage: "login page",
+                bodyPage: "my page",
                 place: null
             }
         };
-
         
-        
-        this.componentDidMount = this.componentDidMount.bind(this);
-        this.handleLoginButtonClick = this.handleLoginButtonClick.bind(this);
-        this.fetchInformationFromServer = this.fetchInformationFromServer.bind(this);
-        this.handleMyPageButtonClick = this.handleMyPageButtonClick.bind(this);
+        this.updateSessionStorage = this.updateSessionStorage.bind(this);
         this.handlePlaceClick = this.handlePlaceClick.bind(this);
         this.handlePlaceLike = this.handlePlaceLike.bind(this);
         this.handleReviewSubmit = this.handleReviewSubmit.bind(this);
         this.handleProfileEditSubmit = this.handleProfileEditSubmit.bind(this);
         this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
-        this.redirectToMainPage = this.redirectToMainPage.bind(this);
     }
 
-    componentDidMount() {
-        // this.setState(this.state);
+    updateSessionStorage() {
+        window.sessionStorage.user = JSON.stringify(this.state.info.user);
     }
-
     
-    redirectToMainPage(placePreferenceList) {
-        /*
-         Handler to redirect the new user from choosing preferred places to the main page. 
-         (1) POST preferences to the server
-         (2) GET recommendations from the server
-         (3) Redirect to the main page
-         */
-        
-        /* TODO: Routine for (1) & (2) */
-        
-        /* Routine for (3) */
-        this.state.info.bodyPage = "main page";
-        this.setState(this.state);
-    }
-
-    handleMyPageButtonClick() {
-        this.state.info.bodyPage = "my page";
-        this.setState(this.state);
-    }
-
     handlePlaceClick(place) {
         this.state.info.bodyPage = "place page";
 
@@ -239,7 +84,7 @@ class Main extends React.Component {
     }
     
     handleBackButtonClick() {
-        this.state.info.bodyPage = "main page";
+        this.state.info.bodyPage = "my page";
         this.setState(this.state);
     }
 
@@ -261,11 +106,13 @@ class Main extends React.Component {
                         return p || c;
                     }
                 );
-        
+
         if (!duplicate) {
             /* Routine */
-            
+
             this.state.info.user.likedPlaces.unshift(place);
+            this.updateSessionStorage();
+            
             console.log("Place liked!");
         } else {
             console.log("Duplicate entry.");
@@ -285,10 +132,11 @@ class Main extends React.Component {
 
         this.state.info.user.reviews.unshift(userReview);
         this.state.info.place.reviews.unshift(placeReview);
+        this.updateSessionStorage();
+        
         console.log("Review submitted!");
-        console.log(this.state.info);
     }
-    
+
     handleProfileEditSubmit(profileInfo) {
         /*
         Take a profileInfo (json object) as the argument and update the user info:
@@ -308,14 +156,13 @@ class Main extends React.Component {
         this.state.info.user.age = profileInfo.age;
         this.state.info.user.gender = profileInfo.gender;
         this.state.info.user.nationality = profileInfo.nationality;
+        this.updateSessionStorage();
         
         console.log("profile edited!");
     }
 
     render() {
         const appBarHandlers = {
-            handleLoginButtonClick: this.handleLoginButtonClick,
-            handleMyPageButtonClick: this.handleMyPageButtonClick,
             handleBackButtonClick: this.handleBackButtonClick
         };
 
@@ -325,7 +172,6 @@ class Main extends React.Component {
             handleProfileEditSubmit: this.handleProfileEditSubmit,
             handleReviewSubmit: this.handleReviewSubmit,
             handleBackButtonClick: this.handleBackButtonClick,
-            redirectToMainPage: this.redirectToMainPage
         };
 
         return (

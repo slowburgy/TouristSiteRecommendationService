@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import injectTapEventPlugin from "react-tap-event-plugin";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MyAppBar from './myAppBar';
+import MyAppBar from './components/myAppBar';
 import {appBarHeight} from '../dimensions/dimensions';
-import MyAppBody from './myAppBody';
+import MyAppBody from './components/myAppBody';
 import {_} from 'underscore';
 
 injectTapEventPlugin();
@@ -200,7 +200,7 @@ class Main extends React.Component {
     }
 
     updateSessionStorage() {
-        window.sessionStorage.info = JSON.stringify(this.state.info);
+        window.sessionStorage.user = JSON.stringify(this.state.info.user);
     }
 
     fetchInformationFromServer() {
@@ -209,7 +209,7 @@ class Main extends React.Component {
                using the UID stored in sessionStorage, and store the retrieved information in sessionStorage.
          */
 
-        if (!window.sessionStorage.info) {
+        if (!window.sessionStorage.user) {
 
             var uid = window.sessionStorage.uid;
             var user, place = null;
@@ -221,11 +221,12 @@ class Main extends React.Component {
 
             this.state.info.user = user;
             this.updateSessionStorage();
+            console.log(window.sessionStorage.user);
 
         } else {
             // If data is in the sessionStorage, retrieve from there.
 
-            this.state.info = JSON.parse(window.sessionStorage.info);
+            this.state.info.user = JSON.parse(window.sessionStorage.user);
         }
     }
 

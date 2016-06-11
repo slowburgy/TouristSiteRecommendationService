@@ -438,7 +438,7 @@ exports.review = function(req, res) {
     var star = Number(req.query.star);
     var date = new Date();
     date.setHours(date.getHours() + 9);
-    date_str = date.getUTCFullYear() + "." + (1+date.getUTCMonth()) + "." + date.getUTCDate());
+    date_str = date.getUTCFullYear() + "." + (1+date.getUTCMonth()) + "." + date.getUTCDate();
     date.setHours(date.getHours() + 9);
     console.log(date);
     var data = 'uid='+mysql.escape(req.query.uid)+

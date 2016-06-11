@@ -5,7 +5,12 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "browserify -t [ babelify --presets [ es2015 react ] ] src/index.js -o build/app.js"
+    "build": "browserify -t [ babelify --presets [ es2015 react ] ] src/index.js -o build/app.js && browserify -t [ babelify --presets [ es2015 react ] ] src/login.js -o build/login.js && browserify -t [ babelify --presets [ es2015 react ] ] src/main.js -o build/main.js && browserify -t [ babelify --presets [ es2015 react ] ] src/select_favorites.js -o build/select_favorites.js && browserify -t [ babelify --presets [ es2015 react ] ] src/recommendations.js -o build/recommendations.js && browserify -t [ babelify --presets [ es2015 react ] ] src/my_page.js -o build/my_page.js",
+    "build_login": "browserify -t [ babelify --presets [ es2015 react ] ] src/login.js -o build/login.js",
+    "build_main": "browserify -t [ babelify --presets [ es2015 react ] ] src/main.js -o build/main.js",
+    "build_sf": "browserify -t [ babelify --presets [ es2015 react ] ] src/select_favorites.js -o build/select_favorites.js",
+    "build_rec": "browserify -t [ babelify --presets [ es2015 react ] ] src/recommendations.js -o build/recommendations.js",
+    "build_mp": "browserify -t [ babelify --presets [ es2015 react ] ] src/my_page.js -o build/my_page.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +26,8 @@
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
     "babelify": "^7.3.0",
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
     "material-ui": "^0.15.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
