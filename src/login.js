@@ -40,8 +40,8 @@ class Main extends React.Component {
 
         var uid = 1, firstLogin = true;
         
-        /* Code for sessionStorage goes here */
-
+        window.sessionStorage.uid = uid;
+        
         return [uid, firstLogin];
     }
 
