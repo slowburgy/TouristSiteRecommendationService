@@ -4,8 +4,8 @@ import injectTapEventPlugin from "react-tap-event-plugin";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {appBarHeight} from '../dimensions/dimensions';
-import MyLoginAppBar from './myLoginAppBar';
-import MyLoginPage from './myLoginPage';
+import MyLoginAppBar from './components/myLoginAppBar';
+import MyLoginPage from './components/myLoginPage';
 
 injectTapEventPlugin();
 
