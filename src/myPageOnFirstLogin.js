@@ -1,11 +1,7 @@
 import React from 'react';
 import {GridList, GridTile} from 'material-ui/GridList';
 import Subheader from 'material-ui/Subheader';
-import StarBorder from 'material-ui/svg-icons/toggle/star-border';
-import ToggleStar from 'material-ui/svg-icons/toggle/star';
 import {dp, horizontalDP, appBarHeight} from '../dimensions/dimensions';
-import {grey50} from 'material-ui/styles/colors';
-import {_} from 'underscore/underscore';
 import RaisedButton from 'material-ui/RaisedButton';
 import SocialSentimentDissatisfied from 'material-ui/svg-icons/social/sentiment-dissatisfied';
 import SocialSentimentSatisfied from 'material-ui/svg-icons/social/sentiment-satisfied';
@@ -59,8 +55,8 @@ export default class MyPageOnFirstLogin extends React.Component {
         super(props);
 
         this.state = {
-            chosens: this.props.info.user.likedPlaces.map((e) => false),
-            likes: this.props.info.user.likedPlaces.map((e) => false)
+            chosens: this.props.places.map((e) => false),
+            likes: this.props.places.map((e) => false)
         };
         
         this.handleDislike = this.handleDislike.bind(this);
@@ -72,9 +68,9 @@ export default class MyPageOnFirstLogin extends React.Component {
         this.state.likes[index] = true;
         this.setState(this.state);
 
-        if (index == this.props.info.user.likedPlaces.length - 1) {
+        if (index == this.props.places.length - 1) {
             var answers =
-                this.props.info.user.likedPlaces
+                this.props.places
                 .filter(
                     (e, i) => this.state.likes[i]
                 );
@@ -89,9 +85,9 @@ export default class MyPageOnFirstLogin extends React.Component {
         this.state.likes[index] = false;
         this.setState(this.state);
 
-        if (index == this.props.info.user.likedPlaces.length - 1) {
+        if (index == this.props.places.length - 1) {
             var answers =
-                this.props.info.user.likedPlaces
+                this.props.places
                     .filter(
                         (e, i) => this.state.likes[i]
                     );
@@ -112,7 +108,7 @@ export default class MyPageOnFirstLogin extends React.Component {
                         padding={dp(20)}
                     >
                         <Subheader style={styles.subheaderStyle}>{"Please rate the following places before proceeding"}</Subheader>
-                        {this.props.info.user.likedPlaces.map(function(place, index) {
+                        {this.props.places.map(function(place, index) {
                             var boundLike = this.handleLike.bind(this, index);
                             var boundDislike = this.handleDislike.bind(this, index);
                             
