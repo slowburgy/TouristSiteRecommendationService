@@ -702,7 +702,7 @@ CREATE TABLE `tourPref` (
 
 LOCK TABLES `tourPref` WRITE;
 /*!40000 ALTER TABLE `tourPref` DISABLE KEYS */;
-INSERT INTO `tourPref` VALUES ('test',668511,3),('test',1909494,4),('test2',1909494,5);
+INSERT INTO `tourPref` VALUES ('test',561382,5),('test',610397,4),('test',1918889,5),('test2',561382,5),('test2',610397,4),('test2',1918889,5),('test3',561382,5),('test3',610397,4),('test3',1918889,5),('test4',561382,4),('test4',610397,4),('test4',1918889,5),('test5',610397,4),('test5',1918889,4),('test6',610397,4),('test6',1918889,5);
 /*!40000 ALTER TABLE `tourPref` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -749,6 +749,8 @@ CREATE TABLE `tourUser` (
   `sex` int(11) DEFAULT NULL,
   `travStyle` int(11) DEFAULT NULL,
   `numPref` int(11) DEFAULT NULL,
+  `nickname` varchar(30) DEFAULT NULL,
+  `nationality` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`uid`),
   UNIQUE KEY `OAuth` (`OAuth`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -760,7 +762,7 @@ CREATE TABLE `tourUser` (
 
 LOCK TABLES `tourUser` WRITE;
 /*!40000 ALTER TABLE `tourUser` DISABLE KEYS */;
-INSERT INTO `tourUser` VALUES ('test','test',20,0,1,0),('test2','test2',20,0,1,0);
+INSERT INTO `tourUser` VALUES ('test','test',20,0,1,3,NULL,NULL),('test2','test2',20,0,1,3,NULL,NULL),('test3','test3',20,0,1,3,NULL,NULL),('test4','test4',20,0,1,3,NULL,NULL),('test5','test5',20,0,1,2,NULL,NULL),('test6','test6',20,0,1,2,NULL,NULL);
 /*!40000 ALTER TABLE `tourUser` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -874,4 +876,4 @@ CREATE TABLE IF NOT EXISTS `slow_log` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-06-10 20:26:07
+-- Dump completed on 2016-06-11 14:10:15
