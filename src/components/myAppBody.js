@@ -18,7 +18,9 @@ export default class MyAppBody extends React.Component {
                 console.log("myAppBody.main_page");
                 BodyPage = () => (
                     <div>
-                        <MyRecommendationBar />
+                        <MyRecommendationBar 
+                            handlers={this.props.handlers}
+                        />
                         <MyCategoryList 
                             handlers={this.props.handlers}
                             info={this.props.info}
