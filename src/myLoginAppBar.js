@@ -39,33 +39,24 @@ const styles = {
 };
 
 
-export default class MyAppBar extends React.Component {
+export default class MyLoginAppBar extends React.Component {
     constructor(props) {
         super(props);
         
-        this.handleMainPageButtonClick = this.handleMainPageButtonClick.bind(this);
-        this.handleMyPageButtonClick = this.handleMyPageButtonClick.bind(this);
-        this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
+        this.handleLoginButtonClick = this.handleLoginButtonClick.bind(this);
     }
 
-    handleMyPageButtonClick() {
-        window.location.href = "my_page.html";
-    }
-
-    handleBackButtonClick() {
-        this.props.handlers.handleBackButtonClick();
-    }
-    
-    handleMainPageButtonClick() {
-        window.location.href = "main.html";
+    handleLoginButtonClick() {
+        this.props.handlers.handleLoginButtonClick();
     }
 
     render() {
-        var PageButton = () => (
+        var PageButton;
+        PageButton = () => (
             <FlatButton
-                label="MY PAGE"
+                label="LOGIN"
                 labelStyle={styles.iconStyle}
-                onTouchTap={this.handleMyPageButtonClick}
+                onTouchTap={this.handleLoginButtonClick}
             />
         );
 
@@ -73,9 +64,8 @@ export default class MyAppBar extends React.Component {
             <AppBar
                 style={styles.root}
                 title={<span style={styles.titleStyle}>{appTitle}</span>}
-                onTitleTouchTap={this.handleMainPageButtonClick}
                 iconElementLeft={
-                    <IconButton onTouchTap={this.handleMainPageButtonClick}>
+                    <IconButton >
                         <PlacesBeachAccess />
                     </IconButton>
                 }

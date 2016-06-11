@@ -136,10 +136,6 @@ export default class MyPlaceBody extends React.Component {
             date: date,
             content: this.state.currentReview
         };
-
-        /*
-         TODO: Routine for updating place_reviews and my_reviews in the server goes here.
-         */
         
         this.props.handlers.handleReviewSubmit(placeReview, userReview);
         this.state.currentReview = "";

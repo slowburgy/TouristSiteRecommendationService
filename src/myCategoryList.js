@@ -12,13 +12,9 @@ const styles = {
 export default class MyCategoryList extends React.Component {
     constructor(props) {
         super(props);
-        
-        console.log("myCategoryList.constructor");
     }
 
     render() {
-        console.log("myCategoryList.render");
-        
         const categories = this.props.info.user.recommendations;
         const likedPlaces = this.props.info.user.likedPlaces;
         
