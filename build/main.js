@@ -46377,21 +46377,16 @@ var MyPlaceBody = function (_React$Component) {
             var today = new Date();
             var date = today.getFullYear() + "." + (today.getMonth() + 1) + "." + today.getDate();
 
-            var placeReview = {
-                name: this.props.info.user.nickname,
+            var review = {
+                cid: this.props.info.place.cid,
+                placeName: this.props.info.place.name,
+                userName: this.props.info.user.nickname,
                 starRating: this.state.value,
                 date: date,
                 content: this.state.currentReview
             };
 
-            var userReview = {
-                name: this.props.info.place.name,
-                starRating: this.state.value,
-                date: date,
-                content: this.state.currentReview
-            };
-
-            this.props.handlers.handleReviewSubmit(placeReview, userReview);
+            this.props.handlers.handleReviewSubmit(review);
             this.state.currentReview = "";
             this.setState(this.state);
         }
@@ -46482,7 +46477,7 @@ var MyPlaceBody = function (_React$Component) {
                                         )
                                     ),
                                     _react2.default.createElement(_List.ListItem, {
-                                        primaryText: item.name,
+                                        primaryText: item.userName,
                                         secondaryText: item.content,
                                         secondaryTextLines: 2,
                                         disabled: true
@@ -47709,7 +47704,7 @@ var MyReviews = function (_React$Component) {
                                     )
                                 ),
                                 _react2.default.createElement(_List.ListItem, {
-                                    primaryText: item.name,
+                                    primaryText: item.placeName,
                                     secondaryText: item.content,
                                     secondaryTextLines: 2,
                                     disabled: true
@@ -47941,17 +47936,23 @@ var _user_ = {
                     img: "images/seolark_highres.jpg",
                     starRating: 3,
                     reviews: [{
-                        name: 'nick',
+                        cid: "1",
+                        placeName: "Seorak",
+                        userName: 'nick',
                         starRating: 5,
                         date: '2016.06.07',
                         content: 'This place is fantastic! The food is amazing, the people are kind, and the view is magnificent. I would certainly come here again!'
                     }, {
-                        name: 'brendan',
+                        cid: "1",
+                        placeName: "Seorak",
+                        userName: 'nick',
                         starRating: 1,
                         date: '2016.05.01',
                         content: 'Imma never come \'ere again, I can tell ya that!'
                     }, {
-                        name: 'you',
+                        cid: "1",
+                        placeName: "Seorak",
+                        userName: 'nick',
                         starRating: 3,
                         date: '2016.04.02',
                         content: 'Good!'
@@ -47970,17 +47971,23 @@ var _user_ = {
             img: "images/seolark_highres.jpg",
             starRating: 3,
             reviews: [{
-                name: 'sherlock',
+                cid: "13",
+                placeName: 'Seorak',
+                userName: 'sherlock',
                 starRating: 5,
                 date: '2016.06.07',
                 content: 'This place is fantastic! The food is amazing, the people are kind, and the view is magnificent. I would certainly come here again!'
             }, {
-                name: 'holmes',
+                cid: "13",
+                placeName: 'Seorak',
+                userName: 'holmes',
                 starRating: 1,
                 date: '2016.05.01',
                 content: 'Imma never come \'ere again, I can tell ya that!'
             }, {
-                name: 'watson',
+                cid: "13",
+                placeName: 'Seorak',
+                userName: 'watson',
                 starRating: 3,
                 date: '2016.04.02',
                 content: 'Good!'
@@ -47989,17 +47996,23 @@ var _user_ = {
     }),
 
     reviews: [{
-        name: 'Seolark',
+        cid: "13",
+        placeName: 'Seorak',
+        userName: 'Seolark',
         starRating: 5,
         date: '2016.06.07',
         content: 'This place is fantastic! The food is amazing, the people are kind, and the view is magnificent. I would certainly come here again!'
     }, {
-        name: 'Mt. Everest',
+        cid: "13",
+        placeName: 'Seorak',
+        userName: 'Mt. Everest',
         starRating: 1,
         date: '2016.05.01',
         content: 'Imma never come \'ere again, I can tell ya that!'
     }, {
-        name: 'Jeju Island',
+        cid: "13",
+        placeName: 'Seorak',
+        userName: 'Jeju Island',
         starRating: 3,
         date: '2016.04.02',
         content: 'Good!'
@@ -48016,17 +48029,23 @@ var _place_ = {
     img: 'images/seolark_highres.jpg',
     starRating: 3,
     reviews: [{
-        name: 'Seolark',
+        cid: "13",
+        placeName: 'Seorak',
+        userName: 'Brendan',
         starRating: 5,
         date: '2016.06.07',
         content: 'This place is fantastic! The food is amazing, the people are kind, and the view is magnificent. I would certainly come here again!'
     }, {
-        name: 'Seolark',
+        cid: "13",
+        placeName: 'Nick',
+        userName: 'Seolark',
         starRating: 1,
         date: '2016.05.01',
         content: 'Imma never come \'ere again, I can tell ya that!'
     }, {
-        name: 'Seolark',
+        cid: "13",
+        placeName: 'Adam',
+        userName: 'Seolark',
         starRating: 3,
         date: '2016.04.02',
         content: 'Good!'
@@ -48215,7 +48234,6 @@ var Main = function (_React$Component) {
                 this.updateSessionStorage();
             } else {
                 // If data is in the sessionStorage, retrieve from there.
-
                 this.state.info.user = JSON.parse(window.sessionStorage.user);
             }
         }
@@ -48310,13 +48328,13 @@ var Main = function (_React$Component) {
         }
     }, {
         key: 'handleReviewSubmit',
-        value: function handleReviewSubmit(placeReview, userReview) {
+        value: function handleReviewSubmit(review) {
             /*
             Take a review (json object) as the argument and add it to:
-                    (1) List of reviews of the place (placeReview)
-                    (2) List of reviews of the user (userReview)
+                    (1) List of reviews of the place 
+                    (2) List of reviews of the user 
              DO NOT invoke this.setState(). We don't want the UI to be re-rendered.
-             @param userReview, placeReview: JSON object, format specified above.
+             @param review: JSON object, format specified above.
              */
 
             /* TODO: Routine for updating user & place review in the server goes here */
@@ -48336,8 +48354,8 @@ var Main = function (_React$Component) {
                 }
                    });*/
 
-            this.state.info.user.reviews.unshift(userReview);
-            this.state.info.place.reviews.unshift(placeReview);
+            this.state.info.user.reviews.unshift(review);
+            this.state.info.place.reviews.unshift(review);
             this.updateSessionStorage();
         }
     }, {

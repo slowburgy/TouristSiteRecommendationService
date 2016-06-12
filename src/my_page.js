@@ -97,11 +97,11 @@ class Main extends React.Component {
         }
     }
 
-    handleReviewSubmit(placeReview, userReview) {
+    handleReviewSubmit(review) {
         // This method is same as that of main.js. Copy it once it is implemented.
 
-        this.state.info.user.reviews.unshift(userReview);
-        this.state.info.place.reviews.unshift(placeReview);
+        this.state.info.user.reviews.unshift(review);
+        this.state.info.place.reviews.unshift(review);
         this.updateSessionStorage();
         
         console.log("Review submitted!");

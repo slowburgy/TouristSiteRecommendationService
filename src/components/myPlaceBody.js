@@ -123,21 +123,16 @@ export default class MyPlaceBody extends React.Component {
         var today = new Date();
         var date = today.getFullYear() + "." + (today.getMonth() + 1) + "." + today.getDate();
 
-        var placeReview = {
-            name: this.props.info.user.nickname,
-            starRating: this.state.value,
-            date: date,
-            content: this.state.currentReview
-        };
-
-        var userReview = {
-            name: this.props.info.place.name,
+        var review = {
+            cid: this.props.info.place.cid,
+            placeName: this.props.info.place.name,
+            userName: this.props.info.user.nickname,
             starRating: this.state.value,
             date: date,
             content: this.state.currentReview
         };
         
-        this.props.handlers.handleReviewSubmit(placeReview, userReview);
+        this.props.handlers.handleReviewSubmit(review);
         this.state.currentReview = "";
         this.setState(this.state);
     }
@@ -205,7 +200,7 @@ export default class MyPlaceBody extends React.Component {
                                         </div>
                                     </div>
                                     <ListItem
-                                        primaryText={item.name}
+                                        primaryText={item.userName}
                                         secondaryText={item.content}
                                         secondaryTextLines={2}
                                         disabled={true}

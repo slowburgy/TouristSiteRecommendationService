@@ -46377,21 +46377,16 @@ var MyPlaceBody = function (_React$Component) {
             var today = new Date();
             var date = today.getFullYear() + "." + (today.getMonth() + 1) + "." + today.getDate();
 
-            var placeReview = {
-                name: this.props.info.user.nickname,
+            var review = {
+                cid: this.props.info.place.cid,
+                placeName: this.props.info.place.name,
+                userName: this.props.info.user.nickname,
                 starRating: this.state.value,
                 date: date,
                 content: this.state.currentReview
             };
 
-            var userReview = {
-                name: this.props.info.place.name,
-                starRating: this.state.value,
-                date: date,
-                content: this.state.currentReview
-            };
-
-            this.props.handlers.handleReviewSubmit(placeReview, userReview);
+            this.props.handlers.handleReviewSubmit(review);
             this.state.currentReview = "";
             this.setState(this.state);
         }
@@ -46482,7 +46477,7 @@ var MyPlaceBody = function (_React$Component) {
                                         )
                                     ),
                                     _react2.default.createElement(_List.ListItem, {
-                                        primaryText: item.name,
+                                        primaryText: item.userName,
                                         secondaryText: item.content,
                                         secondaryTextLines: 2,
                                         disabled: true
@@ -47709,7 +47704,7 @@ var MyReviews = function (_React$Component) {
                                     )
                                 ),
                                 _react2.default.createElement(_List.ListItem, {
-                                    primaryText: item.name,
+                                    primaryText: item.placeName,
                                     secondaryText: item.content,
                                     secondaryTextLines: 2,
                                     disabled: true
@@ -48002,11 +47997,11 @@ var Main = function (_React$Component) {
         }
     }, {
         key: 'handleReviewSubmit',
-        value: function handleReviewSubmit(placeReview, userReview) {
+        value: function handleReviewSubmit(review) {
             // This method is same as that of main.js. Copy it once it is implemented.
 
-            this.state.info.user.reviews.unshift(userReview);
-            this.state.info.place.reviews.unshift(placeReview);
+            this.state.info.user.reviews.unshift(review);
+            this.state.info.place.reviews.unshift(review);
             this.updateSessionStorage();
 
             console.log("Review submitted!");
@@ -48049,7 +48044,7 @@ var Main = function (_React$Component) {
                 this.state.info.user.age = profileInfo.age;
                 this.state.info.user.gender = profileInfo.gender;
                 this.state.info.user.nationality = profileInfo.nationality;
-                this.updatesessionstorage();
+                this.updateSessionStorage();
             }
         }
     }, {
