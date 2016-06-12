@@ -472,7 +472,7 @@ class Main extends React.Component {
             data: {'uid': window.sessionStorage.uid,
                    'cid': review.cid,
                    'content': review.content,
-                   'starRating': review.starRating} 
+                   'starRating': review.starRating}, 
 	    type: 'post',
 	    cache: false,
 	    async: false,

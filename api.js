@@ -444,7 +444,7 @@ exports.like = function(req, res) {
                         return res.json({'result':-1});
                     }
                     if (result) {
-		        //if (result.length) {
+		        if (result.length) {
 		        //    var update = connection.query(
                         //                 'delete from tourLike where '+data,
                         //                 function(err, result){
@@ -452,7 +452,7 @@ exports.like = function(req, res) {
                         //                         console.error(err);
                         //                         return res.json({'result':-1});
                         //                     }
-                                             res.json({'result':2})}
+                                             res.json({'result':2});
                         //    );
 		        } else {
 		            var insert = connection.query(
@@ -474,18 +474,17 @@ exports.like = function(req, res) {
 };
 
 exports.review = function(req, res) {
-    if ( isEmpty(req.body.review) || isEmpty(req.body.star) ||
+    if ( isEmpty(req.body.content) || isEmpty(req.body.starRating) ||
          isEmpty(req.body.uid) || isEmpty(req.body.cid))
 	return res.json({'result':-2});
-    var review = mysql.escape(req.query.review);
-    var star = Number(req.query.star);
+    var review = mysql.escape(req.body.content);
+    var star = Number(req.body.starRating);
     var date = new Date();
     date.setHours(date.getHours() + 9);
     date_str = date.getUTCFullYear() + "." + (1+date.getUTCMonth()) + "." + date.getUTCDate();
     date.setHours(date.getHours() + 9);
-    console.log(date);
-    var data = 'uid='+mysql.escape(req.query.uid)+
-               ' and cid='+Number(req.query.cid);
+    var data = 'uid='+mysql.escape(req.body.uid)+
+               ' and cid='+Number(req.body.cid);
     var query = connection.query(
                 'select * from tourReview where '+data,
                 function(err,result){
@@ -505,13 +504,13 @@ exports.review = function(req, res) {
                         //                         console.error(err);
                         //                         return res.json({'result':-1});
                         //                     }
-                                             res.json({'result':2})}
+                                             res.json({'result':2});
                         //    );
 		        } else {
 		            var insert = connection.query(
                                          'insert into tourReview set ?',
-                                        {'uid':req.query.uid,
-			  	         'cid':Number(req.query.cid),
+                                        {'uid':req.body.uid,
+			  	         'cid':Number(req.body.cid),
 	                                 'review':review,
                                          'star': star,
                                          'date': date_str}, 
