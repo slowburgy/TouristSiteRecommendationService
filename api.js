@@ -75,12 +75,12 @@ exports.signup = function(req, res) {
     if (isEmpty(req.query.uid) || isEmpty(req.query.age) || isEmpty(req.query.sex) || isEmpty(req.query.travStyle)|| isEmpty(req.query.nickname) || isEmpty(req.query.nationality))
         return res.json({'result':-2});
 
-    var user = {'uid':uid,
+    var user = {'uid':req.query.uid,
                 'age':Number(req.query.age),
                 'sex':checkSex(req.query.sex),
                 'travStyle':checkStyle(req.query.travStyle),
-                'nationality':nationality,
-                'nickname':nickname,
+                'nationality':req.query.nationality,
+                'nickname':req.query.nickname,
                 'numPref':0};
     var query = connection.query(
                 'insert into tourUser set ?', user,
@@ -112,18 +112,18 @@ exports.usermodify = function(req, res) {
     });
 };
 
-exports.login = function(req, res) {
+exports.uidcheck = function(req, res) {
     if ( isEmpty(req.query.uid))
-	return res.json({'result':-2});
+            return res.json({'result':-2});
     var query = connection.query(
                 'select uid from tourUser where uid='+mysql.escape(req.query.uid),
                 function(err,result){
                     if (err) {
-                        console.error(err);
-                        return res.json({'result':-1});
+                       console.error(err);
+                       return res.json({'result':-1});
                     }
                     if (!result || !result.length) res.json({'result':0});
-                    else res.json({'result':1, 'uid':result[0]['uid']});
+                    else res.json({"result":1});
     });
 };
 
@@ -174,7 +174,7 @@ exports.recommend = function(req, res) {
                         else {
                           var i=0; var items = [];
 			  (function loop() {
-			     if (i<result.length) {
+			     if (i<Math.min(7,result.length)) {
 			       if (i != result.length - 1) getPlaceData(result[i].cid, items, result[i].pref, exp, null);
 			       else getPlaceData(result[i].cid, items, result[i].pref, exp, res);
 			       i++;

@@ -34906,21 +34906,27 @@ var Main = function (_React$Component) {
 
         _this.handleLoginButtonClick = _this.handleLoginButtonClick.bind(_this);
         _this.authorizeUser = _this.authorizeUser.bind(_this);
+
+        var splited = window.location.href.split("?");
+        if (splited.length > 1 && splited[1].startsWith("oauth=")) {
+            var _this$authorizeUser = _this.authorizeUser();
+
+            var _this$authorizeUser2 = _slicedToArray(_this$authorizeUser, 2);
+
+            var uid = _this$authorizeUser2[0];
+            var firstLogin = _this$authorizeUser2[1];
+
+            opener.top.window.open('about:blank', '_self').close();
+
+            if (firstLogin) window.location.href = "select_favorites.html";else window.location.href = "main.html";
+        }
         return _this;
     }
 
     _createClass(Main, [{
         key: 'handleLoginButtonClick',
         value: function handleLoginButtonClick() {
-            var _authorizeUser = this.authorizeUser();
-
-            var _authorizeUser2 = _slicedToArray(_authorizeUser, 2);
-
-            var uid = _authorizeUser2[0];
-            var firstLogin = _authorizeUser2[1];
-
-
-            if (firstLogin) window.location.href = "select_favorites.html";else this.state.info.bodyPage = "main.html";
+            window.open("/auth/facebook");
         }
     }, {
         key: 'authorizeUser',
@@ -34934,11 +34940,27 @@ var Main = function (_React$Component) {
              */
 
             /* TODO: Routine for OAuth verification and communication with the server goes here */
-            var uid = "test",
-                firstLogin = true;
+            var uid = window.location.href.split("?oauth=")[1].split("#_=_")[0];
+            var firstLogin = -1;
+            $.ajax({
+                url: "/api/uidcheck?uid=" + uid,
+                type: 'get',
+                async: false,
+                cache: false,
+                success: function success(data) {
+                    if (data.result == 1) {
+                        firstLogin = 0;
+                    } else if (data.result == 0) {
+                        firstLogin = 1;
+                    }
+                },
+                error: function error(request, status, _error) {
+                    console.error(_error);
+                }
+            });
 
+            if (firstLogin == -1) console.error("FIRSTLOGIN ERROR");
             window.sessionStorage.uid = uid;
-
             return [uid, firstLogin];
         }
     }, {

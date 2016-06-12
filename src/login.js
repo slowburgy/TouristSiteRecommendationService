@@ -22,13 +22,19 @@ class Main extends React.Component {
 
         this.handleLoginButtonClick = this.handleLoginButtonClick.bind(this);
         this.authorizeUser = this.authorizeUser.bind(this);
+
+        var splited = window.location.href.split("?");
+        if (splited.length > 1 && splited[1].startsWith("oauth=")) {
+            var [uid, firstLogin] = this.authorizeUser();
+            opener.top.window.open('about:blank', '_self').close();
+
+            if (firstLogin) window.location.href="select_favorites.html";
+            else window.location.href="main.html";
+        }
     }
 
     handleLoginButtonClick() {
-        var [uid, firstLogin] = this.authorizeUser();
-        
-        if (firstLogin) window.location.href="select_favorites.html"; 
-        else this.state.info.bodyPage = "main.html";
+        window.open("/auth/facebook");
     }
     
     authorizeUser() {
@@ -41,10 +47,27 @@ class Main extends React.Component {
          */
 
         /* TODO: Routine for OAuth verification and communication with the server goes here */
-        var uid = "test", firstLogin = true;
-        
+        var uid = window.location.href.split("?oauth=")[1].split("#_=_")[0];
+        var firstLogin = -1;
+	$.ajax({
+            url: "/api/uidcheck?uid=" + uid,
+	    type: 'get',
+	    async: false,
+	    cache: false,
+	    success: function(data) {
+	        if (data.result == 1) {
+		    firstLogin = 0;
+		} else if (data.result == 0) {
+                    firstLogin = 1;
+                }
+            },
+            error: function(request, status, error) {
+	        console.error(error);
+	    }
+	});
+ 
+        if (firstLogin == -1) console.error("FIRSTLOGIN ERROR");
         window.sessionStorage.uid = uid;
-        
         return [uid, firstLogin];
     }
 

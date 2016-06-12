@@ -48258,7 +48258,7 @@ var Main = function (_React$Component) {
                             user.firstlogin = data.userprofile.numpref >= 10;
                             user.nickname = data.userprofile.nickname;
                             user.age = data.userprofile.age;
-                            user.gender = data.userprofile.sex;
+                            if (data.userprofile.sex == 0) user.gender = "Male";else if (data.userprofile.sex == 1) user.gender = "Female";else user.gender = "ETC.";
                             user.nationality = data.userprofile.nationality;
                         }
                     },
@@ -48398,12 +48398,13 @@ var Main = function (_React$Component) {
         key: 'handlePlaceLike',
         value: function handlePlaceLike(place) {
             // @param place: JSON object, with format specified as above.
-
-            var duplicate = this.state.info.user.likedPlaces.map(function (e) {
-                return e.cid == place.cid;
-            }).reduce(function (p, c) {
-                return p || c;
-            });
+            if (this.state.info.user.likedPlaces.length == 0) var duplicate = false;else {
+                var duplicate = this.state.info.user.likedPlaces.map(function (e) {
+                    return e.cid == place.cid;
+                }).reduce(function (p, c) {
+                    return p || c;
+                });
+            }
 
             if (!duplicate) {
                 /* TODO: Routine for updating user's liked places in the server goes here */
