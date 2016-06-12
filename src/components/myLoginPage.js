@@ -44,6 +44,15 @@ const styles = {
 
 
 export default class MyLoginPage extends React.Component {
+    constructor(props){
+	super(props);
+	this.handleLoginButtonClick = this.handleLoginButtonClick.bind(this);
+    }
+
+    handleLoginButtonClick() {
+	this.props.handlers.handleLoginButtonClick();
+    }
+
     render() {
         return (
             <div style={styles.root}>
@@ -56,6 +65,7 @@ export default class MyLoginPage extends React.Component {
                         secondary={true}
                         style={styles.buttonStyle}
                         labelStyle={styles.buttonTextStyle}
+			onTouchTap={this.handleLoginButtonClick}
                     />
                 </div>
             </div>
