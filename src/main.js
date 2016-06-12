@@ -230,7 +230,7 @@ class Main extends React.Component {
          */
 
         if (!window.sessionStorage.user) {
-            var uid = "test"; //window.sessionStorage.uid;
+            var uid = window.sessionStorage.uid;
             var user = {}, place = null;
             
             $.ajax({
