@@ -40265,7 +40265,7 @@ var Main = function (_React$Component) {
                 async: false,
                 cache: false,
                 success: function success(data) {
-                    if (data.result > 0) {
+                    if (data.result < 0) {
                         errored = true;
                     }
                 },
@@ -40281,7 +40281,7 @@ var Main = function (_React$Component) {
                     async: false,
                     cache: false,
                     success: function success(data) {
-                        if (data.result > 0) {
+                        if (data.result < 0) {
                             errored = true;
                         }
                     },
