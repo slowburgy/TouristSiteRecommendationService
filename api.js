@@ -94,12 +94,12 @@ exports.signup = function(req, res) {
 };
 
 exports.usermodify = function(req, res) {
-    if ( isEmpty(req.query.uid) || isEmpty(req.query.age) || isEmpty(req.query.sex) || isEmpty(req.query.travStyle) || isEmpty(req.query.nickname) || isEmpty(req.query.nationalty) )
+    if ( isEmpty(req.query.uid) || isEmpty(req.query.age) || isEmpty(req.query.sex) || isEmpty(req.query.travStyle) || isEmpty(req.query.nickname) || isEmpty(req.query.nationality) )
 	return res.json({'result':-2});
     var user = {'age':Number(req.query.age),
                 'sex':checkSex(req.query.sex),
-		'nationality':nationality,
-                'nickname':nickname,
+		'nationality':req.query.nationality,
+                'nickname':req.query.nickname,
                 'travStyle':checkStyle(req.query.travStyle)};
     var query = connection.query(
                 'update tourUser set ? where uid='+mysql.escape(req.query.uid), user,
@@ -151,12 +151,12 @@ exports.recommend = function(req, res) {
          isEmpty(req.query.travStyle) || isEmpty(req.query.area))
             return res.json({'result':-2});
     var age = Number(req.query.age);
-    var inner_query = "1";
     var sex = checkSex(req.query.sex);
     var travStyle = checkStyle(req.query.travStyle);
-    //var inner_query = 'sex = '+checkSex(req.query.sex)+' and '+
-    //            'travStyle = '+checkStyle(req.query.travStyle)+' and '+
-    //            'age>'+(age)+' and age<'+(age+100);
+    var inner_query = '1';
+    if (sex != 2) inner_query = inner_query + ' and sex = '+sex;
+    if (age != 0) inner_query = inner_query + ' and age > '+age+' and age < '+(age+10);
+    if (travStyle != 5) inner_query = inner_query + ' and travStyle = '+travStyle;
     var area = Number(req.query.area);
     var exp = getExp(age, sex, travStyle, area);
     if ( isEmpty(req.query.uid)) {
@@ -369,7 +369,7 @@ exports.randomplace = function(req, res) {
 	function(err,result){
 	if (err) {
 	    console.error(err);
-	    return res.json({'result':'-1'});
+	    return res.json({'result':-1});
 	}
 	if (!result || !result.length) res.json({'result':0});
 	else {
@@ -377,7 +377,7 @@ exports.randomplace = function(req, res) {
             (function loop() {
 	    if (i<result.length) {
                 if (i != result.length - 1) items = getPlaceData(result[i].cid, items, null, null, null);
-                else items = getPlaceData(result[i].cid, items, null, null, res);
+                else { console.log(items); items = getPlaceData(result[i].cid, items, null, null, res); }
                 i++;
                 loop();
             }}());

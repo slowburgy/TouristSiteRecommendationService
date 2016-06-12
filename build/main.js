@@ -45524,7 +45524,7 @@ var MyAppBar = function (_React$Component) {
     }, {
         key: 'handleLogoutButtonClick',
         value: function handleLogoutButtonClick() {
-            window.sessionStorage.user = null;
+            window.sessionStorage.clear();
             window.location.href = "../../index.html";
         }
     }, {
@@ -48123,97 +48123,95 @@ var Main = function (_React$Component) {
              */
 
             if (!window.sessionStorage.user) {
-                // var uid = window.sessionStorage.uid;
-                // var user = {}, place = null;
-                //
-                // $.ajax({
-                //     url: "/api/userinfo?uid=" + uid,
-                //     type: 'get',
-                //     async: false,
-                //     cache: false,
-                //     success: function(data) {
-                //         if (data.result == 1) {
-                //             user.uid = uid;
-                //             user.firstlogin = (data.userprofile.numpref >= 10);
-                //             user.nickname = data.userprofile.nickname;
-                //             user.age = data.userprofile.age;
-                //             user.gender = data.userprofile.sex;
-                //             user.nationality = data.userprofile.nationality;
-                //         }
-                //     },
-                //     error: function(request, status, error) {
-                //         // alert(error);
-                //         console.error(error);
-                //     }
-                // });
-                //
-                // $.ajax({
-                //     url:
-                //     "/api/recommend?uid=" + uid +
-                //     "&age=" + user.age +
-                //     "&sex=" + user.gender +
-                //     "&travStyle=1" + // TEMP
-                //     "&area=1", // TEMP
-                //     type: 'get',
-                //     async: false,
-                //     cache: false,
-                //     success: function(data) {
-                //         if (data.result == 1) {
-                //             user.recommendations = [{}, {}, {}, {}];
-                //             for (var i=0; i < 4; i++) {
-                //                 user.recommendations.exp = data.data.exp;
-                //                 user.recommendations.items = [];
-                //
-                //                 for (var j=0; j < data.data.items.length; j++) {
-                //                     user.recommendations[i].items.push(data.data.items[j].item);
-                //                 }
-                //             }
-                //         }
-                //     },
-                //     error: function(request, status, error) {
-                //         console.error(error); // alert(error);
-                //     }
-                // });
-                //
-                // $.ajax({
-                //     url: "/api/getlike?uid=" + uid,
-                //     type: 'get',
-                //     cache: false,
-                //     async: false,
-                //     success: function(data) {
-                //         user.likedPlaces = [];
-                //         if (data.result == 1) {
-                //             for (var i=0; i < data.data.length; i++) {
-                //                 user.likedPlaces.push(data.data[i].item);
-                //             }
-                //         }
-                //     },
-                //     error: function(request, status, error) {
-                //         console.error(error); // alert(error);
-                //     }
-                // });
-                //
-                // $.ajax({
-                //     url: "/api/getreviewByUID?uid=" + uid,
-                //     type: 'get',
-                //     cache: false,
-                //     async: false,
-                //     success: function(data) {
-                //         user.reviews = [];
-                //         if (data.result == 1) {
-                //             for (var i=0; i < data.items.length; i++) {
-                //                 user.reviews.push(data.items[i]);
-                //             }
-                //         }
-                //     },
-                //     error: function(request, status, error) {
-                //         console.error(error); // alert(error);
-                //     }
-                // });
-                //
-                // console.log(user);
+                var uid = window.sessionStorage.uid;
+                var user = {},
+                    place = null;
 
-                this.state.info.user = _user_;
+                $.ajax({
+                    url: "/api/userinfo?uid=" + uid,
+                    type: 'get',
+                    async: false,
+                    cache: false,
+                    success: function success(data) {
+                        if (data.result == 1) {
+                            user.uid = uid;
+                            user.firstlogin = data.userprofile.numpref >= 10;
+                            user.nickname = data.userprofile.nickname;
+                            user.age = data.userprofile.age;
+                            user.gender = data.userprofile.sex;
+                            user.nationality = data.userprofile.nationality;
+                        }
+                    },
+                    error: function error(request, status, _error) {
+                        console.error(_error);
+                    }
+                });
+
+                $.ajax({
+                    url: "/api/recommend?uid=" + uid + "&age=0" + //+ user.age +
+                    "&sex=none" + //+ user.gender +
+                    "&travStyle=1" + // TEMP
+                    "&area=1", // TEMP
+                    type: 'get',
+                    async: false,
+                    cache: false,
+                    success: function success(data) {
+                        if (data.result == 1) {
+                            user.recommendations = [{}, {}, {}, {}];
+                            for (var i = 0; i < 4; i++) {
+                                user.recommendations[i].exp = data.data.exp;
+                                user.recommendations[i].items = [];
+
+                                for (var j = 0; j < data.data.items.length; j++) {
+                                    user.recommendations[i].items.push(data.data.items[j].item);
+                                }
+                            }
+                        } else if (data.result == 0) user.recommendations = [{ 'exp': 'No Data', items: [] }];
+                    },
+                    error: function error(request, status, _error2) {
+                        console.error(_error2); // alert(error);
+                    }
+                });
+
+                $.ajax({
+                    url: "/api/getlike?uid=" + uid,
+                    type: 'get',
+                    cache: false,
+                    async: false,
+                    success: function success(data) {
+                        user.likedPlaces = [];
+                        if (data.result == 1) {
+                            for (var i = 0; i < data.data.length; i++) {
+                                user.likedPlaces.push(data.data[i].item);
+                            }
+                        }
+                    },
+                    error: function error(request, status, _error3) {
+                        console.error(_error3); // alert(error);
+                    }
+                });
+
+                $.ajax({
+                    url: "/api/getreviewByUID?uid=" + uid,
+                    type: 'get',
+                    cache: false,
+                    async: false,
+                    success: function success(data) {
+                        user.reviews = [];
+                        if (data.result == 1) {
+                            for (var i = 0; i < data.items.length; i++) {
+                                user.reviews.push(data.items[i]);
+                            }
+                        }
+                    },
+                    error: function error(request, status, _error4) {
+                        console.error(_error4); // alert(error);
+                    }
+                });
+
+                console.log(user);
+
+                this.state.info.user = user; //_user_;
                 this.updateSessionStorage();
             } else {
                 // If data is in the sessionStorage, retrieve from there.
@@ -48225,18 +48223,33 @@ var Main = function (_React$Component) {
         key: 'fetchRecommendationsFromServer',
         value: function fetchRecommendationsFromServer(categories) {
             var recList = categories.map(function (category) {
-                var recommendations;
+                var recommendations = { 'exp': '', 'items': [] };
 
                 /*
                 TODO: Routine for fetching list of places for a single recommendation category goes here
                 @param category: String
                 */
 
-                // Just for testing. Replace with the real value.
-                recommendations = {
-                    exp: category,
-                    items: [_place_]
-                };
+                $.ajax({
+                    url: // Need to change
+                    "/api/recommend?uid=" + window.sessionStorage.uid + "&age=" + window.sessionStorage.user.age + "&sex=" + window.sessionStorage.user.gender + "&travStyle=1" + // TEMP
+                    "&area=1", // TEMP
+                    type: 'get',
+                    async: false,
+                    cache: false,
+                    success: function success(data) {
+                        if (data.result == 1) {
+                            for (var j = 0; j < data.data.items.length; j++) {
+                                recommendations.items.push(data.data.items[j].item);
+                            }
+                        } else if (data.result == 0) recommendations = [];
+                    },
+                    error: function error(request, status, _error5) {
+                        console.error(_error5); // alert(error);
+                    }
+                });
+                recommendations.exp = category; // Need to change
+
                 return recommendations;
             });
 
@@ -48275,11 +48288,22 @@ var Main = function (_React$Component) {
 
             if (!duplicate) {
                 /* TODO: Routine for updating user's liked places in the server goes here */
-
-                this.state.info.user.likedPlaces.unshift(place);
-                this.updateSessionStorage();
-
-                console.log("Place liked!");
+                $.ajax({
+                    url: "/api/like?uid=" + window.sessionStorage.uid + "&cid=" + place.cid,
+                    type: 'get',
+                    cache: false,
+                    async: false,
+                    success: function success(data) {
+                        if (data.result == 1) {
+                            this.state.info.user.likedPlaces.unshift(place);
+                            this.updateSessionStorage();
+                            console.log("Place liked!");
+                        }
+                    },
+                    error: function error(request, status, _error6) {
+                        console.error(_error6);
+                    }
+                });
             } else {
                 console.log("Duplicate entry.");
             }
@@ -48296,12 +48320,25 @@ var Main = function (_React$Component) {
              */
 
             /* TODO: Routine for updating user & place review in the server goes here */
+            /*$.ajax({
+                       url: "/api/review",
+                       data: {'uid': uid, 'cid': userReview.cid,
+                type: 'post',
+                cache: false,
+                async: false,
+                success: function(data) {
+                    if (data.result >= 1) {
+            	    console.log("Review submitted!");
+            	}
+                       },
+                       error: function(request, status, error) {
+                    console.error(error);
+                }
+                   });*/
 
             this.state.info.user.reviews.unshift(userReview);
             this.state.info.place.reviews.unshift(placeReview);
             this.updateSessionStorage();
-
-            console.log("Review submitted!");
         }
     }, {
         key: 'render',
@@ -48445,6 +48482,11 @@ var stringKo = exports.stringKo = {
 // shim for using process in browser
 
 var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it don't break things.
+var cachedSetTimeout = setTimeout;
+var cachedClearTimeout = clearTimeout;
+
 var queue = [];
 var draining = false;
 var currentQueue;
@@ -48469,7 +48511,7 @@ function drainQueue() {
     if (draining) {
         return;
     }
-    var timeout = setTimeout(cleanUpNextTick);
+    var timeout = cachedSetTimeout(cleanUpNextTick);
     draining = true;
 
     var len = queue.length;
@@ -48486,7 +48528,7 @@ function drainQueue() {
     }
     currentQueue = null;
     draining = false;
-    clearTimeout(timeout);
+    cachedClearTimeout(timeout);
 }
 
 process.nextTick = function (fun) {
@@ -48498,7 +48540,7 @@ process.nextTick = function (fun) {
     }
     queue.push(new Item(fun, args));
     if (queue.length === 1 && !draining) {
-        setTimeout(drainQueue, 0);
+        cachedSetTimeout(drainQueue, 0);
     }
 };
 

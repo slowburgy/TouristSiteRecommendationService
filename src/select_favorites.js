@@ -58,7 +58,25 @@ class Main extends React.Component {
     
     getRandomPlaceList() {
         /* TODO: Routine for getting a list of random places from the server goes here */
-        
+        randomPlaces = []
+
+        $.ajax({
+            url: "/api/randomplace",
+	    type: 'get',
+	    cache: false,
+	    async: false,
+	    success: function(data) {
+	        if (data.result == 1) {
+                    for (var i=0; i<data.data.length; i++) {
+		        randomPlaces.push(data.data[i].item);
+                    }
+		}
+	    },
+            error: function(request, status, error) {
+	        console.error(error);
+	    }
+        });
+
         return randomPlaces;
     }
     
