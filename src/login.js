@@ -83,7 +83,7 @@ class Main extends React.Component {
                         handlers={appBarHandlers}
                     />
                     <div>
-                        <MyLoginPage />
+                        <MyLoginPage handlers = {appBarHandlers}/>
                     </div>
                 </div>
             </MuiThemeProvider>
