@@ -230,97 +230,97 @@ class Main extends React.Component {
          */
 
         if (!window.sessionStorage.user) {
-            // var uid = window.sessionStorage.uid;
-            // var user = {}, place = null;
-            //
-            // $.ajax({
-            //     url: "/api/userinfo?uid=" + uid,
-            //     type: 'get',
-            //     async: false,
-            //     cache: false,
-            //     success: function(data) {
-            //         if (data.result == 1) {
-            //             user.uid = uid;
-            //             user.firstlogin = (data.userprofile.numpref >= 10);
-            //             user.nickname = data.userprofile.nickname;
-            //             user.age = data.userprofile.age;
-            //             user.gender = data.userprofile.sex;
-            //             user.nationality = data.userprofile.nationality;
-            //         }
-            //     },
-            //     error: function(request, status, error) {
-            //         // alert(error);
-            //         console.error(error);
-            //     }
-            // });
-            //
-            // $.ajax({
-            //     url:
-            //     "/api/recommend?uid=" + uid +
-            //     "&age=" + user.age +
-            //     "&sex=" + user.gender +
-            //     "&travStyle=1" + // TEMP
-            //     "&area=1", // TEMP
-            //     type: 'get',
-            //     async: false,
-            //     cache: false,
-            //     success: function(data) {
-            //         if (data.result == 1) {
-            //             user.recommendations = [{}, {}, {}, {}];
-            //             for (var i=0; i < 4; i++) {
-            //                 user.recommendations.exp = data.data.exp;
-            //                 user.recommendations.items = [];
-            //
-            //                 for (var j=0; j < data.data.items.length; j++) {
-            //                     user.recommendations[i].items.push(data.data.items[j].item);
-            //                 }
-            //             }
-            //         }
-            //     },
-            //     error: function(request, status, error) {
-            //         console.error(error); // alert(error);
-            //     }
-            // });
-            //
-            // $.ajax({
-            //     url: "/api/getlike?uid=" + uid,
-            //     type: 'get',
-            //     cache: false,
-            //     async: false,
-            //     success: function(data) {
-            //         user.likedPlaces = [];
-            //         if (data.result == 1) {
-            //             for (var i=0; i < data.data.length; i++) {
-            //                 user.likedPlaces.push(data.data[i].item);
-            //             }
-            //         }
-            //     },
-            //     error: function(request, status, error) {
-            //         console.error(error); // alert(error);
-            //     }
-            // });
-            //
-            // $.ajax({
-            //     url: "/api/getreviewByUID?uid=" + uid,
-            //     type: 'get',
-            //     cache: false,
-            //     async: false,
-            //     success: function(data) {
-            //         user.reviews = [];
-            //         if (data.result == 1) {
-            //             for (var i=0; i < data.items.length; i++) {
-            //                 user.reviews.push(data.items[i]);
-            //             }
-            //         }
-            //     },
-            //     error: function(request, status, error) {
-            //         console.error(error); // alert(error);
-            //     }
-            // });
-            //
-            // console.log(user);
+            var uid = "test"; //window.sessionStorage.uid;
+            var user = {}, place = null;
+            
+            $.ajax({
+                url: "/api/userinfo?uid=" + uid,
+                type: 'get',
+                async: false,
+                cache: false,
+                success: function(data) {
+                    if (data.result == 1) {
+                        user.uid = uid;
+                        user.firstlogin = (data.userprofile.numpref >= 10);
+                        user.nickname = data.userprofile.nickname;
+                        user.age = data.userprofile.age;
+                        user.gender = data.userprofile.sex;
+                        user.nationality = data.userprofile.nationality;
+                    }
+                },
+                error: function(request, status, error) {
+                    // alert(error);
+                    console.error(error);
+                }
+            });
+            
+            $.ajax({
+                url:
+                "/api/recommend?uid=" + uid +
+                "&age=" + user.age +
+                "&sex=" + user.gender +
+                "&travStyle=1" + // TEMP
+                "&area=1", // TEMP
+                type: 'get',
+                async: false,
+                cache: false,
+                success: function(data) {
+                    if (data.result == 1) {
+                        user.recommendations = [{}, {}, {}, {}];
+                        for (var i=0; i < 4; i++) {
+                            user.recommendations[i].exp = data.data.exp;
+                            user.recommendations[i].items = [];
+            
+                            for (var j=0; j < data.data.items.length; j++) {
+                                user.recommendations[i].items.push(data.data.items[j].item);
+                            }
+                        }
+                    }
+                },
+                error: function(request, status, error) {
+                    console.error(error); // alert(error);
+                }
+            });
+            
+            $.ajax({
+                url: "/api/getlike?uid=" + uid,
+                type: 'get',
+                cache: false,
+                async: false,
+                success: function(data) {
+                    user.likedPlaces = [];
+                    if (data.result == 1) {
+                        for (var i=0; i < data.data.length; i++) {
+                            user.likedPlaces.push(data.data[i].item);
+                        }
+                    }
+                },
+                error: function(request, status, error) {
+                    console.error(error); // alert(error);
+                }
+            });
+            
+            $.ajax({
+                url: "/api/getreviewByUID?uid=" + uid,
+                type: 'get',
+                cache: false,
+                async: false,
+                success: function(data) {
+                    user.reviews = [];
+                    if (data.result == 1) {
+                        for (var i=0; i < data.items.length; i++) {
+                            user.reviews.push(data.items[i]);
+                        }
+                    }
+                },
+                error: function(request, status, error) {
+                    console.error(error); // alert(error);
+                }
+            });
+            
+            console.log(user);
 
-            this.state.info.user = _user_;
+            this.state.info.user = user; //_user_;
             this.updateSessionStorage();
 
         } else {

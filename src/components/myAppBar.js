@@ -60,7 +60,7 @@ export default class MyAppBar extends React.Component {
     }
 
     handleLogoutButtonClick() {
-        window.sessionStorage.user = null;
+        window.sessionStorage.clear();
         window.location.href = "../../index.html";
     }
 
