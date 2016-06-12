@@ -70,7 +70,7 @@ export default class MyReviews extends React.Component {
                                         </div>
                                     </div>
                                     <ListItem
-                                        primaryText={item.name}
+                                        primaryText={item.placeName}
                                         secondaryText={item.content}
                                         secondaryTextLines={2}
                                         disabled={true}

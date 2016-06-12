@@ -41,19 +41,25 @@ var _user_ = {
                 starRating: 3,
                 reviews: [
                     {
-                        name: 'nick',
+                        cid: "1",
+                        placeName: "Seorak",
+                        userName: 'nick',
                         starRating: 5,
                         date: '2016.06.07',
                         content: 'This place is fantastic! The food is amazing, the people are kind, and the view is magnificent. I would certainly come here again!'
                     },
                     {
-                        name: 'brendan',
+                        cid: "1",
+                        placeName: "Seorak",
+                        userName: 'nick',
                         starRating: 1,
                         date: '2016.05.01',
                         content: 'Imma never come \'ere again, I can tell ya that!'
                     },
                     {
-                        name: 'you',
+                        cid: "1",
+                        placeName: "Seorak",
+                        userName: 'nick',
                         starRating: 3,
                         date: '2016.04.02',
                         content: 'Good!'
@@ -74,19 +80,25 @@ var _user_ = {
         starRating: 3,
         reviews: [
             {
-                name: 'sherlock',
+                cid: "13",
+                placeName: 'Seorak',
+                userName: 'sherlock',
                 starRating: 5,
                 date: '2016.06.07',
                 content: 'This place is fantastic! The food is amazing, the people are kind, and the view is magnificent. I would certainly come here again!'
             },
             {
-                name: 'holmes',
+                cid: "13",
+                placeName: 'Seorak',
+                userName: 'holmes',
                 starRating: 1,
                 date: '2016.05.01',
                 content: 'Imma never come \'ere again, I can tell ya that!'
             },
             {
-                name: 'watson',
+                cid: "13",
+                placeName: 'Seorak',
+                userName: 'watson',
                 starRating: 3,
                 date: '2016.04.02',
                 content: 'Good!'
@@ -97,19 +109,25 @@ var _user_ = {
 
     reviews: [
         {
-            name: 'Seolark',
+            cid: "13",
+            placeName: 'Seorak',
+            userName: 'Seolark',
             starRating: 5,
             date: '2016.06.07',
             content: 'This place is fantastic! The food is amazing, the people are kind, and the view is magnificent. I would certainly come here again!'
         },
         {
-            name: 'Mt. Everest',
+            cid: "13",
+            placeName: 'Seorak',
+            userName: 'Mt. Everest',
             starRating: 1,
             date: '2016.05.01',
             content: 'Imma never come \'ere again, I can tell ya that!'
         },
         {
-            name: 'Jeju Island',
+            cid: "13",
+            placeName: 'Seorak',
+            userName: 'Jeju Island',
             starRating: 3,
             date: '2016.04.02',
             content: 'Good!'
@@ -128,19 +146,25 @@ var _place_ = {
     starRating: 3,
     reviews: [
         {
-            name: 'Seolark',
+            cid: "13",
+            placeName: 'Seorak',
+            userName: 'Brendan',
             starRating: 5,
             date: '2016.06.07',
             content: 'This place is fantastic! The food is amazing, the people are kind, and the view is magnificent. I would certainly come here again!'
         },
         {
-            name: 'Seolark',
+            cid: "13",
+            placeName: 'Nick',
+            userName: 'Seolark',
             starRating: 1,
             date: '2016.05.01',
             content: 'Imma never come \'ere again, I can tell ya that!'
         },
         {
-            name: 'Seolark',
+            cid: "13",
+            placeName: 'Adam',
+            userName: 'Seolark',
             starRating: 3,
             date: '2016.04.02',
             content: 'Good!'
@@ -230,97 +254,97 @@ class Main extends React.Component {
          */
 
         if (!window.sessionStorage.user) {
-            var uid = window.sessionStorage.uid;
-            var user = {}, place = null;
+            // var uid = window.sessionStorage.uid;
+            // var user = {}, place = null;
+            //
+            // $.ajax({
+            //     url: "/api/userinfo?uid=" + uid,
+            //     type: 'get',
+            //     async: false,
+            //     cache: false,
+            //     success: function(data) {
+            //         if (data.result == 1) {
+            //             user.uid = uid;
+            //             user.firstlogin = (data.userprofile.numpref >= 10);
+            //             user.nickname = data.userprofile.nickname;
+            //             user.age = data.userprofile.age;
+            //             user.gender = data.userprofile.sex;
+            //             user.nationality = data.userprofile.nationality;
+            //         }
+            //     },
+            //     error: function(request, status, error) {
+            //         // alert(error);
+            //         console.error(error);
+            //     }
+            // });
+            //
+            // $.ajax({
+            //     url:
+            //     "/api/recommend?uid=" + uid +
+            //     "&age=" + user.age +
+            //     "&sex=" + user.gender +
+            //     "&travStyle=1" + // TEMP
+            //     "&area=1", // TEMP
+            //     type: 'get',
+            //     async: false,
+            //     cache: false,
+            //     success: function(data) {
+            //         if (data.result == 1) {
+            //             user.recommendations = [{}, {}, {}, {}];
+            //             for (var i=0; i < 4; i++) {
+            //                 user.recommendations[i].exp = data.data.exp;
+            //                 user.recommendations[i].items = [];
+            //
+            //                 for (var j=0; j < data.data.items.length; j++) {
+            //                     user.recommendations[i].items.push(data.data.items[j].item);
+            //                 }
+            //             }
+            //         }
+            //     },
+            //     error: function(request, status, error) {
+            //         console.error(error); // alert(error);
+            //     }
+            // });
+            //
+            // $.ajax({
+            //     url: "/api/getlike?uid=" + uid,
+            //     type: 'get',
+            //     cache: false,
+            //     async: false,
+            //     success: function(data) {
+            //         user.likedPlaces = [];
+            //         if (data.result == 1) {
+            //             for (var i=0; i < data.data.length; i++) {
+            //                 user.likedPlaces.push(data.data[i].item);
+            //             }
+            //         }
+            //     },
+            //     error: function(request, status, error) {
+            //         console.error(error); // alert(error);
+            //     }
+            // });
+            //
+            // $.ajax({
+            //     url: "/api/getreviewByUID?uid=" + uid,
+            //     type: 'get',
+            //     cache: false,
+            //     async: false,
+            //     success: function(data) {
+            //         user.reviews = [];
+            //         if (data.result == 1) {
+            //             for (var i=0; i < data.items.length; i++) {
+            //                 user.reviews.push(data.items[i]);
+            //             }
+            //         }
+            //     },
+            //     error: function(request, status, error) {
+            //         console.error(error); // alert(error);
+            //     }
+            // });
+            //
+            // console.log(user);
             
-            $.ajax({
-                url: "/api/userinfo?uid=" + uid,
-                type: 'get',
-                async: false,
-                cache: false,
-                success: function(data) {
-                    if (data.result == 1) {
-                        user.uid = uid;
-                        user.firstlogin = (data.userprofile.numpref >= 10);
-                        user.nickname = data.userprofile.nickname;
-                        user.age = data.userprofile.age;
-                        user.gender = data.userprofile.sex;
-                        user.nationality = data.userprofile.nationality;
-                    }
-                },
-                error: function(request, status, error) {
-                    // alert(error);
-                    console.error(error);
-                }
-            });
-            
-            $.ajax({
-                url:
-                "/api/recommend?uid=" + uid +
-                "&age=" + user.age +
-                "&sex=" + user.gender +
-                "&travStyle=1" + // TEMP
-                "&area=1", // TEMP
-                type: 'get',
-                async: false,
-                cache: false,
-                success: function(data) {
-                    if (data.result == 1) {
-                        user.recommendations = [{}, {}, {}, {}];
-                        for (var i=0; i < 4; i++) {
-                            user.recommendations[i].exp = data.data.exp;
-                            user.recommendations[i].items = [];
-            
-                            for (var j=0; j < data.data.items.length; j++) {
-                                user.recommendations[i].items.push(data.data.items[j].item);
-                            }
-                        }
-                    }
-                },
-                error: function(request, status, error) {
-                    console.error(error); // alert(error);
-                }
-            });
-            
-            $.ajax({
-                url: "/api/getlike?uid=" + uid,
-                type: 'get',
-                cache: false,
-                async: false,
-                success: function(data) {
-                    user.likedPlaces = [];
-                    if (data.result == 1) {
-                        for (var i=0; i < data.data.length; i++) {
-                            user.likedPlaces.push(data.data[i].item);
-                        }
-                    }
-                },
-                error: function(request, status, error) {
-                    console.error(error); // alert(error);
-                }
-            });
-            
-            $.ajax({
-                url: "/api/getreviewByUID?uid=" + uid,
-                type: 'get',
-                cache: false,
-                async: false,
-                success: function(data) {
-                    user.reviews = [];
-                    if (data.result == 1) {
-                        for (var i=0; i < data.items.length; i++) {
-                            user.reviews.push(data.items[i]);
-                        }
-                    }
-                },
-                error: function(request, status, error) {
-                    console.error(error); // alert(error);
-                }
-            });
-            
-            console.log(user);
-
-            this.state.info.user = user; //_user_;
+            this.state.info.user = _user_; // user;
             this.updateSessionStorage();
 
         } else {
@@ -398,21 +422,21 @@ class Main extends React.Component {
         }
     }
 
-    handleReviewSubmit(placeReview, userReview) {
+    handleReviewSubmit(review) {
         /*
         Take a review (json object) as the argument and add it to:
-                (1) List of reviews of the place (placeReview)
-                (2) List of reviews of the user (userReview)
+                (1) List of reviews of the place 
+                (2) List of reviews of the user 
 
         DO NOT invoke this.setState(). We don't want the UI to be re-rendered.
 
-        @param userReview, placeReview: JSON object, format specified above.
+        @param review: JSON object, format specified above.
          */
 
         /* TODO: Routine for updating user & place review in the server goes here */
 
-        this.state.info.user.reviews.unshift(userReview);
-        this.state.info.place.reviews.unshift(placeReview);
+        this.state.info.user.reviews.unshift(review);
+        this.state.info.place.reviews.unshift(review);
         this.updateSessionStorage();
         
         console.log("Review submitted!");
