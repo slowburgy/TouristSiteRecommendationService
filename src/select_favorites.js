@@ -65,12 +65,24 @@ class Main extends React.Component {
         return randomPlaces;
     }
     
-    redirectToMainPage(placePreferenceList) {
+    redirectToMainPage(placePreferenceList, userInfo) {
         /*
          Handler to redirect the new user from choosing preferred places to the main page. 
-         (1) POST preferences to the server
+         (1) POST preferences and user information to the server
          (2) GET recommendations from the server
          (3) Redirect to the main page
+
+         @param placePreferenceList: List of tuples (cid, preferenceScore)
+         [("123", 5), ...]
+
+         @param userInfo: JSON
+         {
+            nickname: string,
+            age: number,
+            gender: string,
+            nationality: string,
+            travelStyle: string
+         }
          */
         
         /* TODO: Routine for (1) & (2) */
