@@ -40156,8 +40156,40 @@ var Main = function (_React$Component) {
              */
 
             /* TODO: Routine for (1) & (2) goes here */
+            var errored = false;
 
-            window.location.href = 'main.html';
+            $.ajax({
+                url: "/api/signup?uid=" + window.sessionStorage.uid + "&age=" + userInfo.age + "&sex=" + userInfo.gender + "&travStyle=alone" + "&nickname=" + userInfo.nickname + "&nationality=" + userInfo.nationality,
+                type: 'get',
+                async: false,
+                cache: false,
+                success: function success(data) {
+                    if (data.result > 0) {
+                        errored = true;
+                    }
+                },
+                error: function error(request, status, _error2) {
+                    console.error(_error2);
+                }
+            });
+
+            for (var i = 0; i < placePreferenceList.length; i++) {
+                $.ajax({
+                    url: "/api/addpref?uid=" + window.sessionStorage.uid + "&cid=" + placePreferenceList[i][0] + "&pref=" + placePreferenceList[i][1],
+                    type: 'get',
+                    async: false,
+                    cache: false,
+                    success: function success(data) {
+                        if (data.result > 0) {
+                            errored = true;
+                        }
+                    },
+                    error: function error(request, status, _error3) {
+                        console.error(_error3);
+                    }
+                });
+            }
+            if (!errored) window.location.href = 'main.html';else console.log("ERRORED");
         }
     }, {
         key: 'render',
