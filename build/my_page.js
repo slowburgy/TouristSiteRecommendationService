@@ -45635,7 +45635,9 @@ var MyAppBody = function (_React$Component) {
                         return _react2.default.createElement(
                             'div',
                             null,
-                            _react2.default.createElement(_myRecommendationBar2.default, null),
+                            _react2.default.createElement(_myRecommendationBar2.default, {
+                                handlers: _this2.props.handlers
+                            }),
                             _react2.default.createElement(_myCategoryList2.default, {
                                 handlers: _this2.props.handlers,
                                 info: _this2.props.info
@@ -47347,6 +47349,10 @@ var _clear = require('material-ui/svg-icons/content/clear');
 
 var _clear2 = _interopRequireDefault(_clear);
 
+var _IconButton = require('material-ui/IconButton');
+
+var _IconButton2 = _interopRequireDefault(_IconButton);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -47420,25 +47426,41 @@ var MyRecommendationBar = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(MyRecommendationBar).call(this, props));
 
         _this.state = {
-            open: false
+            open: false,
+            currentCategories: []
         };
 
-        _this.handleToggle = _this.handleToggle.bind(_this);
+        _this.handleCategoryOpen = _this.handleCategoryOpen.bind(_this);
+        _this.handleCategoryChosen = _this.handleCategoryChosen.bind(_this);
+        _this.handleCategoryRemove = _this.handleCategoryRemove.bind(_this);
         _this.handleRequestClose = _this.handleRequestClose.bind(_this);
+        _this.handleSubmit = _this.handleSubmit.bind(_this);
         return _this;
     }
 
     _createClass(MyRecommendationBar, [{
-        key: 'handleToggle',
-        value: function handleToggle(event) {
-            console.log("Toggled!");
-
+        key: 'handleCategoryOpen',
+        value: function handleCategoryOpen(event) {
             event.preventDefault();
 
             this.setState({
                 open: true,
                 anchorEl: event.currentTarget
             });
+        }
+    }, {
+        key: 'handleCategoryChosen',
+        value: function handleCategoryChosen(event, menuItem, index) {
+            this.state.currentCategories.push(menuItem.props.value);
+            this.setState(this.state);
+        }
+    }, {
+        key: 'handleCategoryRemove',
+        value: function handleCategoryRemove(category) {
+            this.state.currentCategories = this.state.currentCategories.filter(function (e) {
+                return e !== category;
+            });
+            this.setState(this.state);
         }
     }, {
         key: 'handleRequestClose',
@@ -47448,8 +47470,15 @@ var MyRecommendationBar = function (_React$Component) {
             });
         }
     }, {
+        key: 'handleSubmit',
+        value: function handleSubmit() {
+            this.props.handlers.fetchRecommendationsFromServer(this.state.currentCategories);
+        }
+    }, {
         key: 'render',
         value: function render() {
+            var categories = ["Seoul", "Daejeon", "Busan", "Gwangju", "Daegu", "Ulsan", "Incheon", "Gyeonggi-do", "Chungcheong-do", "Jeolla-do", "Gyeongsang-do", "Gangwon-do", "Jeju-do", "For your age", "For your gender", "Travelling alone", "Travelling with your family", "Travelling with your friends", "Travelling with your lover", "Travelling with your company members"];
+
             return _react2.default.createElement(
                 'div',
                 { style: styles.root },
@@ -47470,7 +47499,7 @@ var MyRecommendationBar = function (_React$Component) {
                             _react2.default.createElement(_RaisedButton2.default, {
                                 style: styles.buttonStyle,
                                 label: 'Click to add a category',
-                                onTouchTap: this.handleToggle,
+                                onTouchTap: this.handleCategoryOpen,
                                 primary: true
                             }),
                             _react2.default.createElement(
@@ -47484,27 +47513,41 @@ var MyRecommendationBar = function (_React$Component) {
                                 },
                                 _react2.default.createElement(
                                     _Menu2.default,
-                                    null,
-                                    _react2.default.createElement(_MenuItem2.default, { value: 1, primaryText: 'Recommended for you' }),
-                                    _react2.default.createElement(_MenuItem2.default, { value: 2, primaryText: 'Recommended for women' }),
-                                    _react2.default.createElement(_MenuItem2.default, { value: 3, primaryText: 'Recommended for 20s' }),
-                                    _react2.default.createElement(_MenuItem2.default, { value: 4, primaryText: 'Recommended for alone' }),
-                                    _react2.default.createElement(_MenuItem2.default, { value: 5, primaryText: 'Recommended for family' })
+                                    {
+                                        maxHeight: (0, _dimensions.verticalDP)(450),
+                                        onItemTouchTap: this.handleCategoryChosen },
+                                    categories.map(function (category, index) {
+                                        return _react2.default.createElement(_MenuItem2.default, {
+                                            primaryText: category,
+                                            value: category
+                                        });
+                                    }.bind(this))
                                 )
                             ),
                             _react2.default.createElement(_RaisedButton2.default, {
                                 label: 'Submit',
                                 style: styles.buttonStyle,
-                                secondary: true
+                                secondary: true,
+                                onTouchTap: this.handleSubmit
                             })
                         ),
                         _react2.default.createElement(
                             _List.List,
-                            { style: styles.listStyle },
-                            _react2.default.createElement(_List.ListItem, { primaryText: 'Recommended for you', rightIcon: _react2.default.createElement(_clear2.default, null) }),
-                            _react2.default.createElement(_List.ListItem, { primaryText: 'Recommended for women', rightIcon: _react2.default.createElement(_clear2.default, null) }),
-                            _react2.default.createElement(_List.ListItem, { primaryText: 'Recommended for 20s', rightIcon: _react2.default.createElement(_clear2.default, null) }),
-                            _react2.default.createElement(_List.ListItem, { primaryText: 'Recommended for family', rightIcon: _react2.default.createElement(_clear2.default, null) })
+                            { style: styles.listStyle, id: 'recommendation_categories' },
+                            this.state.currentCategories.map(function (category) {
+                                var boundRemove = this.handleCategoryRemove.bind(this, category);
+
+                                return _react2.default.createElement(_List.ListItem, {
+                                    primaryText: category,
+                                    rightIconButton: _react2.default.createElement(
+                                        _IconButton2.default,
+                                        {
+                                            onTouchTap: boundRemove
+                                        },
+                                        _react2.default.createElement(_clear2.default, null)
+                                    )
+                                });
+                            }.bind(this))
                         )
                     )
                 )
@@ -47517,7 +47560,7 @@ var MyRecommendationBar = function (_React$Component) {
 
 exports.default = MyRecommendationBar;
 
-},{"../../dimensions/dimensions":1,"material-ui/List":135,"material-ui/Menu":137,"material-ui/MenuItem":139,"material-ui/Popover":145,"material-ui/RaisedButton":147,"material-ui/styles/colors":190,"material-ui/svg-icons/content/clear":198,"react":375}],401:[function(require,module,exports){
+},{"../../dimensions/dimensions":1,"material-ui/IconButton":130,"material-ui/List":135,"material-ui/Menu":137,"material-ui/MenuItem":139,"material-ui/Popover":145,"material-ui/RaisedButton":147,"material-ui/styles/colors":190,"material-ui/svg-icons/content/clear":198,"react":375}],401:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
