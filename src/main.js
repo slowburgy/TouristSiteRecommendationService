@@ -440,6 +440,10 @@ class Main extends React.Component {
 		        this.state.info.user.likedPlaces.unshift(place);
 			this.updateSessionStorage();
                         console.log("Place liked!");
+                    } else if (data.result == 2) {
+                        console.error("Already liked");
+                    } else {
+                        console.error("Like error");
                     }
                 },
                 error: function(request, status, error) {
@@ -463,25 +467,31 @@ class Main extends React.Component {
          */
 
         /* TODO: Routine for updating user & place review in the server goes here */
-	/*$.ajax({
+	$.ajax({
             url: "/api/review",
-            data: {'uid': uid, 'cid': userReview.cid,
+            data: {'uid': window.sessionStorage.uid,
+                   'cid': review.cid,
+                   'content': review.content,
+                   'starRating': review.starRating} 
 	    type: 'post',
 	    cache: false,
 	    async: false,
 	    success: function(data) {
-	        if (data.result >= 1) {
+	        if (data.result == 1) {
+		    this.state.info.user.reviews.unshift(review);
+		    this.state.info.place.reviews.unshift(review);
+		    this.updateSessionStorage();
 		    console.log("Review submitted!");
-		}
+		} else if (data.result == 2) {
+                    console.log("Review existed");
+                } else {
+                    console.error("Review error");
+                }
             },
             error: function(request, status, error) {
 	        console.error(error);
 	    }
-        });*/
- 
-        this.state.info.user.reviews.unshift(review);
-        this.state.info.place.reviews.unshift(review);
-        this.updateSessionStorage();
+        });
     }
 
     render() {

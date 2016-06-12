@@ -444,16 +444,16 @@ exports.like = function(req, res) {
                         return res.json({'result':-1});
                     }
                     if (result) {
-		        if (result.length) {
-		            var update = connection.query(
-                                         'delete from tourLike where '+data,
-                                         function(err, result){
-                                             if (err) {
-                                                 console.error(err);
-                                                 return res.json({'result':-1});
-                                             }
+		        //if (result.length) {
+		        //    var update = connection.query(
+                        //                 'delete from tourLike where '+data,
+                        //                 function(err, result){
+                        //                     if (err) {
+                        //                         console.error(err);
+                        //                         return res.json({'result':-1});
+                        //                     }
                                              res.json({'result':2})}
-                            );
+                        //    );
 		        } else {
 		            var insert = connection.query(
                                          'insert into tourLike set ?',
@@ -495,18 +495,18 @@ exports.review = function(req, res) {
                     }
                     if (result) {
 		        if (result.length) {
-		            var update = connection.query(
-                                         'update tourReview set review='+review+
-                                         ', star='+star+
-                                         ', date='+date_str+
-                                         ' where '+data,
-                                         function(err, result){
-                                             if (err) {
-                                                 console.error(err);
-                                                 return res.json({'result':-1});
-                                             }
+		        //    var update = connection.query(
+                        //                 'update tourReview set review='+review+
+                        //                 ', star='+star+
+                        //                 ', date='+date_str+
+                        //                 ' where '+data,
+                        //                 function(err, result){
+                        //                     if (err) {
+                        //                         console.error(err);
+                        //                         return res.json({'result':-1});
+                        //                     }
                                              res.json({'result':2})}
-                            );
+                        //    );
 		        } else {
 		            var insert = connection.query(
                                          'insert into tourReview set ?',

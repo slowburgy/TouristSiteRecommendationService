@@ -113,7 +113,7 @@ class Main extends React.Component {
             async: false,
 	    cache: false,
 	    success: function(data) {
-		if (data.result > 0) {
+		if (data.result < 0) {
                     errored = true;
                 }
             },
@@ -131,7 +131,7 @@ class Main extends React.Component {
             async: false,
 	    cache: false,
 	    success: function(data) {
-		if (data.result > 0) {
+		if (data.result < 0) {
                     errored = true;
                 }
             },
