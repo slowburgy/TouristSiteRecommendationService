@@ -22,7 +22,7 @@ export default class MyCategoryList extends React.Component {
             <div  >
                 {categories.map((cat) => (
                     <div style={styles.siteListStyle}>
-                        <MySiteList 
+                        <MySiteList
                             recommendations={cat}
                             likedPlaces={likedPlaces}
                             handlers={this.props.handlers}

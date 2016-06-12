@@ -6,7 +6,7 @@ import ToggleStar from 'material-ui/svg-icons/toggle/star';
 import {dp, horizontalDP} from '../../dimensions/dimensions';
 import {grey50} from 'material-ui/styles/colors';
 import {_} from 'underscore/underscore';
-
+import {myLikes} from '../../strings/strings';
 
 const styles = {
     root: {
@@ -84,7 +84,7 @@ export default class MyLikedPlaces extends React.Component {
                         cellHeight={styles.cellHeight}
                         padding={dp(20)}
                     >
-                        <Subheader style={styles.subheaderStyle}>{"Places I Liked"}</Subheader>
+                        <Subheader style={styles.subheaderStyle}>{myLikes}</Subheader>
                         {this.state.likedPlaces.map(function(place) {
                             var boundClick = this.handlePlaceClick.bind(this, place);
 

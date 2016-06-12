@@ -58,7 +58,6 @@ const styles = {
     },
  
     listStyle: {
-        // margin: dp(5),
         overflowY: 'auto'
     },
     
@@ -117,38 +116,40 @@ export default class MyRecommendationBar extends React.Component {
     }
 
     render() {
+        var strings = this.props.info.strings;
+        
         var categories = [
-            "Seoul",
-            "Daejeon",
-            "Busan",
-            "Gwangju",
-            "Daegu",
-            "Ulsan",
-            "Incheon",
-            "Gyeonggi-do",
-            "Chungcheong-do",
-            "Jeolla-do",
-            "Gyeongsang-do",
-            "Gangwon-do",
-            "Jeju-do",
-            "For your age",
-            "For your gender",
-            "Travelling alone",
-            "Travelling with your family",
-            "Travelling with your friends",
-            "Travelling with your lover",
-            "Travelling with your company members"
+            strings.seoul,
+            strings.daejeon,
+            strings.busan,
+            strings.gwangju,
+            strings.daegu,
+            strings.ulsan,
+            strings.incheon,
+            strings.gyeonggi,
+            strings.chungcheong,
+            strings.jeolla,
+            strings.gyeongsang,
+            strings.gangwon,
+            strings.jeju,
+            strings.forAge,
+            strings.forGender,
+            strings.alone,
+            strings.family,
+            strings.friends,
+            strings.lover,
+            strings.company
         ];
 
         return (
             <div style={styles.root}>
                 <div style={styles.child}>
-                    <div style={styles.msgStyle}>Experience our recommendation system</div>
+                    <div style={styles.msgStyle}>{strings.msg}</div>
                     <div style={styles.barStyle}>
                         <div style={styles.buttonsBarStyle}>
                             <RaisedButton
                                 style={styles.buttonStyle}
-                                label="Click to add a category"
+                                label={strings.addCat}
                                 onTouchTap={this.handleCategoryOpen}
                                 primary={true}
                             />
@@ -177,7 +178,7 @@ export default class MyRecommendationBar extends React.Component {
                                 </Menu>
                             </Popover>
                             <RaisedButton 
-                                label="Submit" 
+                                label={strings.submit}
                                 style={styles.buttonStyle}
                                 secondary={true}
                                 onTouchTap={this.handleSubmit}

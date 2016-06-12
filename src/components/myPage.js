@@ -46,12 +46,14 @@ export default class MyPage extends React.Component {
                 if (!this.state.profileEdit) {
                     Page = () =>
                         <MyProfilePage
+                            info={this.props.info}
                             userInfo={userInfo}
                             handlers={bodyHandlers}
                         />;
                 } else {
                     Page = () =>
                         <MyProfileEditPage
+                            info={this.props.info}
                             userInfo={userInfo}
                             handlers={bodyHandlers}
                         />;

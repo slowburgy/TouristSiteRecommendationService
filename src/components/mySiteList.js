@@ -47,9 +47,9 @@ export default class MySiteList extends React.Component {
                     cellHeight={styles.cellHeight}
                     padding={dp(1)}
                 >
-                    <Subheader style={styles.subheaderStyle}>Recommended</Subheader>
+                    <Subheader style={styles.subheaderStyle}>{this.props.recommendations.exp}</Subheader>
                     {
-                        this.props.recommendations.map(function(place, index) {
+                        this.props.recommendations.items.map(function(place, index) {
                             var boundClick = this.handlePlaceClick.bind(this, place);
 
                             return (

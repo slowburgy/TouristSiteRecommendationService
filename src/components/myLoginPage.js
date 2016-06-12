@@ -3,6 +3,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {cyan50, grey200} from 'material-ui/styles/colors';
 import {dp, horizontalDP, verticalDP} from '../../dimensions/dimensions';
 import {appBarHeight} from '../../dimensions/dimensions';
+import {stringEn} from '../../strings/strings';
 
 
 const styles = {
@@ -22,8 +23,8 @@ const styles = {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        opacity: 0.7,
-        backgroundColor: grey200
+        // opacity: 0.7,
+        // backgroundColor: grey200
     },
 
     msgStyle: {
@@ -48,11 +49,11 @@ export default class MyLoginPage extends React.Component {
             <div style={styles.root}>
                 <div style={styles.containerStyle}>
                     <div style={styles.msgStyle}>
-                        Login to experience our recommendation system
+                        {stringEn.greetings}
                     </div>
                     <RaisedButton
-                        label="Login with Naver"
-                        primary={true}
+                        label="Login with Facebook"
+                        secondary={true}
                         style={styles.buttonStyle}
                         labelStyle={styles.buttonTextStyle}
                     />

@@ -6,6 +6,8 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MyAppBar from './components/myAppBar';
 import {appBarHeight} from '../dimensions/dimensions';
 import MyAppBody from './components/myAppBody';
+import {stringEn} from '../strings/strings';
+import {stringKo} from '../strings/strings_korean';
 import {_} from 'underscore';
 
 injectTapEventPlugin();
@@ -17,6 +19,105 @@ const muiTheme = getMuiTheme({
     }
 });
 
+// _user_, _place_: Sample data for testing
+var _user_ = {
+    uid: "1",
+    firstLogin: true,
+    nickname: "rhapsodyjs",
+    age: 24,
+    gender: "Male",
+    nationality: "Korea, Republic Of",
+
+    recommendations: _.range(4).map((c) => ({
+        exp: "For travelling alone",
+        items: _.range(7).map((r) => (
+            {
+                cid: (7 * c + r).toString(), // Just for testing
+                name: 'Seolark',
+                address: 'Seoraksan-ro, Sokcho-si, Gangwon-do',
+                latitude: 38.119444,
+                longitude: 128.465556,
+                img: "images/seolark_highres.jpg",
+                starRating: 3,
+                reviews: [
+                    {
+                        name: 'nick',
+                        starRating: 5,
+                        date: '2016.06.07',
+                        content: 'This place is fantastic! The food is amazing, the people are kind, and the view is magnificent. I would certainly come here again!'
+                    },
+                    {
+                        name: 'brendan',
+                        starRating: 1,
+                        date: '2016.05.01',
+                        content: 'Imma never come \'ere again, I can tell ya that!'
+                    },
+                    {
+                        name: 'you',
+                        starRating: 3,
+                        date: '2016.04.02',
+                        content: 'Good!'
+                    },
+                ]
+            })
+        )}
+    )),
+
+    likedPlaces: _.range(7).map((r) => (
+    {
+        cid: r.toString(),
+        name: 'Seolark',
+        address: 'Seoraksan-ro, Sokcho-si, Gangwon-do',
+        latitude: 38.119444,
+        longitude: 128.465556,
+        img: "images/seolark_highres.jpg",
+        starRating: 3,
+        reviews: [
+            {
+                name: 'sherlock',
+                starRating: 5,
+                date: '2016.06.07',
+                content: 'This place is fantastic! The food is amazing, the people are kind, and the view is magnificent. I would certainly come here again!'
+            },
+            {
+                name: 'holmes',
+                starRating: 1,
+                date: '2016.05.01',
+                content: 'Imma never come \'ere again, I can tell ya that!'
+            },
+            {
+                name: 'watson',
+                starRating: 3,
+                date: '2016.04.02',
+                content: 'Good!'
+            },
+        ]
+    }
+    )),
+
+    reviews: [
+        {
+            name: 'Seolark',
+            starRating: 5,
+            date: '2016.06.07',
+            content: 'This place is fantastic! The food is amazing, the people are kind, and the view is magnificent. I would certainly come here again!'
+        },
+        {
+            name: 'Mt. Everest',
+            starRating: 1,
+            date: '2016.05.01',
+            content: 'Imma never come \'ere again, I can tell ya that!'
+        },
+        {
+            name: 'Jeju Island',
+            starRating: 3,
+            date: '2016.04.02',
+            content: 'Good!'
+        },
+    ]
+};
+
+// Example format of _place_
 var _place_ = {
     cid: "1",
     name: 'Seolark',
@@ -50,49 +151,52 @@ var _place_ = {
 
 class Main extends React.Component {
     /*
-        this.state.info specification:
+        Specifications:
 
-        * user: 
-            - uid
-            - nickname
-            - age
-            - gender
-            - nationality
-            - recommendations: list of list of places (json objects).
-                               Outer list corresponds to the categories, inner list to the places within that category.
-            - likedPlaces: same as recommendations
-            - reviews: list of json objects (refer to _user_ above)
-            
-        * query: Query typed into the search bar
-        
-        * bodyPage: Type of the body page. Stack of strings for emulating "back" button in a browser.
-            (1) "main page": Main page with recommendations
-            (2) "place page": Page with the detailed information about a place
+        * user:
+            - uid: string
+            - nickname: string
+            - age: string
+            - gender: string
+            - nationality: string
+            - recommendations: list of JSON, where each JSON object is of the following format:
+                                    {
+                                        exp: recommendation category (string)
+                                        items: list of recommended places
+                                    }
+                               Outer list corresponds to the categories.
+            - likedPlaces: list of places (JSON objects)
+            - reviews: list of json objects, format specified above.
             
         * place: Place information (updated when a certain place is clicked)
-            - cid
-            - name
-            - address
+            - cid: string
+            - name: string
+            - address: string
             - latitude: float
             - longitude: float
-            - img (source url)
+            - img (source url) : string
             - starRating: integer
-            - reviews: list of json objects
+            - reviews: list of json objects, format as above.
      */
 
     constructor(props) {
         super(props);
+        console.log(stringEn);
+        console.log(stringEn.appTitle);
 
         this.state = {
             info: {
                 user: null,
                 query: null,
                 bodyPage: "main page",
-                place: null
+                place: null,
+                strings: stringEn,
+                english: true
             }
         };
 
         this.updateSessionStorage = this.updateSessionStorage.bind(this);
+        this.changeAppLanguage = this.changeAppLanguage.bind(this);
         this.fetchInitialInformationFromServer = this.fetchInitialInformationFromServer.bind(this);
         this.fetchRecommendationsFromServer = this.fetchRecommendationsFromServer.bind(this);
         this.handlePlaceClick = this.handlePlaceClick.bind(this);
@@ -106,103 +210,117 @@ class Main extends React.Component {
     updateSessionStorage() {
         window.sessionStorage.user = JSON.stringify(this.state.info.user);
     }
+    
+    changeAppLanguage() {
+        if (this.state.info.english) {
+            this.state.info.strings = stringEn;
+            this.state.info.english = false;
+        } else {
+            this.state.info.strings = stringKo;
+            this.state.info.english = true;
+        }
+        
+        this.setState(this.state);
+    }
 
     fetchInitialInformationFromServer() {
         /*
-         TODO: Fetch ALL information about the user (nickname, gender, places he liked, ..., initial set of recommendations, etc).
-               using the UID stored in sessionStorage, and store the retrieved information in sessionStorage.
+          Fetch ALL information about the user (nickname, gender, places he liked, ..., initial set of recommendations, etc).
+          using the UID stored in sessionStorage, and store the retrieved information in sessionStorage.
          */
 
         if (!window.sessionStorage.user) {
+            // var uid = window.sessionStorage.uid;
+            // var user = {}, place = null;
+            //
+            // $.ajax({
+            //     url: "/api/userinfo?uid=" + uid,
+            //     type: 'get',
+            //     async: false,
+            //     cache: false,
+            //     success: function(data) {
+            //         if (data.result == 1) {
+            //             user.uid = uid;
+            //             user.firstlogin = (data.userprofile.numpref >= 10);
+            //             user.nickname = data.userprofile.nickname;
+            //             user.age = data.userprofile.age;
+            //             user.gender = data.userprofile.sex;
+            //             user.nationality = data.userprofile.nationality;
+            //         }
+            //     },
+            //     error: function(request, status, error) {
+            //         // alert(error);
+            //         console.error(error);
+            //     }
+            // });
+            //
+            // $.ajax({
+            //     url:
+            //     "/api/recommend?uid=" + uid +
+            //     "&age=" + user.age +
+            //     "&sex=" + user.gender +
+            //     "&travStyle=1" + // TEMP
+            //     "&area=1", // TEMP
+            //     type: 'get',
+            //     async: false,
+            //     cache: false,
+            //     success: function(data) {
+            //         if (data.result == 1) {
+            //             user.recommendations = [{}, {}, {}, {}];
+            //             for (var i=0; i < 4; i++) {
+            //                 user.recommendations.exp = data.data.exp;
+            //                 user.recommendations.items = [];
+            //
+            //                 for (var j=0; j < data.data.items.length; j++) {
+            //                     user.recommendations[i].items.push(data.data.items[j].item);
+            //                 }
+            //             }
+            //         }
+            //     },
+            //     error: function(request, status, error) {
+            //         console.error(error); // alert(error);
+            //     }
+            // });
+            //
+            // $.ajax({
+            //     url: "/api/getlike?uid=" + uid,
+            //     type: 'get',
+            //     cache: false,
+            //     async: false,
+            //     success: function(data) {
+            //         user.likedPlaces = [];
+            //         if (data.result == 1) {
+            //             for (var i=0; i < data.data.length; i++) {
+            //                 user.likedPlaces.push(data.data[i].item);
+            //             }
+            //         }
+            //     },
+            //     error: function(request, status, error) {
+            //         console.error(error); // alert(error);
+            //     }
+            // });
+            //
+            // $.ajax({
+            //     url: "/api/getreviewByUID?uid=" + uid,
+            //     type: 'get',
+            //     cache: false,
+            //     async: false,
+            //     success: function(data) {
+            //         user.reviews = [];
+            //         if (data.result == 1) {
+            //             for (var i=0; i < data.items.length; i++) {
+            //                 user.reviews.push(data.items[i]);
+            //             }
+            //         }
+            //     },
+            //     error: function(request, status, error) {
+            //         console.error(error); // alert(error);
+            //     }
+            // });
+            //
+            // console.log(user);
 
-            var uid = window.sessionStorage.uid;
-            var user, place = null;
-
-            var _user_ = {};
-
-	    $.ajax({
-                url: "/api/userinfo?uid="+uid,
-		type: 'get',
-		async: false,
-		cache: false,
-		success: function(data) {
-		  if (data.result == 1) {
-		    _user_.uid = uid;
-		    _user_.firstlogin = (data.userprofile.numpref >= 10);
-		    _user_.nickname = data.userprofile.nickname;
-		    _user_.age = data.userprofile.age;
-		    _user_.gender = data.userprofile.sex;
-		    _user_.nationality = data.userprofile.nationality;
-		  }
-		},
-                error: function(request, status, error) {
-		  alert(error);
-		}
-	    });
-
-	    $.ajax({
-                url: "/api/recommend?uid="+uid+
-		                   "&age="+_user_.age+
-				   "&sex="+_user_.gender+
-				   "&travStyle=1"+ // TEMP
-				   "&area=1", // TEMP
-                type: 'get',
-		async: false,
-		cache: false,
-		success: function(data) {
-		  if (data.result == 1) {
-		    _user_.recommendations = [[], [], [], []];
-		    for (var i=0; i<4; i++) {
-		      for (var j=0; j<data.data.items.length; j++) {
-		        _user_.recommendations[i].push(data.data.items[j].item);
-		      }
-		    }
-		  }
-	        },
-                error: function(request, status, error) {
-		  alert(error);
-		}
-	    });
-
-	    $.ajax({
-                url: "/api/getlike?uid="+uid,
-                type: 'get',
-		cache: false,
-                async: false,
-		success: function(data) {
-                  _user_.likedPlaces = [];
-		  if (data.result == 1) {
-		    for (var i=0; i<data.data.length; i++) {
-		      _user_.likedPlaces.push(data.data[i].item);
-		    }
-		  }
-	        },
-                error: function(request, status, error) {
-		  alert(error);
-		}
-	    });
-
-	    $.ajax({
-                url: "/api/getreviewByUID?uid="+uid,
-                type: 'get',
-		cache: false,
-                async: false,
-		success: function(data) {
-                  _user_.reviews = [];
-		  if (data.result == 1) {
-		    for (var i=0; i<data.items.length; i++) {
-		      _user_.reviews.push(data.items[i]);
-		    }
-		  }
-	        },
-                error: function(request, status, error) {
-		  alert(error);
-		}
-	    });
-
-            user = _user_;
-
-            this.state.info.user = user;
+            this.state.info.user = _user_;
             this.updateSessionStorage();
 
         } else {
@@ -213,19 +331,21 @@ class Main extends React.Component {
     }
 
     fetchRecommendationsFromServer(categories) {
-        /*
-        TODO: Fetch a list of recommendations for a given list of categories from the server.
-         */
-
-        var recList = 
+        var recList =
             categories.map(
                 function(category) {
                     var recommendations;
 
-                    /* Some routine */
-                    
+                    /*
+                    TODO: Routine for fetching list of places for a single recommendation category goes here
+                    @param category: String
+                    */
+
                     // Just for testing. Replace with the real value.
-                    recommendations = [_place_];
+                    recommendations = {
+                        exp: category,
+                        items: [_place_]
+                    };
                     return recommendations;
                 }
             );
@@ -233,6 +353,7 @@ class Main extends React.Component {
         this.state.info.user.recommendations = recList;
         this.state.info.bodyPage = "main page";
         this.updateSessionStorage();
+
         console.log("Recommendations fetched!");
         
         this.setState(this.state);
@@ -251,11 +372,7 @@ class Main extends React.Component {
     }
 
     handlePlaceLike(place) {
-        /*
-         DO NOT invoke this.setState(). We don't want the UI to be re-rendered.
-
-         TODO: Replace _place_ with state.info.place and update user information in the server.
-         */
+         // @param place: JSON object, with format specified as above.
 
         var duplicate =
             this.state.info.user.likedPlaces
@@ -270,7 +387,7 @@ class Main extends React.Component {
                 );
         
         if (!duplicate) {
-            /* Routine */
+            /* TODO: Routine for updating user's liked places in the server goes here */
             
             this.state.info.user.likedPlaces.unshift(place);
             this.updateSessionStorage();
@@ -284,13 +401,15 @@ class Main extends React.Component {
     handleReviewSubmit(placeReview, userReview) {
         /*
         Take a review (json object) as the argument and add it to:
-                (1) Place review list
-                (2) User review list
+                (1) List of reviews of the place (placeReview)
+                (2) List of reviews of the user (userReview)
 
         DO NOT invoke this.setState(). We don't want the UI to be re-rendered.
 
-        TODO: Update user & place review information in the server
+        @param userReview, placeReview: JSON object, format specified above.
          */
+
+        /* TODO: Routine for updating user & place review in the server goes here */
 
         this.state.info.user.reviews.unshift(userReview);
         this.state.info.place.reviews.unshift(placeReview);
@@ -301,7 +420,8 @@ class Main extends React.Component {
 
     render() {
         const appBarHandlers = {
-            handleBackButtonClick: this.handleBackButtonClick
+            handleBackButtonClick: this.handleBackButtonClick,
+            changeAppLanguage: this.changeAppLanguage
         };
 
         const bodyHandlers = {

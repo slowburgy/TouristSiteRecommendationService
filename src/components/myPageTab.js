@@ -1,6 +1,5 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
-import {myLikes, myReviews, myVisitedPlaces, changeProfileInfo} from '../../strings/strings';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import {appBarHeight} from '../../dimensions/dimensions';
 import {grey200, grey800} from 'material-ui/styles/colors';
@@ -32,6 +31,8 @@ export default class MyPageTab extends React.Component {
     }
 
     render() {
+        var strings = this.props.info.strings;
+        
         return (
             <div>
                 <div>
@@ -40,9 +41,9 @@ export default class MyPageTab extends React.Component {
                         value={this.state.value}
                         onChange={this.handleMyPageTabSelection}
                     >
-                        <Tab label={myLikes} value="liked places" style={styles.tabStyle}></Tab>
-                        <Tab label={myReviews} value="reviews" style={styles.tabStyle}></Tab>
-                        <Tab label={changeProfileInfo} value="profile" style={styles.tabStyle}></Tab>
+                        <Tab label={strings.myLikes} value="liked places" style={styles.tabStyle}></Tab>
+                        <Tab label={strings.myReviews} value="reviews" style={styles.tabStyle}></Tab>
+                        <Tab label={strings.changeProfileInfo} value="profile" style={styles.tabStyle}></Tab>
                     </Tabs>
                 </div>
                 <MyPage 

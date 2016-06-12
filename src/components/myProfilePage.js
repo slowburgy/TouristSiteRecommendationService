@@ -71,11 +71,13 @@ export default class MyProfilePage extends React.Component {
     }
     
     render() {
+        var strings = this.props.info.strings;
+        
         var categories = [
-            "Nickname",
-            "Age",
-            "Gender",
-            "Nationality"
+            strings.nickname,
+            strings.age,
+            strings.gender,
+            strings.nationality
         ];
         
         var labels = [
@@ -105,7 +107,7 @@ export default class MyProfilePage extends React.Component {
                     </Table>
                     <div style={styles.buttonBarStyle}>
                         <RaisedButton
-                            label="Edit profile information"
+                            label={strings.editProfile}
                             style={styles.buttonStyle}
                             labelStyle={styles.buttonLabelStyle}
                             secondary={true}

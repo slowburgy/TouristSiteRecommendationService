@@ -10,6 +10,10 @@ import {_} from 'underscore';
 
 injectTapEventPlugin();
 
+/***************************************************************************
+    THIS SCRIPT IS UNUSED. DO NOT READ/MODIFY THIS SCRIPT.
+****************************************************************************/
+
 
 const muiTheme = getMuiTheme({
     appBar: {

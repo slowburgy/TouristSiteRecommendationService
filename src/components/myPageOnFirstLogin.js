@@ -168,10 +168,12 @@ export default class MyPageOnFirstLogin extends React.Component {
                     }.bind(this)
                 );
             
-            console.log(prefList);
-            console.log(userInfo);
+            // console.log(prefList);
+            // console.log(userInfo);
             
-            // this.props.handlers.redirectToMainPage(prefList, userInfo);
+            this.props.handlers.redirectToMainPage(prefList, userInfo);
+        } else {
+            window.alert("Please rate all places.");
         }
     }
     

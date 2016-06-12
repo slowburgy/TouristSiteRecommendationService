@@ -189,6 +189,8 @@ export default class MyPlacePageTab extends React.Component {
     }
 
     render() {
+        var strings = this.props.info.strings;
+        
         return (
             <Paper style={styles.root} id="place_page_tab">
                 <IconButton onTouchTap={this.handleBackButtonClick}>
@@ -208,8 +210,8 @@ export default class MyPlacePageTab extends React.Component {
                     </div>
                 </div>
                 <List>
-                    <ListItem primaryText="Like this place" onTouchTap={this.handlePlaceLike} leftIcon={<ActionFavorite />} /> 
-                    <ListItem primaryText="Rate & Review" onTouchTap={this.handleShowReviewPage} leftIcon={<ToggleStar />} />
+                    <ListItem primaryText={strings.likePlace} onTouchTap={this.handlePlaceLike} leftIcon={<ActionFavorite />} /> 
+                    <ListItem primaryText={strings.rateReviews} onTouchTap={this.handleShowReviewPage} leftIcon={<ToggleStar />} />
                 </List>
                 <div style={styles.fillerStyle}></div>
                 <div style={styles.containerStyle}>
@@ -231,7 +233,7 @@ export default class MyPlacePageTab extends React.Component {
                 <div>
                     <Snackbar
                         open={this.state.open}
-                        message={this.props.info.place.name + " added to your favorites"}
+                        message={this.props.info.place.name + strings.added}
                         autoHideDuration={2000}
                         onRequestClose={this.handleSnackbarClose}
                     />

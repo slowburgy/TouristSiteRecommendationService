@@ -110,11 +110,13 @@ export default class MyProfileEditPage extends React.Component {
             this.handleNatChange
         ];
 
-        const categories = [
-            "Nickname",
-            "Age",
-            "Gender",
-            "Nationality"
+        var strings = this.props.info.strings;
+
+        var categories = [
+            strings.nickname,
+            strings.age,
+            strings.gender,
+            strings.nationality
         ];
 
         const labels = [
@@ -147,7 +149,7 @@ export default class MyProfileEditPage extends React.Component {
                     </Table>
                     <div style={styles.buttonBarStyle}>
                         <RaisedButton
-                            label="Submit changes"
+                            label={strings.submit}
                             style={styles.buttonStyle}
                             labelStyle={styles.buttonLabelStyle}
                             primary={true}

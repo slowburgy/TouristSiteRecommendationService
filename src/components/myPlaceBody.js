@@ -149,6 +149,7 @@ export default class MyPlaceBody extends React.Component {
     render() {
         var Reviews;
         var rootStyle = styles.root;
+        var strings = this.props.info.strings;
         
         if (this.props.reviewFlag) {
             if (rootStyle.backgroundImage) { 
@@ -165,7 +166,7 @@ export default class MyPlaceBody extends React.Component {
                             <TextField 
                                 style={styles.reviewTextFieldStyle} 
                                 multiLine={true}
-                                hintText="Write a review"
+                                hintText={strings.writeReview}
                                 onChange={this.handleTextFieldChange}
                             />
                         </div>
@@ -174,7 +175,7 @@ export default class MyPlaceBody extends React.Component {
                                 value={this.state.value} 
                                 onChange={this.handleSelectFieldChange} 
                                 style={styles.starRatingStyle}
-                                floatingLabelText="Rate this place"
+                                floatingLabelText={strings.rateHere}
                             >
                                 <MenuItem value={1} primaryText="1" />
                                 <MenuItem value={2} primaryText="2" />
@@ -184,7 +185,7 @@ export default class MyPlaceBody extends React.Component {
                             </SelectField>
                             <RaisedButton
                                 primary={true}
-                                label="Submit"
+                                label={strings.submit}
                                 style={styles.submitButtonStyle}
                                 onTouchTap={this.handleReviewSubmit}
                             />

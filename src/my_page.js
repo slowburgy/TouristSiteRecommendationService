@@ -6,7 +6,8 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MyAppBar from './components/myAppBar';
 import {appBarHeight} from '../dimensions/dimensions';
 import MyAppBody from './components/myAppBody';
-import {_} from 'underscore';
+import {stringEn} from '../strings/strings';
+import {stringKo} from '../strings/strings_korean';
 
 injectTapEventPlugin();
 
@@ -18,40 +19,6 @@ const muiTheme = getMuiTheme({
 });
 
 class Main extends React.Component {
-    /*
-        this.state.info specification:
-
-        * user: 
-            - uid
-            - nickname
-            - age
-            - gender
-            - nationality
-            - recommendations: list of list of places (json objects).
-                               Outer list corresponds to the categories, inner list to the places within that category.
-            - likedPlaces: same as recommendations
-            - reviews: list of json objects (refer to _user_ above)
-            
-        * query: Query typed into the search bar
-        
-        * bodyPage: Type of the body page. Stack of strings for emulating "back" button in a browser.
-            (1) "login page": Default login page
-            (2) "page on first login": page in which a new user is asked to select favorite places
-            (3) "main page": Main page with recommendations
-            (4) "my page": My profile page
-            (5) "place page": Page with the detailed information about a place
-            
-        * place: Place information (updated when a certain place is clicked)
-            - cid
-            - name
-            - address
-            - latitude: float
-            - longitude: float
-            - img (source url)
-            - starRating: integer
-            - reviews: list of json objects
-     */
-
     constructor(props) {
         super(props);
 
@@ -60,16 +27,31 @@ class Main extends React.Component {
                 user: JSON.parse(window.sessionStorage.user),
                 query: null,
                 bodyPage: "my page",
-                place: null
+                place: null,
+                strings: stringEn,
+                english: false
             }
         };
-        
+
+        this.changeAppLanguage = this.changeAppLanguage.bind(this);
         this.updateSessionStorage = this.updateSessionStorage.bind(this);
         this.handlePlaceClick = this.handlePlaceClick.bind(this);
         this.handlePlaceLike = this.handlePlaceLike.bind(this);
         this.handleReviewSubmit = this.handleReviewSubmit.bind(this);
         this.handleProfileEditSubmit = this.handleProfileEditSubmit.bind(this);
         this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
+    }
+
+    changeAppLanguage() {
+        if (this.state.info.english) {
+            this.state.info.strings = stringEn;
+            this.state.info.english = false;
+        } else {
+            this.state.info.strings = stringKo;
+            this.state.info.english = true;
+        }
+
+        this.setState(this.state);
     }
 
     updateSessionStorage() {
@@ -89,12 +71,8 @@ class Main extends React.Component {
     }
 
     handlePlaceLike(place) {
-        /*
-         DO NOT invoke this.setState(). We don't want the UI to be re-rendered.
-
-         TODO: Replace _place_ with state.info.place and update user information in the server.
-         */
-
+        // This method is same as that of main.js. Copy it once it is implemented.
+        
         var duplicate =
             this.state.info.user.likedPlaces
             .map(
@@ -120,15 +98,7 @@ class Main extends React.Component {
     }
 
     handleReviewSubmit(placeReview, userReview) {
-        /*
-        Take a review (json object) as the argument and add it to:
-                (1) Place review list
-                (2) User review list
-
-        DO NOT invoke this.setState(). We don't want the UI to be re-rendered.
-
-        TODO: Update user & place information in the server
-         */
+        // This method is same as that of main.js. Copy it once it is implemented.
 
         this.state.info.user.reviews.unshift(userReview);
         this.state.info.place.reviews.unshift(placeReview);
@@ -140,17 +110,17 @@ class Main extends React.Component {
     handleProfileEditSubmit(profileInfo) {
         /*
         Take a profileInfo (json object) as the argument and update the user info:
-            profileInfo spec:
+        
+        @param profileInfo:
             {
                 nickname: string,
+                age: string,
                 gender: string,
                 nationality: string
             }
-
-        DO NOT invoke this.setState(). We don't want the UI to be re-rendered.
-
-        TODO: Update user information in the server
         */ 
+
+        /* TODO: Routine for updating user information in the server goes here */
         
         this.state.info.user.nickname = profileInfo.nickname;
         this.state.info.user.age = profileInfo.age;
@@ -163,7 +133,8 @@ class Main extends React.Component {
 
     render() {
         const appBarHandlers = {
-            handleBackButtonClick: this.handleBackButtonClick
+            handleBackButtonClick: this.handleBackButtonClick,
+            changeAppLanguage: this.changeAppLanguage
         };
 
         const bodyHandlers = {

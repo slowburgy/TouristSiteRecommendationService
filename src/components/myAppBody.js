@@ -15,10 +15,10 @@ export default class MyAppBody extends React.Component {
         
         switch (bodyPage) {
             case "main page":
-                console.log("myAppBody.main_page");
                 BodyPage = () => (
                     <div>
                         <MyRecommendationBar 
+                            info={this.props.info}
                             handlers={this.props.handlers}
                         />
                         <MyCategoryList 

@@ -57,11 +57,8 @@ class Main extends React.Component {
     }
     
     getRandomPlaceList() {
-        /*
-        TODO: Get random place list from the server
-         */
+        /* TODO: Routine for getting a list of random places from the server goes here */
         
-        // Update randomPlaces with the real list fetched from the server.
         return randomPlaces;
     }
     
@@ -81,13 +78,11 @@ class Main extends React.Component {
             age: number,
             gender: string,
             nationality: string,
-            travelStyle: string
          }
          */
         
-        /* TODO: Routine for (1) & (2) */
+        /* TODO: Routine for (1) & (2) goes here */
         
-        /* Routine for (3) */
         window.location.href = 'main.html';
     }
 

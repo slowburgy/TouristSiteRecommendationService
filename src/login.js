@@ -33,11 +33,14 @@ class Main extends React.Component {
     
     authorizeUser() {
         /*
-         TODO: Routine for OAuth verification and server communication goes here. Save uid in sessionStorage for further use.
+         Get uid by via OAuth API. 
+         Send this uid to the server, and check if the user is new or previously registered. 
+         Save uid in sessionStorage for future use.
          ...
          @return: _uid_, a string, and _firstLogin_, a boolean flag to check whether the user is new to our service.
          */
 
+        /* TODO: Routine for OAuth verification and communication with the server goes here */
         var uid = "test", firstLogin = true;
         
         window.sessionStorage.uid = uid;
@@ -48,9 +51,6 @@ class Main extends React.Component {
     render() {
         const appBarHandlers = {
             handleLoginButtonClick: this.handleLoginButtonClick,
-        };
-
-        const bodyHandlers = {
         };
 
         return (
