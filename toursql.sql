@@ -647,7 +647,7 @@ CREATE TABLE `tourLike` (
 
 LOCK TABLES `tourLike` WRITE;
 /*!40000 ALTER TABLE `tourLike` DISABLE KEYS */;
-INSERT INTO `tourLike` VALUES ('test',264475),('test',999854);
+INSERT INTO `tourLike` VALUES ('test',264475),('test',561382),('test',610397),('1038447736237181',997266),('test',999854);
 /*!40000 ALTER TABLE `tourLike` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -702,7 +702,7 @@ CREATE TABLE `tourPref` (
 
 LOCK TABLES `tourPref` WRITE;
 /*!40000 ALTER TABLE `tourPref` DISABLE KEYS */;
-INSERT INTO `tourPref` VALUES ('test',561382,5),('test',610397,4),('test',1918889,5),('test2',561382,5),('test2',610397,4),('test2',1918889,5),('test3',561382,5),('test3',610397,4),('test3',1918889,5),('test4',561382,4),('test4',610397,4),('test4',1918889,5),('test5',610397,4),('test5',1918889,4),('test6',610397,4),('test6',1918889,5);
+INSERT INTO `tourPref` VALUES ('1038447736237181',264257,5),('1038447736237181',264340,3),('1038447736237181',610397,1),('1038447736237181',669211,1),('1038447736237181',997266,3),('1038447736237181',1371835,5),('1038447736237181',1511701,5),('1038447736237181',1747979,1),('1038447736237181',1824742,1),('1038447736237181',1930534,5),('test',561382,5),('test',610397,4),('test',1918889,5),('test2',561382,5),('test2',610397,4),('test2',1918889,5),('test3',561382,5),('test3',610397,4),('test3',1918889,5),('test4',561382,4),('test4',610397,4),('test4',1918889,5),('test5',610397,4),('test5',1918889,4),('test6',610397,4),('test6',1918889,5);
 /*!40000 ALTER TABLE `tourPref` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -732,6 +732,7 @@ CREATE TABLE `tourReview` (
 
 LOCK TABLES `tourReview` WRITE;
 /*!40000 ALTER TABLE `tourReview` DISABLE KEYS */;
+INSERT INTO `tourReview` VALUES ('test',610397,'this is the review!','2016.06.16.',NULL);
 /*!40000 ALTER TABLE `tourReview` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -744,15 +745,13 @@ DROP TABLE IF EXISTS `tourUser`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tourUser` (
   `uid` varchar(40) NOT NULL DEFAULT '',
-  `OAuth` varchar(255) DEFAULT NULL,
   `age` int(11) DEFAULT NULL,
   `sex` int(11) DEFAULT NULL,
   `travStyle` int(11) DEFAULT NULL,
   `numPref` int(11) DEFAULT NULL,
   `nickname` varchar(30) DEFAULT NULL,
   `nationality` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`uid`),
-  UNIQUE KEY `OAuth` (`OAuth`)
+  PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -762,7 +761,7 @@ CREATE TABLE `tourUser` (
 
 LOCK TABLES `tourUser` WRITE;
 /*!40000 ALTER TABLE `tourUser` DISABLE KEYS */;
-INSERT INTO `tourUser` VALUES ('test','test',20,0,1,3,NULL,NULL),('test2','test2',20,0,1,3,NULL,NULL),('test3','test3',20,0,1,3,NULL,NULL),('test4','test4',20,0,1,3,NULL,NULL),('test5','test5',20,0,1,2,NULL,NULL),('test6','test6',20,0,1,2,NULL,NULL);
+INSERT INTO `tourUser` VALUES ('1038447736237181',30,2,1,10,'test_nick2','Japan'),('test',2,2,1,3,'1','4'),('test2',20,0,1,3,NULL,NULL),('test3',20,0,1,3,NULL,NULL),('test4',20,0,1,3,NULL,NULL),('test5',20,0,1,2,NULL,NULL),('test6',20,0,1,2,NULL,NULL);
 /*!40000 ALTER TABLE `tourUser` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -876,4 +875,4 @@ CREATE TABLE IF NOT EXISTS `slow_log` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-06-11 14:10:15
+-- Dump completed on 2016-06-12 13:09:31
