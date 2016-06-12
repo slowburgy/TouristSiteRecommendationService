@@ -73,7 +73,7 @@ class Main extends React.Component {
          (3) Redirect to the main page
 
          @param placePreferenceList: List of tuples (cid, preferenceScore)
-         [("123", 5), ...]
+         [["123", 5], ...]
 
          @param userInfo: JSON
          {

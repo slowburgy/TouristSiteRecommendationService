@@ -135,7 +135,44 @@ export default class MyPageOnFirstLogin extends React.Component {
     }
     
     handleSubmit() {
-        this.props.handlers.redirectToMainPage();
+        var chosen = this.state.chosens
+            .reduce(
+                (p, c) => p && c
+            );
+
+        if (chosen) {
+            var userInfo = {
+                nickname: this.state.nickname,
+                age: this.state.age,
+                gender: this.state.gender,
+                nationality: this.state.nationality
+            };
+            
+            var prefList = 
+                this.props.places.map(
+                    function(place, index) {
+                        var score;
+                       
+                        switch (this.state.likes[index]) {
+                            case "like":
+                                score = 5;
+                                break;
+                            case "dislike":
+                                score = 1;
+                                break;
+                            default:
+                                score = 3;
+                        }
+                        
+                        return [place.cid, score];
+                    }.bind(this)
+                );
+            
+            console.log(prefList);
+            console.log(userInfo);
+            
+            // this.props.handlers.redirectToMainPage(prefList, userInfo);
+        }
     }
     
     render() {
@@ -187,14 +224,14 @@ export default class MyPageOnFirstLogin extends React.Component {
                                             <RaisedButton
                                                 label="Dislike"
                                                 icon={<SocialSentimentDissatisfied />}
+                                                style={{marginRight: dp(5)}}
                                                 onTouchTap={boundDislike}
                                                 secondary={this.state.chosens[index] && (this.state.likes[index] == "dislike")}
                                                 disabled={this.state.chosens[index] && (this.state.likes[index] !== "dislike")}
                                             />
                                             <RaisedButton
-                                                label="Not sure"
+                                                label="Unsure"
                                                 icon={<SocialSentimentNeutral />}
-                                                style={{marginRight: dp(5)}}
                                                 onTouchTap={boundNeutral}
                                                 primary={this.state.chosens[index] && (this.state.likes[index] == "neutral")}
                                                 disabled={this.state.chosens[index] && (this.state.likes[index] !== "neutral")}
