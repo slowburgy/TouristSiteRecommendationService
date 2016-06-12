@@ -1,20 +1,50 @@
 'use strict';
 
-exports.default = {
-    appTitle: "Title",
-    myLikes: "Places I Liked",
-    myReviews: "My Reviews",
-    changeProfileInfo: "Change Profile Information",
-    rateReviews: "Rate & Reviews",
-    logout: "LOG OUT",
-    login: "LOG IN",
-    search: "Search for anything",
-    mypage: "MY PAGE",
-    greetings: "Welcome!",
-    
-    
-    
-    
+var stringKo = exports.stringKo = 
+{
+    appTitle: "제목",
+    myLikes: "내가 좋아한 장소들",
+    myReviews: "내가 쓴 리뷰",
+    changeProfileInfo: "프로필 정보 변경",
+    rateReviews: "별점 / 리뷰",
+    logout: "로그아웃",
+    login: "로그인",
+    search: "여기에 입력하여 검색하세요",
+    mypage: "내 정보",
+    greetings: "환영합니다!",
+    seoul: "서울",
+    daejeon: "대전",
+    busan: "부산",
+    gwangju: "광주",
+    daegu: "대구",
+    ulsan: "울산",
+    incheon: "인천",
+    gyeonggi: "경기",
+    chungcheon: "충청",
+    jeolla: "전라",
+    gyeongsang: "경상",
+    gangwon: "강원",
+    jeju: "제주",
+    forAge: "당신의 나이에 맞는",
+    forGender: "당신의 성별에 맞는",
+    alone: "홀로 여행",
+    family: "가족과의 여행",
+    friends: "친구들과의 여행",
+    lover: "연인과의 여행",
+    company: "사내 여행",
+    addCat: "클릭하여 추가",
+    submit: "제출",
+    nickname: "닉네임",
+    age: "나이",
+    gender: "성별",
+    nationality: "국적",
+    editProfile: "프로필 정보 변경",
+    writeReview: "리뷰 쓰기",
+    rateHere: "별점 주기",
+    likePlace: "좋아하기",
+    added: " 이(가) 좋아하는 장소 목록에 추가되었습니다.",
+	language: "To English",
+	msg: "추천해줘!"
 };
 
 

@@ -1,20 +1,51 @@
 'use strict';
 
-var appTitle = exports.appTitle = "Title";
-var myDrawerTitle = exports.myDrawerTitle = "MY PAGE";
-var myVisitedPlaces = exports.myVisitedPlaces = "My Visited Places";
-var myLikes = exports.myLikes = "Places I Liked";
-var myReviews = exports.myReviews = "My Reviews";
-var changeProfileInfo = exports.changeProfileInfo = "Change Profile Information";
-
-var recommended = exports.recommended = "Recommended for you";
-var recommendedForGender = exports.recommendedForGender = "Recommended for your gender";
-var recommendedForAge = exports.recommendedForAge = "Recommended for your age";
-var recommendedForNationality = exports.recommendedForNationality = "Recommended for your country";
-
-var rate = exports.rate = "Rate this place";
-var review = exports.review = "View/write reviews";
-var moreSnapshots = exports.moreSnapshots = "View more snapshots";
+var stringEn = exports.stringEn = 
+{
+    appTitle: "Title",
+    myLikes: "Places I Liked",
+    myReviews: "My Reviews",
+    changeProfileInfo: "Change Profile Information",
+    rateReviews: "Rate & Reviews",
+    logout: "LOG OUT",
+    login: "LOG IN",
+    search: "Search for anything",
+    mypage: "MY PAGE",
+    greetings: "Welcome!",
+    seoul: "Seoul",
+    daejeon: "Daejeon",
+    busan: "Busan",
+    gwangju: "Gwangju",
+    daegu: "Daegu",
+    ulsan: "Ulsan",
+    incheon: "Incheon",
+    gyeonggi: "Gyeonggi-do",
+    chungcheon: "Chungcheong-do",
+    jeolla: "Jeolla-do",
+    gyeongsang: "Gyeongsang-do",
+    gangwon: "Gangwon-do",
+    jeju: "Jeju-do",
+    forAge: "For your age",
+    forGender: "For your gender",
+    alone: "Travelling alone",
+    family: "Travelling with your family",
+    friends: "Travelling with your friends",
+    lover: "Travelling with your lover",
+    company: "Travelling with your company members",
+    addCat: "Click to add a category",
+    submit: "Submit",
+    nickname: "Nickname",
+    age: "Age",
+    gender: "Gender",
+    nationality: "Nationality",
+    editProfile: "Edit Profile Information",
+    writeReview: "Write a review",
+    rateHere: "Rate this place",
+    likePlace: "Like this place",
+    added: " added to your favorites",
+    language: "한글로",
+	msg: "Get recommendations!"
+};
 
 
 

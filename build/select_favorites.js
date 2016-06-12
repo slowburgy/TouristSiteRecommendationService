@@ -39604,23 +39604,12 @@ var MyLoginAppBar = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            var _this2 = this;
-
-            var PageButton;
-            PageButton = function PageButton() {
-                return _react2.default.createElement(_FlatButton2.default, {
-                    label: 'LOGIN',
-                    labelStyle: styles.iconStyle,
-                    onTouchTap: _this2.handleLoginButtonClick
-                });
-            };
-
             return _react2.default.createElement(_AppBar2.default, {
                 style: styles.root,
                 title: _react2.default.createElement(
                     'span',
                     { style: styles.titleStyle },
-                    _strings.appTitle
+                    'Title'
                 ),
                 iconElementLeft: _react2.default.createElement(
                     _IconButton2.default,
@@ -39633,14 +39622,18 @@ var MyLoginAppBar = function (_React$Component) {
                     _react2.default.createElement(
                         'div',
                         { style: styles.searchBarStyle },
-                        _react2.default.createElement(_TextField2.default, { hintText: 'Search for anything' }),
+                        _react2.default.createElement(_TextField2.default, { hintText: _strings.search }),
                         _react2.default.createElement(
                             _IconButton2.default,
                             null,
                             _react2.default.createElement(_zoomIn2.default, null)
                         )
                     ),
-                    _react2.default.createElement(PageButton, null)
+                    _react2.default.createElement(_FlatButton2.default, {
+                        label: 'LOG IN',
+                        labelStyle: styles.iconStyle,
+                        onTouchTap: this.handleLoginButtonClick
+                    })
                 )
             });
         }
@@ -39880,10 +39873,12 @@ var MyPageOnFirstLogin = function (_React$Component) {
                     return [place.cid, score];
                 }.bind(this));
 
-                console.log(prefList);
-                console.log(userInfo);
+                // console.log(prefList);
+                // console.log(userInfo);
 
-                // this.props.handlers.redirectToMainPage(prefList, userInfo);
+                this.props.handlers.redirectToMainPage(prefList, userInfo);
+            } else {
+                window.alert("Please rate all places.");
             }
         }
     }, {
@@ -40119,11 +40114,8 @@ var Main = function (_React$Component) {
     _createClass(Main, [{
         key: 'getRandomPlaceList',
         value: function getRandomPlaceList() {
-            /*
-            TODO: Get random place list from the server
-             */
+            /* TODO: Routine for getting a list of random places from the server goes here */
 
-            // Update randomPlaces with the real list fetched from the server.
             return randomPlaces;
         }
     }, {
@@ -40142,13 +40134,11 @@ var Main = function (_React$Component) {
                 age: number,
                 gender: string,
                 nationality: string,
-                travelStyle: string
              }
              */
 
-            /* TODO: Routine for (1) & (2) */
+            /* TODO: Routine for (1) & (2) goes here */
 
-            /* Routine for (3) */
             window.location.href = 'main.html';
         }
     }, {
@@ -40187,31 +40177,56 @@ _reactDom2.default.render(_react2.default.createElement(Main, null), document.ge
 },{"../dimensions/dimensions":1,"./components/myLoginAppBar":351,"./components/myPageOnFirstLogin":352,"material-ui/styles/MuiThemeProvider":158,"material-ui/styles/getMuiTheme":161,"react":337,"react-dom":188,"react-tap-event-plugin":195,"underscore":349}],354:[function(require,module,exports){
 'use strict';
 
-var appTitle = exports.appTitle = "Title";
-var myDrawerTitle = exports.myDrawerTitle = "MY PAGE";
-var myVisitedPlaces = exports.myVisitedPlaces = "My Visited Places";
-var myLikes = exports.myLikes = "Places I Liked";
-var myReviews = exports.myReviews = "My Reviews";
-var changeProfileInfo = exports.changeProfileInfo = "Change Profile Information";
-
-var recommended = exports.recommended = "Recommended for you";
-var recommendedForGender = exports.recommendedForGender = "Recommended for your gender";
-var recommendedForAge = exports.recommendedForAge = "Recommended for your age";
-var recommendedForNationality = exports.recommendedForNationality = "Recommended for your country";
-
-var rate = exports.rate = "Rate this place";
-var review = exports.review = "View/write reviews";
-var moreSnapshots = exports.moreSnapshots = "View more snapshots";
+var stringEn = exports.stringEn = {
+    appTitle: "Title",
+    myLikes: "Places I Liked",
+    myReviews: "My Reviews",
+    changeProfileInfo: "Change Profile Information",
+    rateReviews: "Rate & Reviews",
+    logout: "LOG OUT",
+    login: "LOG IN",
+    search: "Search for anything",
+    mypage: "MY PAGE",
+    greetings: "Welcome!",
+    seoul: "Seoul",
+    daejeon: "Daejeon",
+    busan: "Busan",
+    gwangju: "Gwangju",
+    daegu: "Daegu",
+    ulsan: "Ulsan",
+    incheon: "Incheon",
+    gyeonggi: "Gyeonggi-do",
+    chungcheon: "Chungcheong-do",
+    jeolla: "Jeolla-do",
+    gyeongsang: "Gyeongsang-do",
+    gangwon: "Gangwon-do",
+    jeju: "Jeju-do",
+    forAge: "For your age",
+    forGender: "For your gender",
+    alone: "Travelling alone",
+    family: "Travelling with your family",
+    friends: "Travelling with your friends",
+    lover: "Travelling with your lover",
+    company: "Travelling with your company members",
+    addCat: "Click to add a category",
+    submit: "Submit",
+    nickname: "Nickname",
+    age: "Age",
+    gender: "Gender",
+    nationality: "Nationality",
+    editProfile: "Edit Profile Information",
+    writeReview: "Write a review",
+    rateHere: "Rate this place",
+    likePlace: "Like this place",
+    added: " added to your favorites",
+    language: "한글로",
+    msg: "Get recommendations!"
+};
 
 },{}],355:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it don't break things.
-var cachedSetTimeout = setTimeout;
-var cachedClearTimeout = clearTimeout;
-
 var queue = [];
 var draining = false;
 var currentQueue;
@@ -40236,7 +40251,7 @@ function drainQueue() {
     if (draining) {
         return;
     }
-    var timeout = cachedSetTimeout(cleanUpNextTick);
+    var timeout = setTimeout(cleanUpNextTick);
     draining = true;
 
     var len = queue.length;
@@ -40253,7 +40268,7 @@ function drainQueue() {
     }
     currentQueue = null;
     draining = false;
-    cachedClearTimeout(timeout);
+    clearTimeout(timeout);
 }
 
 process.nextTick = function (fun) {
@@ -40265,7 +40280,7 @@ process.nextTick = function (fun) {
     }
     queue.push(new Item(fun, args));
     if (queue.length === 1 && !draining) {
-        cachedSetTimeout(drainQueue, 0);
+        setTimeout(drainQueue, 0);
     }
 };
 
