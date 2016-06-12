@@ -190,20 +190,21 @@ class Main extends React.Component {
         };
 
         this.updateSessionStorage = this.updateSessionStorage.bind(this);
-        this.fetchInformationFromServer = this.fetchInformationFromServer.bind(this);
+        this.fetchInitialInformationFromServer = this.fetchInitialInformationFromServer.bind(this);
+        this.fetchRecommendationsFromServer = this.fetchRecommendationsFromServer.bind(this);
         this.handlePlaceClick = this.handlePlaceClick.bind(this);
         this.handlePlaceLike = this.handlePlaceLike.bind(this);
         this.handleReviewSubmit = this.handleReviewSubmit.bind(this);
         this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
         
-        this.fetchInformationFromServer();
+        this.fetchInitialInformationFromServer();
     }
 
     updateSessionStorage() {
         window.sessionStorage.user = JSON.stringify(this.state.info.user);
     }
 
-    fetchInformationFromServer() {
+    fetchInitialInformationFromServer() {
         /*
          TODO: Fetch ALL information about the user (nickname, gender, places he liked, ..., initial set of recommendations, etc).
                using the UID stored in sessionStorage, and store the retrieved information in sessionStorage.
@@ -221,13 +222,38 @@ class Main extends React.Component {
 
             this.state.info.user = user;
             this.updateSessionStorage();
-            console.log(window.sessionStorage.user);
 
         } else {
             // If data is in the sessionStorage, retrieve from there.
 
             this.state.info.user = JSON.parse(window.sessionStorage.user);
         }
+    }
+
+    fetchRecommendationsFromServer(categories) {
+        /*
+        TODO: Fetch a list of recommendations for a given list of categories from the server.
+         */
+
+        var recList = 
+            categories.map(
+                function(category) {
+                    var recommendations;
+
+                    /* Some routine */
+                    
+                    // Just for testing. Replace with the real value.
+                    recommendations = [_place_];
+                    return recommendations;
+                }
+            );
+        
+        this.state.info.user.recommendations = recList;
+        this.state.info.bodyPage = "main page";
+        this.updateSessionStorage();
+        console.log("Recommendations fetched!");
+        
+        this.setState(this.state);
     }
 
     handlePlaceClick(place) {
@@ -301,6 +327,7 @@ class Main extends React.Component {
             handlePlaceLike: this.handlePlaceLike,
             handleReviewSubmit: this.handleReviewSubmit,
             handleBackButtonClick: this.handleBackButtonClick,
+            fetchRecommendationsFromServer: this.fetchRecommendationsFromServer
         };
 
         return (

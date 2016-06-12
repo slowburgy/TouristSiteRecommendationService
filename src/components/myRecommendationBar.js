@@ -7,6 +7,7 @@ import {Popover, PopoverAnimationVertical} from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import {List, ListItem} from 'material-ui/List';
 import ContentClear from 'material-ui/svg-icons/content/clear';
+import IconButton from 'material-ui/IconButton';
 
 const styles = {
     root: {
@@ -71,15 +72,17 @@ export default class MyRecommendationBar extends React.Component {
 
         this.state = {
             open: false,
+            currentCategories: []
         };
 
-        this.handleToggle = this.handleToggle.bind(this);
+        this.handleCategoryOpen = this.handleCategoryOpen.bind(this);
+        this.handleCategoryChosen = this.handleCategoryChosen.bind(this);
+        this.handleCategoryRemove = this.handleCategoryRemove.bind(this);
         this.handleRequestClose = this.handleRequestClose.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleToggle(event) {
-        console.log("Toggled!");
-
+    handleCategoryOpen(event) {
         event.preventDefault();
 
         this.setState({
@@ -88,13 +91,55 @@ export default class MyRecommendationBar extends React.Component {
         });
     }
 
+    handleCategoryChosen(event, menuItem, index) {
+        this.state.currentCategories.push(menuItem.props.value);
+        this.setState(this.state);
+    }
+    
+    handleCategoryRemove(category) {
+        this.state.currentCategories = 
+            this.state.currentCategories.filter(
+                (e) => e !== category
+            );
+        this.setState(this.state);
+    }
+
     handleRequestClose() {
         this.setState({
             open: false
         })
     }
+    
+    handleSubmit() {
+        this.props.handlers.fetchRecommendationsFromServer(
+            this.state.currentCategories
+        )
+    }
 
     render() {
+        var categories = [
+            "Seoul",
+            "Daejeon",
+            "Busan",
+            "Gwangju",
+            "Daegu",
+            "Ulsan",
+            "Incheon",
+            "Gyeonggi-do",
+            "Chungcheong-do",
+            "Jeolla-do",
+            "Gyeongsang-do",
+            "Gangwon-do",
+            "Jeju-do",
+            "For your age",
+            "For your gender",
+            "Travelling alone",
+            "Travelling with your family",
+            "Travelling with your friends",
+            "Travelling with your lover",
+            "Travelling with your company members"
+        ];
+
         return (
             <div style={styles.root}>
                 <div style={styles.child}>
@@ -104,7 +149,7 @@ export default class MyRecommendationBar extends React.Component {
                             <RaisedButton
                                 style={styles.buttonStyle}
                                 label="Click to add a category"
-                                onTouchTap={this.handleToggle}
+                                onTouchTap={this.handleCategoryOpen}
                                 primary={true}
                             />
                             <Popover
@@ -114,34 +159,56 @@ export default class MyRecommendationBar extends React.Component {
                                 anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
                                 targetOrigin={{horizontal: 'left', vertical: 'top'}}
                             >
-                                <Menu>
-                                    <MenuItem value={1} primaryText="Recommended for you" />
-                                    <MenuItem value={2} primaryText="Recommended for women" />
-                                    <MenuItem value={3} primaryText="Recommended for 20s" />
-                                    <MenuItem value={4} primaryText="Recommended for alone" />
-                                    <MenuItem value={5} primaryText="Recommended for family" />
+                                <Menu
+                                    maxHeight={verticalDP(450)}
+                                    onItemTouchTap={this.handleCategoryChosen} >
+                                    {
+                                        categories.map(
+                                            function (category, index) {
+                                                return (
+                                                    <MenuItem
+                                                        primaryText={category}
+                                                        value={category}
+                                                    />
+                                                )
+                                            }.bind(this)
+                                        )
+                                    }
                                 </Menu>
                             </Popover>
                             <RaisedButton 
                                 label="Submit" 
                                 style={styles.buttonStyle}
                                 secondary={true}
+                                onTouchTap={this.handleSubmit}
                             />
                         </div>
-                        <List style={styles.listStyle}>
-                            <ListItem primaryText="Recommended for you" rightIcon={<ContentClear />} />
-                            <ListItem primaryText="Recommended for women" rightIcon={<ContentClear />} />
-                            <ListItem primaryText="Recommended for 20s" rightIcon={<ContentClear />} />
-                            <ListItem primaryText="Recommended for family" rightIcon={<ContentClear />} />
+                        <List style={styles.listStyle} id="recommendation_categories">
+                            {
+                                this.state.currentCategories.map(
+                                    function(category) {
+                                        var boundRemove = this.handleCategoryRemove.bind(this, category);
+                                        
+                                        return (
+                                            <ListItem
+                                                primaryText={category}
+                                                rightIconButton={
+                                                    <IconButton
+                                                        onTouchTap={boundRemove}
+                                                    >
+                                                        <ContentClear />
+                                                    </IconButton>
+                                                }
+                                            />
+                                        )
+                                    }.bind(this)
+                                )
+                            }
                         </List>
                     </div>
                 </div>
             </div>
         );
     }
-
-
-
-
 }
 
