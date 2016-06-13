@@ -18,8 +18,8 @@ var connection = mysql.createConnection({
 
 var checkSex = function(str) {
     switch (str) {
-        case "m": return 0;
-        case "w": return 1;
+        case "Male": return 0;
+        case "Woman": return 1;
         default: return 2;
     }
 };
@@ -34,8 +34,27 @@ var checkStyle = function(str) {
     }
 };
 
-var getExp = function(age, sex, travStyle, area) {
-    return "Recommedation ~~";
+var getArea = function(c) {
+    switch (c) {
+        case "Seoul": return 1;
+        case "Inchoen": return 2;
+        case "Daejeon": return 3;
+        case "Daegu": return 4;
+        case "Gwangju": return 5;
+        case "Busan": return 6;
+        case "Ulsan": return 7;
+        case "Sejong": return 8;
+        case "Gyeonggi-do": return 31;
+        case "Gangwon-do": return 32;
+        case "Chungcheongbuk-do": return 33;
+        case "Chungcheongnam-do": return 34;
+        case "Gyeongsangbuk-do": return 35;
+        case "Gyeongsangnam-do": return 36;
+        case "Jeollabuk-do": return 37;
+        case "Jeollanam-do": return 38;
+        case "Jeju-do": return 39;
+        default: return 1;
+    }
 };
 
 var makeUid = function() {
@@ -150,21 +169,38 @@ exports.recommend = function(req, res) {
     if ( isEmpty(req.query.age) || isEmpty(req.query.sex) ||
          isEmpty(req.query.travStyle) || isEmpty(req.query.area))
             return res.json({'result':-2});
-    var age = Number(req.query.age);
+    var age; var area_query = ""; var area = req.query.area;
+    if (req.query.age == "all") age = 0;
+    else age = Math.floor(Number(req.query.age)/10)*10;
     var sex = checkSex(req.query.sex);
     var travStyle = checkStyle(req.query.travStyle);
+    if (area.indexOf("Gyeongsang") === 0) area_query = " and cid in (select cid from tourPlace where areaCode=35 or areaCode=36)";
+    else if (area.indexOf("Chungcheong") === 0) area_query = " and cid in (select cid from tourPlace where areaCode=33 or areaCode=34)";
+    else if (area.indexOf("Jeolla") === 0) area_query = " and cid in (select cid from tourPlace where areaCode=37 or areaCode=38)";
+    else if (area != "all") area_query = " and cid in (select cid from tourPlace where areaCode="+getArea(area)+")";
     var inner_query = '1';
+
     if (sex != 2) inner_query = inner_query + ' and sex = '+sex;
     if (age != 0) inner_query = inner_query + ' and age > '+age+' and age < '+(age+10);
     if (travStyle != 5) inner_query = inner_query + ' and travStyle = '+travStyle;
-    var area = Number(req.query.area);
-    var exp = getExp(age, sex, travStyle, area);
+
+    var exp = "Recommedations ";
+    if (area != "all") exp = exp + "in "+area;
+    if (age != 0 || sex != 2 || travStyle != 5) exp = exp + "for ";
+    if (age != 0) exp = exp + age + "\'s ";
+    if (sex == 0) exp = exp + "men ";
+    else if (sex == 1) exp = exp + "women ";
+    if (travStyle == 1) exp = exp + "alone ";
+    else if (travStyle == 2) exp = exp + "in couple ";
+    else if (travStyle == 3) exp = exp + "with friends";
+    else if (travStyle == 4) exp = exp + "with family";
+
     if ( isEmpty(req.query.uid)) {
         var query = connection.query(
                     'select cid, avg(pref) as pref from tourPref where '+
                     'uid in (select uid from tourUser where '+inner_query+
-                    ') and cid in (select cid from tourPlace where areaCode='+area+
-                    ') group by cid order by pref desc',
+                    ')'+area_query+
+                    ' group by cid order by pref desc',
                     function(err,result){
                         if (err) {
                            console.error(err);
@@ -186,8 +222,8 @@ exports.recommend = function(req, res) {
        // cid condition can be deleted.
        var query = connection.query(
                     'select uid, avg(pref) as pref from tourPref where '+
-                    'uid in (select uid from tourUser where '+inner_query+') and '+
-                    'cid in (select cid from tourPlace where areaCode='+area+')'+
+                    'uid in (select uid from tourUser where '+inner_query+')'+
+                    area_query+
                     ' group by uid',
                     function(err,result){
                         if (err) {
@@ -198,8 +234,7 @@ exports.recommend = function(req, res) {
                         else {
                             var query2 = connection.query(
 	                        'select uid, cid, pref from tourPref where '+
-				'uid in (select uid from tourUser where '+inner_query+') and '+
-				'cid in (select cid from tourPlace where areaCode='+area+')',
+				'uid in (select uid from tourUser where '+inner_query+')'+area_query,
 				function(err,result2){
 				    if (err) {
 				        console.error(err);
@@ -210,9 +245,7 @@ exports.recommend = function(req, res) {
 				        var query2 = connection.query(
 					    'select distinct cid from tourPref where '+
 					    'uid in (select uid from tourUser where '+
-                                            inner_query+') and '+
-					    'cid in (select cid from tourPlace '+
-                                            'where areaCode='+area+')',
+                                            inner_query+')'+area_query,
 					    function(err,result3){
 					        if (err) {
 						    console.error(err);
@@ -251,8 +284,8 @@ var recom_callback = function(res, usr_avg_list, all_pref, place_list, uid, exp)
     var final_list = sort_by_wsum(pref_list, usr_avg_list, place_list, un);
     var items = []; var i = 0;
     (function loop() {
-      if (i<final_list.length) {
-        if (i != final_list.length - 1) getPlaceData(final_list[i].cid, items, final_list[i].pref, exp, null);
+      if (i<Math.min(7,final_list.length)) {
+        if (i != Math.min(7,final_list.length) - 1) getPlaceData(final_list[i].cid, items, final_list[i].pref, exp, null);
         else getPlaceData(final_list[i].cid, items, final_list[i].pref, exp, res);
         i++;
         loop();
@@ -627,8 +660,8 @@ exports.getreviewByUID = function(req, res) {
                     else {
             var items = []; var i = 0;
             (function loop() {
-	    if (i<result.length) {
-                if (i != result.length - 1) items = getPlaceData(result[i].cid, items, null, null, null);
+	    if (i<Math.min(7,result.length)) {
+                if (i != Math.min(7,result.length) - 1) items = getPlaceData(result[i].cid, items, null, null, null);
                 else items = getPlaceData(result[i].cid, items, null, null, null);
                 items[i].starRating = 3; //TEMP
                 items[i].content = result[i].content;
@@ -662,6 +695,7 @@ var getPlaceData = function(cid, items, pref, exp, res) {
                 else return items;
             } else {
                 items.push({"item":data, "pref":pref});
+                console.log(exp);
                 if (res != null) return res.json({'result':1, 'data':{'exp':exp, 'items':items}});
                 else return items;
             }

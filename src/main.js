@@ -127,26 +127,74 @@ class Main extends React.Component {
                 }.bind(this)
             });
 
+            user.recommendations = [{}, {}];
+/*
             $.ajax({
                 url:
                 "/api/recommend?uid=" + uid +
-                "&age=0"+ //+ user.age +
-                "&sex=none"+ //+ user.gender +
-                "&travStyle=1" + // TEMP
-                "&area=1", // TEMP
+                "&age=all"+
+                "&sex=all"+ //+ user.gender +
+                "&travStyle=all" +
+                "&area=Seoul",
                 type: 'get',
                 async: false,
                 cache: false,
                 success: function(data) {
                     if (data.result == 1) {
-                        user.recommendations = [{}, {}, {}, {}];
-                        for (var i=0; i < 4; i++) {
-                            user.recommendations[i].exp = data.data.exp;
-                            user.recommendations[i].items = [];
-                            for (var j=0; j < Math.min(7,data.data.items.length); j++) {
-                                user.recommendations[i].items.push(data.data.items[j].item);
-                            }
-                        }
+			user.recommendations[0].exp = data.data.exp;
+			user.recommendations[0].items = [];
+			for (var j=0; j < Math.min(7,data.data.items.length); j++) {
+			    user.recommendations[0].items.push(data.data.items[j].item);
+			}
+                    } else if (data.result == 0) user.recommendations = [{'exp':'No Data', items:[]}];
+                }.bind(this),
+                error: function(request, status, error) {
+                    console.error(error); // alert(error);
+                }.bind(this)
+            });
+*/
+
+            $.ajax({
+                url:
+                "/api/recommend?uid=" + uid +
+                "&age="+ user.age +
+                "&sex=all"+ //+ user.gender +
+                "&travStyle=all" +
+                "&area=all",
+                type: 'get',
+                async: false,
+                cache: false,
+                success: function(data) {
+                    if (data.result == 1) {
+			user.recommendations[0].exp = data.data.exp;
+			user.recommendations[0].items = [];
+			for (var j=0; j < Math.min(7,data.data.items.length); j++) {
+			    user.recommendations[0].items.push(data.data.items[j].item);
+			}
+                    } else if (data.result == 0) user.recommendations = [{'exp':'No Data', items:[]}];
+                }.bind(this),
+                error: function(request, status, error) {
+                    console.error(error); // alert(error);
+                }.bind(this)
+            });
+
+            $.ajax({
+                url:
+                "/api/recommend?uid=" + uid +
+                "&age=all"+
+                "&sex="+ user.gender +
+                "&travStyle=all" +
+                "&area=all",
+                type: 'get',
+                async: false,
+                cache: false,
+                success: function(data) {
+                    if (data.result == 1) {
+		        user.recommendations[1].exp = data.data.exp;
+			user.recommendations[1].items = [];
+			for (var j=0; j < Math.min(7,data.data.items.length); j++) {
+			    user.recommendations[1].items.push(data.data.items[j].item);
+			}
                     } else if (data.result == 0) user.recommendations = [{'exp':'No Data', items:[]}];
                 }.bind(this),
                 error: function(request, status, error) {
@@ -247,30 +295,48 @@ class Main extends React.Component {
                      TODO: Routine for fetching list of places for a single recommendation category goes here
                      @param category: String
                      */
+                    var age = 0; var sex = "all"; var travStyle = "all"; var area = "all";
+                    if (category == "For your age")
+                        age = JSON.parse(window.sessionStorage.user).age;
+                    else if (category == "For your gender")
+                        sex = JSON.parse(window.sessionStorage.user).gender;
+                    else if (category == "Travelling alone")
+                        travStyle = "alone";
+                    else if (category == "Travelling with your family")
+                        travStyle = "family";
+                    else if (category == "Travelling with your friends")
+                        travStyle = "friend";
+                    else if (category == "Travelling with your lover")
+                        travStyle = "couple";
+                    else if (category == "Travelling with your company members")
+                        travStyle = "all";
+                    else area = category;
 
                     $.ajax({
-                        url: // Need to change
+                        url:
                         "/api/recommend?uid=" + window.sessionStorage.uid +
-                        "&age=" + JSON.parse(window.sessionStorage.user).age +
-                        "&sex=" + JSON.parse(window.sessionStorage.user).gender +
-                        "&travStyle=1" + // TEMP
-                        "&area=1", // TEMP
+                        "&age="+age+
+                        "&sex="+sex+
+                        "&travStyle="+travStyle+
+                        "&area="+area,
                         type: 'get',
                         async: false,
                         cache: false,
                         success: function(data) {
                             if (data.result == 1) {
+                                recommendations.exp = data.data.exp;
                                 for (var j=0; j < Math.min(7,data.data.items.length); j++) {
                                     recommendations.items.push(data.data.items[j].item);
                                 }
-                            } else if (data.result == 0) recommendations = [];
+                            } else if (data.result == 0) {
+                              recommendations.exp = category + " (No Data);
+                              recommendations.items = [];
+                            }
                         },
                         error: function(request, status, error) {
                             console.error(error); // alert(error);
                         }
                     });
-                    recommendations.exp = category; // Need to change
-
                     return recommendations;
                 }.bind(this)
             );
