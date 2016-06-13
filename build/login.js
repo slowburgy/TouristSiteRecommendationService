@@ -34697,13 +34697,21 @@ var styles = {
 var MyLoginPage = function (_React$Component) {
     _inherits(MyLoginPage, _React$Component);
 
-    function MyLoginPage() {
+    function MyLoginPage(props) {
         _classCallCheck(this, MyLoginPage);
 
-        return _possibleConstructorReturn(this, Object.getPrototypeOf(MyLoginPage).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(MyLoginPage).call(this, props));
+
+        _this.handleLoginButtonClick = _this.handleLoginButtonClick.bind(_this);
+        return _this;
     }
 
     _createClass(MyLoginPage, [{
+        key: 'handleLoginButtonClick',
+        value: function handleLoginButtonClick() {
+            this.props.handlers.handleLoginButtonClick();
+        }
+    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
@@ -34721,7 +34729,8 @@ var MyLoginPage = function (_React$Component) {
                         label: 'Login with Facebook',
                         secondary: true,
                         style: styles.buttonStyle,
-                        labelStyle: styles.buttonTextStyle
+                        labelStyle: styles.buttonTextStyle,
+                        onTouchTap: this.handleLoginButtonClick
                     })
                 )
             );
@@ -34796,21 +34805,27 @@ var Main = function (_React$Component) {
 
         _this.handleLoginButtonClick = _this.handleLoginButtonClick.bind(_this);
         _this.authorizeUser = _this.authorizeUser.bind(_this);
+
+        var splited = window.location.href.split("?");
+        if (splited.length > 1 && splited[1].startsWith("oauth=")) {
+            var _this$authorizeUser = _this.authorizeUser();
+
+            var _this$authorizeUser2 = _slicedToArray(_this$authorizeUser, 2);
+
+            var uid = _this$authorizeUser2[0];
+            var firstLogin = _this$authorizeUser2[1];
+
+            opener.top.window.open('about:blank', '_self').close();
+
+            if (firstLogin) window.location.href = "select_favorites.html";else window.location.href = "main.html";
+        }
         return _this;
     }
 
     _createClass(Main, [{
         key: 'handleLoginButtonClick',
         value: function handleLoginButtonClick() {
-            var _authorizeUser = this.authorizeUser();
-
-            var _authorizeUser2 = _slicedToArray(_authorizeUser, 2);
-
-            var uid = _authorizeUser2[0];
-            var firstLogin = _authorizeUser2[1];
-
-
-            if (firstLogin) window.location.href = "select_favorites.html";else this.state.info.bodyPage = "main.html";
+            window.open("/auth/facebook");
         }
     }, {
         key: 'authorizeUser',
@@ -34824,11 +34839,27 @@ var Main = function (_React$Component) {
              */
 
             /* TODO: Routine for OAuth verification and communication with the server goes here */
-            var uid = "test",
-                firstLogin = true;
+            var uid = window.location.href.split("?oauth=")[1].split("#_=_")[0];
+            var firstLogin = -1;
+            $.ajax({
+                url: "/api/uidcheck?uid=" + uid,
+                type: 'get',
+                async: false,
+                cache: false,
+                success: function success(data) {
+                    if (data.result == 1) {
+                        firstLogin = 0;
+                    } else if (data.result == 0) {
+                        firstLogin = 1;
+                    }
+                },
+                error: function error(request, status, _error) {
+                    console.error(_error);
+                }
+            });
 
+            if (firstLogin == -1) console.error("FIRSTLOGIN ERROR");
             window.sessionStorage.uid = uid;
-
             return [uid, firstLogin];
         }
     }, {
@@ -34850,7 +34881,7 @@ var Main = function (_React$Component) {
                     _react2.default.createElement(
                         'div',
                         null,
-                        _react2.default.createElement(_myLoginPage2.default, null)
+                        _react2.default.createElement(_myLoginPage2.default, { handlers: appBarHandlers })
                     )
                 )
             );
@@ -34915,6 +34946,11 @@ var stringEn = exports.stringEn = {
 // shim for using process in browser
 
 var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it don't break things.
+var cachedSetTimeout = setTimeout;
+var cachedClearTimeout = clearTimeout;
+
 var queue = [];
 var draining = false;
 var currentQueue;
@@ -34939,7 +34975,7 @@ function drainQueue() {
     if (draining) {
         return;
     }
-    var timeout = setTimeout(cleanUpNextTick);
+    var timeout = cachedSetTimeout(cleanUpNextTick);
     draining = true;
 
     var len = queue.length;
@@ -34956,7 +34992,7 @@ function drainQueue() {
     }
     currentQueue = null;
     draining = false;
-    clearTimeout(timeout);
+    cachedClearTimeout(timeout);
 }
 
 process.nextTick = function (fun) {
@@ -34968,7 +35004,7 @@ process.nextTick = function (fun) {
     }
     queue.push(new Item(fun, args));
     if (queue.length === 1 && !draining) {
-        setTimeout(drainQueue, 0);
+        cachedSetTimeout(drainQueue, 0);
     }
 };
 

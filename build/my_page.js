@@ -48022,14 +48022,30 @@ var Main = function (_React$Component) {
             */
 
             /* TODO: Routine for updating user information in the server goes here */
+            var _success = 0;
+            $.ajax({
+                url: "/api/usermodify?uid=" + window.sessionStorage.uid + "&age=" + profileInfo.age + "&sex=" + profileInfo.gender + "&nationality=" + profileInfo.nationality + "&nickname=" + profileInfo.nickname + "&travStyle=alone",
+                type: 'get',
+                cache: false,
+                async: false,
+                success: function success(data) {
+                    if (data.result == 1) {
+                        _success = 1;
+                        console.log("Profile Edited!");
+                    }
+                },
+                error: function error(request, status, _error) {
+                    console.error(_error);
+                }
+            });
 
-            this.state.info.user.nickname = profileInfo.nickname;
-            this.state.info.user.age = profileInfo.age;
-            this.state.info.user.gender = profileInfo.gender;
-            this.state.info.user.nationality = profileInfo.nationality;
-            this.updateSessionStorage();
-
-            console.log("profile edited!");
+            if (_success) {
+                this.state.info.user.nickname = profileInfo.nickname;
+                this.state.info.user.age = profileInfo.age;
+                this.state.info.user.gender = profileInfo.gender;
+                this.state.info.user.nationality = profileInfo.nationality;
+                this.updateSessionStorage();
+            }
         }
     }, {
         key: 'render',
@@ -48173,6 +48189,11 @@ var stringKo = exports.stringKo = {
 // shim for using process in browser
 
 var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it don't break things.
+var cachedSetTimeout = setTimeout;
+var cachedClearTimeout = clearTimeout;
+
 var queue = [];
 var draining = false;
 var currentQueue;
@@ -48197,7 +48218,7 @@ function drainQueue() {
     if (draining) {
         return;
     }
-    var timeout = setTimeout(cleanUpNextTick);
+    var timeout = cachedSetTimeout(cleanUpNextTick);
     draining = true;
 
     var len = queue.length;
@@ -48214,7 +48235,7 @@ function drainQueue() {
     }
     currentQueue = null;
     draining = false;
-    clearTimeout(timeout);
+    cachedClearTimeout(timeout);
 }
 
 process.nextTick = function (fun) {
@@ -48226,7 +48247,7 @@ process.nextTick = function (fun) {
     }
     queue.push(new Item(fun, args));
     if (queue.length === 1 && !draining) {
-        setTimeout(drainQueue, 0);
+        cachedSetTimeout(drainQueue, 0);
     }
 };
 
