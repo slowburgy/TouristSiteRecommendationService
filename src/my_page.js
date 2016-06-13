@@ -121,14 +121,35 @@ class Main extends React.Component {
         */ 
 
         /* TODO: Routine for updating user information in the server goes here */
-        
-        this.state.info.user.nickname = profileInfo.nickname;
-        this.state.info.user.age = profileInfo.age;
-        this.state.info.user.gender = profileInfo.gender;
-        this.state.info.user.nationality = profileInfo.nationality;
-        this.updateSessionStorage();
-        
-        console.log("profile edited!");
+        var success = 0;
+	$.ajax({
+            url: "/api/usermodify?uid=" + window.sessionStorage.uid +
+                                 "&age=" + profileInfo.age + 
+                                 "&sex=" + profileInfo.gender + 
+                                 "&nationality=" + profileInfo.nationality +
+                                 "&nickname=" + profileInfo.nickname + 
+                                 "&travStyle=alone",
+	    type: 'get',
+	    cache: false,
+	    async: false,
+	    success: function(data) {
+	        if (data.result == 1) {
+                    success = 1;
+		    console.log("Profile Edited!");
+		}
+	    },
+            error: function(request, status, error) {
+	        console.error(error);
+	    }
+        });
+
+        if (success) {
+	    this.state.info.user.nickname = profileInfo.nickname;
+	    this.state.info.user.age = profileInfo.age;
+	    this.state.info.user.gender = profileInfo.gender;
+	    this.state.info.user.nationality = profileInfo.nationality;
+	    this.updateSessionStorage();
+        }
     }
 
     render() {

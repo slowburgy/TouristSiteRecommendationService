@@ -254,102 +254,101 @@ class Main extends React.Component {
          */
 
         if (!window.sessionStorage.user) {
-            // var uid = window.sessionStorage.uid;
-            // var user = {}, place = null;
-            //
-            // $.ajax({
-            //     url: "/api/userinfo?uid=" + uid,
-            //     type: 'get',
-            //     async: false,
-            //     cache: false,
-            //     success: function(data) {
-            //         if (data.result == 1) {
-            //             user.uid = uid;
-            //             user.firstlogin = (data.userprofile.numpref >= 10);
-            //             user.nickname = data.userprofile.nickname;
-            //             user.age = data.userprofile.age;
-            //             user.gender = data.userprofile.sex;
-            //             user.nationality = data.userprofile.nationality;
-            //         }
-            //     },
-            //     error: function(request, status, error) {
-            //         // alert(error);
-            //         console.error(error);
-            //     }
-            // });
-            //
-            // $.ajax({
-            //     url:
-            //     "/api/recommend?uid=" + uid +
-            //     "&age=" + user.age +
-            //     "&sex=" + user.gender +
-            //     "&travStyle=1" + // TEMP
-            //     "&area=1", // TEMP
-            //     type: 'get',
-            //     async: false,
-            //     cache: false,
-            //     success: function(data) {
-            //         if (data.result == 1) {
-            //             user.recommendations = [{}, {}, {}, {}];
-            //             for (var i=0; i < 4; i++) {
-            //                 user.recommendations[i].exp = data.data.exp;
-            //                 user.recommendations[i].items = [];
-            //
-            //                 for (var j=0; j < data.data.items.length; j++) {
-            //                     user.recommendations[i].items.push(data.data.items[j].item);
-            //                 }
-            //             }
-            //         }
-            //     },
-            //     error: function(request, status, error) {
-            //         console.error(error); // alert(error);
-            //     }
-            // });
-            //
-            // $.ajax({
-            //     url: "/api/getlike?uid=" + uid,
-            //     type: 'get',
-            //     cache: false,
-            //     async: false,
-            //     success: function(data) {
-            //         user.likedPlaces = [];
-            //         if (data.result == 1) {
-            //             for (var i=0; i < data.data.length; i++) {
-            //                 user.likedPlaces.push(data.data[i].item);
-            //             }
-            //         }
-            //     },
-            //     error: function(request, status, error) {
-            //         console.error(error); // alert(error);
-            //     }
-            // });
-            //
-            // $.ajax({
-            //     url: "/api/getreviewByUID?uid=" + uid,
-            //     type: 'get',
-            //     cache: false,
-            //     async: false,
-            //     success: function(data) {
-            //         user.reviews = [];
-            //         if (data.result == 1) {
-            //             for (var i=0; i < data.items.length; i++) {
-            //                 user.reviews.push(data.items[i]);
-            //             }
-            //         }
-            //     },
-            //     error: function(request, status, error) {
-            //         console.error(error); // alert(error);
-            //     }
-            // });
-            //
-            // console.log(user);
-            
-            this.state.info.user = _user_; // user;
-            this.updateSessionStorage();
+            var uid = window.sessionStorage.uid;
+            var user = {}, place = null;
 
+            $.ajax({
+                url: "/api/userinfo?uid=" + uid,
+                type: 'get',
+                async: false,
+                cache: false,
+                success: function(data) {
+                    if (data.result == 1) {
+                        user.uid = uid;
+                        user.firstlogin = (data.userprofile.numpref >= 10);
+                        user.nickname = data.userprofile.nickname;
+                        user.age = data.userprofile.age;
+                        if (data.userprofile.sex == 0) user.gender = "Male";
+                        else if (data.userprofile.sex == 1) user.gender = "Female";
+                        else user.gender = "ETC.";
+                        user.nationality = data.userprofile.nationality;
+                    }
+                },
+                error: function(request, status, error) {
+                    console.error(error);
+                }
+            });
+            
+            $.ajax({
+                url:
+                "/api/recommend?uid=" + uid +
+                "&age=0"+ //+ user.age +
+                "&sex=none"+ //+ user.gender +
+                "&travStyle=1" + // TEMP
+                "&area=1", // TEMP
+                type: 'get',
+                async: false,
+                cache: false,
+                success: function(data) {
+                    if (data.result == 1) {
+                        user.recommendations = [{}, {}, {}, {}];
+                        for (var i=0; i < 4; i++) {
+                            user.recommendations[i].exp = data.data.exp;
+                            user.recommendations[i].items = [];
+            
+                            for (var j=0; j < data.data.items.length; j++) {
+                                user.recommendations[i].items.push(data.data.items[j].item);
+                            }
+                        }
+                    } else if (data.result == 0) user.recommendations = [{'exp':'No Data', items:[]}];
+                },
+                error: function(request, status, error) {
+                    console.error(error); // alert(error);
+                }
+            });
+            
+            $.ajax({
+                url: "/api/getlike?uid=" + uid,
+                type: 'get',
+                cache: false,
+                async: false,
+                success: function(data) {
+                    user.likedPlaces = [];
+                    if (data.result == 1) {
+                        for (var i=0; i < data.data.length; i++) {
+                            user.likedPlaces.push(data.data[i].item);
+                        }
+                    }
+                },
+                error: function(request, status, error) {
+                    console.error(error); // alert(error);
+                }
+            });
+            
+            $.ajax({
+                url: "/api/getreviewByUID?uid=" + uid,
+                type: 'get',
+                cache: false,
+                async: false,
+                success: function(data) {
+                    user.reviews = [];
+                    if (data.result == 1) {
+                        for (var i=0; i < data.items.length; i++) {
+                            user.reviews.push(data.items[i]);
+                        }
+                    }
+                },
+                error: function(request, status, error) {
+                    console.error(error); // alert(error);
+                }
+            });
+            
+            console.log(user);
+
+            this.state.info.user = user; //_user_;
+            this.updateSessionStorage();
         } else {
             // If data is in the sessionStorage, retrieve from there.
-
             this.state.info.user = JSON.parse(window.sessionStorage.user);
         }
     }
@@ -358,18 +357,36 @@ class Main extends React.Component {
         var recList =
             categories.map(
                 function(category) {
-                    var recommendations;
+                    var recommendations = {'exp':'', 'items':[]};
 
                     /*
                     TODO: Routine for fetching list of places for a single recommendation category goes here
                     @param category: String
                     */
 
-                    // Just for testing. Replace with the real value.
-                    recommendations = {
-                        exp: category,
-                        items: [_place_]
-                    };
+		    $.ajax({
+                        url: // Need to change
+			"/api/recommend?uid=" + window.sessionStorage.uid +
+			              "&age=" + window.sessionStorage.user.age +
+				      "&sex=" + window.sessionStorage.user.gender +
+				      "&travStyle=1" + // TEMP
+				      "&area=1", // TEMP
+	                type: 'get',
+			async: false,
+			cache: false,
+			success: function(data) {
+			  if (data.result == 1) {
+				for (var j=0; j < data.data.items.length; j++) {
+                                  recommendations.items.push(data.data.items[j].item);
+			      }
+			  } else if (data.result == 0) recommendations = [];
+			},
+                        error: function(request, status, error) {
+                          console.error(error); // alert(error);
+			}
+		    });
+                    recommendations.exp = category; // Need to change
+
                     return recommendations;
                 }
             );
@@ -397,8 +414,8 @@ class Main extends React.Component {
 
     handlePlaceLike(place) {
          // @param place: JSON object, with format specified as above.
-
-        var duplicate =
+        if (this.state.info.user.likedPlaces.length == 0) var duplicate = false;
+        else { var duplicate =
             this.state.info.user.likedPlaces
             .map(
                 function(e) {
@@ -409,14 +426,30 @@ class Main extends React.Component {
                         return p || c;
                     }
                 );
+        }
         
         if (!duplicate) {
             /* TODO: Routine for updating user's liked places in the server goes here */
-            
-            this.state.info.user.likedPlaces.unshift(place);
-            this.updateSessionStorage();
-            
-            console.log("Place liked!");
+	    $.ajax({
+                url: "/api/like?uid=" + window.sessionStorage.uid + "&cid=" + place.cid,
+                type: 'get',
+                cache: false,
+                async: false,
+                success: function(data) {
+                    if (data.result == 1) {
+		        this.state.info.user.likedPlaces.unshift(place);
+			this.updateSessionStorage();
+                        console.log("Place liked!");
+                    } else if (data.result == 2) {
+                        console.error("Already liked");
+                    } else {
+                        console.error("Like error");
+                    }
+                },
+                error: function(request, status, error) {
+                    console.error(error);
+                }
+            });
         } else {
             console.log("Duplicate entry.");
         }
@@ -434,12 +467,31 @@ class Main extends React.Component {
          */
 
         /* TODO: Routine for updating user & place review in the server goes here */
-
-        this.state.info.user.reviews.unshift(review);
-        this.state.info.place.reviews.unshift(review);
-        this.updateSessionStorage();
-        
-        console.log("Review submitted!");
+	$.ajax({
+            url: "/api/review",
+            data: {'uid': window.sessionStorage.uid,
+                   'cid': review.cid,
+                   'content': review.content,
+                   'starRating': review.starRating} 
+	    type: 'post',
+	    cache: false,
+	    async: false,
+	    success: function(data) {
+	        if (data.result == 1) {
+		    this.state.info.user.reviews.unshift(review);
+		    this.state.info.place.reviews.unshift(review);
+		    this.updateSessionStorage();
+		    console.log("Review submitted!");
+		} else if (data.result == 2) {
+                    console.log("Review existed");
+                } else {
+                    console.error("Review error");
+                }
+            },
+            error: function(request, status, error) {
+	        console.error(error);
+	    }
+        });
     }
 
     render() {

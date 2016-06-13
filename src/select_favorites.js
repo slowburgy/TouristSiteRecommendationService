@@ -58,7 +58,25 @@ class Main extends React.Component {
     
     getRandomPlaceList() {
         /* TODO: Routine for getting a list of random places from the server goes here */
-        
+        randomPlaces = []
+
+        $.ajax({
+            url: "/api/randomplace",
+	    type: 'get',
+	    cache: false,
+	    async: false,
+	    success: function(data) {
+	        if (data.result == 1) {
+                    for (var i=0; i<data.data.length; i++) {
+		        randomPlaces.push(data.data[i].item);
+                    }
+		}
+	    },
+            error: function(request, status, error) {
+	        console.error(error);
+	    }
+        });
+
         return randomPlaces;
     }
     
@@ -82,8 +100,48 @@ class Main extends React.Component {
          */
         
         /* TODO: Routine for (1) & (2) goes here */
+        var errored = false;
+
+        $.ajax({
+            url: "/api/signup?uid=" + window.sessionStorage.uid +
+                            "&age=" + userInfo.age + 
+                            "&sex=" + userInfo.gender + 
+                            "&travStyle=alone" + 
+                            "&nickname=" + userInfo.nickname + 
+                            "&nationality=" + userInfo.nationality,
+	    type: 'get',
+            async: false,
+	    cache: false,
+	    success: function(data) {
+		if (data.result < 0) {
+                    errored = true;
+                }
+            },
+            error: function(request, status, error) {
+	        console.error(error);
+	    }
+        });
         
-        window.location.href = 'main.html';
+        for (var i=0; i<placePreferenceList.length; i++) {
+        $.ajax({
+            url: "/api/addpref?uid=" + window.sessionStorage.uid +
+                             "&cid=" + placePreferenceList[i][0] + 
+                             "&pref=" + placePreferenceList[i][1],
+	    type: 'get',
+            async: false,
+	    cache: false,
+	    success: function(data) {
+		if (data.result < 0) {
+                    errored = true;
+                }
+            },
+            error: function(request, status, error) {
+	        console.error(error);
+	    }
+        });
+        }
+        if (!errored) window.location.href = 'main.html';
+        else console.log("ERRORED");
     }
 
     render() {
@@ -112,16 +170,4 @@ ReactDOM.render(
     <Main />,
     document.getElementById('app')
 );
-
-
-
-
-
-
-
-
-
-
-
-
 

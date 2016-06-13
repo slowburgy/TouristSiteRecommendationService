@@ -89,7 +89,7 @@ app.use('/', express.static(__dirname));
 app.get('/api/userinfo', api.userinfo);
 app.get('/api/signup', api.signup);
 app.get('/api/usermodify', api.usermodify);
-app.get('/api/login', api.login);
+app.get('/api/uidcheck', api.uidcheck);
 app.get('/api/prefinfo', api.prefinfo);
 app.get('/api/recommend', api.recommend);
 app.get('/api/addpref', api.addpref);
@@ -106,10 +106,7 @@ app.get('/api/getreviewByCID', api.getreviewByCID);
 app.get('/auth/facebook', passport.authenticate('facebook'));
 app.get('/auth/facebook/callback', passport.authenticate('facebook', { successRedirect: '/login_success', failureRedirect: '/login_fail' }));
 app.get('/login_success', ensureAuthenticated, function(req, res){
-    res.send(req.user);
-    /*
-	Something will be added.
-    */
+    res.redirect('/index.html?oauth='+req.user.id);
 });
 
 app.get('/logout', function(req, res){
