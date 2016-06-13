@@ -13,7 +13,7 @@ var connection = mysql.createConnection({
     port: 3306,
     user: 'root',
     password: 'toursql',
-    database: 'mysql'
+    database: 'tour'
 });
 
 var checkSex = function(str) {
@@ -273,7 +273,7 @@ var sort_by_wsum = function(pref_list, usr_avg_list, place_list, un) {
         var x = weighted_sum(pref_list, sim_list, j, un);
         final_list.push({"cid":place_list[j]["cid"], "pref":x}); 
     }
-    return final_list;
+    return final_list.sort(function(a,b){return b.pref-a.pref});
 };
 
 var weighted_sum = function(pref_list, sim_list, j, un) {
@@ -408,8 +408,7 @@ exports.addplace = function(req, res) {
 	for (i=0; i<item.length; i++) {
             var cid = item[i].contentid;
             var placedata = {'cid':cid,
-                'areaCode':areaCode,
-                'sigunguCode':sigunguCode};
+                'areaCode':areaCode};
             var place = connection.query(
                 'insert into tourPlace set ?', placedata,
                 function(err,result){
@@ -512,7 +511,7 @@ exports.review = function(req, res) {
                                         {'uid':req.body.uid,
 			  	         'cid':Number(req.body.cid),
 	                                 'review':review,
-                                         'star': star,
+                                         'starRating': star,
                                          'date': date_str}, 
 				         function(err, result){
 				             if (err) {
@@ -585,7 +584,7 @@ exports.getreviewByCID = function(req, res) {
     if ( isEmpty(req.query.cid))
             return res.json({'result':-2});
     var query = connection.query(
-                'select review, date, star from tourReview'+
+                'select review, date, starRating from tourReview, uid'+
                 ' where cid='+Number(req.query.cid),
                 function(err,result){
                     if (err) {
@@ -601,7 +600,7 @@ exports.getreviewByUID = function(req, res) {
     if ( isEmpty(req.query.uid))
             return res.json({'result':-2});
     var query = connection.query(
-                'select cid, review as content, date from tourReview'+
+                'select cid, review as content, date, starRating from tourReview'+
                 ' where uid='+mysql.escape(req.query.uid),
                 function(err,result){
                     if (err) {

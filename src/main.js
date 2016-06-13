@@ -144,7 +144,7 @@ class Main extends React.Component {
                             user.recommendations[i].exp = data.data.exp;
                             user.recommendations[i].items = [];
 
-                            for (var j=0; j < data.data.items.length; j++) {
+                            for (var j=0; j < Math.min(7,data.data.items.length); j++) {
                                 user.recommendations[i].items.push(data.data.items[j].item);
                             }
                         }
@@ -224,7 +224,7 @@ class Main extends React.Component {
                         cache: false,
                         success: function(data) {
                             if (data.result == 1) {
-                                for (var j=0; j < data.data.items.length; j++) {
+                                for (var j=0; j < Math.min(7,data.data.items.length); j++) {
                                     recommendations.items.push(data.data.items[j].item);
                                 }
                             } else if (data.result == 0) recommendations = [];
