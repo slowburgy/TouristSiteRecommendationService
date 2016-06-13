@@ -27,6 +27,63 @@ const styles = {
 };
 
 
+class MySelectField extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            value: this.props.category
+        };
+        
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(event, index, value) {
+        this.state.value = value;
+        this.props.handleChange(value);
+        this.setState(this.state);
+    }
+    
+    render() {
+        var Field;
+        
+        switch (this.props.category) {
+            case "M":
+                Field = () => 
+                    <SelectField
+                        value={this.state.value}
+                        onChange={this.handleChange}
+                    >
+                        <MenuItem value={"m"} primaryText={"M"} />
+                        <MenuItem value={"w"} primaryText={"W"} />
+                    </SelectField>;
+                break;
+            
+            case "Alone":
+                Field = () =>
+                    <SelectField
+                        value={this.state.value}
+                        onChange={this.handleChange}
+                    >
+                        <MenuItem value={"alone"} primaryText={"alone"} />
+                        <MenuItem value={"family"} primaryText={"with family"} />
+                        <MenuItem value={"friends"} primaryText={"with friends"} />
+                        <MenuItem value={"love"} primaryText={"with a lover"} />
+                        <MenuItem value={"company"} primaryText={"with company members"} />
+                    </SelectField>;
+                break;
+            default:
+                console.error("Error");
+        }
+        
+        
+        return (
+            <Field />
+        );
+    }
+}
+
+
 export default class MyFirstProfile extends React.Component {
     constructor(props) {
         super(props);
@@ -43,6 +100,7 @@ export default class MyFirstProfile extends React.Component {
         this.handleAgeChange = this.handleAgeChange.bind(this);
         this.handleGenderChange = this.handleGenderChange.bind(this);
         this.handleNatChange = this.handleNatChange.bind(this);
+        this.handleTravelStyleChange = this.handleTravelStyleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -54,13 +112,18 @@ export default class MyFirstProfile extends React.Component {
         this.state.age = event.target.value;
     }
 
-    handleGenderChange(event, index, value) {
+    handleGenderChange(value) {
         this.state.gender = value;
-        this.setState(this.state);
+        console.log(value);
+        // this.setState(this.state);
     }
 
     handleNatChange(event) {
         this.state.nationality = event.target.value;
+    }
+
+    handleTravelStyleChange(value) {
+        this.state.travStyle = value;
     }
     
     handleSubmit() {
@@ -72,14 +135,16 @@ export default class MyFirstProfile extends React.Component {
             this.handleNameChange,
             this.handleAgeChange,
             this.handleGenderChange,
-            this.handleNatChange
+            this.handleNatChange,
+            this.handleTravelStyleChange
         ];
 
         const categories = [
             "Nickname",
             "Age",
             "Gender",
-            "Nationality"
+            "Nationality",
+            "Travelling style"
         ];
 
         return (
@@ -93,24 +158,25 @@ export default class MyFirstProfile extends React.Component {
 
                                 switch (e) {
                                     case "Gender":
-                                        Entry = () =>
-                                            <SelectField
-                                                value={this.state.gender}
-                                                onChange={actions[i]}
-                                            >
-                                                <MenuItem value={"M"} primaryText={"M"} />
-                                                <MenuItem value={"W"} primaryText={"W"} />
-                                            </SelectField>;
+                                        Entry = () => 
+                                            <MySelectField 
+                                                category="M"
+                                                handleChange={this.handleGenderChange}
+                                            />;
                                         break;
                                     case "Travelling style":
-
+                                        Entry = () =>
+                                            <MySelectField
+                                                category="Alone"
+                                                handleChange={this.handleTravelStyleChange}
+                                            />;
                                         break;
                                     default:
                                         Entry = () =>
                                             <TextField
-                                                value={this.state[e.toLowerCase()]}
                                                 style={styles.fontStyle}
-                                                onChange={actions[i]}/>;
+                                                onChange={actions[i]}
+                                            />;
                                 }
 
                                 return (
