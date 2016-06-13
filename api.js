@@ -20,6 +20,10 @@ var checkSex = function(str) {
     switch (str) {
         case "Male": return 0;
         case "Woman": return 1;
+        case "m": return 0;
+        case "w": return 1;
+        case "M": return 0;
+        case "W": return 1;
         default: return 2;
     }
 };
@@ -183,7 +187,7 @@ exports.recommend = function(req, res) {
     if (sex != 2) inner_query = inner_query + ' and sex = '+sex;
     if (age != 0) inner_query = inner_query + ' and age > '+age+' and age < '+(age+10);
     if (travStyle != 5) inner_query = inner_query + ' and travStyle = '+travStyle;
-
+console.log(inner_query);
     var exp = "Recommedations ";
     if (area != "all") exp = exp + "in "+area;
     if (age != 0 || sex != 2 || travStyle != 5) exp = exp + "for ";
@@ -663,7 +667,6 @@ exports.getreviewByUID = function(req, res) {
 	    if (i<Math.min(7,result.length)) {
                 if (i != Math.min(7,result.length) - 1) items = getPlaceData(result[i].cid, items, null, null, null);
                 else items = getPlaceData(result[i].cid, items, null, null, null);
-                items[i].starRating = 3; //TEMP
                 items[i].content = result[i].content;
                 items[i].date = result[i].date;
                 i++;
@@ -694,6 +697,7 @@ var getPlaceData = function(cid, items, pref, exp, res) {
                 if (res != null) return res.json({'result':1, 'data':items});
                 else return items;
             } else {
+                console.log(pref);
                 items.push({"item":data, "pref":pref});
                 console.log(exp);
                 if (res != null) return res.json({'result':1, 'data':{'exp':exp, 'items':items}});
