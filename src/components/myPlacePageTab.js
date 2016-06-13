@@ -171,8 +171,9 @@ export default class MyPlacePageTab extends React.Component {
         });
     }
 
-    handlePlaceLike(place) {
-        this.props.handlers.handlePlaceLike(place);
+    handlePlaceLike() {
+        this.props.handlers.handlePlaceLike();
+        console.log("Liked!");
         this.setState({open: true});
     }
     

@@ -57,40 +57,40 @@ class Main extends React.Component {
     updateSessionStorage() {
         window.sessionStorage.user = JSON.stringify(this.state.info.user);
     }
-    
+
     handlePlaceClick(place) {
         this.state.info.bodyPage = "place page";
 
         this.state.info.place = place;
         this.setState(this.state);
     }
-    
+
     handleBackButtonClick() {
         this.state.info.bodyPage = "my page";
         this.setState(this.state);
     }
 
-    handlePlaceLike(place) {
+    handlePlaceLike() {
         // This method is same as that of main.js. Copy it once it is implemented.
-        
+
         var duplicate =
             this.state.info.user.likedPlaces
-            .map(
-                function(e) {
-                    return e.cid == place.cid;
-                })
+                .map(
+                    function(e) {
+                        return e.cid == this.state.info.place.cid;
+                    }.bind(this))
                 .reduce(
                     function(p, c) {
                         return p || c;
-                    }
+                    }.bind(this)
                 );
 
         if (!duplicate) {
             /* Routine */
 
-            this.state.info.user.likedPlaces.unshift(place);
+            this.state.info.user.likedPlaces.unshift(this.state.info.place);
             this.updateSessionStorage();
-            
+
             console.log("Place liked!");
         } else {
             console.log("Duplicate entry.");
@@ -103,52 +103,52 @@ class Main extends React.Component {
         this.state.info.user.reviews.unshift(review);
         this.state.info.place.reviews.unshift(review);
         this.updateSessionStorage();
-        
+
         console.log("Review submitted!");
     }
 
     handleProfileEditSubmit(profileInfo) {
         /*
-        Take a profileInfo (json object) as the argument and update the user info:
-        
-        @param profileInfo:
-            {
-                nickname: string,
-                age: string,
-                gender: string,
-                nationality: string
-            }
-        */ 
+         Take a profileInfo (json object) as the argument and update the user info:
+
+         @param profileInfo:
+         {
+         nickname: string,
+         age: string,
+         gender: string,
+         nationality: string
+         }
+         */
 
         /* TODO: Routine for updating user information in the server goes here */
         var success = 0;
-	$.ajax({
+        $.ajax({
             url: "/api/usermodify?uid=" + window.sessionStorage.uid +
-                                 "&age=" + profileInfo.age + 
-                                 "&sex=" + profileInfo.gender + 
-                                 "&nationality=" + profileInfo.nationality +
-                                 "&nickname=" + profileInfo.nickname + 
-                                 "&travStyle=alone",
-	    type: 'get',
-	    cache: false,
-	    async: false,
-	    success: function(data) {
-	        if (data.result == 1) {
+            "&age=" + profileInfo.age +
+            "&sex=" + profileInfo.gender +
+            "&nationality=" + profileInfo.nationality +
+            "&nickname=" + profileInfo.nickname +
+            "&travStyle=alone",
+            type: 'get',
+            cache: false,
+            async: false,
+            success: function(data) {
+                if (data.result == 1) {
                     success = 1;
-		    console.log("Profile Edited!");
-		}
-	    },
+                    console.log("Profile Edited!");
+                }
+            }.bind(this),
             error: function(request, status, error) {
-	        console.error(error);
-	    }
+                console.error(error);
+            }.bind(this)
         });
 
         if (success) {
-	    this.state.info.user.nickname = profileInfo.nickname;
-	    this.state.info.user.age = profileInfo.age;
-	    this.state.info.user.gender = profileInfo.gender;
-	    this.state.info.user.nationality = profileInfo.nationality;
-	    this.updateSessionStorage();
+            this.state.info.user.nickname = profileInfo.nickname;
+            this.state.info.user.age = profileInfo.age;
+            this.state.info.user.gender = profileInfo.gender;
+            this.state.info.user.nationality = profileInfo.nationality;
+            this.updateSessionStorage();
         }
     }
 
@@ -168,7 +168,7 @@ class Main extends React.Component {
 
         return (
             <MuiThemeProvider muiTheme={muiTheme}>
-                <div > 
+                <div >
                     <MyAppBar
                         info={this.state.info}
                         handlers={appBarHandlers}

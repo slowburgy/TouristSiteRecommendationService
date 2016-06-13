@@ -36,7 +36,7 @@ class Main extends React.Component {
     handleLoginButtonClick() {
         window.open("/auth/facebook");
     }
-    
+
     authorizeUser() {
         /*
          Get uid by via OAuth API. 
@@ -49,23 +49,23 @@ class Main extends React.Component {
         /* TODO: Routine for OAuth verification and communication with the server goes here */
         var uid = window.location.href.split("?oauth=")[1].split("#_=_")[0];
         var firstLogin = -1;
-	$.ajax({
+        $.ajax({
             url: "/api/uidcheck?uid=" + uid,
-	    type: 'get',
-	    async: false,
-	    cache: false,
-	    success: function(data) {
-	        if (data.result == 1) {
-		    firstLogin = 0;
-		} else if (data.result == 0) {
+            type: 'get',
+            async: false,
+            cache: false,
+            success: function(data) {
+                if (data.result == 1) {
+                    firstLogin = 0;
+                } else if (data.result == 0) {
                     firstLogin = 1;
                 }
-            },
+            }.bind(this),
             error: function(request, status, error) {
-	        console.error(error);
-	    }
-	});
- 
+                console.error(error);
+            }.bind(this)
+        });
+
         if (firstLogin == -1) console.error("FIRSTLOGIN ERROR");
         window.sessionStorage.uid = uid;
         return [uid, firstLogin];
@@ -78,7 +78,7 @@ class Main extends React.Component {
 
         return (
             <MuiThemeProvider muiTheme={muiTheme}>
-                <div > 
+                <div >
                     <MyLoginAppBar
                         handlers={appBarHandlers}
                     />

@@ -55,31 +55,31 @@ class Main extends React.Component {
         this.redirectToMainPage = this.redirectToMainPage.bind(this);
         this.getRandomPlaceList = this.getRandomPlaceList.bind(this);
     }
-    
+
     getRandomPlaceList() {
         /* TODO: Routine for getting a list of random places from the server goes here */
         randomPlaces = []
 
         $.ajax({
             url: "/api/randomplace",
-	    type: 'get',
-	    cache: false,
-	    async: false,
-	    success: function(data) {
-	        if (data.result == 1) {
+            type: 'get',
+            cache: false,
+            async: false,
+            success: function(data) {
+                if (data.result == 1) {
                     for (var i=0; i<data.data.length; i++) {
-		        randomPlaces.push(data.data[i].item);
+                        randomPlaces.push(data.data[i].item);
                     }
-		}
-	    },
+                }
+            }.bind(this),
             error: function(request, status, error) {
-	        console.error(error);
-	    }
+                console.error(error);
+            }.bind(this)
         });
 
         return randomPlaces;
     }
-    
+
     redirectToMainPage(placePreferenceList, userInfo) {
         /*
          Handler to redirect the new user from choosing preferred places to the main page. 
@@ -92,53 +92,53 @@ class Main extends React.Component {
 
          @param userInfo: JSON
          {
-            nickname: string,
-            age: number,
-            gender: string,
-            nationality: string,
+         nickname: string,
+         age: number,
+         gender: string,
+         nationality: string,
          }
          */
-        
+
         /* TODO: Routine for (1) & (2) goes here */
         var errored = false;
 
         $.ajax({
             url: "/api/signup?uid=" + window.sessionStorage.uid +
-                            "&age=" + userInfo.age + 
-                            "&sex=" + userInfo.gender + 
-                            "&travStyle=alone" + 
-                            "&nickname=" + userInfo.nickname + 
-                            "&nationality=" + userInfo.nationality,
-	    type: 'get',
+            "&age=" + userInfo.age +
+            "&sex=" + userInfo.gender +
+            "&travStyle=alone" +
+            "&nickname=" + userInfo.nickname +
+            "&nationality=" + userInfo.nationality,
+            type: 'get',
             async: false,
-	    cache: false,
-	    success: function(data) {
-		if (data.result < 0) {
+            cache: false,
+            success: function(data) {
+                if (data.result < 0) {
                     errored = true;
                 }
-            },
+            }.bind(this),
             error: function(request, status, error) {
-	        console.error(error);
-	    }
+                console.error(error);
+            }.bind(this)
         });
-        
+
         for (var i=0; i<placePreferenceList.length; i++) {
-        $.ajax({
-            url: "/api/addpref?uid=" + window.sessionStorage.uid +
-                             "&cid=" + placePreferenceList[i][0] + 
-                             "&pref=" + placePreferenceList[i][1],
-	    type: 'get',
-            async: false,
-	    cache: false,
-	    success: function(data) {
-		if (data.result < 0) {
-                    errored = true;
-                }
-            },
-            error: function(request, status, error) {
-	        console.error(error);
-	    }
-        });
+            $.ajax({
+                url: "/api/addpref?uid=" + window.sessionStorage.uid +
+                "&cid=" + placePreferenceList[i][0] +
+                "&pref=" + placePreferenceList[i][1],
+                type: 'get',
+                async: false,
+                cache: false,
+                success: function(data) {
+                    if (data.result < 0) {
+                        errored = true;
+                    }
+                }.bind(this),
+                error: function(request, status, error) {
+                    console.error(error);
+                }.bind(this)
+            });
         }
         if (!errored) window.location.href = 'main.html';
         else console.log("ERRORED");
@@ -151,7 +151,7 @@ class Main extends React.Component {
 
         return (
             <MuiThemeProvider muiTheme={muiTheme}>
-                <div > 
+                <div >
                     <MyLoginAppBar />
                     <div>
                         <div style={{height: appBarHeight}} ></div>
