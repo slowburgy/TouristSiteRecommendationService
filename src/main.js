@@ -215,8 +215,8 @@ class Main extends React.Component {
                     $.ajax({
                         url: // Need to change
                         "/api/recommend?uid=" + window.sessionStorage.uid +
-                        "&age=" + window.sessionStorage.user.age +
-                        "&sex=" + window.sessionStorage.user.gender +
+                        "&age=" + JSON.parse(window.sessionStorage.user).age +
+                        "&sex=" + JSON.parse(window.sessionStorage.user).gender +
                         "&travStyle=1" + // TEMP
                         "&area=1", // TEMP
                         type: 'get',
