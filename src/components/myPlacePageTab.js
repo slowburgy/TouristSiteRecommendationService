@@ -193,6 +193,17 @@ export default class MyPlacePageTab extends React.Component {
 
     render() {
         var strings = this.props.info.strings;
+        var weatherText = this.props.info.place.weather.toLowerCase();
+        var temp = this.props.info.place.temp;
+        var image;
+        
+        if (weatherText.indexOf("rain") > -1) {
+            image = 'images/rain.png';
+        } else if (weatherText.indexOf("cloud") > -1) {
+            image = 'images/clouds.png';
+        } else {
+            image = 'images/sun.png'
+        }
         
         return (
             <Paper style={styles.root} id="place_page_tab">
@@ -222,15 +233,10 @@ export default class MyPlacePageTab extends React.Component {
                         <div id="map" style={styles.mapStyle}></div>
                     </div>
                     <div style={styles.weatherStyle}>
-                        {weathers.map(function (item) {
-                            return (
-                                <div style={styles.oneWeatherStyle}>
-                                    <div>{item.date}</div>
-                                    <img src={item.img} style={styles.weatherIconStyle}/>
-                                    <div>{item.temp}</div>
-                                </div>
-                            );
-                        })}
+                        <div style={styles.oneWeatherStyle}>
+                            <img src={image} style={styles.weatherIconStyle}/>
+                            <div>{temp}</div>
+                        </div>
                     </div>
                 </div>
                 <div>
@@ -250,3 +256,12 @@ export default class MyPlacePageTab extends React.Component {
 // <ListItem primaryText="More snapshots" leftIcon={<ImageAddAPhoto />} />
 
 // <img src="images/googlemap.png" style={styles.mapStyle} />
+// {weathers.map(function (item) {
+//     return (
+//         <div style={styles.oneWeatherStyle}>
+//             <div>{item.date}</div>
+//             <img src={item.img} style={styles.weatherIconStyle}/>
+//             <div>{item.temp}</div>
+//         </div>
+//     );
+// })}

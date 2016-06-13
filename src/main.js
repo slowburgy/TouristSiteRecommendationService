@@ -329,7 +329,7 @@ class Main extends React.Component {
                                     recommendations.items.push(data.data.items[j].item);
                                 }
                             } else if (data.result == 0) {
-                              recommendations.exp = category + " (No Data);
+                              recommendations.exp = category + " (No Data)";
                               recommendations.items = [];
                             }
                         },
