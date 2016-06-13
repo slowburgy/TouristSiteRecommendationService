@@ -102,6 +102,7 @@ app.get('/api/numpref', api.numpref);
 app.get('/api/getlike', api.getlike);
 app.get('/api/getreviewByUID', api.getreviewByUID);
 app.get('/api/getreviewByCID', api.getreviewByCID);
+app.get('/api/getRating', api.getRating);
 
 // FACEBOOK OAUTH 
 app.get('/auth/facebook', passport.authenticate('facebook'));

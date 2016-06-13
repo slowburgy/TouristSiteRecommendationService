@@ -143,7 +143,6 @@ class Main extends React.Component {
                         for (var i=0; i < 4; i++) {
                             user.recommendations[i].exp = data.data.exp;
                             user.recommendations[i].items = [];
-
                             for (var j=0; j < Math.min(7,data.data.items.length); j++) {
                                 user.recommendations[i].items.push(data.data.items[j].item);
                             }
@@ -154,6 +153,43 @@ class Main extends React.Component {
                     console.error(error); // alert(error);
                 }.bind(this)
             });
+
+            for (var i=0; i < user.recommendations.length; i++) {
+                for (var j=0; j < Math.min(7, user.recommendations[i].items.length); j++) {
+                    var now = user.recommendations[i].items[j];
+		    $.ajax({
+                        url:
+			"/api/getreviewByCID?cid=" + now.cid,
+			type: 'get',
+			async: false,
+			cache: false,
+			success: function(data) {
+                            if (data.result == 1) {
+                                user.recommendations[i].items[j].reviews = data.items;
+                            }
+                        }.bind(this),
+                        error: function(request, status, error) {
+			    console.error(error); // alert(error);
+			}.bind(this)
+		    });
+		    $.ajax({
+                        url:
+			"/api/getRating?cid=" + now.cid,
+			type: 'get',
+			async: false,
+			cache: false,
+			success: function(data) {
+                            if (data.result >= 0) {
+                                user.recommendations[i].items[j].starRating = data.result;
+                            }
+                        }.bind(this),
+                        error: function(request, status, error) {
+			    console.error(error); // alert(error);
+			}.bind(this)
+		    });
+
+		}
+	    }
 
             $.ajax({
                 url: "/api/getlike?uid=" + uid,

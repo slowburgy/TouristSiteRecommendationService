@@ -527,6 +527,22 @@ exports.review = function(req, res) {
     });
 };
 
+exports.getRating = function(req, res) {
+    if ( isEmpty(req.query.cid))
+            return res.json({'result':-2});
+    var query = connection.query(
+                'select avg(pref) as starRating from tourPref where cid='+Number(req.query.cid),
+                function(err,result){
+                    if (err) {
+                       console.error(err);
+                       return res.json({'result':-1});
+                    }
+                    if (!result || !result.length) res.json({'result':-1});
+                    else res.json({"result":Math.round(result[0]["starRating"])});
+    });
+};
+
+
 exports.numpref = function(req, res) {
     if ( isEmpty(req.query.uid))
             return res.json({'result':-2});
@@ -584,7 +600,7 @@ exports.getreviewByCID = function(req, res) {
     if ( isEmpty(req.query.cid))
             return res.json({'result':-2});
     var query = connection.query(
-                'select review, date, starRating from tourReview, uid'+
+                'select review as content, date, starRating from tourReview'+
                 ' where cid='+Number(req.query.cid),
                 function(err,result){
                     if (err) {
