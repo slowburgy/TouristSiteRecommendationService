@@ -63,8 +63,8 @@ class Main extends React.Component {
                 bodyPage: "main page",
                 place: null,
                 strings: stringEn,
-                english: true
-            }
+                english: true,
+            },
         };
 
         this.updateSessionStorage = this.updateSessionStorage.bind(this);
@@ -190,7 +190,7 @@ class Main extends React.Component {
                     console.error(error); // alert(error);
                 }.bind(this)
             });
-
+            
             console.log(user);
             
             this.state.info.user = user;

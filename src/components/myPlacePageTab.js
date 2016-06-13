@@ -23,7 +23,9 @@ const styles = {
     },
     
     headerStyle: {
-        marginBottom: dp(20),
+        marginBottom: dp(15),
+        marginLeft: dp(15),
+        marginRight: dp(15),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -32,13 +34,13 @@ const styles = {
     
     nameStyle: {
         flex: 1,
-        fontSize: dp(40),
+        fontSize: dp(30),
         fontWeight: 'bold',
     },
     
     starStyle: {
         flex: 1,
-        marginTop: dp(20)
+        marginTop: dp(15)
     },
     
     oneStarStyle: {
@@ -47,12 +49,12 @@ const styles = {
     
     infoStyle: {
         fontSize: dp(20),
-        marginTop: dp(20),
+        marginTop: dp(15),
         whiteBreak: 'normal'
     },
 
     containerStyle: {
-        marginTop: dp(10),
+        // marginTop: dp(10),
         width: mapWeatherContainerWidth,
         display: 'flex',
         flexDirection: 'column',
@@ -73,7 +75,7 @@ const styles = {
     
     weatherStyle: {
         margin: dp(10),
-        marginTop: dp(25),
+        marginTop: dp(15),
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',

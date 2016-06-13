@@ -46667,7 +46667,9 @@ var styles = {
     },
 
     headerStyle: {
-        marginBottom: (0, _dimensions.dp)(20),
+        marginBottom: (0, _dimensions.dp)(15),
+        marginLeft: (0, _dimensions.dp)(15),
+        marginRight: (0, _dimensions.dp)(15),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -46676,13 +46678,13 @@ var styles = {
 
     nameStyle: {
         flex: 1,
-        fontSize: (0, _dimensions.dp)(40),
+        fontSize: (0, _dimensions.dp)(30),
         fontWeight: 'bold'
     },
 
     starStyle: {
         flex: 1,
-        marginTop: (0, _dimensions.dp)(20)
+        marginTop: (0, _dimensions.dp)(15)
     },
 
     oneStarStyle: {
@@ -46691,12 +46693,12 @@ var styles = {
 
     infoStyle: {
         fontSize: (0, _dimensions.dp)(20),
-        marginTop: (0, _dimensions.dp)(20),
+        marginTop: (0, _dimensions.dp)(15),
         whiteBreak: 'normal'
     },
 
     containerStyle: {
-        marginTop: (0, _dimensions.dp)(10),
+        // marginTop: dp(10),
         width: _dimensions.mapWeatherContainerWidth,
         display: 'flex',
         flexDirection: 'column',
@@ -46717,7 +46719,7 @@ var styles = {
 
     weatherStyle: {
         margin: (0, _dimensions.dp)(10),
-        marginTop: (0, _dimensions.dp)(25),
+        marginTop: (0, _dimensions.dp)(15),
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
@@ -46814,8 +46816,9 @@ var MyPlacePageTab = function (_React$Component) {
         }
     }, {
         key: 'handlePlaceLike',
-        value: function handlePlaceLike(place) {
-            this.props.handlers.handlePlaceLike(place);
+        value: function handlePlaceLike() {
+            this.props.handlers.handlePlaceLike();
+            console.log("Liked!");
             this.setState({ open: true });
         }
     }, {
@@ -47914,173 +47917,34 @@ var muiTheme = (0, _getMuiTheme2.default)({
     }
 });
 
-// _user_, _place_: Sample data for testing
-var _user_ = {
-    uid: "1",
-    firstLogin: true,
-    nickname: "rhapsodyjs",
-    age: 24,
-    gender: "Male",
-    nationality: "Korea, Republic Of",
-
-    recommendations: _underscore._.range(4).map(function (c) {
-        return {
-            exp: "For travelling alone",
-            items: _underscore._.range(7).map(function (r) {
-                return {
-                    cid: (7 * c + r).toString(), // Just for testing
-                    name: 'Seolark',
-                    address: 'Seoraksan-ro, Sokcho-si, Gangwon-do',
-                    latitude: 38.119444,
-                    longitude: 128.465556,
-                    img: "images/seolark_highres.jpg",
-                    starRating: 3,
-                    reviews: [{
-                        cid: "1",
-                        placeName: "Seorak",
-                        userName: 'nick',
-                        starRating: 5,
-                        date: '2016.06.07',
-                        content: 'This place is fantastic! The food is amazing, the people are kind, and the view is magnificent. I would certainly come here again!'
-                    }, {
-                        cid: "1",
-                        placeName: "Seorak",
-                        userName: 'nick',
-                        starRating: 1,
-                        date: '2016.05.01',
-                        content: 'Imma never come \'ere again, I can tell ya that!'
-                    }, {
-                        cid: "1",
-                        placeName: "Seorak",
-                        userName: 'nick',
-                        starRating: 3,
-                        date: '2016.04.02',
-                        content: 'Good!'
-                    }]
-                };
-            }) };
-    }),
-
-    likedPlaces: _underscore._.range(7).map(function (r) {
-        return {
-            cid: r.toString(),
-            name: 'Seolark',
-            address: 'Seoraksan-ro, Sokcho-si, Gangwon-do',
-            latitude: 38.119444,
-            longitude: 128.465556,
-            img: "images/seolark_highres.jpg",
-            starRating: 3,
-            reviews: [{
-                cid: "13",
-                placeName: 'Seorak',
-                userName: 'sherlock',
-                starRating: 5,
-                date: '2016.06.07',
-                content: 'This place is fantastic! The food is amazing, the people are kind, and the view is magnificent. I would certainly come here again!'
-            }, {
-                cid: "13",
-                placeName: 'Seorak',
-                userName: 'holmes',
-                starRating: 1,
-                date: '2016.05.01',
-                content: 'Imma never come \'ere again, I can tell ya that!'
-            }, {
-                cid: "13",
-                placeName: 'Seorak',
-                userName: 'watson',
-                starRating: 3,
-                date: '2016.04.02',
-                content: 'Good!'
-            }]
-        };
-    }),
-
-    reviews: [{
-        cid: "13",
-        placeName: 'Seorak',
-        userName: 'Seolark',
-        starRating: 5,
-        date: '2016.06.07',
-        content: 'This place is fantastic! The food is amazing, the people are kind, and the view is magnificent. I would certainly come here again!'
-    }, {
-        cid: "13",
-        placeName: 'Seorak',
-        userName: 'Mt. Everest',
-        starRating: 1,
-        date: '2016.05.01',
-        content: 'Imma never come \'ere again, I can tell ya that!'
-    }, {
-        cid: "13",
-        placeName: 'Seorak',
-        userName: 'Jeju Island',
-        starRating: 3,
-        date: '2016.04.02',
-        content: 'Good!'
-    }]
-};
-
-// Example format of _place_
-var _place_ = {
-    cid: "1",
-    name: 'Seolark',
-    address: 'Seoraksan-ro, Sokcho-si, Gangwon-do',
-    latitude: 38.119444,
-    longitude: 128.465556,
-    img: 'images/seolark_highres.jpg',
-    starRating: 3,
-    reviews: [{
-        cid: "13",
-        placeName: 'Seorak',
-        userName: 'Brendan',
-        starRating: 5,
-        date: '2016.06.07',
-        content: 'This place is fantastic! The food is amazing, the people are kind, and the view is magnificent. I would certainly come here again!'
-    }, {
-        cid: "13",
-        placeName: 'Nick',
-        userName: 'Seolark',
-        starRating: 1,
-        date: '2016.05.01',
-        content: 'Imma never come \'ere again, I can tell ya that!'
-    }, {
-        cid: "13",
-        placeName: 'Adam',
-        userName: 'Seolark',
-        starRating: 3,
-        date: '2016.04.02',
-        content: 'Good!'
-    }]
-};
-
 var Main = function (_React$Component) {
     _inherits(Main, _React$Component);
 
     /*
-        Specifications:
-         * user:
-            - uid: string
-            - nickname: string
-            - age: string
-            - gender: string
-            - nationality: string
-            - recommendations: list of JSON, where each JSON object is of the following format:
-                                    {
-                                        exp: recommendation category (string)
-                                        items: list of recommended places
-                                    }
-                               Outer list corresponds to the categories.
-            - likedPlaces: list of places (JSON objects)
-            - reviews: list of json objects, format specified above.
-            
-        * place: Place information (updated when a certain place is clicked)
-            - cid: string
-            - name: string
-            - address: string
-            - latitude: float
-            - longitude: float
-            - img (source url) : string
-            - starRating: integer
-            - reviews: list of json objects, format as above.
+     Specifications:
+      * user:
+     - uid: string
+     - nickname: string
+     - age: string
+     - gender: string
+     - nationality: string
+     - recommendations: list of JSON, where each JSON object is of the following format:
+     {
+     exp: recommendation category (string)
+     items: list of recommended places
+     }
+     Outer list corresponds to the categories.
+     - likedPlaces: list of places (JSON objects)
+     - reviews: list of json objects, format specified above.
+      * place: Place information (updated when a certain place is clicked)
+     - cid: string
+     - name: string
+     - address: string
+     - latitude: float
+     - longitude: float
+     - img (source url) : string
+     - starRating: integer
+     - reviews: list of json objects, format as above.
      */
 
     function Main(props) {
@@ -48099,7 +47963,8 @@ var Main = function (_React$Component) {
                 place: null,
                 strings: _strings.stringEn,
                 english: true
-            }
+            },
+            semaphore: 0
         };
 
         _this.updateSessionStorage = _this.updateSessionStorage.bind(_this);
@@ -48137,8 +48002,8 @@ var Main = function (_React$Component) {
         key: 'fetchInitialInformationFromServer',
         value: function fetchInitialInformationFromServer() {
             /*
-              Fetch ALL information about the user (nickname, gender, places he liked, ..., initial set of recommendations, etc).
-              using the UID stored in sessionStorage, and store the retrieved information in sessionStorage.
+             Fetch ALL information about the user (nickname, gender, places he liked, ..., initial set of recommendations, etc).
+             using the UID stored in sessionStorage, and store the retrieved information in sessionStorage.
              */
 
             if (!window.sessionStorage.user) {
@@ -48149,9 +48014,9 @@ var Main = function (_React$Component) {
                 $.ajax({
                     url: "/api/userinfo?uid=" + uid,
                     type: 'get',
-                    async: false,
+                    async: true,
                     cache: false,
-                    success: function success(data) {
+                    success: function (data) {
                         if (data.result == 1) {
                             user.uid = uid;
                             user.firstlogin = data.userprofile.numpref >= 10;
@@ -48159,11 +48024,16 @@ var Main = function (_React$Component) {
                             user.age = data.userprofile.age;
                             if (data.userprofile.sex == 0) user.gender = "Male";else if (data.userprofile.sex == 1) user.gender = "Female";else user.gender = "ETC.";
                             user.nationality = data.userprofile.nationality;
+
+                            console.log(this.state.semaphore);
+                            this.state.semaphore++;
                         }
-                    },
-                    error: function error(request, status, _error) {
-                        console.error(_error);
-                    }
+                    }.bind(this),
+                    error: function (request, status, error) {
+                        console.error(error);
+
+                        this.state.semaphore++;
+                    }.bind(this)
                 });
 
                 $.ajax({
@@ -48172,9 +48042,9 @@ var Main = function (_React$Component) {
                     "&travStyle=1" + // TEMP
                     "&area=1", // TEMP
                     type: 'get',
-                    async: false,
+                    async: true,
                     cache: false,
-                    success: function success(data) {
+                    success: function (data) {
                         if (data.result == 1) {
                             user.recommendations = [{}, {}, {}, {}];
                             for (var i = 0; i < 4; i++) {
@@ -48186,52 +48056,70 @@ var Main = function (_React$Component) {
                                 }
                             }
                         } else if (data.result == 0) user.recommendations = [{ 'exp': 'No Data', items: [] }];
-                    },
-                    error: function error(request, status, _error2) {
-                        console.error(_error2); // alert(error);
-                    }
+
+                        console.log(this.state.semaphore);
+                        this.state.semaphore++;
+                    }.bind(this),
+                    error: function (request, status, error) {
+                        console.error(error); // alert(error);
+
+                        this.state.semaphore++;
+                    }.bind(this)
                 });
 
                 $.ajax({
                     url: "/api/getlike?uid=" + uid,
                     type: 'get',
                     cache: false,
-                    async: false,
-                    success: function success(data) {
+                    async: true,
+                    success: function (data) {
                         user.likedPlaces = [];
                         if (data.result == 1) {
                             for (var i = 0; i < data.data.length; i++) {
                                 user.likedPlaces.push(data.data[i].item);
                             }
                         }
-                    },
-                    error: function error(request, status, _error3) {
-                        console.error(_error3); // alert(error);
-                    }
+
+                        console.log(this.state.semaphore);
+                        this.state.semaphore++;
+                    }.bind(this),
+                    error: function (request, status, error) {
+                        console.error(error); // alert(error);
+
+                        this.state.semaphore++;
+                    }.bind(this)
                 });
 
                 $.ajax({
                     url: "/api/getreviewByUID?uid=" + uid,
                     type: 'get',
                     cache: false,
-                    async: false,
-                    success: function success(data) {
+                    async: true,
+                    success: function (data) {
                         user.reviews = [];
                         if (data.result == 1) {
                             for (var i = 0; i < data.items.length; i++) {
                                 user.reviews.push(data.items[i]);
                             }
                         }
-                    },
-                    error: function error(request, status, _error4) {
-                        console.error(_error4); // alert(error);
-                    }
+
+                        console.log(this.state.semaphore);
+                        this.state.semaphore++;
+                    }.bind(this),
+                    error: function (request, status, error) {
+                        console.error(error); // alert(error);
+
+                        this.state.semaphore++;
+                    }.bind(this)
                 });
 
-                console.log(user);
+                setTimeout(function () {
+                    this.state.semaphore = 0;
+                    console.log(user);
 
-                this.state.info.user = user; //_user_;
-                this.updateSessionStorage();
+                    this.state.info.user = user;
+                    this.updateSessionStorage();
+                }, 10000);
             } else {
                 // If data is in the sessionStorage, retrieve from there.
                 this.state.info.user = JSON.parse(window.sessionStorage.user);
@@ -48244,9 +48132,9 @@ var Main = function (_React$Component) {
                 var recommendations = { 'exp': '', 'items': [] };
 
                 /*
-                TODO: Routine for fetching list of places for a single recommendation category goes here
-                @param category: String
-                */
+                 TODO: Routine for fetching list of places for a single recommendation category goes here
+                 @param category: String
+                 */
 
                 $.ajax({
                     url: // Need to change
@@ -48262,14 +48150,14 @@ var Main = function (_React$Component) {
                             }
                         } else if (data.result == 0) recommendations = [];
                     },
-                    error: function error(request, status, _error5) {
-                        console.error(_error5); // alert(error);
+                    error: function error(request, status, _error) {
+                        console.error(_error); // alert(error);
                     }
                 });
                 recommendations.exp = category; // Need to change
 
                 return recommendations;
-            });
+            }.bind(this));
 
             this.state.info.user.recommendations = recList;
             this.state.info.bodyPage = "main page";
@@ -48295,26 +48183,29 @@ var Main = function (_React$Component) {
         }
     }, {
         key: 'handlePlaceLike',
-        value: function handlePlaceLike(place) {
+        value: function handlePlaceLike() {
             // @param place: JSON object, with format specified as above.
-            if (this.state.info.user.likedPlaces.length == 0) var duplicate = false;else {
-                var duplicate = this.state.info.user.likedPlaces.map(function (e) {
-                    return e.cid == place.cid;
-                }).reduce(function (p, c) {
+            var duplicate = false;
+
+            if (this.state.info.user.likedPlaces.length == 0) duplicate = false;else {
+                duplicate = this.state.info.user.likedPlaces.map(function (e) {
+                    return e.cid == this.state.info.place.cid;
+                }.bind(this)).reduce(function (p, c) {
                     return p || c;
-                });
+                }.bind(this));
             }
 
             if (!duplicate) {
                 /* TODO: Routine for updating user's liked places in the server goes here */
+
                 $.ajax({
-                    url: "/api/like?uid=" + window.sessionStorage.uid + "&cid=" + place.cid,
+                    url: "/api/like?uid=" + window.sessionStorage.uid + "&cid=" + this.state.info.place.cid,
                     type: 'get',
                     cache: false,
                     async: false,
-                    success: function success(data) {
+                    success: function (data) {
                         if (data.result == 1) {
-                            this.state.info.user.likedPlaces.unshift(place);
+                            this.state.info.user.likedPlaces.unshift(this.state.info.place);
                             this.updateSessionStorage();
                             console.log("Place liked!");
                         } else if (data.result == 2) {
@@ -48322,10 +48213,10 @@ var Main = function (_React$Component) {
                         } else {
                             console.error("Like error");
                         }
-                    },
-                    error: function error(request, status, _error6) {
-                        console.error(_error6);
-                    }
+                    }.bind(this),
+                    error: function (request, status, error) {
+                        console.error(error);
+                    }.bind(this)
                 });
             } else {
                 console.log("Duplicate entry.");
@@ -48335,11 +48226,11 @@ var Main = function (_React$Component) {
         key: 'handleReviewSubmit',
         value: function handleReviewSubmit(review) {
             /*
-            Take a review (json object) as the argument and add it to:
-                    (1) List of reviews of the place 
-                    (2) List of reviews of the user 
-             DO NOT invoke this.setState(). We don't want the UI to be re-rendered.
-             @param review: JSON object, format specified above.
+             Take a review (json object) as the argument and add it to:
+             (1) List of reviews of the place 
+             (2) List of reviews of the user 
+              DO NOT invoke this.setState(). We don't want the UI to be re-rendered.
+              @param review: JSON object, format specified above.
              */
 
             /* TODO: Routine for updating user & place review in the server goes here */
@@ -48352,7 +48243,7 @@ var Main = function (_React$Component) {
                 type: 'post',
                 cache: false,
                 async: false,
-                success: function success(data) {
+                success: function (data) {
                     if (data.result == 1) {
                         this.state.info.user.reviews.unshift(review);
                         this.state.info.place.reviews.unshift(review);
@@ -48363,10 +48254,10 @@ var Main = function (_React$Component) {
                     } else {
                         console.error("Review error");
                     }
-                },
-                error: function error(request, status, _error7) {
-                    console.error(_error7);
-                }
+                }.bind(this),
+                error: function (request, status, error) {
+                    console.error(error);
+                }.bind(this)
             });
         }
     }, {
@@ -48511,11 +48402,6 @@ var stringKo = exports.stringKo = {
 // shim for using process in browser
 
 var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it don't break things.
-var cachedSetTimeout = setTimeout;
-var cachedClearTimeout = clearTimeout;
-
 var queue = [];
 var draining = false;
 var currentQueue;
@@ -48540,7 +48426,7 @@ function drainQueue() {
     if (draining) {
         return;
     }
-    var timeout = cachedSetTimeout(cleanUpNextTick);
+    var timeout = setTimeout(cleanUpNextTick);
     draining = true;
 
     var len = queue.length;
@@ -48557,7 +48443,7 @@ function drainQueue() {
     }
     currentQueue = null;
     draining = false;
-    cachedClearTimeout(timeout);
+    clearTimeout(timeout);
 }
 
 process.nextTick = function (fun) {
@@ -48569,7 +48455,7 @@ process.nextTick = function (fun) {
     }
     queue.push(new Item(fun, args));
     if (queue.length === 1 && !draining) {
-        cachedSetTimeout(drainQueue, 0);
+        setTimeout(drainQueue, 0);
     }
 };
 

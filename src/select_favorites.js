@@ -21,19 +21,25 @@ var randomPlaces = _.range(7).map((r) => (
     starRating: 3,
     reviews: [
         {
-            name: 'sherlock',
+            cid: "1",
+            userName: 'sherlock',
+            placeName: "Seorak",
             starRating: 5,
             date: '2016.06.07',
             content: 'This place is fantastic! The food is amazing, the people are kind, and the view is magnificent. I would certainly come here again!'
         },
         {
-            name: 'holmes',
+            cid: "1",
+            userName: 'holmes',
+            placeName: "Seorak",
             starRating: 1,
             date: '2016.05.01',
             content: 'Imma never come \'ere again, I can tell ya that!'
         },
         {
-            name: 'watson',
+            cid: "1",
+            userName: 'watson',
+            placeName: "Seorak",
             starRating: 3,
             date: '2016.04.02',
             content: 'Good!'
@@ -58,24 +64,26 @@ class Main extends React.Component {
 
     getRandomPlaceList() {
         /* TODO: Routine for getting a list of random places from the server goes here */
-        randomPlaces = []
-
-        $.ajax({
-            url: "/api/randomplace",
-            type: 'get',
-            cache: false,
-            async: false,
-            success: function(data) {
-                if (data.result == 1) {
-                    for (var i=0; i<data.data.length; i++) {
-                        randomPlaces.push(data.data[i].item);
-                    }
-                }
-            }.bind(this),
-            error: function(request, status, error) {
-                console.error(error);
-            }.bind(this)
-        });
+        // randomPlaces = []
+        //
+        // $.ajax({
+        //     url: "/api/randomplace",
+        //     type: 'get',
+        //     cache: false,
+        //     async: false,
+        //     success: function(data) {
+        //         if (data.result == 1) {
+        //             for (var i=0; i<data.data.length; i++) {
+        //                 randomPlaces.push(data.data[i].item);
+        //             }
+        //         }
+        //     }.bind(this),
+        //     error: function(request, status, error) {
+        //         console.error(error);
+        //     }.bind(this)
+        // });
+        
+        window.sessionStorage.uid = "test";
 
         return randomPlaces;
     }

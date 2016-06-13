@@ -46814,8 +46814,9 @@ var MyPlacePageTab = function (_React$Component) {
         }
     }, {
         key: 'handlePlaceLike',
-        value: function handlePlaceLike(place) {
-            this.props.handlers.handlePlaceLike(place);
+        value: function handlePlaceLike() {
+            this.props.handlers.handlePlaceLike();
+            console.log("Liked!");
             this.setState({ open: true });
         }
     }, {
@@ -47975,19 +47976,19 @@ var Main = function (_React$Component) {
         }
     }, {
         key: 'handlePlaceLike',
-        value: function handlePlaceLike(place) {
+        value: function handlePlaceLike() {
             // This method is same as that of main.js. Copy it once it is implemented.
 
             var duplicate = this.state.info.user.likedPlaces.map(function (e) {
-                return e.cid == place.cid;
-            }).reduce(function (p, c) {
+                return e.cid == this.state.info.place.cid;
+            }.bind(this)).reduce(function (p, c) {
                 return p || c;
-            });
+            }.bind(this));
 
             if (!duplicate) {
                 /* Routine */
 
-                this.state.info.user.likedPlaces.unshift(place);
+                this.state.info.user.likedPlaces.unshift(this.state.info.place);
                 this.updateSessionStorage();
 
                 console.log("Place liked!");
@@ -48010,36 +48011,35 @@ var Main = function (_React$Component) {
         key: 'handleProfileEditSubmit',
         value: function handleProfileEditSubmit(profileInfo) {
             /*
-            Take a profileInfo (json object) as the argument and update the user info:
-            
-            @param profileInfo:
-                {
-                    nickname: string,
-                    age: string,
-                    gender: string,
-                    nationality: string
-                }
-            */
+             Take a profileInfo (json object) as the argument and update the user info:
+              @param profileInfo:
+             {
+             nickname: string,
+             age: string,
+             gender: string,
+             nationality: string
+             }
+             */
 
             /* TODO: Routine for updating user information in the server goes here */
-            var _success = 0;
+            var success = 0;
             $.ajax({
                 url: "/api/usermodify?uid=" + window.sessionStorage.uid + "&age=" + profileInfo.age + "&sex=" + profileInfo.gender + "&nationality=" + profileInfo.nationality + "&nickname=" + profileInfo.nickname + "&travStyle=alone",
                 type: 'get',
                 cache: false,
                 async: false,
-                success: function success(data) {
+                success: function (data) {
                     if (data.result == 1) {
-                        _success = 1;
+                        success = 1;
                         console.log("Profile Edited!");
                     }
-                },
-                error: function error(request, status, _error) {
-                    console.error(_error);
-                }
+                }.bind(this),
+                error: function (request, status, error) {
+                    console.error(error);
+                }.bind(this)
             });
 
-            if (_success) {
+            if (success) {
                 this.state.info.user.nickname = profileInfo.nickname;
                 this.state.info.user.age = profileInfo.age;
                 this.state.info.user.gender = profileInfo.gender;
@@ -48189,11 +48189,6 @@ var stringKo = exports.stringKo = {
 // shim for using process in browser
 
 var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it don't break things.
-var cachedSetTimeout = setTimeout;
-var cachedClearTimeout = clearTimeout;
-
 var queue = [];
 var draining = false;
 var currentQueue;
@@ -48218,7 +48213,7 @@ function drainQueue() {
     if (draining) {
         return;
     }
-    var timeout = cachedSetTimeout(cleanUpNextTick);
+    var timeout = setTimeout(cleanUpNextTick);
     draining = true;
 
     var len = queue.length;
@@ -48235,7 +48230,7 @@ function drainQueue() {
     }
     currentQueue = null;
     draining = false;
-    cachedClearTimeout(timeout);
+    clearTimeout(timeout);
 }
 
 process.nextTick = function (fun) {
@@ -48247,7 +48242,7 @@ process.nextTick = function (fun) {
     }
     queue.push(new Item(fun, args));
     if (queue.length === 1 && !draining) {
-        cachedSetTimeout(drainQueue, 0);
+        setTimeout(drainQueue, 0);
     }
 };
 

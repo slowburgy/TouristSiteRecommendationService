@@ -34846,16 +34846,16 @@ var Main = function (_React$Component) {
                 type: 'get',
                 async: false,
                 cache: false,
-                success: function success(data) {
+                success: function (data) {
                     if (data.result == 1) {
                         firstLogin = 0;
                     } else if (data.result == 0) {
                         firstLogin = 1;
                     }
-                },
-                error: function error(request, status, _error) {
-                    console.error(_error);
-                }
+                }.bind(this),
+                error: function (request, status, error) {
+                    console.error(error);
+                }.bind(this)
             });
 
             if (firstLogin == -1) console.error("FIRSTLOGIN ERROR");
@@ -34946,11 +34946,6 @@ var stringEn = exports.stringEn = {
 // shim for using process in browser
 
 var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it don't break things.
-var cachedSetTimeout = setTimeout;
-var cachedClearTimeout = clearTimeout;
-
 var queue = [];
 var draining = false;
 var currentQueue;
@@ -34975,7 +34970,7 @@ function drainQueue() {
     if (draining) {
         return;
     }
-    var timeout = cachedSetTimeout(cleanUpNextTick);
+    var timeout = setTimeout(cleanUpNextTick);
     draining = true;
 
     var len = queue.length;
@@ -34992,7 +34987,7 @@ function drainQueue() {
     }
     currentQueue = null;
     draining = false;
-    cachedClearTimeout(timeout);
+    clearTimeout(timeout);
 }
 
 process.nextTick = function (fun) {
@@ -35004,7 +34999,7 @@ process.nextTick = function (fun) {
     }
     queue.push(new Item(fun, args));
     if (queue.length === 1 && !draining) {
-        cachedSetTimeout(drainQueue, 0);
+        setTimeout(drainQueue, 0);
     }
 };
 

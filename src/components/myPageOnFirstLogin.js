@@ -6,10 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import SocialSentimentDissatisfied from 'material-ui/svg-icons/social/sentiment-dissatisfied';
 import SocialSentimentSatisfied from 'material-ui/svg-icons/social/sentiment-satisfied';
 import SocialSentimentNeutral from 'material-ui/svg-icons/social/sentiment-neutral';
-import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
-import Divider from 'material-ui/Divider';
-import TextField from 'material-ui/TextField';
-import Paper from 'material-ui/Paper';
+import MyFirstProfile from './myFirstProfile';
 
 const styles = {
     root: {
@@ -25,7 +22,7 @@ const styles = {
     },
 
     gridList: {
-        flex: 3,
+        flex: 4,
         margin: dp(0)
     },
 
@@ -50,27 +47,12 @@ const styles = {
         marginTop: dp(50),
         textAlign: 'center',
     },
-
+    
     buttonsStyle: {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
         marginRight: horizontalDP(20)
-    },
-    
-    buttonBarStyle: {
-        display: 'flex',
-        flexDirection: 'row',
-        marginTop: dp(20)
-    },
-
-    buttonStyle: {
-        flex: 1,
-        height: dp(60)
-    },
-
-    buttonLabelStyle: {
-        fontSize: dp(25),
     },
 };
 
@@ -84,38 +66,14 @@ export default class MyPageOnFirstLogin extends React.Component {
         this.state = {
             chosens: this.props.places.map((e) => false),
             likes: this.props.places.map((e) => "neutral"),
-            nickname: "",
-            age: "",
-            gender: "",
-            nationality: ""
         };
         
         this.handleDislike = this.handleDislike.bind(this);
         this.handleLike = this.handleLike.bind(this);
         this.handleNeutral = this.handleNeutral.bind(this);
-        this.handleNameChange = this.handleNameChange.bind(this);
-        this.handleAgeChange = this.handleAgeChange.bind(this);
-        this.handleGenderChange = this.handleGenderChange.bind(this);
-        this.handleNatChange = this.handleNatChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleNameChange(event) {
-        this.state.nickname = event.target.value;
-    }
-
-    handleAgeChange(event) {
-        this.state.age = event.target.value;
-    }
-
-    handleGenderChange(event) {
-        this.state.gender = event.target.value;
-    }
-
-    handleNatChange(event) {
-        this.state.nationality = event.target.value;
-    }
-    
     handleLike(index) {
         this.state.chosens[index] = true;
         this.state.likes[index] = "like";
@@ -134,20 +92,13 @@ export default class MyPageOnFirstLogin extends React.Component {
         this.setState(this.state);
     }
     
-    handleSubmit() {
+    handleSubmit(userInfo) {
         var chosen = this.state.chosens
             .reduce(
                 (p, c) => p && c
             );
 
         if (chosen) {
-            var userInfo = {
-                nickname: this.state.nickname,
-                age: this.state.age,
-                gender: this.state.gender,
-                nationality: this.state.nationality
-            };
-            
             var prefList = 
                 this.props.places.map(
                     function(place, index) {
@@ -178,20 +129,6 @@ export default class MyPageOnFirstLogin extends React.Component {
     }
     
     render() {
-        const actions = [
-            this.handleNameChange,
-            this.handleAgeChange,
-            this.handleGenderChange,
-            this.handleNatChange
-        ];
-
-        const categories = [
-            "Nickname",
-            "Age",
-            "Gender",
-            "Nationality"
-        ];
-
         return (
             <div style={styles.root}>
                 <div style={styles.filler} ></div>
@@ -248,32 +185,9 @@ export default class MyPageOnFirstLogin extends React.Component {
                         )}
                     </GridList>
                     <Subheader style={styles.secondSubheaderStyle}>{"Please provide information about yourself"}</Subheader>
-                    <Paper>
-                        <Divider />
-                        <Table selectable={false}>
-                            <TableBody displayRowCheckbox={false}>
-                                {
-                                    categories.map((e, i) => (
-                                        <TableRow>
-                                            <TableRowColumn style={styles.fontStyle}>{e}</TableRowColumn>
-                                            <TableRowColumn style={styles.fontStyle}>
-                                                <TextField style={styles.fontStyle} onChange={actions[i]} />
-                                            </TableRowColumn>
-                                        </TableRow>
-                                    ))
-                                }
-                            </TableBody>
-                        </Table>
-                        <div style={styles.buttonBarStyle}>
-                            <RaisedButton
-                                label="Submit"
-                                style={styles.buttonStyle}
-                                labelStyle={styles.buttonLabelStyle}
-                                primary={true}
-                                onTouchTap={this.handleSubmit}
-                            />
-                        </div>
-                    </Paper>
+                    <MyFirstProfile
+                        handleSubmit={this.handleSubmit}
+                    />
                 </div>
                 <div style={styles.filler}></div>
             </div>
